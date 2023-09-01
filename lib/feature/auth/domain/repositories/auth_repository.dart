@@ -7,4 +7,5 @@ abstract class AuthRepository {
   Future<Either<Failure, CheckDataEntity>> checkData(
       CheckDataParams checkDataParams);
   Future<Either<Failure, UserEntity>> signin(SignInParams signInParams);
+  Future<Either<Failure, UserEntity>> signup(SignUpParams signUpParams);
 }

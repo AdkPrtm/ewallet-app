@@ -22,9 +22,14 @@ class MyApp extends StatelessWidget {
         BlocProvider(
           create: (_) => sl<AuthBloc>()
             ..add(
-              CheckDataExists(
-                CheckDataParams(
-                    email: 'andhika@gmail.com', username: 'andhika'),
+              AuthRegister(
+                SignUpParams(
+                  name: 'Trial Bloc',
+                  username: 'trial1',
+                  email: 'trial@gmail.com',
+                  password: 'Maklo123!',
+                  pin: '123123'
+                ),
               ),
             ),
         )

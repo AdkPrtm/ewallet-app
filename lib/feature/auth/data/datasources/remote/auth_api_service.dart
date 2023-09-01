@@ -18,4 +18,9 @@ abstract class AuthRemoteService {
   Future<HttpResponse<UserModel>> loginUser({
     @Body() Map<String, dynamic>? body,
   });
+
+  @POST('/register')
+  Future<HttpResponse<UserModel>> signupUser({
+    @Body() Map<String, dynamic>? body,
+  });
 }
