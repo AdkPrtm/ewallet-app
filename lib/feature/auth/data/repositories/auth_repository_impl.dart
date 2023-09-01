@@ -24,8 +24,10 @@ class AuthRepositoryImpl extends AuthRepository {
           response: httpResponse.response,
         );
       }
+      print(httpResponse.data);
       return Right(httpResponse.data.toEntity());
     } on DioException catch (e) {
+      print(e.toString());
       return Left(ServerFailure(e.response?.data['message'] ?? e.message));
     } on SocketException {
       return const Left(ConnectionFailure('Failed to connect to the network'));
@@ -76,19 +78,25 @@ class AuthRepositoryImpl extends AuthRepository {
   @override
   Future<Either<Failure, UserEntity>> getCurrentUser(String token) async {
     try {
+      print('1');
       final httpResponse =
           await _authRemoteService.getCurrentUser(token: token);
-      if ((httpResponse.response.statusCode ?? 0) < 200 ||
-          (httpResponse.response.statusCode ?? 0) > 201) {
+      print('2');
+      if (httpResponse.response.statusCode != 200) {
+        print('3');
         throw DioException(
           requestOptions: httpResponse.response.requestOptions,
           response: httpResponse.response,
         );
       }
+      print('4');
       return Right(httpResponse.data.toEntity());
     } on DioException catch (e) {
-      return Left(ServerFailure(e.response?.data['message'] ?? e.message));
+      print('5');
+      print(e.toString());
+      return Left(ServerFailure('Something went wrong'));
     } on SocketException {
+      print('6');
       return const Left(ConnectionFailure('Failed to connect to the network'));
     }
   }

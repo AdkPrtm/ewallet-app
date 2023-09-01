@@ -58,12 +58,14 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     result.fold(
       (failure) {
         if (failure is ServerFailure) {
-          emit(AuthFailed(failure.message ?? ""));
+          emit(AuthFailed(failure.message));
         } else if (failure is ConnectionFailure) {
           emit(AuthFailed(failure.message));
         }
+        print(failure);
       },
       (data) async {
+        print(data);
         emit(AuthDone(data));
         await _setCredentialUseCase.call(params: data.token!);
       },
@@ -77,7 +79,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     result.fold(
       (failure) {
         if (failure is ServerFailure) {
-          emit(AuthFailed(failure.message ?? ""));
+          emit(AuthFailed(failure.message));
         } else if (failure is ConnectionFailure) {
           emit(AuthFailed(failure.message));
         }
@@ -91,12 +93,18 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
 
   Future<void> onGetCurrentUserProses(
       GetCurrentUser event, Emitter<AuthState> emit) async {
+    emit(AuthLoading());
     final token = await _getCredentialUseCase.call();
     if (token != '') {
       final result = await _getCurrentUserUseCase.call(params: token);
       result.fold(
         (l) => emit(AuthFailed(l.message)),
-        (data) => emit(AuthDone(data)),
+        (data) async {
+          if (data.email == null) {
+            await _getCurrentUserUseCase(params: data.token);
+          }
+          emit(AuthDone(data));
+        },
       );
     } else {
       emit(const AuthFailed('Something went wrong'));
