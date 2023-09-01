@@ -7,7 +7,7 @@ import 'package:template_clean_architecture/feature/user/domain/entities/user_en
 
 part 'signup_usecase.g.dart';
 
-class SignUpUseCase extends UseCase<UserEntity, SignUpParams> {
+class SignUpUseCase extends UseCase<Either<Failure, UserEntity>, SignUpParams> {
   final AuthRepository _authRepository;
 
   SignUpUseCase(this._authRepository);

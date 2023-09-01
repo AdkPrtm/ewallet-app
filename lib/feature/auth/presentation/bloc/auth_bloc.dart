@@ -12,11 +12,13 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   final SignInUseCase _signInUseCase;
   final CheckDataUseCase _checkDataUseCase;
   final SignUpUseCase _signUpUseCase;
+  final SetCredentialUseCase _setCredentialUseCase;
 
   AuthBloc(
     this._signInUseCase,
     this._checkDataUseCase,
     this._signUpUseCase,
+    this._setCredentialUseCase,
   ) : super(AuthInitial()) {
     on<CheckDataExists>(onCheckDataProses);
 
@@ -52,7 +54,10 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
           emit(AuthFailed(failure.message));
         }
       },
-      (data) => emit(AuthDone(data)),
+      (data) async {
+        emit(AuthDone(data));
+        await _setCredentialUseCase.call(data.token!);
+      },
     );
   }
 

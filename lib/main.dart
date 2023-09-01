@@ -22,13 +22,10 @@ class MyApp extends StatelessWidget {
         BlocProvider(
           create: (_) => sl<AuthBloc>()
             ..add(
-              AuthRegister(
-                SignUpParams(
-                  name: 'Trial Bloc',
-                  username: 'trial1',
-                  email: 'trial@gmail.com',
-                  password: 'Maklo123!',
-                  pin: '123123'
+              const AuthLogin(
+                SignInParams(
+                  email: 'andhika@gmail.com',
+                  password: 'Lamongan16!',
                 ),
               ),
             ),

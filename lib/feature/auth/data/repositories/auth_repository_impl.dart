@@ -3,14 +3,15 @@ import 'dart:io';
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:template_clean_architecture/core/error/failure.dart';
-import 'package:template_clean_architecture/feature/auth/data/datasources/remote/auth_api_service.dart';
+import 'package:template_clean_architecture/feature/auth/data/datasources/datasources.dart';
 import 'package:template_clean_architecture/feature/auth/domain/domain.dart';
 import 'package:template_clean_architecture/feature/user/domain/entities/user_entities.dart';
 
 class AuthRepositoryImpl extends AuthRepository {
   final AuthRemoteService _authRemoteService;
+  final AuthLocalService _authLocalService;
 
-  AuthRepositoryImpl(this._authRemoteService);
+  AuthRepositoryImpl(this._authRemoteService, this._authLocalService);
   @override
   Future<Either<Failure, UserEntity>> signin(SignInParams signInParams) async {
     try {
@@ -71,4 +72,8 @@ class AuthRepositoryImpl extends AuthRepository {
       return const Left(ConnectionFailure('Failed to connect to the network'));
     }
   }
+
+  @override
+  Future<bool> setCredential(String token) async =>
+      await _authLocalService.setCredentialToLocal(token);
 }
