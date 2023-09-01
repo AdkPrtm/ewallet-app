@@ -2,19 +2,24 @@ import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
 import 'package:template_clean_architecture/feature/auth/data/data.dart';
 import 'package:template_clean_architecture/feature/auth/domain/domain.dart';
+import 'package:template_clean_architecture/feature/auth/domain/usecases/get_credential_usecase.dart';
+import 'package:template_clean_architecture/feature/auth/domain/usecases/get_current_user_usecase.dart';
 import 'package:template_clean_architecture/feature/auth/presentation/bloc/auth_bloc.dart';
 
 final sl = GetIt.instance;
 
 void setupLocator() {
   //BLOC
-  sl.registerFactory(() => AuthBloc(sl(), sl(), sl(), sl()));
+  sl.registerFactory(() => AuthBloc(sl(), sl(), sl(), sl(), sl(), sl()));
 
   //USECASE
   sl.registerLazySingleton(() => SignInUseCase(sl()));
   sl.registerLazySingleton(() => SignUpUseCase(sl()));
   sl.registerLazySingleton(() => CheckDataUseCase(sl()));
+  sl.registerLazySingleton(() => GetCurrentUserUseCase(sl()));
+
   sl.registerLazySingleton(() => SetCredentialUseCase(sl()));
+  sl.registerLazySingleton(() => GetCredentialUseCase(sl()));
 
   //REPOSITORY
   sl.registerLazySingleton<AuthRepository>(

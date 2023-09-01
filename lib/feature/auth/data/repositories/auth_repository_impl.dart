@@ -74,6 +74,30 @@ class AuthRepositoryImpl extends AuthRepository {
   }
 
   @override
+  Future<Either<Failure, UserEntity>> getCurrentUser(String token) async {
+    try {
+      final httpResponse =
+          await _authRemoteService.getCurrentUser(token: token);
+      if ((httpResponse.response.statusCode ?? 0) < 200 ||
+          (httpResponse.response.statusCode ?? 0) > 201) {
+        throw DioException(
+          requestOptions: httpResponse.response.requestOptions,
+          response: httpResponse.response,
+        );
+      }
+      return Right(httpResponse.data.toEntity());
+    } on DioException catch (e) {
+      return Left(ServerFailure(e.response?.data['message'] ?? e.message));
+    } on SocketException {
+      return const Left(ConnectionFailure('Failed to connect to the network'));
+    }
+  }
+
+  @override
   Future<bool> setCredential(String token) async =>
       await _authLocalService.setCredentialToLocal(token);
+
+  @override
+  Future<String> getCredential() async =>
+      await _authLocalService.getCredentialToLocal();
 }

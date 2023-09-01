@@ -20,15 +20,7 @@ class MyApp extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider(
-          create: (_) => sl<AuthBloc>()
-            ..add(
-              const AuthLogin(
-                SignInParams(
-                  email: 'andhika@gmail.com',
-                  password: 'Lamongan16!',
-                ),
-              ),
-            ),
+          create: (_) => sl<AuthBloc>()..add(GetCurrentUser()),
         )
       ],
       child: MaterialApp(

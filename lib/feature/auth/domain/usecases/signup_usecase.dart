@@ -13,8 +13,8 @@ class SignUpUseCase extends UseCase<Either<Failure, UserEntity>, SignUpParams> {
   SignUpUseCase(this._authRepository);
 
   @override
-  Future<Either<Failure, UserEntity>> call(SignUpParams params) =>
-      _authRepository.signup(params);
+  Future<Either<Failure, UserEntity>> call({SignUpParams? params}) =>
+      _authRepository.signup(params!);
 }
 
 @JsonSerializable()

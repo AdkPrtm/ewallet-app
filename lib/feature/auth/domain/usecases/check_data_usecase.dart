@@ -13,7 +13,7 @@ class CheckDataUseCase
   CheckDataUseCase(this._authRepository);
 
   @override
-  Future<Either<Failure, CheckDataEntity>> call(CheckDataParams? params) =>
+  Future<Either<Failure, CheckDataEntity>> call({CheckDataParams? params}) =>
       _authRepository.checkData(params!);
 }
 

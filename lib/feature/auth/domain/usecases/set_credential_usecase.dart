@@ -7,6 +7,6 @@ class SetCredentialUseCase extends UseCase<bool, String> {
   SetCredentialUseCase(this._authRepository);
 
   @override
-  Future<bool> call(String params) =>
-      _authRepository.setCredential(params);
+  Future<bool> call({String? params}) =>
+      _authRepository.setCredential(params!);
 }

@@ -23,3 +23,5 @@ class AuthRegister extends AuthEvent {
 
   const AuthRegister(this.signUpParams);
 }
+
+class GetCurrentUser extends AuthEvent {}

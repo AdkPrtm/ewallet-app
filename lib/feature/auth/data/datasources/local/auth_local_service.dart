@@ -12,4 +12,13 @@ class AuthLocalService {
       return false;
     }
   }
+
+  Future<String> getCredentialToLocal() async {
+    const storage = FlutterSecureStorage();
+    String? token = await storage.read(key: 'token');
+    if (token != null) {
+      return token;
+    }
+    return '';
+  }
 }

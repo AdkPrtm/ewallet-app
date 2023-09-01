@@ -13,8 +13,8 @@ class SignInUseCase extends UseCase<Either<Failure, UserEntity>, SignInParams> {
   SignInUseCase(this._authRepository);
 
   @override
-  Future<Either<Failure, UserEntity>> call(SignInParams params) =>
-      _authRepository.signin(params);
+  Future<Either<Failure, UserEntity>> call({SignInParams? params}) =>
+      _authRepository.signin(params!);
 }
 
 @freezed

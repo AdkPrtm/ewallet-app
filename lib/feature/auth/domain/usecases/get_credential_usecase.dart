@@ -5,10 +5,7 @@ class GetCredentialUseCase extends UseCase<String, void> {
   final AuthRepository _authRepository;
 
   GetCredentialUseCase(this._authRepository);
-  
+
   @override
-  Future<String> call(void params) {
-    // TODO: implement call
-    throw UnimplementedError();
-  }
+  Future<String> call({void params}) => _authRepository.getCredential();
 }
