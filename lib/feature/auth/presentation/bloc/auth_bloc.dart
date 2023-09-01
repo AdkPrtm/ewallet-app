@@ -11,13 +11,18 @@ part 'auth_state.dart';
 class AuthBloc extends Bloc<AuthEvent, AuthState> {
   final SignInUseCase _signInUseCase;
   final CheckDataUseCase _checkDataUseCase;
+  final SignUpUseCase _signUpUseCase;
 
   AuthBloc(
     this._signInUseCase,
     this._checkDataUseCase,
+    this._signUpUseCase,
   ) : super(AuthInitial()) {
     on<CheckDataExists>(onCheckDataProses);
+
     on<AuthLogin>(onLoginProses);
+
+    on<AuthRegister>(onRegisterProses);
   }
 
   Future<void> onCheckDataProses(
@@ -39,6 +44,22 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
 
   Future<void> onLoginProses(AuthLogin event, Emitter<AuthState> emit) async {
     final result = await _signInUseCase.call(event.signInParams);
+    result.fold(
+      (failure) {
+        if (failure is ServerFailure) {
+          emit(AuthFailed(failure.message ?? ""));
+        } else if (failure is ConnectionFailure) {
+          emit(AuthFailed(failure.message));
+        }
+      },
+      (data) => emit(AuthDone(data)),
+    );
+  }
+
+  Future<void> onRegisterProses(
+      AuthRegister event, Emitter<AuthState> emit) async {
+    final result = await _signUpUseCase.call(event.signUpParams);
+
     result.fold(
       (failure) {
         if (failure is ServerFailure) {

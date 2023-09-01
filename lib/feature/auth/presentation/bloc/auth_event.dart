@@ -7,13 +7,19 @@ sealed class AuthEvent extends Equatable {
   List<Object> get props => [];
 }
 
+class CheckDataExists extends AuthEvent {
+  final CheckDataParams checkDataParams;
+
+  const CheckDataExists(this.checkDataParams);
+}
+
 class AuthLogin extends AuthEvent {
   final SignInParams signInParams;
   const AuthLogin(this.signInParams);
 }
 
-class CheckDataExists extends AuthEvent {
-  final CheckDataParams checkDataParams;
+class AuthRegister extends AuthEvent {
+  final SignUpParams signUpParams;
 
-  const CheckDataExists(this.checkDataParams);
+  const AuthRegister(this.signUpParams);
 }

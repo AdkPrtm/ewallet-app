@@ -8,8 +8,8 @@ part of 'check_data_response.dart';
 
 _$_CheckDataResponse _$$_CheckDataResponseFromJson(Map<String, dynamic> json) =>
     _$_CheckDataResponse(
-      email: json['is_email_exists'].toString(),
-      username: json['is_username_exists'].toString(),
+      email: json['is_email_exists'] as String?,
+      username: json['is_username_exists'] as String?,
     );
 
 Map<String, dynamic> _$$_CheckDataResponseToJson(

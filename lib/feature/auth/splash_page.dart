@@ -10,8 +10,8 @@ class SplashPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<AuthBloc, AuthState>(
       builder: (context, state) {
-        if (state is CheckDataSuccess) {
-          print(state.checkDataEntity);
+        if (state is AuthDone) {
+          print(state.userEntity);
         }
         if (state is AuthFailed) {
           print(state.message);

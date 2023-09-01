@@ -8,10 +8,11 @@ final sl = GetIt.instance;
 
 void setupLocator() {
   //BLOC
-  sl.registerFactory(() => AuthBloc(sl(), sl()));
+  sl.registerFactory(() => AuthBloc(sl(), sl(), sl()));
 
   //USECASE
   sl.registerLazySingleton(() => SignInUseCase(sl()));
+  sl.registerLazySingleton(() => SignUpUseCase(sl()));
   sl.registerLazySingleton(() => CheckDataUseCase(sl()));
 
   //REPOSITORY

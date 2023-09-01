@@ -35,9 +35,28 @@ class AuthRepositoryImpl extends AuthRepository {
   Future<Either<Failure, CheckDataEntity>> checkData(
       CheckDataParams checkDataParams) async {
     try {
-      print(checkDataParams.toJson());
       final httpResponse =
           await _authRemoteService.checkData(body: checkDataParams.toJson());
+      if ((httpResponse.response.statusCode ?? 0) < 200 ||
+          (httpResponse.response.statusCode ?? 0) > 201) {
+        throw DioException(
+          requestOptions: httpResponse.response.requestOptions,
+          response: httpResponse.response,
+        );
+      }
+      return Right(httpResponse.data.toEntity());
+    } on DioException catch (e) {
+      return Left(ServerFailure(e.response?.data['message'] ?? e.message));
+    } on SocketException {
+      return const Left(ConnectionFailure('Failed to connect to the network'));
+    }
+  }
+
+  @override
+  Future<Either<Failure, UserEntity>> signup(SignUpParams signUpParams) async {
+    try {
+      final httpResponse =
+          await _authRemoteService.signupUser(body: signUpParams.toJson());
       if ((httpResponse.response.statusCode ?? 0) < 200 ||
           (httpResponse.response.statusCode ?? 0) > 201) {
         throw DioException(
