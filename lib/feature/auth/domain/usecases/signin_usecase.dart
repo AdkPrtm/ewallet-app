@@ -8,13 +8,13 @@ import 'package:template_clean_architecture/feature/user/domain/entities/user_en
 part 'signin_usecase.freezed.dart';
 part 'signin_usecase.g.dart';
 
-class SignInUseCase extends UseCase<UserEntity, SignInParams> {
+class SignInUseCase extends UseCase<Either<Failure, UserEntity>, SignInParams> {
   final AuthRepository _authRepository;
   SignInUseCase(this._authRepository);
 
   @override
-  Future<Either<Failure, UserEntity>> call(SignInParams params) =>
-      _authRepository.signin(params);
+  Future<Either<Failure, UserEntity>> call({SignInParams? params}) =>
+      _authRepository.signin(params!);
 }
 
 @freezed

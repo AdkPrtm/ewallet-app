@@ -6,7 +6,8 @@ part of 'signup_usecase.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-SignUpParams _$SignUpParamsFromJson(Map<String, dynamic> json) => SignUpParams(
+_$_SignUpParams _$$_SignUpParamsFromJson(Map<String, dynamic> json) =>
+    _$_SignUpParams(
       name: json['name'] as String?,
       username: json['username'] as String?,
       email: json['email'] as String?,
@@ -16,7 +17,7 @@ SignUpParams _$SignUpParamsFromJson(Map<String, dynamic> json) => SignUpParams(
       ktp: json['ktp'] as String?,
     );
 
-Map<String, dynamic> _$SignUpParamsToJson(SignUpParams instance) =>
+Map<String, dynamic> _$$_SignUpParamsToJson(_$_SignUpParams instance) =>
     <String, dynamic>{
       'name': instance.name,
       'username': instance.username,

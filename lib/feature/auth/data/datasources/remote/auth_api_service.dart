@@ -23,4 +23,9 @@ abstract class AuthRemoteService {
   Future<HttpResponse<UserModel>> signupUser({
     @Body() Map<String, dynamic>? body,
   });
+
+  @GET('/users')
+  Future<HttpResponse<UserModel>> getCurrentUser({
+    @Header("Authorization") String? token,
+  });
 }

@@ -6,13 +6,14 @@ import 'package:template_clean_architecture/feature/auth/domain/domain.dart';
 
 part 'check_data_usecase.g.dart';
 
-class CheckDataUseCase extends UseCase<CheckDataEntity, CheckDataParams> {
+class CheckDataUseCase
+    extends UseCase<Either<Failure, CheckDataEntity>, CheckDataParams> {
   final AuthRepository _authRepository;
 
   CheckDataUseCase(this._authRepository);
 
   @override
-  Future<Either<Failure, CheckDataEntity>> call(CheckDataParams? params) =>
+  Future<Either<Failure, CheckDataEntity>> call({CheckDataParams? params}) =>
       _authRepository.checkData(params!);
 }
 
