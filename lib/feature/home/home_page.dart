@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -25,10 +24,17 @@ class HomePage extends StatelessWidget {
               if (state is AuthDone) {
                 return Column(
                   children: [
-                    CustomWellcomeProfileComponent(
-                      name: state.userEntity.name!,
-                      urlPicture: state.userEntity.profilePicture!,
-                      verified: state.userEntity.verified!,
+                    GestureDetector(
+                      onTap: () => Navigator.pushNamed(
+                        context,
+                        '/profile',
+                        arguments: state.userEntity,
+                      ),
+                      child: CustomWellcomeProfileComponent(
+                        name: state.userEntity.name!,
+                        urlPicture: state.userEntity.profilePicture!,
+                        verified: state.userEntity.verified!,
+                      ),
                     ),
                     SizedBox(height: 32.h),
                     CustomWalletComponent(

@@ -2,17 +2,21 @@ import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
 import 'package:template_clean_architecture/feature/auth/data/data.dart';
 import 'package:template_clean_architecture/feature/auth/domain/domain.dart';
-import 'package:template_clean_architecture/feature/auth/domain/usecases/get_credential_usecase.dart';
-import 'package:template_clean_architecture/feature/auth/domain/usecases/get_current_user_usecase.dart';
 import 'package:template_clean_architecture/feature/auth/presentation/bloc/auth_bloc.dart';
+import 'package:template_clean_architecture/feature/user/data/data.dart';
+import 'package:template_clean_architecture/feature/user/domain/domain.dart';
+import 'package:template_clean_architecture/feature/user/presentation/bloc/user_bloc.dart';
 
 final sl = GetIt.instance;
 
 void setupLocator() {
   //BLOC
   sl.registerFactory(() => AuthBloc(sl(), sl(), sl(), sl(), sl(), sl()));
+  sl.registerFactory(() => UserBloc(sl(), sl()));
 
-  //USECASE
+  /* USECASE */
+
+  //AUTH USECASE
   sl.registerLazySingleton(() => SignInUseCase(sl()));
   sl.registerLazySingleton(() => SignUpUseCase(sl()));
   sl.registerLazySingleton(() => CheckDataUseCase(sl()));
@@ -21,14 +25,27 @@ void setupLocator() {
   sl.registerLazySingleton(() => SetCredentialUseCase(sl()));
   sl.registerLazySingleton(() => GetCredentialUseCase(sl()));
 
-  //REPOSITORY
+  //USER USECASE
+  sl.registerLazySingleton(() => UpdateDataUserUsecase(sl()));
+
+  /* REPOSITORY */
+
+  //AUTH REPOSITORY
   sl.registerLazySingleton<AuthRepository>(
       () => AuthRepositoryImpl(sl(), sl()));
 
-  //DATA SOURCE
+  //USER REPOSITORY
+  sl.registerLazySingleton<UserRepository>(() => UserRepositoryImpl(sl(), sl()));
+
+  /* DATA SOURCE */
+
+  //AUTH DATASOURCE
   sl.registerLazySingleton(() => AuthRemoteService(sl()));
   sl.registerLazySingleton(() => AuthLocalService());
 
-  //EXTERNAL
+  //USER DATASOURCE
+  sl.registerLazySingleton(() => UserRemoteService(sl()));
+
+  /* EXTERNAL */
   sl.registerLazySingleton(() => Dio());
 }

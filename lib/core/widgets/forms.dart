@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:template_clean_architecture/core/resource/config.dart';
+import 'package:template_clean_architecture/core/resource/resource.dart';
 
 class CustomFormField extends StatelessWidget {
   const CustomFormField({
@@ -78,11 +78,6 @@ class CustomFormField extends StatelessWidget {
             return null;
           },
         ),
-        // validator: title == 'Email Address'
-        //     ? (value) => emailValidator(value!) ? null : 'Invalid Email'
-        //     : title == "Password"
-        //         ? (value)
-        //         : null),
       ],
     );
   }

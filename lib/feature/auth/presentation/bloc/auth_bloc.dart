@@ -2,8 +2,6 @@ import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:template_clean_architecture/core/error/error.dart';
 import 'package:template_clean_architecture/feature/auth/domain/entities/entities.dart';
-import 'package:template_clean_architecture/feature/auth/domain/usecases/get_credential_usecase.dart';
-import 'package:template_clean_architecture/feature/auth/domain/usecases/get_current_user_usecase.dart';
 import 'package:template_clean_architecture/feature/auth/domain/usecases/usecases.dart';
 import 'package:template_clean_architecture/feature/user/domain/domain.dart';
 
@@ -62,10 +60,8 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         } else if (failure is ConnectionFailure) {
           emit(AuthFailed(failure.message));
         }
-        print(failure);
       },
       (data) async {
-        print(data);
         emit(AuthDone(data));
         await _setCredentialUseCase.call(params: data.token!);
       },
