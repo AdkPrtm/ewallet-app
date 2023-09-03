@@ -12,7 +12,7 @@ final sl = GetIt.instance;
 void setupLocator() {
   //BLOC
   sl.registerFactory(() => AuthBloc(sl(), sl(), sl(), sl(), sl(), sl()));
-  sl.registerFactory(() => UserBloc(sl(), sl()));
+  sl.registerFactory(() => UserBloc(sl(), sl(), sl()));
 
   /* USECASE */
 
@@ -27,7 +27,8 @@ void setupLocator() {
 
   //USER USECASE
   sl.registerLazySingleton(() => UpdateDataUserUsecase(sl()));
-  sl.registerLazySingleton(() => GetUserByUsernameUsecase(sl()),);
+  sl.registerLazySingleton(() => GetUserByUsernameUsecase(sl()));
+  sl.registerLazySingleton(() => ChangePinUsecase(sl()));
 
   /* REPOSITORY */
 
@@ -36,7 +37,8 @@ void setupLocator() {
       () => AuthRepositoryImpl(sl(), sl()));
 
   //USER REPOSITORY
-  sl.registerLazySingleton<UserRepository>(() => UserRepositoryImpl(sl(), sl()));
+  sl.registerLazySingleton<UserRepository>(
+      () => UserRepositoryImpl(sl(), sl()));
 
   /* DATA SOURCE */
 

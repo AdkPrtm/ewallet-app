@@ -39,22 +39,40 @@ class ProfileEditPage extends StatelessWidget {
                 CustomFormField(
                   title: 'Username',
                   textEditingController: conUsername,
+                  validator: (value) {
+                    if (value!.isEmpty) {
+                      return 'Full Name Required';
+                    }
+                  },
                 ),
                 16.0.height,
                 CustomFormField(
                   title: 'Full Name',
                   textEditingController: conName,
+                  validator: (value) {
+                    if (value!.isEmpty) {
+                      return 'Full Name Required';
+                    }
+                  },
                 ),
                 16.0.height,
                 CustomFormField(
                   title: 'Email Address',
                   textEditingController: conEmail,
+                  validator: (value) {
+                    if (!emailValidator(value!)) {
+                      return 'Invalid Email';
+                    }
+                  },
                 ),
                 16.0.height,
                 CustomFormField(
                   title: 'Password',
                   obsecureText: true,
                   textEditingController: conPassword,
+                  validator: (value) {
+                    return passwordValidator(value!);
+                  },
                 ),
                 30.0.height,
                 BlocConsumer<UserBloc, UserState>(

@@ -22,4 +22,14 @@ abstract class UserRemoteService {
     @Header("Content-Type") String? contentType,
     @Path("username") String? username,
   });
+
+  @PUT('/wallet')
+  Future<HttpResponse> changePinUser({
+    @Header("Authorization") String? token,
+    @Header("Content-Type") String? contentType,
+    @Body() Map<String, dynamic>? body,
+  });
+
+  // @GET('/wallet')
+  // Future<>
 }

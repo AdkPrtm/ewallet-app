@@ -109,29 +109,54 @@ class _SignUpPageState extends State<SignUpPage> {
                   CustomFormField(
                     title: 'Full Name',
                     textEditingController: nameController,
+                    validator: (value) {
+                      if (value!.isEmpty) {
+                        return 'Full Name Required';
+                      }
+                    },
                   ),
                   SizedBox(height: 16.h),
                   CustomFormField(
                     title: 'Username',
                     textEditingController: usernameController,
+                    validator: (value) {
+                      if (value!.isEmpty) {
+                        return 'Full Name Required';
+                      }
+                    },
                   ),
                   SizedBox(height: 16.h),
                   CustomFormField(
                     title: 'Email Address',
                     textEditingController: emailController,
+                    validator: (value) {
+                      if (!emailValidator(value!)) {
+                        return 'Invalid Email';
+                      }
+                    },
                   ),
                   SizedBox(height: 16.h),
                   CustomFormField(
                     title: 'Password',
                     textEditingController: passwordController,
                     obsecureText: true,
+                    validator: (value) {
+                      return passwordValidator(value!);
+                    },
                   ),
                   SizedBox(height: 16.h),
                   CustomFormField(
                     title: 'Confirmation Password',
                     textEditingController: konfirmasiPasswordController,
                     obsecureText: true,
-                    password: passwordController.text,
+                    validator: (value) {
+                      if (value!.isEmpty) {
+                        return 'Confirmation Required';
+                      }
+                      if (value != passwordController.text) {
+                        return 'Confirm password not matching';
+                      }
+                    },
                   ),
                   SizedBox(height: 30.h),
                   CustomFilledButton(

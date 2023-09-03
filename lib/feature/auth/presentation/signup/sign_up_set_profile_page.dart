@@ -108,6 +108,12 @@ class _SetProfilePageState extends State<SetProfilePage> {
                   obsecureText: true,
                   textEditingController: pinController,
                   keyboardType: TextInputType.number,
+                  maxLength: 6,
+                  validator: (value) {
+                    if (value!.isEmpty) {
+                      return 'Pin Required';
+                    }
+                  },
                 ),
                 SizedBox(height: 30.h),
                 CustomFilledButton(
@@ -123,7 +129,7 @@ class _SetProfilePageState extends State<SetProfilePage> {
                               profilePicture: selectedImage == null
                                   ? null
                                   : 'data:image/png;base64,${base64Encode(File(selectedImage!.path).readAsBytesSync())}',
-                                  // 'data:image/png;base64,${base64Encode(File(selectedImage!.path).readAsBytesSync(),)}'
+                              // 'data:image/png;base64,${base64Encode(File(selectedImage!.path).readAsBytesSync(),)}'
                             ),
                           ),
                         ),

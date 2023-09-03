@@ -27,8 +27,6 @@ class UserFailed extends UserState {
   List<Object> get props => [message];
 }
 
-class UpdateProfileSuccess extends UserState {}
-
 class ListDataByUsername extends UserState {
   final List<UserBySearchingEntity>? listData;
 
@@ -36,3 +34,5 @@ class ListDataByUsername extends UserState {
   @override
   List<Object> get props => [listData!];
 }
+
+class UpdateProfileSuccess extends UserState {}

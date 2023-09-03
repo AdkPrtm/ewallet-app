@@ -82,6 +82,13 @@ class SignInPage extends StatelessWidget {
                   CustomFormField(
                     title: 'Email Address',
                     textEditingController: emailController,
+                    validator: (value) {
+                      if (emailValidator(value!)) {
+                        return null;
+                      } else {
+                        return 'Invalid Email';
+                      }
+                    },
                   ),
                   SizedBox(height: 16.h),
                   //EMAIL INPUT
@@ -89,6 +96,9 @@ class SignInPage extends StatelessWidget {
                     obsecureText: true,
                     title: 'Password',
                     textEditingController: passwordController,
+                    validator: (value) {
+                      return passwordValidator(value!);
+                    },
                   ),
                   SizedBox(height: 16.h),
                   Align(

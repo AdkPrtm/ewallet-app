@@ -71,7 +71,11 @@ class ProfilePage extends StatelessWidget {
                 ActionProfileWidget(
                   svgAsset: SvgSrc.mypinSVG,
                   title: 'My Pin',
-                  onTap: () => Navigator.pushNamed(context, '/profile-pin'),
+                  onTap: () => Navigator.pushNamed(
+                    context,
+                    '/profile-pin',
+                    arguments: userEntity,
+                  ),
                 ),
                 30.0.height,
                 ActionProfileWidget(

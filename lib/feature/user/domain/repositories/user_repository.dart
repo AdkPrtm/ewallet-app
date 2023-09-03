@@ -9,4 +9,7 @@ abstract class UserRepository {
 
   Future<Either<Failure, ResponseSearchUsername>> getByUsername(
       String username);
+
+  Future<Either<Failure, String>> changePinUser(
+      UpdatePinParams updatePinParams);
 }

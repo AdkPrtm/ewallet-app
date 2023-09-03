@@ -7,6 +7,7 @@ import 'package:template_clean_architecture/feature/pin/pin_page.dart';
 import 'package:template_clean_architecture/feature/splash_page.dart';
 import 'package:template_clean_architecture/feature/user/domain/domain.dart';
 import 'package:template_clean_architecture/feature/user/presentation/profile/profile.dart';
+import 'package:template_clean_architecture/utils/helper/helper.dart';
 
 class AppRoutes {
   static Route onGenerateRoutes(RouteSettings settings) {
@@ -32,7 +33,9 @@ class AppRoutes {
           userEntity: settings.arguments as UserEntity,
         ));
       case '/profile-pin':
-        return _materialPageRoute(const ProfilePinPage());
+        return _materialPageRoute(ProfilePinPage(
+          userEntity: settings.arguments as UserEntity,
+        ));
       case '/pin':
         return _materialPageRoute(PinPage(
           userEntity: settings.arguments as UserEntity,
@@ -44,7 +47,10 @@ class AppRoutes {
       // case '/transfer':
       //   return _materialPageRoute(const TransferPage());
       case '/success-widget':
-        return _materialPageRoute(const SuccessPage());
+        return _materialPageRoute(SuccessPage(
+          successWidgetModelHelper:
+              settings.arguments as SuccessWidgetModelHelper,
+        ));
       // case '/select-provider':
       //   return _materialPageRoute(const SelectProviderPage());
       // case '/select-package':
