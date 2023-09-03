@@ -7,14 +7,16 @@ part 'user_event.dart';
 part 'user_state.dart';
 
 class UserBloc extends Bloc<UserEvent, UserState> {
-  final GetCredentialUseCase _getCredentialUseCase;
   final UpdateDataUserUsecase _updateDataUserUsecase;
+  final GetUserByUsernameUsecase _getUserByUsernameUsecase;
 
   UserBloc(
-    this._getCredentialUseCase,
     this._updateDataUserUsecase,
+    this._getUserByUsernameUsecase,
   ) : super(UserInitial()) {
     on<UpdateDataProfileEvent>(onUpdateProfileUserProses);
+
+    on<GetDataByUsername>(onGetDataUsernameProses);
   }
 
   Future<void> onUpdateProfileUserProses(
@@ -25,13 +27,29 @@ class UserBloc extends Bloc<UserEvent, UserState> {
     result.fold(
       (l) => emit(UserFailed(l.message)),
       (data) {
-        print(event.userEntity);
         event.userEntity!.copyWith(
           username: event.updateProfileUserParams!.username,
           name: event.updateProfileUserParams!.name,
           email: event.updateProfileUserParams!.email,
         );
         emit(UpdateProfileSuccess());
+      },
+    );
+  }
+
+  Future<void> onGetDataUsernameProses(
+      GetDataByUsername event, Emitter<UserState> emit) async {
+    print('masuk bloc');
+    emit(UserLoading());
+    final result = await _getUserByUsernameUsecase.call(params: event.username);
+    result.fold(
+      (l) {
+        print(l.message);
+        emit(UserFailed(l.message));
+      },
+      (data) {
+        print(data.data);
+        emit(ListDataByUsername(listData: data.data));
       },
     );
   }

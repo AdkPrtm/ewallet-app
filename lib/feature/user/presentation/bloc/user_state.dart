@@ -27,6 +27,12 @@ class UserFailed extends UserState {
   List<Object> get props => [message];
 }
 
-class UpdateProfileSuccess extends UserState {
+class UpdateProfileSuccess extends UserState {}
 
+class ListDataByUsername extends UserState {
+  final List<UserBySearchingEntity>? listData;
+
+  const ListDataByUsername({this.listData});
+  @override
+  List<Object> get props => [listData!];
 }

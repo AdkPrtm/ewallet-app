@@ -25,7 +25,9 @@ class MyApp extends StatelessWidget {
             BlocProvider(
               create: (_) => sl<AuthBloc>()..add(GetCurrentUser()),
             ),
-            BlocProvider(create: (_) => sl<UserBloc>()),
+            BlocProvider(
+              create: (_) => sl<UserBloc>(),
+            ),
           ],
           child: MaterialApp(
             title: 'Flutter Demo',

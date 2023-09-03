@@ -17,3 +17,11 @@ class UpdateDataProfileEvent extends UserEvent {
   @override
   List<Object> get props => [updateProfileUserParams!, userEntity!];
 }
+
+class GetDataByUsername extends UserEvent {
+  final String? username;
+
+  const GetDataByUsername({this.username});
+  @override
+  List<Object> get props => [username!];
+}

@@ -27,6 +27,7 @@ void setupLocator() {
 
   //USER USECASE
   sl.registerLazySingleton(() => UpdateDataUserUsecase(sl()));
+  sl.registerLazySingleton(() => GetUserByUsernameUsecase(sl()),);
 
   /* REPOSITORY */
 

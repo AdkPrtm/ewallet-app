@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:template_clean_architecture/core/resource/src/src.dart';
@@ -23,17 +24,17 @@ class ImageProfileHeader extends StatelessWidget {
             decoration: BoxDecoration(
               shape: BoxShape.circle,
               image: DecorationImage(
-                image: NetworkImage(url),
+                image: CachedNetworkImageProvider(url),
                 fit: BoxFit.cover,
               ),
             ),
           ),
           verified == '0'
               ? Align(
-                  alignment: const Alignment(0.8, -0.8),
+                  alignment: const Alignment(0.9, -0.9),
                   child: Container(
-                    height: 14.h,
-                    width: 14.h,
+                    height: 25.h,
+                    width: 25.h,
                     decoration: const BoxDecoration(
                       shape: BoxShape.circle,
                       image: DecorationImage(

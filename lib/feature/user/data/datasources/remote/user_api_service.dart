@@ -15,4 +15,11 @@ abstract class UserRemoteService {
     @Header("Content-Type") String? contentType,
     @Body() Map<String, dynamic>? body,
   });
+
+  @GET('/users/{username}')
+  Future<HttpResponse<SearchingByUsernameResponse>> getDataUsername({
+    @Header("Authorization") String? token,
+    @Header("Content-Type") String? contentType,
+    @Path("username") String? username,
+  });
 }

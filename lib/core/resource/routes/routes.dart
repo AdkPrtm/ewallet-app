@@ -6,8 +6,7 @@ import 'package:template_clean_architecture/feature/home/home_page.dart';
 import 'package:template_clean_architecture/feature/pin/pin_page.dart';
 import 'package:template_clean_architecture/feature/splash_page.dart';
 import 'package:template_clean_architecture/feature/user/domain/domain.dart';
-import 'package:template_clean_architecture/feature/user/presentation/profile/edit/profile_edit_page.dart';
-import 'package:template_clean_architecture/feature/user/presentation/profile/profile_page.dart';
+import 'package:template_clean_architecture/feature/user/presentation/profile/profile.dart';
 
 class AppRoutes {
   static Route onGenerateRoutes(RouteSettings settings) {
@@ -32,8 +31,8 @@ class AppRoutes {
         return _materialPageRoute(ProfileEditPage(
           userEntity: settings.arguments as UserEntity,
         ));
-      // case '/profile-pin':
-      //   return _materialPageRoute(const ProfilePinPage());
+      case '/profile-pin':
+        return _materialPageRoute(const ProfilePinPage());
       case '/pin':
         return _materialPageRoute(PinPage(
           userEntity: settings.arguments as UserEntity,
