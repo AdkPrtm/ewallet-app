@@ -24,18 +24,26 @@ class CustomFilledButton extends StatelessWidget {
       child: TextButton(
         onPressed: onTap,
         style: TextButton.styleFrom(
-          backgroundColor: disable ? greyColor : purpleColor,
+          backgroundColor: purpleColor,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(56),
           ),
         ),
-        child: Text(
-          title,
-          style: AppFont().whiteTextStyle.copyWith(
-                fontSize: 16.sp,
-                fontWeight: AppFont().semibold,
+        child: disable
+            ? SizedBox(
+                height: 25.h,
+                width: 25.h,
+                child: CircularProgressIndicator(
+                  color: whiteColor,
+                ),
+              )
+            : Text(
+                title,
+                style: AppFont().whiteTextStyle.copyWith(
+                      fontSize: 16.sp,
+                      fontWeight: AppFont().semibold,
+                    ),
               ),
-        ),
       ),
     );
   }
@@ -47,11 +55,13 @@ class CustomeTextButton extends StatelessWidget {
     required this.title,
     this.width = double.infinity,
     required this.onTap,
+    this.disable = false,
   });
 
   final String title;
   final double width;
   final VoidCallback onTap;
+  final bool disable;
 
   @override
   Widget build(BuildContext context) {
@@ -63,12 +73,16 @@ class CustomeTextButton extends StatelessWidget {
         style: TextButton.styleFrom(
           padding: EdgeInsets.zero,
         ),
-        child: Text(
-          title,
-          style: AppFont().greyTextStyle.copyWith(
-                fontSize: 16.sp,
+        child: disable
+            ? CircularProgressIndicator(
+                color: greyColor,
+              )
+            : Text(
+                title,
+                style: AppFont().greyTextStyle.copyWith(
+                      fontSize: 16.sp,
+                    ),
               ),
-        ),
       ),
     );
   }

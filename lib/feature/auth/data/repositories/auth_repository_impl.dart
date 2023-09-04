@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:template_clean_architecture/core/error/failure.dart';
+import 'package:template_clean_architecture/core/resource/constant/api_list.dart';
 import 'package:template_clean_architecture/feature/auth/data/datasources/datasources.dart';
 import 'package:template_clean_architecture/feature/auth/domain/domain.dart';
 import 'package:template_clean_architecture/feature/user/domain/entities/user_entities.dart';
@@ -15,8 +16,10 @@ class AuthRepositoryImpl extends AuthRepository {
   @override
   Future<Either<Failure, UserEntity>> signin(SignInParams signInParams) async {
     try {
-      final httpResponse =
-          await _authRemoteService.loginUser(body: signInParams.toJson());
+      final httpResponse = await _authRemoteService.loginUser(
+        body: signInParams.toJson(),
+        contentType: contentType,
+      );
       if ((httpResponse.response.statusCode ?? 0) < 200 ||
           (httpResponse.response.statusCode ?? 0) > 201) {
         throw DioException(
@@ -24,10 +27,8 @@ class AuthRepositoryImpl extends AuthRepository {
           response: httpResponse.response,
         );
       }
-      print(httpResponse.data);
       return Right(httpResponse.data.toEntity());
     } on DioException catch (e) {
-      print(e.toString());
       return Left(ServerFailure(e.response?.data['message'] ?? e.message));
     } on SocketException {
       return const Left(ConnectionFailure('Failed to connect to the network'));
@@ -38,8 +39,10 @@ class AuthRepositoryImpl extends AuthRepository {
   Future<Either<Failure, CheckDataEntity>> checkData(
       CheckDataParams checkDataParams) async {
     try {
-      final httpResponse =
-          await _authRemoteService.checkData(body: checkDataParams.toJson());
+      final httpResponse = await _authRemoteService.checkData(
+        body: checkDataParams.toJson(),
+        contentType: contentType,
+      );
       if ((httpResponse.response.statusCode ?? 0) < 200 ||
           (httpResponse.response.statusCode ?? 0) > 201) {
         throw DioException(
@@ -58,8 +61,10 @@ class AuthRepositoryImpl extends AuthRepository {
   @override
   Future<Either<Failure, UserEntity>> signup(SignUpParams signUpParams) async {
     try {
-      final httpResponse =
-          await _authRemoteService.signupUser(body: signUpParams.toJson());
+      final httpResponse = await _authRemoteService.signupUser(
+        body: signUpParams.toJson(),
+        contentType: contentType,
+      );
       if ((httpResponse.response.statusCode ?? 0) < 200 ||
           (httpResponse.response.statusCode ?? 0) > 201) {
         throw DioException(
@@ -76,27 +81,25 @@ class AuthRepositoryImpl extends AuthRepository {
   }
 
   @override
-  Future<Either<Failure, UserEntity>> getCurrentUser(String token) async {
+  Future<Either<Failure, UserEntity>> validationToken(String token) async {
     try {
-      print('1');
-      final httpResponse =
-          await _authRemoteService.getCurrentUser(token: token);
-      print('2');
-      if (httpResponse.response.statusCode != 200) {
-        print('3');
+      final httpResponse = await _authRemoteService.validationToken(
+        token: token,
+        contentType: contentType,
+      );
+      if ((httpResponse.response.statusCode ?? 0) < 200 ||
+          (httpResponse.response.statusCode ?? 0) > 201) {
         throw DioException(
           requestOptions: httpResponse.response.requestOptions,
           response: httpResponse.response,
         );
       }
-      print('4');
+      print('masuk 1');
       return Right(httpResponse.data.toEntity());
     } on DioException catch (e) {
-      print('5');
-      print(e.toString());
-      return Left(ServerFailure('Something went wrong'));
+      print('masuk 2');
+      return Left(ServerFailure(e.response?.data['message'] ?? e.message));
     } on SocketException {
-      print('6');
       return const Left(ConnectionFailure('Failed to connect to the network'));
     }
   }

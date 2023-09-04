@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:template_clean_architecture/core/resource/config.dart';
+import 'package:template_clean_architecture/core/resource/resource.dart';
 import 'package:template_clean_architecture/core/widgets/buttons.dart';
 import 'package:template_clean_architecture/core/widgets/forms.dart';
 import 'package:template_clean_architecture/feature/auth/domain/domain.dart';
@@ -9,39 +9,35 @@ import 'package:template_clean_architecture/feature/auth/presentation/bloc/auth_
 
 class SignInPage extends StatelessWidget {
   const SignInPage({super.key});
+  // return BlocConsumer<AuthBloc, AuthState>(
+  //   listener: (context, state) {
+  //     if (state is AuthFailed) {
+  //       showCustomSnackbar(context, state.message);
+  //     }
 
+  //     if (state is AuthDone) {
+  //       Navigator.pushNamedAndRemoveUntil(context, '/home', (route) => false);
+  //     }
+  //   },
+  //   builder: (context, state) {
+  //     if (state is AuthLoading) {
+  //       return Stack(
+  //         children: [
+  //           _buildPage(context),
+  //           Container(
+  //             height: double.infinity,
+  //             width: double.infinity,
+  //             color: Colors.white.withOpacity(0.5),
+  //             child: const Center(child: CircularProgressIndicator()),
+  //           ),
+  //         ],
+  //       );
+  //     }
+  //     return _buildPage(context);
+  //   },
+  // );
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<AuthBloc, AuthState>(
-      listener: (context, state) {
-        if (state is AuthFailed) {
-          showCustomSnackbar(context, state.message);
-        }
-
-        if (state is AuthDone) {
-          Navigator.pushNamedAndRemoveUntil(context, '/home', (route) => false);
-        }
-      },
-      builder: (context, state) {
-        if (state is AuthLoading) {
-          return Stack(
-            children: [
-              _buildPage(context),
-              Container(
-                height: double.infinity,
-                width: double.infinity,
-                color: Colors.white.withOpacity(0.5),
-                child: const Center(child: CircularProgressIndicator()),
-              ),
-            ],
-          );
-        }
-        return _buildPage(context);
-      },
-    );
-  }
-
-  Scaffold _buildPage(BuildContext context) {
     final emailController = TextEditingController(text: '');
     final passwordController = TextEditingController(text: '');
     final formKey = GlobalKey<FormState>();
@@ -82,6 +78,13 @@ class SignInPage extends StatelessWidget {
                   CustomFormField(
                     title: 'Email Address',
                     textEditingController: emailController,
+                    validator: (value) {
+                      if (emailValidator(value!)) {
+                        return null;
+                      } else {
+                        return 'Invalid Email';
+                      }
+                    },
                   ),
                   SizedBox(height: 16.h),
                   //EMAIL INPUT
@@ -89,6 +92,9 @@ class SignInPage extends StatelessWidget {
                     obsecureText: true,
                     title: 'Password',
                     textEditingController: passwordController,
+                    validator: (value) {
+                      return passwordValidator(value!);
+                    },
                   ),
                   SizedBox(height: 16.h),
                   Align(
@@ -99,19 +105,39 @@ class SignInPage extends StatelessWidget {
                     ),
                   ),
                   SizedBox(height: 30.h),
-                  CustomFilledButton(
-                    title: 'Sign In',
-                    onTap: () {
-                      if (formKey.currentState!.validate()) {
-                        context.read<AuthBloc>().add(
-                              AuthLogin(
-                                SignInParams(
-                                  email: emailController.text,
-                                  password: passwordController.text,
-                                ),
-                              ),
-                            );
+                  BlocConsumer<AuthBloc, AuthState>(
+                    listener: (context, state) {
+                      if (state is AuthDone) {
+                        Navigator.pushNamedAndRemoveUntil(
+                            context, '/home', (route) => false);
                       }
+                      if (state is AuthFailed) {
+                        showCustomSnackbar(context, state.message);
+                      }
+                    },
+                    builder: (context, state) {
+                      if (state is AuthLoading) {
+                        return CustomFilledButton(
+                          title: 'Update Now',
+                          disable: true,
+                          onTap: () {},
+                        );
+                      }
+                      return CustomFilledButton(
+                        title: 'Sign In',
+                        onTap: () {
+                          if (formKey.currentState!.validate()) {
+                            context.read<AuthBloc>().add(
+                                  AuthLogin(
+                                    SignInParams(
+                                      email: emailController.text,
+                                      password: passwordController.text,
+                                    ),
+                                  ),
+                                );
+                          }
+                        },
+                      );
                     },
                   ),
                 ],

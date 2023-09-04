@@ -21,12 +21,15 @@ class _AuthRemoteService implements AuthRemoteService {
   String? baseUrl;
 
   @override
-  Future<HttpResponse<CheckDataResponse>> checkData(
-      {Map<String, dynamic>? body}) async {
+  Future<HttpResponse<CheckDataResponse>> checkData({
+    Map<String, dynamic>? body,
+    String? contentType,
+  }) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     queryParameters.removeWhere((k, v) => v == null);
-    final _headers = <String, dynamic>{};
+    final _headers = <String, dynamic>{r'Content-Type': contentType};
+    _headers.removeWhere((k, v) => v == null);
     final _data = <String, dynamic>{};
     _data.addAll(body!);
     final _result = await _dio.fetch<Map<String, dynamic>>(
@@ -34,6 +37,7 @@ class _AuthRemoteService implements AuthRemoteService {
       method: 'POST',
       headers: _headers,
       extra: _extra,
+      contentType: contentType,
     )
             .compose(
               _dio.options,
@@ -52,12 +56,15 @@ class _AuthRemoteService implements AuthRemoteService {
   }
 
   @override
-  Future<HttpResponse<UserModel>> loginUser(
-      {Map<String, dynamic>? body}) async {
+  Future<HttpResponse<UserModel>> loginUser({
+    Map<String, dynamic>? body,
+    String? contentType,
+  }) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     queryParameters.removeWhere((k, v) => v == null);
-    final _headers = <String, dynamic>{};
+    final _headers = <String, dynamic>{r'Content-Type': contentType};
+    _headers.removeWhere((k, v) => v == null);
     final _data = <String, dynamic>{};
     _data.addAll(body!);
     final _result = await _dio.fetch<Map<String, dynamic>>(
@@ -65,6 +72,7 @@ class _AuthRemoteService implements AuthRemoteService {
       method: 'POST',
       headers: _headers,
       extra: _extra,
+      contentType: contentType,
     )
             .compose(
               _dio.options,
@@ -83,12 +91,15 @@ class _AuthRemoteService implements AuthRemoteService {
   }
 
   @override
-  Future<HttpResponse<UserModel>> signupUser(
-      {Map<String, dynamic>? body}) async {
+  Future<HttpResponse<UserModel>> signupUser({
+    Map<String, dynamic>? body,
+    String? contentType,
+  }) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     queryParameters.removeWhere((k, v) => v == null);
-    final _headers = <String, dynamic>{};
+    final _headers = <String, dynamic>{r'Content-Type': contentType};
+    _headers.removeWhere((k, v) => v == null);
     final _data = <String, dynamic>{};
     _data.addAll(body!);
     final _result = await _dio.fetch<Map<String, dynamic>>(
@@ -96,6 +107,7 @@ class _AuthRemoteService implements AuthRemoteService {
       method: 'POST',
       headers: _headers,
       extra: _extra,
+      contentType: contentType,
     )
             .compose(
               _dio.options,
@@ -114,18 +126,25 @@ class _AuthRemoteService implements AuthRemoteService {
   }
 
   @override
-  Future<HttpResponse<UserModel>> getCurrentUser({String? token}) async {
+  Future<HttpResponse<UserModel>> validationToken({
+    String? token,
+    String? contentType,
+  }) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     queryParameters.removeWhere((k, v) => v == null);
-    final _headers = <String, dynamic>{r'Authorization': token};
+    final _headers = <String, dynamic>{
+      r'Authorization': token,
+      r'Content-Type': contentType,
+    };
     _headers.removeWhere((k, v) => v == null);
-    const Map<String, dynamic>? _data = null;
+    final Map<String, dynamic>? _data = null;
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<HttpResponse<UserModel>>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
+      contentType: contentType,
     )
             .compose(
               _dio.options,

@@ -3,7 +3,11 @@ import 'package:template_clean_architecture/core/widgets/success_widget.dart';
 import 'package:template_clean_architecture/feature/auth/presentation/signin/sign_in_page.dart';
 import 'package:template_clean_architecture/feature/auth/presentation/signup/sign_up_page.dart';
 import 'package:template_clean_architecture/feature/home/home_page.dart';
+import 'package:template_clean_architecture/feature/pin/pin_page.dart';
 import 'package:template_clean_architecture/feature/splash_page.dart';
+import 'package:template_clean_architecture/feature/user/domain/domain.dart';
+import 'package:template_clean_architecture/feature/user/presentation/profile/profile.dart';
+import 'package:template_clean_architecture/utils/helper/helper.dart';
 
 class AppRoutes {
   static Route onGenerateRoutes(RouteSettings settings) {
@@ -20,14 +24,20 @@ class AppRoutes {
       //   return _materialPageRoute(const SignUpSuccessPage());
       case '/home':
         return _materialPageRoute(const HomePage());
-      // case '/profile':
-      //   return _materialPageRoute(const ProfilePage());
-      // case '/profile-edit':
-      //   return _materialPageRoute(const ProfileEditPage());
-      // case '/profile-pin':
-      //   return _materialPageRoute(const ProfilePinPage());
-      // case '/pin':
-      //   return _materialPageRoute(const PinPage());
+      case '/profile':
+        return _materialPageRoute(ProfilePage(
+          userEntity: settings.arguments as UserEntity,
+        ));
+      case '/profile-edit':
+        return _materialPageRoute(ProfileEditPage(
+          userEntity: settings.arguments as UserEntity,
+        ));
+      case '/profile-pin':
+        return _materialPageRoute(const ProfilePinPage());
+      case '/pin':
+        return _materialPageRoute(PinPage(
+          userEntity: settings.arguments as UserEntity,
+        ));
       // case '/topup':
       //   return _materialPageRoute(const TopUpPage());
       // case '/amount':
@@ -35,7 +45,10 @@ class AppRoutes {
       // case '/transfer':
       //   return _materialPageRoute(const TransferPage());
       case '/success-widget':
-        return _materialPageRoute(const SuccessPage());
+        return _materialPageRoute(SuccessPage(
+          successWidgetModelHelper:
+              settings.arguments as SuccessWidgetModelHelper,
+        ));
       // case '/select-provider':
       //   return _materialPageRoute(const SelectProviderPage());
       // case '/select-package':

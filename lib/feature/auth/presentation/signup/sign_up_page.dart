@@ -1,77 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:template_clean_architecture/core/resource/config.dart';
+import 'package:template_clean_architecture/core/resource/resource.dart';
 import 'package:template_clean_architecture/core/widgets/buttons.dart';
 import 'package:template_clean_architecture/core/widgets/forms.dart';
 import 'package:template_clean_architecture/feature/auth/domain/domain.dart';
 import 'package:template_clean_architecture/feature/auth/presentation/bloc/auth_bloc.dart';
 import 'package:template_clean_architecture/feature/auth/presentation/signup/sign_up_set_profile_page.dart';
 
-class SignUpPage extends StatefulWidget {
+class SignUpPage extends StatelessWidget {
   const SignUpPage({super.key});
 
   @override
-  State<SignUpPage> createState() => _SignUpPageState();
-}
-
-class _SignUpPageState extends State<SignUpPage> {
+  Widget build(BuildContext context) {
   final nameController = TextEditingController(text: '');
   final usernameController = TextEditingController(text: '');
   final emailController = TextEditingController(text: '');
   final passwordController = TextEditingController(text: '');
   final konfirmasiPasswordController = TextEditingController(text: '');
-
-  @override
-  Widget build(BuildContext context) {
-    return BlocConsumer<AuthBloc, AuthState>(
-      listener: (context, state) {
-        if (state is AuthFailed) {
-          showCustomSnackbar(context, state.message);
-        }
-
-        if (state is CheckDataSuccess) {
-          if (state.checkDataEntity.email == "true") {
-            showCustomSnackbar(context, 'Email already used');
-          } else if (state.checkDataEntity.username == "true") {
-            showCustomSnackbar(context, 'Username already used');
-          } else {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => SetProfilePage(
-                  data: SignUpParams(
-                    name: nameController.text,
-                    username: usernameController.text,
-                    email: emailController.text,
-                    password: passwordController.text,
-                  ),
-                ),
-              ),
-            );
-          }
-        }
-      },
-      builder: (context, state) {
-        if (state is AuthLoading) {
-          return Stack(
-            children: [
-              _buildPage(context, true),
-              Container(
-                height: double.infinity,
-                width: double.infinity,
-                color: Colors.white.withOpacity(0.5),
-                child: const Center(child: CircularProgressIndicator()),
-              ),
-            ],
-          );
-        }
-        return _buildPage(context, false);
-      },
-    );
-  }
-
-  Scaffold _buildPage(BuildContext context, bool isLoading) {
     final formKey = GlobalKey<FormState>();
     return Scaffold(
       body: ListView(
@@ -109,48 +55,107 @@ class _SignUpPageState extends State<SignUpPage> {
                   CustomFormField(
                     title: 'Full Name',
                     textEditingController: nameController,
+                    validator: (value) {
+                      if (value!.isEmpty) {
+                        return 'Full Name Required';
+                      }
+                    },
                   ),
                   SizedBox(height: 16.h),
                   CustomFormField(
                     title: 'Username',
                     textEditingController: usernameController,
+                    validator: (value) {
+                      if (value!.isEmpty) {
+                        return 'Full Name Required';
+                      }
+                    },
                   ),
                   SizedBox(height: 16.h),
                   CustomFormField(
                     title: 'Email Address',
                     textEditingController: emailController,
+                    validator: (value) {
+                      if (!emailValidator(value!)) {
+                        return 'Invalid Email';
+                      }
+                    },
                   ),
                   SizedBox(height: 16.h),
                   CustomFormField(
                     title: 'Password',
                     textEditingController: passwordController,
                     obsecureText: true,
+                    validator: (value) {
+                      return passwordValidator(value!);
+                    },
                   ),
                   SizedBox(height: 16.h),
                   CustomFormField(
                     title: 'Confirmation Password',
                     textEditingController: konfirmasiPasswordController,
                     obsecureText: true,
-                    password: passwordController.text,
+                    validator: (value) {
+                      if (value!.isEmpty) {
+                        return 'Confirmation Required';
+                      }
+                      if (value != passwordController.text) {
+                        return 'Confirm password not matching';
+                      }
+                    },
                   ),
                   SizedBox(height: 30.h),
-                  CustomFilledButton(
-                    title: 'Continue',
-                    onTap: isLoading
-                        ? () {}
-                        : () {
-                            if (formKey.currentState!.validate()) {
-                              context.read<AuthBloc>().add(
-                                    CheckDataExists(
-                                      CheckDataParams(
-                                        email: emailController.text,
-                                        username: usernameController.text,
-                                      ),
+                  BlocConsumer<AuthBloc, AuthState>(
+                    listener: (context, state) {
+                      if (state is AuthFailed) {
+                        showCustomSnackbar(context, state.message);
+                      }
+                      if (state is CheckDataSuccess) {
+                        if (state.checkDataEntity.email == "true") {
+                          showCustomSnackbar(context, 'Email already used');
+                        } else if (state.checkDataEntity.username == "true") {
+                          showCustomSnackbar(context, 'Username already used');
+                        } else {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => SetProfilePage(
+                                data: SignUpParams(
+                                  name: nameController.text,
+                                  username: usernameController.text,
+                                  email: emailController.text,
+                                  password: passwordController.text,
+                                ),
+                              ),
+                            ),
+                          );
+                        }
+                      }
+                    },
+                    builder: (context, state) {
+                      if (state is AuthLoading) {
+                        return CustomFilledButton(
+                          title: 'Continue',
+                          onTap: () {},
+                          disable: true,
+                        );
+                      }
+                      return CustomFilledButton(
+                        title: 'Continue',
+                        onTap: () {
+                          if (formKey.currentState!.validate()) {
+                            context.read<AuthBloc>().add(
+                                  CheckDataExists(
+                                    CheckDataParams(
+                                      email: emailController.text,
+                                      username: usernameController.text,
                                     ),
-                                  );
-                            }
-                          },
-                    disable: isLoading,
+                                  ),
+                                );
+                          }
+                        },
+                      );
+                    },
                   ),
                 ],
               ),

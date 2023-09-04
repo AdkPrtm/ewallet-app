@@ -1,8 +1,6 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:template_clean_architecture/feature/auth/presentation/bloc/auth_bloc.dart';
 import 'package:template_clean_architecture/feature/home/component/custom_latest_transaction_component.dart';
 import 'package:template_clean_architecture/feature/home/component/custom_level_card_component.dart';
 import 'package:template_clean_architecture/feature/home/component/custom_send_again_component.dart';
@@ -10,9 +8,22 @@ import 'package:template_clean_architecture/feature/home/component/custom_tips_c
 import 'package:template_clean_architecture/feature/home/component/custom_transaction_option_component.dart';
 import 'package:template_clean_architecture/feature/home/component/custom_wallet_component.dart';
 import 'package:template_clean_architecture/feature/home/component/custome_wellcome_profile_component.dart';
+import 'package:template_clean_architecture/feature/home/component/shimmer_profile_and_card_component.dart';
+import 'package:template_clean_architecture/feature/user/presentation/bloc/user_bloc.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   const HomePage({super.key});
+
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  @override
+  void initState() {
+    super.initState();
+    context.read<UserBloc>().add(GetCurrentUserEvent());
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -20,15 +31,22 @@ class HomePage extends StatelessWidget {
       body: ListView(
         padding: EdgeInsets.fromLTRB(24.w, 50.h, 24.w, 40.h),
         children: [
-          BlocBuilder<AuthBloc, AuthState>(
+          BlocBuilder<UserBloc, UserState>(
             builder: (context, state) {
-              if (state is AuthDone) {
+              if (state is UserLoaded) {
                 return Column(
                   children: [
-                    CustomWellcomeProfileComponent(
-                      name: state.userEntity.name!,
-                      urlPicture: state.userEntity.profilePicture!,
-                      verified: state.userEntity.verified!,
+                    GestureDetector(
+                      onTap: () => Navigator.pushNamed(
+                        context,
+                        '/profile',
+                        arguments: state.userEntity,
+                      ),
+                      child: CustomWellcomeProfileComponent(
+                        name: state.userEntity.name!,
+                        urlPicture: state.userEntity.profilePicture!,
+                        verified: state.userEntity.verified!,
+                      ),
                     ),
                     SizedBox(height: 32.h),
                     CustomWalletComponent(
@@ -38,6 +56,9 @@ class HomePage extends StatelessWidget {
                     ),
                   ],
                 );
+              }
+              if (state is UserLoading) {
+                return const ShimmerProfileAndCardComponent();
               }
               return Container();
             },

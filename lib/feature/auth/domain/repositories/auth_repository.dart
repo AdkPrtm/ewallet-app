@@ -9,7 +9,7 @@ abstract class AuthRepository {
       CheckDataParams checkDataParams);
   Future<Either<Failure, UserEntity>> signin(SignInParams signInParams);
   Future<Either<Failure, UserEntity>> signup(SignUpParams signUpParams);
-  Future<Either<Failure, UserEntity>> getCurrentUser(String token);
+  Future<Either<Failure, UserEntity>> validationToken(String token);
 
   //LOCAL SERVICE
   Future<bool> setCredential(String token);
