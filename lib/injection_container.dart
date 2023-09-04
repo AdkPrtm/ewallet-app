@@ -12,7 +12,7 @@ final sl = GetIt.instance;
 void setupLocator() {
   //BLOC
   sl.registerFactory(() => AuthBloc(sl(), sl(), sl(), sl(), sl(), sl()));
-  sl.registerFactory(() => UserBloc(sl(), sl(), sl()));
+  sl.registerFactory(() => UserBloc(sl(), sl(), sl(), sl()));
 
   /* USECASE */
 
@@ -20,7 +20,7 @@ void setupLocator() {
   sl.registerLazySingleton(() => SignInUseCase(sl()));
   sl.registerLazySingleton(() => SignUpUseCase(sl()));
   sl.registerLazySingleton(() => CheckDataUseCase(sl()));
-  sl.registerLazySingleton(() => GetCurrentUserUseCase(sl()));
+  sl.registerLazySingleton(() => ValidationTokenUseCase(sl()));
 
   sl.registerLazySingleton(() => SetCredentialUseCase(sl()));
   sl.registerLazySingleton(() => GetCredentialUseCase(sl()));
@@ -29,6 +29,7 @@ void setupLocator() {
   sl.registerLazySingleton(() => UpdateDataUserUsecase(sl()));
   sl.registerLazySingleton(() => GetUserByUsernameUsecase(sl()));
   sl.registerLazySingleton(() => ChangePinUsecase(sl()));
+  sl.registerLazySingleton(() => GetCurrentUserUseCase(sl()));
 
   /* REPOSITORY */
 

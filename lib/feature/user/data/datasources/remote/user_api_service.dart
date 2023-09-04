@@ -30,6 +30,9 @@ abstract class UserRemoteService {
     @Body() Map<String, dynamic>? body,
   });
 
-  // @GET('/wallet')
-  // Future<>
+  @GET('/users')
+  Future<HttpResponse<UserModel>> getCurrentUser({
+    @Header("Authorization") String? token,
+    @Header("Content-Type") String? contentType,
+  });
 }

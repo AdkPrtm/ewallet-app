@@ -81,21 +81,24 @@ class AuthRepositoryImpl extends AuthRepository {
   }
 
   @override
-  Future<Either<Failure, UserEntity>> getCurrentUser(String token) async {
+  Future<Either<Failure, UserEntity>> validationToken(String token) async {
     try {
-      final httpResponse = await _authRemoteService.getCurrentUser(
+      final httpResponse = await _authRemoteService.validationToken(
         token: token,
         contentType: contentType,
       );
-      if (httpResponse.response.statusCode != 200) {
+      if ((httpResponse.response.statusCode ?? 0) < 200 ||
+          (httpResponse.response.statusCode ?? 0) > 201) {
         throw DioException(
           requestOptions: httpResponse.response.requestOptions,
           response: httpResponse.response,
         );
       }
+      print('masuk 1');
       return Right(httpResponse.data.toEntity());
     } on DioException catch (e) {
-      return  Left(ServerFailure(e.response?.data['message'] ?? e.message));
+      print('masuk 2');
+      return Left(ServerFailure(e.response?.data['message'] ?? e.message));
     } on SocketException {
       return const Left(ConnectionFailure('Failed to connect to the network'));
     }

@@ -126,7 +126,7 @@ class _AuthRemoteService implements AuthRemoteService {
   }
 
   @override
-  Future<HttpResponse<UserModel>> getCurrentUser({
+  Future<HttpResponse<UserModel>> validationToken({
     String? token,
     String? contentType,
   }) async {

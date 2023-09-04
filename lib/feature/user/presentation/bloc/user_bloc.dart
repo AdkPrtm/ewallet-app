@@ -9,17 +9,29 @@ class UserBloc extends Bloc<UserEvent, UserState> {
   final UpdateDataUserUsecase _updateDataUserUsecase;
   final GetUserByUsernameUsecase _getUserByUsernameUsecase;
   final ChangePinUsecase _changePinUsecase;
+  final GetCurrentUserUseCase _getCurrentUserUseCase;
 
   UserBloc(
     this._updateDataUserUsecase,
     this._getUserByUsernameUsecase,
     this._changePinUsecase,
+    this._getCurrentUserUseCase,
   ) : super(UserInitial()) {
+    on<GetCurrentUserEvent>(onGetCurrentUserProses);
+
     on<UpdateDataProfileEvent>(onUpdateProfileUserProses);
 
     on<GetDataByUsername>(onGetDataUsernameProses);
 
     on<ChangePinUserEvent>(onChangePinUserProses);
+  }
+
+  Future<void> onGetCurrentUserProses(
+      GetCurrentUserEvent event, Emitter<UserState> emit) async {
+    emit(UserLoading());
+    final result = await _getCurrentUserUseCase.call();
+    result.fold(
+        (l) => emit(UserFailed(l.message)), (data) => emit(UserLoaded(data)));
   }
 
   Future<void> onUpdateProfileUserProses(
@@ -57,12 +69,7 @@ class UserBloc extends Bloc<UserEvent, UserState> {
     result.fold(
       (l) => emit(UserFailed(l.message)),
       (data) {
-        event.userEntity!.copyWith(
-          pin: event.updatePinParams!.newPin.toString(),
-        );
-        print(event.updatePinParams!.newPin);
-        print(event.userEntity);
-        emit(UpdateProfileSuccess());
+        return emit(UpdateProfileSuccess());
       },
     );
   }

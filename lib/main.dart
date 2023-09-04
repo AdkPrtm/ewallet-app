@@ -23,7 +23,7 @@ class MyApp extends StatelessWidget {
         return MultiBlocProvider(
           providers: [
             BlocProvider(
-              create: (_) => sl<AuthBloc>()..add(GetCurrentUser()),
+              create: (_) => sl<AuthBloc>()..add(ValidationTokenEvent()),
             ),
             BlocProvider(
               create: (_) => sl<UserBloc>(),

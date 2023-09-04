@@ -12,7 +12,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   final SignInUseCase _signInUseCase;
   final CheckDataUseCase _checkDataUseCase;
   final SignUpUseCase _signUpUseCase;
-  final GetCurrentUserUseCase _getCurrentUserUseCase;
+  final ValidationTokenUseCase _validationTokenUseCase;
 
   final SetCredentialUseCase _setCredentialUseCase;
   final GetCredentialUseCase _getCredentialUseCase;
@@ -23,7 +23,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     this._signUpUseCase,
     this._setCredentialUseCase,
     this._getCredentialUseCase,
-    this._getCurrentUserUseCase,
+    this._validationTokenUseCase,
   ) : super(AuthInitial()) {
     on<CheckDataExists>(onCheckDataProses);
 
@@ -31,7 +31,32 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
 
     on<AuthRegister>(onRegisterProses);
 
-    on<GetCurrentUser>(onGetCurrentUserProses);
+    on<ValidationTokenEvent>(onValidationProses);
+  }
+
+  Future<void> onValidationProses(
+      ValidationTokenEvent event, Emitter<AuthState> emit) async {
+    emit(AuthLoading());
+    final token = await _getCredentialUseCase.call();
+    if (token == '' || token == 'Something went wrong') {
+      return emit(const AuthFailed('null token'));
+    }
+    final result = await _validationTokenUseCase.call(params: token);
+    await result.fold(
+      (l) async => emit(AuthFailed(l.message)),
+      (data) async {
+        if (data.email == null) {
+          final result2 =
+              await _validationTokenUseCase.call(params: data.token);
+          await _setCredentialUseCase.call(params: data.token);
+          await result2.fold(
+            (l) async => null,
+            (r) async => emit(AuthDone(data)),
+          );
+        }
+        return emit(AuthDone(data));
+      },
+    );
   }
 
   Future<void> onCheckDataProses(
@@ -85,25 +110,5 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         await _setCredentialUseCase.call(params: data.token!);
       },
     );
-  }
-
-  Future<void> onGetCurrentUserProses(
-      GetCurrentUser event, Emitter<AuthState> emit) async {
-    emit(AuthLoading());
-    final token = await _getCredentialUseCase.call();
-    if (token != '') {
-      final result = await _getCurrentUserUseCase.call(params: token);
-      result.fold(
-        (l) => emit(AuthFailed(l.message)),
-        (data) async {
-          if (data.email == null) {
-            await _getCurrentUserUseCase(params: data.token);
-          }
-          emit(AuthDone(data));
-        },
-      );
-    } else {
-      emit(const AuthFailed('Something went wrong'));
-    }
   }
 }

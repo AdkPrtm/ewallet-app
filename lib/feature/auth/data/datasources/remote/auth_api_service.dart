@@ -29,7 +29,7 @@ abstract class AuthRemoteService {
   });
 
   @GET('/users')
-  Future<HttpResponse<UserModel>> getCurrentUser({
+  Future<HttpResponse<UserModel>> validationToken({
     @Header("Authorization") String? token,
     @Header("Content-Type") String? contentType,
   });

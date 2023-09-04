@@ -28,9 +28,8 @@ class GetDataByUsername extends UserEvent {
 
 class ChangePinUserEvent extends UserEvent {
   final UpdatePinParams? updatePinParams;
-  final UserEntity? userEntity;
 
-  const ChangePinUserEvent({this.updatePinParams, this.userEntity});
+  const ChangePinUserEvent({this.updatePinParams});
   @override
-  List<Object> get props => [updatePinParams!, userEntity!];
+  List<Object> get props => [updatePinParams!];
 }

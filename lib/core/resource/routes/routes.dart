@@ -33,9 +33,7 @@ class AppRoutes {
           userEntity: settings.arguments as UserEntity,
         ));
       case '/profile-pin':
-        return _materialPageRoute(ProfilePinPage(
-          userEntity: settings.arguments as UserEntity,
-        ));
+        return _materialPageRoute(const ProfilePinPage());
       case '/pin':
         return _materialPageRoute(PinPage(
           userEntity: settings.arguments as UserEntity,

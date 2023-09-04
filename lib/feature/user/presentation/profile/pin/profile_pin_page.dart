@@ -10,9 +10,7 @@ import 'package:template_clean_architecture/utils/extensions/extensions.dart';
 import 'package:template_clean_architecture/utils/helper/helper.dart';
 
 class ProfilePinPage extends StatelessWidget {
-  const ProfilePinPage({super.key, required this.userEntity});
-
-  final UserEntity userEntity;
+  const ProfilePinPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -82,25 +80,25 @@ class ProfilePinPage extends StatelessWidget {
                 BlocConsumer<UserBloc, UserState>(
                   listener: (context, state) {
                     if (state is UpdateProfileSuccess) {
-                      print('masuk a');
                       Navigator.pushNamedAndRemoveUntil(
-                          context, '/success-widget', (route) => false,
-                          arguments: SuccessWidgetModelHelper(
-                            navigator: '/home',
-                            title: 'Nice Update!',
-                            subtitle: 'Your data is safe with\nour system',
-                            textButton: 'My Profile',
-                          ));
+                        context,
+                        '/success-widget',
+                        (route) => false,
+                        arguments: SuccessWidgetModelHelper(
+                          navigator: '/home',
+                          title: 'Nice Update!',
+                          subtitle: 'Your data is safe with\nour system',
+                          textButton: 'My Profile',
+                        ),
+                      );
                     }
 
                     if (state is UserFailed) {
-                      print('masuk b');
                       showCustomSnackbar(context, state.message);
                     }
                   },
                   builder: (context, state) {
                     if (state is UserLoading) {
-                      print('masuk c');
                       return CustomFilledButton(
                         title: 'Update Now',
                         onTap: () {},
@@ -117,7 +115,6 @@ class ProfilePinPage extends StatelessWidget {
                                     oldPin: int.parse(conOldPin.text),
                                     newPin: int.parse(conNewPin.text),
                                   ),
-                                  userEntity: userEntity,
                                 ),
                               );
                         }

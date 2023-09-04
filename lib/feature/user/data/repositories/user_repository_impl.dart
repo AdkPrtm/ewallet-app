@@ -74,7 +74,6 @@ class UserRepositoryImpl extends UserRepository {
         contentType: contentType,
         body: updatePinParams.toJson(),
       );
-      print(httpResponse.data);
       if ((httpResponse.response.statusCode ?? 0) < 200 ||
           (httpResponse.response.statusCode ?? 0) > 201) {
         throw DioException(
@@ -84,6 +83,30 @@ class UserRepositoryImpl extends UserRepository {
       }
       return Right(httpResponse.data['meesage'].toString());
     } on DioException catch (e) {
+      return Left(ServerFailure(e.response?.data['message'] ?? e.message));
+    } on SocketException {
+      return const Left(ConnectionFailure('Failed to connect to the network'));
+    }
+  }
+
+  @override
+  Future<Either<Failure, UserEntity>> getCurrentUser() async {
+    try {
+      final token = await _authLocalService.getCredentialToLocal();
+      final httpResponse = await _userRemoteService.getCurrentUser(
+        token: token,
+        contentType: contentType,
+      );
+      if (httpResponse.response.statusCode != 200) {
+        throw DioException(
+          requestOptions: httpResponse.response.requestOptions,
+          response: httpResponse.response,
+        );
+      }
+      print(httpResponse.data);
+      return Right(httpResponse.data.toEntity());
+    } on DioException catch (e) {
+      print(e.response!.data);
       return Left(ServerFailure(e.response?.data['message'] ?? e.message));
     } on SocketException {
       return const Left(ConnectionFailure('Failed to connect to the network'));

@@ -7,6 +7,7 @@ import 'package:template_clean_architecture/core/widgets/forms.dart';
 import 'package:template_clean_architecture/feature/user/domain/domain.dart';
 import 'package:template_clean_architecture/feature/user/presentation/bloc/user_bloc.dart';
 import 'package:template_clean_architecture/utils/extensions/extensions.dart';
+import 'package:template_clean_architecture/utils/helper/model_success_helper.dart';
 
 class ProfileEditPage extends StatelessWidget {
   const ProfileEditPage({super.key, required this.userEntity});
@@ -79,7 +80,16 @@ class ProfileEditPage extends StatelessWidget {
                   listener: (context, state) {
                     if (state is UpdateProfileSuccess) {
                       Navigator.pushNamedAndRemoveUntil(
-                          context, '/home', (route) => false);
+                        context,
+                        '/success-widget',
+                        (route) => false,
+                        arguments: SuccessWidgetModelHelper(
+                          navigator: '/home',
+                          title: 'Nice Update!',
+                          subtitle: 'Your data is safe with\nour system',
+                          textButton: 'My Profile',
+                        ),
+                      );
                     }
 
                     if (state is UserFailed) {

@@ -55,11 +55,13 @@ class CustomeTextButton extends StatelessWidget {
     required this.title,
     this.width = double.infinity,
     required this.onTap,
+    this.disable = false,
   });
 
   final String title;
   final double width;
   final VoidCallback onTap;
+  final bool disable;
 
   @override
   Widget build(BuildContext context) {
@@ -71,12 +73,16 @@ class CustomeTextButton extends StatelessWidget {
         style: TextButton.styleFrom(
           padding: EdgeInsets.zero,
         ),
-        child: Text(
-          title,
-          style: AppFont().greyTextStyle.copyWith(
-                fontSize: 16.sp,
+        child: disable
+            ? CircularProgressIndicator(
+                color: greyColor,
+              )
+            : Text(
+                title,
+                style: AppFont().greyTextStyle.copyWith(
+                      fontSize: 16.sp,
+                    ),
               ),
-        ),
       ),
     );
   }
