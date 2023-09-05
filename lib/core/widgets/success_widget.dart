@@ -17,7 +17,7 @@ class SuccessPage extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
-              successWidgetModelHelper!.title!,
+              successWidgetModelHelper.title!,
               style: AppFont().blackTextStyle.copyWith(
                     fontSize: 20.sp,
                     fontWeight: AppFont().semibold,
@@ -26,17 +26,17 @@ class SuccessPage extends StatelessWidget {
             ),
             SizedBox(height: 26.h),
             Text(
-              successWidgetModelHelper!.subtitle!,
+              successWidgetModelHelper.subtitle!,
               style: AppFont().greyTextStyle.copyWith(fontSize: 16.sp),
               textAlign: TextAlign.center,
             ),
             SizedBox(height: 50.h),
             CustomFilledButton(
-              title: successWidgetModelHelper!.textButton!,
+              title: successWidgetModelHelper.textButton!,
               width: 183.w,
               onTap: () {
                 Navigator.pushNamedAndRemoveUntil(context,
-                    successWidgetModelHelper!.navigator!, (route) => false);
+                    successWidgetModelHelper.navigator!, (route) => false);
               },
             )
           ],

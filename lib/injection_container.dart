@@ -1,11 +1,17 @@
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
-import 'package:template_clean_architecture/feature/auth/data/data.dart';
-import 'package:template_clean_architecture/feature/auth/domain/domain.dart';
-import 'package:template_clean_architecture/feature/auth/presentation/bloc/auth_bloc.dart';
-import 'package:template_clean_architecture/feature/user/data/data.dart';
-import 'package:template_clean_architecture/feature/user/domain/domain.dart';
-import 'package:template_clean_architecture/feature/user/presentation/bloc/user_bloc.dart';
+import 'package:template_clean_architecture/features/auth/data/data.dart';
+import 'package:template_clean_architecture/features/auth/domain/domain.dart';
+import 'package:template_clean_architecture/features/auth/presentation/bloc/auth_bloc.dart';
+import 'package:template_clean_architecture/features/topup/data/datasources/datasource.dart';
+import 'package:template_clean_architecture/features/topup/data/repositories/repositories.dart';
+import 'package:template_clean_architecture/features/topup/domain/repositories/repositories.dart';
+import 'package:template_clean_architecture/features/topup/domain/usecases/get_payment_method.dart';
+import 'package:template_clean_architecture/features/topup/domain/usecases/usecases.dart';
+import 'package:template_clean_architecture/features/topup/presentation/bloc/topup_bloc.dart';
+import 'package:template_clean_architecture/features/user/data/data.dart';
+import 'package:template_clean_architecture/features/user/domain/domain.dart';
+import 'package:template_clean_architecture/features/user/presentation/bloc/user_bloc.dart';
 
 final sl = GetIt.instance;
 
@@ -13,6 +19,7 @@ void setupLocator() {
   //BLOC
   sl.registerFactory(() => AuthBloc(sl(), sl(), sl(), sl(), sl(), sl()));
   sl.registerFactory(() => UserBloc(sl(), sl(), sl(), sl()));
+  sl.registerFactory(() => TopupBloc(sl(), sl()));
 
   /* USECASE */
 
@@ -31,6 +38,10 @@ void setupLocator() {
   sl.registerLazySingleton(() => ChangePinUsecase(sl()));
   sl.registerLazySingleton(() => GetCurrentUserUseCase(sl()));
 
+  //TOPUP USECASE
+  sl.registerLazySingleton(() => TopUpUseCase(sl()));
+  sl.registerLazySingleton(() => GetPaymentMethodUseCase(sl()));
+
   /* REPOSITORY */
 
   //AUTH REPOSITORY
@@ -41,6 +52,10 @@ void setupLocator() {
   sl.registerLazySingleton<UserRepository>(
       () => UserRepositoryImpl(sl(), sl()));
 
+  //TOPUP REPOSITORY
+  sl.registerLazySingleton<TopUpRespository>(
+      () => TopUpRepositoryImpl(sl(), sl()));
+
   /* DATA SOURCE */
 
   //AUTH DATASOURCE
@@ -49,6 +64,9 @@ void setupLocator() {
 
   //USER DATASOURCE
   sl.registerLazySingleton(() => UserRemoteService(sl()));
+
+  //TOPUP DATASOURCE
+  sl.registerLazySingleton(() => TopupRemoteService(sl()));
 
   /* EXTERNAL */
   sl.registerLazySingleton(() => Dio());
