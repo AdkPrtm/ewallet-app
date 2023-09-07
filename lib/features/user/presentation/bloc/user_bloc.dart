@@ -31,7 +31,9 @@ class UserBloc extends Bloc<UserEvent, UserState> {
     emit(UserLoading());
     final result = await _getCurrentUserUseCase.call();
     result.fold(
-        (l) => emit(UserFailed(l.message)), (data) => emit(UserLoaded(data)));
+      (l) => emit(UserFailed(l.message)),
+      (data) => emit(UserLoaded(data)),
+    );
   }
 
   Future<void> onUpdateProfileUserProses(

@@ -72,7 +72,7 @@ class _TopupRemoteService implements TopupRemoteService {
       r'Content-Type': contentType,
     };
     _headers.removeWhere((k, v) => v == null);
-    const Map<String, dynamic>? _data = null;
+    final Map<String, dynamic>? _data = null;
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<HttpResponse<PaymentMethodTopupResponse>>(Options(
       method: 'GET',
@@ -91,7 +91,7 @@ class _TopupRemoteService implements TopupRemoteService {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    final value = PaymentMethodTopupResponse.fromJson(_result.data!);
+    final value = PaymentMethodTopupResponse.fromJson(_result.data!['data']);
     final httpResponse = HttpResponse(value, _result);
     return httpResponse;
   }

@@ -2,10 +2,10 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'tips_entities.freezed.dart';
 
-@freezed 
+@unfreezed
 class TipsResponseEntity with _$TipsResponseEntity {
-  const factory TipsResponseEntity({
-        int? currentPage,
+  factory TipsResponseEntity({
+    int? currentPage,
     List<DataTipsEntity>? data,
     String? firstPageUrl,
     int? from,
@@ -21,17 +21,17 @@ class TipsResponseEntity with _$TipsResponseEntity {
   }) = _TipsResponseEntity;
 }
 
-@freezed
+@unfreezed
 class DataTipsEntity with _$DataTipsEntity {
-  const factory DataTipsEntity({
-    String? id,
+  factory DataTipsEntity({
+    int? id,
     String? title,
     String? url,
     String? thumbnail,
   }) = _DataTipsEntity;
 }
 
-@freezed
+@unfreezed
 class LinkTipsEntity with _$LinkTipsEntity {
   factory LinkTipsEntity({
     String? url,

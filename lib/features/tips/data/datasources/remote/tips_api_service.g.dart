@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'transfer_api_service.dart';
+part of 'tips_api_service.dart';
 
 // **************************************************************************
 // RetrofitGenerator
@@ -8,8 +8,8 @@ part of 'transfer_api_service.dart';
 
 // ignore_for_file: unnecessary_brace_in_string_interps,no_leading_underscores_for_local_identifiers
 
-class _TransferRemoteService implements TransferRemoteService {
-  _TransferRemoteService(
+class _TipsServiceRemote implements TipsServiceRemote {
+  _TipsServiceRemote(
     this._dio, {
     this.baseUrl,
   }) {
@@ -21,10 +21,9 @@ class _TransferRemoteService implements TransferRemoteService {
   String? baseUrl;
 
   @override
-  Future<HttpResponse<TransferResponse>> transferService({
+  Future<HttpResponse<TipsResponse>> getTips({
     String? token,
     String? contentType,
-    Map<String, dynamic>? body,
   }) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
@@ -34,48 +33,9 @@ class _TransferRemoteService implements TransferRemoteService {
       r'Content-Type': contentType,
     };
     _headers.removeWhere((k, v) => v == null);
-    final _data = <String, dynamic>{};
-    _data.addAll(body!);
+    final Map<String, dynamic>? _data = null;
     final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<HttpResponse<TransferResponse>>(Options(
-      method: 'POST',
-      headers: _headers,
-      extra: _extra,
-      contentType: contentType,
-    )
-            .compose(
-              _dio.options,
-              '/transfer',
-              queryParameters: queryParameters,
-              data: _data,
-            )
-            .copyWith(
-                baseUrl: _combineBaseUrls(
-              _dio.options.baseUrl,
-              baseUrl,
-            ))));
-    final value = TransferResponse.fromJson(_result.data!);
-    final httpResponse = HttpResponse(value, _result);
-    return httpResponse;
-  }
-
-  @override
-  Future<HttpResponse<TransferHistoryResponse>> transferHistoryService({
-    String? token,
-    String? contentType,
-    String? limit,
-  }) async {
-    const _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{r'limit': limit};
-    queryParameters.removeWhere((k, v) => v == null);
-    final _headers = <String, dynamic>{
-      r'Authorization': token,
-      r'Content-Type': contentType,
-    };
-    _headers.removeWhere((k, v) => v == null);
-    const Map<String, dynamic>? _data = null;
-    final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<HttpResponse<TransferHistoryResponse>>(Options(
+        _setStreamType<HttpResponse<TipsResponse>>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
@@ -83,7 +43,7 @@ class _TransferRemoteService implements TransferRemoteService {
     )
             .compose(
               _dio.options,
-              '/transferhistory',
+              '/tips',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -92,7 +52,7 @@ class _TransferRemoteService implements TransferRemoteService {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    final value = TransferHistoryResponse.fromJson(_result.data!['data']);
+    final value = TipsResponse.fromJson(_result.data!['data']);
     final httpResponse = HttpResponse(value, _result);
     return httpResponse;
   }

@@ -3,6 +3,11 @@ import 'package:get_it/get_it.dart';
 import 'package:template_clean_architecture/features/auth/data/data.dart';
 import 'package:template_clean_architecture/features/auth/domain/domain.dart';
 import 'package:template_clean_architecture/features/auth/presentation/bloc/auth_bloc.dart';
+import 'package:template_clean_architecture/features/tips/data/datasources/remote/remote.dart';
+import 'package:template_clean_architecture/features/tips/data/repositories/repositories.dart';
+import 'package:template_clean_architecture/features/tips/domain/repositories/repositories.dart';
+import 'package:template_clean_architecture/features/tips/domain/usecases/usecase.dart';
+import 'package:template_clean_architecture/features/tips/presentation/bloc/tips_bloc.dart';
 import 'package:template_clean_architecture/features/topup/data/datasources/datasource.dart';
 import 'package:template_clean_architecture/features/topup/data/repositories/repositories.dart';
 import 'package:template_clean_architecture/features/topup/domain/repositories/repositories.dart';
@@ -26,6 +31,7 @@ void setupLocator() {
   sl.registerFactory(() => UserBloc(sl(), sl(), sl(), sl()));
   sl.registerFactory(() => TopupBloc(sl(), sl()));
   sl.registerFactory(() => TransferBloc(sl(), sl()));
+  sl.registerFactory(() => TipsBloc(sl()));
 
   /* USECASE */
 
@@ -52,6 +58,9 @@ void setupLocator() {
   sl.registerLazySingleton(() => TransferUseCase(sl()));
   sl.registerLazySingleton(() => TransferHistoryUseCase(sl()));
 
+  //TIPS USECASE
+  sl.registerLazySingleton(() => GetTipsUseCase(sl()));
+
   /* REPOSITORY */
 
   //AUTH REPOSITORY
@@ -70,6 +79,10 @@ void setupLocator() {
   sl.registerLazySingleton<TransferRepository>(
       () => TransferRepositoryImpl(sl(), sl()));
 
+  //TIPS REPOSITORY
+  sl.registerLazySingleton<TipsRepository>(
+      () => TipsRepositoryImpl(sl(), sl()));
+
   /* DATA SOURCE */
 
   //AUTH DATASOURCE
@@ -84,6 +97,9 @@ void setupLocator() {
 
   //TRANSFER DATASOURCE
   sl.registerLazySingleton(() => TransferRemoteService(sl()));
+
+  //TIPS DATASOURCE
+  sl.registerLazySingleton(() => TipsServiceRemote(sl()));
 
   /* EXTERNAL */
   sl.registerLazySingleton(() => Dio());

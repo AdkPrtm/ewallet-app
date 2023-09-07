@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'tips_entities.dart';
+part of 'tips_response.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -14,66 +14,86 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
+TipsResponse _$TipsResponseFromJson(Map<String, dynamic> json) {
+  return _TipsResponse.fromJson(json);
+}
+
 /// @nodoc
-mixin _$TipsResponseEntity {
+mixin _$TipsResponse {
+  @JsonKey(name: 'current_page')
   int? get currentPage => throw _privateConstructorUsedError;
+  @JsonKey(name: 'current_page')
   set currentPage(int? value) => throw _privateConstructorUsedError;
-  List<DataTipsEntity>? get data => throw _privateConstructorUsedError;
-  set data(List<DataTipsEntity>? value) => throw _privateConstructorUsedError;
+  List<DataTipsResponse>? get data => throw _privateConstructorUsedError;
+  set data(List<DataTipsResponse>? value) => throw _privateConstructorUsedError;
+  @JsonKey(name: 'first_page_url')
   String? get firstPageUrl => throw _privateConstructorUsedError;
+  @JsonKey(name: 'first_page_url')
   set firstPageUrl(String? value) => throw _privateConstructorUsedError;
   int? get from => throw _privateConstructorUsedError;
   set from(int? value) => throw _privateConstructorUsedError;
+  @JsonKey(name: 'last_page')
   int? get lastPage => throw _privateConstructorUsedError;
+  @JsonKey(name: 'last_page')
   set lastPage(int? value) => throw _privateConstructorUsedError;
+  @JsonKey(name: 'last_page_url')
   String? get lastPageUrl => throw _privateConstructorUsedError;
+  @JsonKey(name: 'last_page_url')
   set lastPageUrl(String? value) => throw _privateConstructorUsedError;
-  List<LinkTipsEntity>? get links => throw _privateConstructorUsedError;
-  set links(List<LinkTipsEntity>? value) => throw _privateConstructorUsedError;
+  List<LinksTipsResponse>? get links => throw _privateConstructorUsedError;
+  set links(List<LinksTipsResponse>? value) =>
+      throw _privateConstructorUsedError;
+  @JsonKey(name: 'next_page_url')
   String? get nextPageUrl => throw _privateConstructorUsedError;
+  @JsonKey(name: 'next_page_url')
   set nextPageUrl(String? value) => throw _privateConstructorUsedError;
   String? get path => throw _privateConstructorUsedError;
   set path(String? value) => throw _privateConstructorUsedError;
+  @JsonKey(name: 'per_page')
   int? get perPage => throw _privateConstructorUsedError;
+  @JsonKey(name: 'per_page')
   set perPage(int? value) => throw _privateConstructorUsedError;
+  @JsonKey(name: 'prev_page_url')
   String? get prevPageUrl => throw _privateConstructorUsedError;
+  @JsonKey(name: 'prev_page_url')
   set prevPageUrl(String? value) => throw _privateConstructorUsedError;
   int? get to => throw _privateConstructorUsedError;
   set to(int? value) => throw _privateConstructorUsedError;
   int? get total => throw _privateConstructorUsedError;
   set total(int? value) => throw _privateConstructorUsedError;
 
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $TipsResponseEntityCopyWith<TipsResponseEntity> get copyWith =>
+  $TipsResponseCopyWith<TipsResponse> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $TipsResponseEntityCopyWith<$Res> {
-  factory $TipsResponseEntityCopyWith(
-          TipsResponseEntity value, $Res Function(TipsResponseEntity) then) =
-      _$TipsResponseEntityCopyWithImpl<$Res, TipsResponseEntity>;
+abstract class $TipsResponseCopyWith<$Res> {
+  factory $TipsResponseCopyWith(
+          TipsResponse value, $Res Function(TipsResponse) then) =
+      _$TipsResponseCopyWithImpl<$Res, TipsResponse>;
   @useResult
   $Res call(
-      {int? currentPage,
-      List<DataTipsEntity>? data,
-      String? firstPageUrl,
+      {@JsonKey(name: 'current_page') int? currentPage,
+      List<DataTipsResponse>? data,
+      @JsonKey(name: 'first_page_url') String? firstPageUrl,
       int? from,
-      int? lastPage,
-      String? lastPageUrl,
-      List<LinkTipsEntity>? links,
-      String? nextPageUrl,
+      @JsonKey(name: 'last_page') int? lastPage,
+      @JsonKey(name: 'last_page_url') String? lastPageUrl,
+      List<LinksTipsResponse>? links,
+      @JsonKey(name: 'next_page_url') String? nextPageUrl,
       String? path,
-      int? perPage,
-      String? prevPageUrl,
+      @JsonKey(name: 'per_page') int? perPage,
+      @JsonKey(name: 'prev_page_url') String? prevPageUrl,
       int? to,
       int? total});
 }
 
 /// @nodoc
-class _$TipsResponseEntityCopyWithImpl<$Res, $Val extends TipsResponseEntity>
-    implements $TipsResponseEntityCopyWith<$Res> {
-  _$TipsResponseEntityCopyWithImpl(this._value, this._then);
+class _$TipsResponseCopyWithImpl<$Res, $Val extends TipsResponse>
+    implements $TipsResponseCopyWith<$Res> {
+  _$TipsResponseCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -105,7 +125,7 @@ class _$TipsResponseEntityCopyWithImpl<$Res, $Val extends TipsResponseEntity>
       data: freezed == data
           ? _value.data
           : data // ignore: cast_nullable_to_non_nullable
-              as List<DataTipsEntity>?,
+              as List<DataTipsResponse>?,
       firstPageUrl: freezed == firstPageUrl
           ? _value.firstPageUrl
           : firstPageUrl // ignore: cast_nullable_to_non_nullable
@@ -125,7 +145,7 @@ class _$TipsResponseEntityCopyWithImpl<$Res, $Val extends TipsResponseEntity>
       links: freezed == links
           ? _value.links
           : links // ignore: cast_nullable_to_non_nullable
-              as List<LinkTipsEntity>?,
+              as List<LinksTipsResponse>?,
       nextPageUrl: freezed == nextPageUrl
           ? _value.nextPageUrl
           : nextPageUrl // ignore: cast_nullable_to_non_nullable
@@ -155,35 +175,35 @@ class _$TipsResponseEntityCopyWithImpl<$Res, $Val extends TipsResponseEntity>
 }
 
 /// @nodoc
-abstract class _$$_TipsResponseEntityCopyWith<$Res>
-    implements $TipsResponseEntityCopyWith<$Res> {
-  factory _$$_TipsResponseEntityCopyWith(_$_TipsResponseEntity value,
-          $Res Function(_$_TipsResponseEntity) then) =
-      __$$_TipsResponseEntityCopyWithImpl<$Res>;
+abstract class _$$_TipsResponseCopyWith<$Res>
+    implements $TipsResponseCopyWith<$Res> {
+  factory _$$_TipsResponseCopyWith(
+          _$_TipsResponse value, $Res Function(_$_TipsResponse) then) =
+      __$$_TipsResponseCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
-      {int? currentPage,
-      List<DataTipsEntity>? data,
-      String? firstPageUrl,
+      {@JsonKey(name: 'current_page') int? currentPage,
+      List<DataTipsResponse>? data,
+      @JsonKey(name: 'first_page_url') String? firstPageUrl,
       int? from,
-      int? lastPage,
-      String? lastPageUrl,
-      List<LinkTipsEntity>? links,
-      String? nextPageUrl,
+      @JsonKey(name: 'last_page') int? lastPage,
+      @JsonKey(name: 'last_page_url') String? lastPageUrl,
+      List<LinksTipsResponse>? links,
+      @JsonKey(name: 'next_page_url') String? nextPageUrl,
       String? path,
-      int? perPage,
-      String? prevPageUrl,
+      @JsonKey(name: 'per_page') int? perPage,
+      @JsonKey(name: 'prev_page_url') String? prevPageUrl,
       int? to,
       int? total});
 }
 
 /// @nodoc
-class __$$_TipsResponseEntityCopyWithImpl<$Res>
-    extends _$TipsResponseEntityCopyWithImpl<$Res, _$_TipsResponseEntity>
-    implements _$$_TipsResponseEntityCopyWith<$Res> {
-  __$$_TipsResponseEntityCopyWithImpl(
-      _$_TipsResponseEntity _value, $Res Function(_$_TipsResponseEntity) _then)
+class __$$_TipsResponseCopyWithImpl<$Res>
+    extends _$TipsResponseCopyWithImpl<$Res, _$_TipsResponse>
+    implements _$$_TipsResponseCopyWith<$Res> {
+  __$$_TipsResponseCopyWithImpl(
+      _$_TipsResponse _value, $Res Function(_$_TipsResponse) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -203,7 +223,7 @@ class __$$_TipsResponseEntityCopyWithImpl<$Res>
     Object? to = freezed,
     Object? total = freezed,
   }) {
-    return _then(_$_TipsResponseEntity(
+    return _then(_$_TipsResponse(
       currentPage: freezed == currentPage
           ? _value.currentPage
           : currentPage // ignore: cast_nullable_to_non_nullable
@@ -211,7 +231,7 @@ class __$$_TipsResponseEntityCopyWithImpl<$Res>
       data: freezed == data
           ? _value.data
           : data // ignore: cast_nullable_to_non_nullable
-              as List<DataTipsEntity>?,
+              as List<DataTipsResponse>?,
       firstPageUrl: freezed == firstPageUrl
           ? _value.firstPageUrl
           : firstPageUrl // ignore: cast_nullable_to_non_nullable
@@ -231,7 +251,7 @@ class __$$_TipsResponseEntityCopyWithImpl<$Res>
       links: freezed == links
           ? _value.links
           : links // ignore: cast_nullable_to_non_nullable
-              as List<LinkTipsEntity>?,
+              as List<LinksTipsResponse>?,
       nextPageUrl: freezed == nextPageUrl
           ? _value.nextPageUrl
           : nextPageUrl // ignore: cast_nullable_to_non_nullable
@@ -261,44 +281,55 @@ class __$$_TipsResponseEntityCopyWithImpl<$Res>
 }
 
 /// @nodoc
-
-class _$_TipsResponseEntity implements _TipsResponseEntity {
-  _$_TipsResponseEntity(
-      {this.currentPage,
+@JsonSerializable()
+class _$_TipsResponse extends _TipsResponse {
+  _$_TipsResponse(
+      {@JsonKey(name: 'current_page') this.currentPage,
       this.data,
-      this.firstPageUrl,
+      @JsonKey(name: 'first_page_url') this.firstPageUrl,
       this.from,
-      this.lastPage,
-      this.lastPageUrl,
+      @JsonKey(name: 'last_page') this.lastPage,
+      @JsonKey(name: 'last_page_url') this.lastPageUrl,
       this.links,
-      this.nextPageUrl,
+      @JsonKey(name: 'next_page_url') this.nextPageUrl,
       this.path,
-      this.perPage,
-      this.prevPageUrl,
+      @JsonKey(name: 'per_page') this.perPage,
+      @JsonKey(name: 'prev_page_url') this.prevPageUrl,
       this.to,
-      this.total});
+      this.total})
+      : super._();
+
+  factory _$_TipsResponse.fromJson(Map<String, dynamic> json) =>
+      _$$_TipsResponseFromJson(json);
 
   @override
+  @JsonKey(name: 'current_page')
   int? currentPage;
   @override
-  List<DataTipsEntity>? data;
+  List<DataTipsResponse>? data;
   @override
+  @JsonKey(name: 'first_page_url')
   String? firstPageUrl;
   @override
   int? from;
   @override
+  @JsonKey(name: 'last_page')
   int? lastPage;
   @override
+  @JsonKey(name: 'last_page_url')
   String? lastPageUrl;
   @override
-  List<LinkTipsEntity>? links;
+  List<LinksTipsResponse>? links;
   @override
+  @JsonKey(name: 'next_page_url')
   String? nextPageUrl;
   @override
   String? path;
   @override
+  @JsonKey(name: 'per_page')
   int? perPage;
   @override
+  @JsonKey(name: 'prev_page_url')
   String? prevPageUrl;
   @override
   int? to;
@@ -307,65 +338,89 @@ class _$_TipsResponseEntity implements _TipsResponseEntity {
 
   @override
   String toString() {
-    return 'TipsResponseEntity(currentPage: $currentPage, data: $data, firstPageUrl: $firstPageUrl, from: $from, lastPage: $lastPage, lastPageUrl: $lastPageUrl, links: $links, nextPageUrl: $nextPageUrl, path: $path, perPage: $perPage, prevPageUrl: $prevPageUrl, to: $to, total: $total)';
+    return 'TipsResponse(currentPage: $currentPage, data: $data, firstPageUrl: $firstPageUrl, from: $from, lastPage: $lastPage, lastPageUrl: $lastPageUrl, links: $links, nextPageUrl: $nextPageUrl, path: $path, perPage: $perPage, prevPageUrl: $prevPageUrl, to: $to, total: $total)';
   }
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_TipsResponseEntityCopyWith<_$_TipsResponseEntity> get copyWith =>
-      __$$_TipsResponseEntityCopyWithImpl<_$_TipsResponseEntity>(
-          this, _$identity);
+  _$$_TipsResponseCopyWith<_$_TipsResponse> get copyWith =>
+      __$$_TipsResponseCopyWithImpl<_$_TipsResponse>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$_TipsResponseToJson(
+      this,
+    );
+  }
 }
 
-abstract class _TipsResponseEntity implements TipsResponseEntity {
-  factory _TipsResponseEntity(
-      {int? currentPage,
-      List<DataTipsEntity>? data,
-      String? firstPageUrl,
+abstract class _TipsResponse extends TipsResponse {
+  factory _TipsResponse(
+      {@JsonKey(name: 'current_page') int? currentPage,
+      List<DataTipsResponse>? data,
+      @JsonKey(name: 'first_page_url') String? firstPageUrl,
       int? from,
-      int? lastPage,
-      String? lastPageUrl,
-      List<LinkTipsEntity>? links,
-      String? nextPageUrl,
+      @JsonKey(name: 'last_page') int? lastPage,
+      @JsonKey(name: 'last_page_url') String? lastPageUrl,
+      List<LinksTipsResponse>? links,
+      @JsonKey(name: 'next_page_url') String? nextPageUrl,
       String? path,
-      int? perPage,
-      String? prevPageUrl,
+      @JsonKey(name: 'per_page') int? perPage,
+      @JsonKey(name: 'prev_page_url') String? prevPageUrl,
       int? to,
-      int? total}) = _$_TipsResponseEntity;
+      int? total}) = _$_TipsResponse;
+  _TipsResponse._() : super._();
+
+  factory _TipsResponse.fromJson(Map<String, dynamic> json) =
+      _$_TipsResponse.fromJson;
 
   @override
+  @JsonKey(name: 'current_page')
   int? get currentPage;
+  @JsonKey(name: 'current_page')
   set currentPage(int? value);
   @override
-  List<DataTipsEntity>? get data;
-  set data(List<DataTipsEntity>? value);
+  List<DataTipsResponse>? get data;
+  set data(List<DataTipsResponse>? value);
   @override
+  @JsonKey(name: 'first_page_url')
   String? get firstPageUrl;
+  @JsonKey(name: 'first_page_url')
   set firstPageUrl(String? value);
   @override
   int? get from;
   set from(int? value);
   @override
+  @JsonKey(name: 'last_page')
   int? get lastPage;
+  @JsonKey(name: 'last_page')
   set lastPage(int? value);
   @override
+  @JsonKey(name: 'last_page_url')
   String? get lastPageUrl;
+  @JsonKey(name: 'last_page_url')
   set lastPageUrl(String? value);
   @override
-  List<LinkTipsEntity>? get links;
-  set links(List<LinkTipsEntity>? value);
+  List<LinksTipsResponse>? get links;
+  set links(List<LinksTipsResponse>? value);
   @override
+  @JsonKey(name: 'next_page_url')
   String? get nextPageUrl;
+  @JsonKey(name: 'next_page_url')
   set nextPageUrl(String? value);
   @override
   String? get path;
   set path(String? value);
   @override
+  @JsonKey(name: 'per_page')
   int? get perPage;
+  @JsonKey(name: 'per_page')
   set perPage(int? value);
   @override
+  @JsonKey(name: 'prev_page_url')
   String? get prevPageUrl;
+  @JsonKey(name: 'prev_page_url')
   set prevPageUrl(String? value);
   @override
   int? get to;
@@ -375,12 +430,16 @@ abstract class _TipsResponseEntity implements TipsResponseEntity {
   set total(int? value);
   @override
   @JsonKey(ignore: true)
-  _$$_TipsResponseEntityCopyWith<_$_TipsResponseEntity> get copyWith =>
+  _$$_TipsResponseCopyWith<_$_TipsResponse> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
+DataTipsResponse _$DataTipsResponseFromJson(Map<String, dynamic> json) {
+  return _DataTipsResponse.fromJson(json);
+}
+
 /// @nodoc
-mixin _$DataTipsEntity {
+mixin _$DataTipsResponse {
   int? get id => throw _privateConstructorUsedError;
   set id(int? value) => throw _privateConstructorUsedError;
   String? get title => throw _privateConstructorUsedError;
@@ -390,24 +449,25 @@ mixin _$DataTipsEntity {
   String? get thumbnail => throw _privateConstructorUsedError;
   set thumbnail(String? value) => throw _privateConstructorUsedError;
 
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $DataTipsEntityCopyWith<DataTipsEntity> get copyWith =>
+  $DataTipsResponseCopyWith<DataTipsResponse> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $DataTipsEntityCopyWith<$Res> {
-  factory $DataTipsEntityCopyWith(
-          DataTipsEntity value, $Res Function(DataTipsEntity) then) =
-      _$DataTipsEntityCopyWithImpl<$Res, DataTipsEntity>;
+abstract class $DataTipsResponseCopyWith<$Res> {
+  factory $DataTipsResponseCopyWith(
+          DataTipsResponse value, $Res Function(DataTipsResponse) then) =
+      _$DataTipsResponseCopyWithImpl<$Res, DataTipsResponse>;
   @useResult
   $Res call({int? id, String? title, String? url, String? thumbnail});
 }
 
 /// @nodoc
-class _$DataTipsEntityCopyWithImpl<$Res, $Val extends DataTipsEntity>
-    implements $DataTipsEntityCopyWith<$Res> {
-  _$DataTipsEntityCopyWithImpl(this._value, this._then);
+class _$DataTipsResponseCopyWithImpl<$Res, $Val extends DataTipsResponse>
+    implements $DataTipsResponseCopyWith<$Res> {
+  _$DataTipsResponseCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -444,22 +504,22 @@ class _$DataTipsEntityCopyWithImpl<$Res, $Val extends DataTipsEntity>
 }
 
 /// @nodoc
-abstract class _$$_DataTipsEntityCopyWith<$Res>
-    implements $DataTipsEntityCopyWith<$Res> {
-  factory _$$_DataTipsEntityCopyWith(
-          _$_DataTipsEntity value, $Res Function(_$_DataTipsEntity) then) =
-      __$$_DataTipsEntityCopyWithImpl<$Res>;
+abstract class _$$_DataTipsResponseCopyWith<$Res>
+    implements $DataTipsResponseCopyWith<$Res> {
+  factory _$$_DataTipsResponseCopyWith(
+          _$_DataTipsResponse value, $Res Function(_$_DataTipsResponse) then) =
+      __$$_DataTipsResponseCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({int? id, String? title, String? url, String? thumbnail});
 }
 
 /// @nodoc
-class __$$_DataTipsEntityCopyWithImpl<$Res>
-    extends _$DataTipsEntityCopyWithImpl<$Res, _$_DataTipsEntity>
-    implements _$$_DataTipsEntityCopyWith<$Res> {
-  __$$_DataTipsEntityCopyWithImpl(
-      _$_DataTipsEntity _value, $Res Function(_$_DataTipsEntity) _then)
+class __$$_DataTipsResponseCopyWithImpl<$Res>
+    extends _$DataTipsResponseCopyWithImpl<$Res, _$_DataTipsResponse>
+    implements _$$_DataTipsResponseCopyWith<$Res> {
+  __$$_DataTipsResponseCopyWithImpl(
+      _$_DataTipsResponse _value, $Res Function(_$_DataTipsResponse) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -470,7 +530,7 @@ class __$$_DataTipsEntityCopyWithImpl<$Res>
     Object? url = freezed,
     Object? thumbnail = freezed,
   }) {
-    return _then(_$_DataTipsEntity(
+    return _then(_$_DataTipsResponse(
       id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -492,9 +552,12 @@ class __$$_DataTipsEntityCopyWithImpl<$Res>
 }
 
 /// @nodoc
+@JsonSerializable()
+class _$_DataTipsResponse implements _DataTipsResponse {
+  _$_DataTipsResponse({this.id, this.title, this.url, this.thumbnail});
 
-class _$_DataTipsEntity implements _DataTipsEntity {
-  _$_DataTipsEntity({this.id, this.title, this.url, this.thumbnail});
+  factory _$_DataTipsResponse.fromJson(Map<String, dynamic> json) =>
+      _$$_DataTipsResponseFromJson(json);
 
   @override
   int? id;
@@ -507,22 +570,32 @@ class _$_DataTipsEntity implements _DataTipsEntity {
 
   @override
   String toString() {
-    return 'DataTipsEntity(id: $id, title: $title, url: $url, thumbnail: $thumbnail)';
+    return 'DataTipsResponse(id: $id, title: $title, url: $url, thumbnail: $thumbnail)';
   }
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_DataTipsEntityCopyWith<_$_DataTipsEntity> get copyWith =>
-      __$$_DataTipsEntityCopyWithImpl<_$_DataTipsEntity>(this, _$identity);
+  _$$_DataTipsResponseCopyWith<_$_DataTipsResponse> get copyWith =>
+      __$$_DataTipsResponseCopyWithImpl<_$_DataTipsResponse>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$_DataTipsResponseToJson(
+      this,
+    );
+  }
 }
 
-abstract class _DataTipsEntity implements DataTipsEntity {
-  factory _DataTipsEntity(
+abstract class _DataTipsResponse implements DataTipsResponse {
+  factory _DataTipsResponse(
       {int? id,
       String? title,
       String? url,
-      String? thumbnail}) = _$_DataTipsEntity;
+      String? thumbnail}) = _$_DataTipsResponse;
+
+  factory _DataTipsResponse.fromJson(Map<String, dynamic> json) =
+      _$_DataTipsResponse.fromJson;
 
   @override
   int? get id;
@@ -538,12 +611,16 @@ abstract class _DataTipsEntity implements DataTipsEntity {
   set thumbnail(String? value);
   @override
   @JsonKey(ignore: true)
-  _$$_DataTipsEntityCopyWith<_$_DataTipsEntity> get copyWith =>
+  _$$_DataTipsResponseCopyWith<_$_DataTipsResponse> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
+LinksTipsResponse _$LinksTipsResponseFromJson(Map<String, dynamic> json) {
+  return _LinksTipsResponse.fromJson(json);
+}
+
 /// @nodoc
-mixin _$LinkTipsEntity {
+mixin _$LinksTipsResponse {
   String? get url => throw _privateConstructorUsedError;
   set url(String? value) => throw _privateConstructorUsedError;
   String? get label => throw _privateConstructorUsedError;
@@ -551,24 +628,25 @@ mixin _$LinkTipsEntity {
   bool? get active => throw _privateConstructorUsedError;
   set active(bool? value) => throw _privateConstructorUsedError;
 
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $LinkTipsEntityCopyWith<LinkTipsEntity> get copyWith =>
+  $LinksTipsResponseCopyWith<LinksTipsResponse> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $LinkTipsEntityCopyWith<$Res> {
-  factory $LinkTipsEntityCopyWith(
-          LinkTipsEntity value, $Res Function(LinkTipsEntity) then) =
-      _$LinkTipsEntityCopyWithImpl<$Res, LinkTipsEntity>;
+abstract class $LinksTipsResponseCopyWith<$Res> {
+  factory $LinksTipsResponseCopyWith(
+          LinksTipsResponse value, $Res Function(LinksTipsResponse) then) =
+      _$LinksTipsResponseCopyWithImpl<$Res, LinksTipsResponse>;
   @useResult
   $Res call({String? url, String? label, bool? active});
 }
 
 /// @nodoc
-class _$LinkTipsEntityCopyWithImpl<$Res, $Val extends LinkTipsEntity>
-    implements $LinkTipsEntityCopyWith<$Res> {
-  _$LinkTipsEntityCopyWithImpl(this._value, this._then);
+class _$LinksTipsResponseCopyWithImpl<$Res, $Val extends LinksTipsResponse>
+    implements $LinksTipsResponseCopyWith<$Res> {
+  _$LinksTipsResponseCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -600,22 +678,22 @@ class _$LinkTipsEntityCopyWithImpl<$Res, $Val extends LinkTipsEntity>
 }
 
 /// @nodoc
-abstract class _$$_LinkTipsEntityCopyWith<$Res>
-    implements $LinkTipsEntityCopyWith<$Res> {
-  factory _$$_LinkTipsEntityCopyWith(
-          _$_LinkTipsEntity value, $Res Function(_$_LinkTipsEntity) then) =
-      __$$_LinkTipsEntityCopyWithImpl<$Res>;
+abstract class _$$_LinksTipsResponseCopyWith<$Res>
+    implements $LinksTipsResponseCopyWith<$Res> {
+  factory _$$_LinksTipsResponseCopyWith(_$_LinksTipsResponse value,
+          $Res Function(_$_LinksTipsResponse) then) =
+      __$$_LinksTipsResponseCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({String? url, String? label, bool? active});
 }
 
 /// @nodoc
-class __$$_LinkTipsEntityCopyWithImpl<$Res>
-    extends _$LinkTipsEntityCopyWithImpl<$Res, _$_LinkTipsEntity>
-    implements _$$_LinkTipsEntityCopyWith<$Res> {
-  __$$_LinkTipsEntityCopyWithImpl(
-      _$_LinkTipsEntity _value, $Res Function(_$_LinkTipsEntity) _then)
+class __$$_LinksTipsResponseCopyWithImpl<$Res>
+    extends _$LinksTipsResponseCopyWithImpl<$Res, _$_LinksTipsResponse>
+    implements _$$_LinksTipsResponseCopyWith<$Res> {
+  __$$_LinksTipsResponseCopyWithImpl(
+      _$_LinksTipsResponse _value, $Res Function(_$_LinksTipsResponse) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -625,7 +703,7 @@ class __$$_LinkTipsEntityCopyWithImpl<$Res>
     Object? label = freezed,
     Object? active = freezed,
   }) {
-    return _then(_$_LinkTipsEntity(
+    return _then(_$_LinksTipsResponse(
       url: freezed == url
           ? _value.url
           : url // ignore: cast_nullable_to_non_nullable
@@ -643,9 +721,12 @@ class __$$_LinkTipsEntityCopyWithImpl<$Res>
 }
 
 /// @nodoc
+@JsonSerializable()
+class _$_LinksTipsResponse implements _LinksTipsResponse {
+  _$_LinksTipsResponse({this.url, this.label, this.active});
 
-class _$_LinkTipsEntity implements _LinkTipsEntity {
-  _$_LinkTipsEntity({this.url, this.label, this.active});
+  factory _$_LinksTipsResponse.fromJson(Map<String, dynamic> json) =>
+      _$$_LinksTipsResponseFromJson(json);
 
   @override
   String? url;
@@ -656,19 +737,30 @@ class _$_LinkTipsEntity implements _LinkTipsEntity {
 
   @override
   String toString() {
-    return 'LinkTipsEntity(url: $url, label: $label, active: $active)';
+    return 'LinksTipsResponse(url: $url, label: $label, active: $active)';
   }
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_LinkTipsEntityCopyWith<_$_LinkTipsEntity> get copyWith =>
-      __$$_LinkTipsEntityCopyWithImpl<_$_LinkTipsEntity>(this, _$identity);
+  _$$_LinksTipsResponseCopyWith<_$_LinksTipsResponse> get copyWith =>
+      __$$_LinksTipsResponseCopyWithImpl<_$_LinksTipsResponse>(
+          this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$_LinksTipsResponseToJson(
+      this,
+    );
+  }
 }
 
-abstract class _LinkTipsEntity implements LinkTipsEntity {
-  factory _LinkTipsEntity({String? url, String? label, bool? active}) =
-      _$_LinkTipsEntity;
+abstract class _LinksTipsResponse implements LinksTipsResponse {
+  factory _LinksTipsResponse({String? url, String? label, bool? active}) =
+      _$_LinksTipsResponse;
+
+  factory _LinksTipsResponse.fromJson(Map<String, dynamic> json) =
+      _$_LinksTipsResponse.fromJson;
 
   @override
   String? get url;
@@ -681,6 +773,6 @@ abstract class _LinkTipsEntity implements LinkTipsEntity {
   set active(bool? value);
   @override
   @JsonKey(ignore: true)
-  _$$_LinkTipsEntityCopyWith<_$_LinkTipsEntity> get copyWith =>
+  _$$_LinksTipsResponseCopyWith<_$_LinksTipsResponse> get copyWith =>
       throw _privateConstructorUsedError;
 }

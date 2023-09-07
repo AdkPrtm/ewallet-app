@@ -24,7 +24,7 @@ class _HomePageState extends State<HomePage> {
     super.initState();
     context.read<UserBloc>().add(GetCurrentUserEvent());
   }
-  
+
   @override
   void dispose() {
     // TODO: implement dispose
@@ -39,6 +39,7 @@ class _HomePageState extends State<HomePage> {
         children: [
           BlocBuilder<UserBloc, UserState>(
             builder: (context, state) {
+              print(state);
               if (state is UserLoaded) {
                 return Column(
                   children: [

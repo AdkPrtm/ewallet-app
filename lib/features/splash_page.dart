@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:template_clean_architecture/core/resource/resource.dart';
 import 'package:template_clean_architecture/features/auth/presentation/bloc/auth_bloc.dart';
+import 'package:template_clean_architecture/features/tips/presentation/bloc/tips_bloc.dart';
 import 'package:template_clean_architecture/features/transfer/presentation/bloc/transfer_bloc.dart';
 
 class SplashPage extends StatelessWidget {
@@ -41,12 +42,12 @@ class SplashPage extends StatelessWidget {
         return Container();
       },
     );
-    // return BlocBuilder<TransferBloc, TransferState>(
+    // return BlocBuilder<TipsBloc, TipsState>(
     //   builder: (context, state) {
-    //     if (state is SuccessTransferHistory) {
-    //       print(state.dataTransferHistory);
+    //     if (state is TipsLoaded) {
+    //       print(state.dataTips);
     //     }
-    //     if (state is FailedTransfer) {
+    //     if (state is TipsFailed) {
     //       print(state.message);
     //     }
     //     return Container();

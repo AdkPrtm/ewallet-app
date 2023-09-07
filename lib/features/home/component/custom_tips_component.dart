@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:template_clean_architecture/core/resource/resource.dart';
 import 'package:template_clean_architecture/core/widgets/tips_widget.dart';
+import 'package:template_clean_architecture/features/tips/domain/entities/tips_entities.dart';
+import 'package:template_clean_architecture/features/tips/presentation/bloc/tips_bloc.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class CustomTipsComponent extends StatelessWidget {
   const CustomTipsComponent({
@@ -21,32 +25,32 @@ class CustomTipsComponent extends StatelessWidget {
               ),
         ),
         SizedBox(height: 14.h),
-        Wrap(
-          spacing: 17.w,
-          runSpacing: 18.h,
-          children: [
-            TipsWidget(
-              title: 'Best tips for using a credit card',
-              tipsimage: ImgString.tips1Image,
-              url: Uri.parse('https://www.google.com/'),
-            ),
-            TipsWidget(
-              title: 'Spot the good pie of finance model',
-              tipsimage: ImgString.tips2Image,
-              url: Uri.parse('https://www.google.com/'),
-            ),
-            TipsWidget(
-              title: 'Great hack to get better advices',
-              tipsimage: ImgString.tips3Image,
-              url: Uri.parse('https://www.google.com/'),
-            ),
-            TipsWidget(
-              title: 'Save more penny buy this instead',
-              tipsimage: ImgString.tips4Image,
-              url: Uri.parse('https://www.google.com/'),
-            ),
-          ],
-        )
+        BlocBuilder<TipsBloc, TipsState>(
+          builder: (context, state) {
+            if (state is TipsLoaded) {
+              return Wrap(
+                spacing: 17.w,
+                runSpacing: 18.h,
+                children: state.dataTips!
+                    .map((dataTips) => GestureDetector(
+                        onTap: () {
+                          launchUrl(
+                            Uri.parse(dataTips.url!),
+                            mode: LaunchMode.inAppWebView,
+                          );
+                        },
+                        child: TipsWidget(dataTipsEntity: dataTips)))
+                    .toList(),
+              );
+            }
+            return Center(
+              child: CircularProgressIndicator(
+                color: purpleColor,
+                strokeWidth: 5.h,
+              ),
+            );
+          },
+        ),
       ],
     );
   }
