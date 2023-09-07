@@ -6,27 +6,27 @@ import 'package:template_clean_architecture/core/resource/resource.dart';
 import 'package:template_clean_architecture/core/widgets/buttons.dart';
 import 'package:template_clean_architecture/core/widgets/type_number_widget.dart';
 import 'package:template_clean_architecture/features/auth/presentation/bloc/auth_bloc.dart';
-import 'package:template_clean_architecture/features/topup/domain/entities/entities.dart';
-import 'package:template_clean_architecture/features/topup/domain/usecases/topup_usecase.dart';
 import 'package:template_clean_architecture/features/topup/presentation/bloc/topup_bloc.dart';
 import 'package:template_clean_architecture/features/topup/presentation/pages/component/amount_component.dart';
+import 'package:template_clean_architecture/features/transfer/domain/usecases/usecases.dart';
+import 'package:template_clean_architecture/features/transfer/presentation/bloc/transfer_bloc.dart';
 import 'package:template_clean_architecture/utils/extensions/extensions.dart';
 import 'package:template_clean_architecture/utils/helper/helper.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-class AmountTopupPage extends StatefulWidget {
-  const AmountTopupPage({
+class AmountTransferPage extends StatefulWidget {
+  const AmountTransferPage({
     super.key,
-    required this.paymentDataTopupEntity,
+    required this.transferParams,
   });
 
-  final PaymentDataTopupEntity paymentDataTopupEntity;
+  final TransferParams transferParams;
 
   @override
-  State<AmountTopupPage> createState() => _AmountTopupPageState();
+  State<AmountTransferPage> createState() => _AmountTransferPageState();
 }
 
-class _AmountTopupPageState extends State<AmountTopupPage> {
+class _AmountTransferPageState extends State<AmountTransferPage> {
   final TextEditingController amountController =
       TextEditingController(text: '0');
 
@@ -68,17 +68,9 @@ class _AmountTopupPageState extends State<AmountTopupPage> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<TopupBloc, TopupState>(
+    return BlocConsumer<TransferBloc, TransferState>(
       listener: (context, state) async {
-        if (state is TopUpLoaded) {
-          await launchUrl(
-            Uri.parse(state.topUpEntity!.redirectUrl!),
-          );
-          await Future.delayed(const Duration(milliseconds: 100));
-          while (WidgetsBinding.instance?.lifecycleState !=
-              AppLifecycleState.resumed) {
-            await Future.delayed(const Duration(milliseconds: 100));
-          }
+        if (state is TransferSuccess) {
           if (context.mounted) {
             Navigator.pushNamedAndRemoveUntil(
               context,
@@ -86,21 +78,21 @@ class _AmountTopupPageState extends State<AmountTopupPage> {
               (route) => false,
               arguments: SuccessWidgetModelHelper(
                 navigator: '/home',
-                title: 'Top Up\nWallet Berhasil',
+                title: 'Berhasil Transfer',
                 subtitle: 'Use the money wisely and\ngrow your finance',
                 textButton: 'Back to Home',
               ),
             );
           }
         }
-        if (state is TopupFailed) {
+        if (state is FailedTransfer) {
           if (context.mounted) {
             showCustomSnackbar(context, state.message!);
           }
         }
       },
       builder: (context, state) {
-        if (state is TopUpLoading) {
+        if (state is TransferLoading) {
           return Scaffold(
             backgroundColor: lightBackground,
             body: Center(
@@ -222,22 +214,31 @@ class _AmountTopupPageState extends State<AmountTopupPage> {
                     title: 'Checkout Now',
                     onTap: () async {
                       final authState = context.read<AuthBloc>().state;
-                      if (authState is AuthDone) {
-                        if (await Navigator.pushNamed(context, '/pin',
-                                arguments: authState.userEntity) ==
-                            true) {
-                          if (context.mounted) {
-                            context.read<TopupBloc>().add(
-                                  RequestTopupEvent(
-                                    TopupParams(
-                                      amount: int.parse(amountController.text
-                                          .replaceAll('.', '')),
-                                      pin: authState.userEntity.pin,
-                                      paymentMethod:
-                                          widget.paymentDataTopupEntity.code,
+                      int amount =
+                          int.parse(amountController.text.replaceAll('.', ''));
+                      if (amount <= 999) {
+                        showCustomSnackbar(context, 'minimum transfer 1000');
+                      } else {
+                        if (authState is AuthDone) {
+                          if (await Navigator.pushNamed(context, '/pin',
+                                  arguments: authState.userEntity) ==
+                              true) {
+                            if (context.mounted) {
+                              context.read<TransferBloc>().add(
+                                    RequestTransferEvent(
+                                      transferParams:
+                                          widget.transferParams.copyWith(
+                                        sendToUsername: widget
+                                            .transferParams.sendToUsername,
+                                        pin: authState.userEntity.pin,
+                                        amount: int.parse(
+                                          amountController.text
+                                              .replaceAll('.', ''),
+                                        ),
+                                      ),
                                     ),
-                                  ),
-                                );
+                                  );
+                            }
                           }
                         }
                       }

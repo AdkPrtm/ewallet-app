@@ -73,7 +73,7 @@ class _UserRemoteService implements UserRemoteService {
       r'Content-Type': contentType,
     };
     _headers.removeWhere((k, v) => v == null);
-    const Map<String, dynamic>? _data = null;
+    final Map<String, dynamic>? _data = null;
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<HttpResponse<SearchingByUsernameResponse>>(Options(
       method: 'GET',
@@ -92,7 +92,7 @@ class _UserRemoteService implements UserRemoteService {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    final value = SearchingByUsernameResponse.fromJson(_result.data!['data']);
+    final value = SearchingByUsernameResponse.fromJson(_result.data!);
     final httpResponse = HttpResponse(value, _result);
     return httpResponse;
   }
@@ -149,7 +149,7 @@ class _UserRemoteService implements UserRemoteService {
       r'Content-Type': contentType,
     };
     _headers.removeWhere((k, v) => v == null);
-    const Map<String, dynamic>? _data = null;
+    final Map<String, dynamic>? _data = null;
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<HttpResponse<UserModel>>(Options(
       method: 'GET',

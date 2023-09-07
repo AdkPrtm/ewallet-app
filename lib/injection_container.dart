@@ -9,6 +9,11 @@ import 'package:template_clean_architecture/features/topup/domain/repositories/r
 import 'package:template_clean_architecture/features/topup/domain/usecases/get_payment_method.dart';
 import 'package:template_clean_architecture/features/topup/domain/usecases/usecases.dart';
 import 'package:template_clean_architecture/features/topup/presentation/bloc/topup_bloc.dart';
+import 'package:template_clean_architecture/features/transfer/data/datasources/remote/remote.dart';
+import 'package:template_clean_architecture/features/transfer/data/repositories/repositories.dart';
+import 'package:template_clean_architecture/features/transfer/domain/repositories/repositories.dart';
+import 'package:template_clean_architecture/features/transfer/domain/usecases/usecases.dart';
+import 'package:template_clean_architecture/features/transfer/presentation/bloc/transfer_bloc.dart';
 import 'package:template_clean_architecture/features/user/data/data.dart';
 import 'package:template_clean_architecture/features/user/domain/domain.dart';
 import 'package:template_clean_architecture/features/user/presentation/bloc/user_bloc.dart';
@@ -20,6 +25,7 @@ void setupLocator() {
   sl.registerFactory(() => AuthBloc(sl(), sl(), sl(), sl(), sl(), sl()));
   sl.registerFactory(() => UserBloc(sl(), sl(), sl(), sl()));
   sl.registerFactory(() => TopupBloc(sl(), sl()));
+  sl.registerFactory(() => TransferBloc(sl(), sl()));
 
   /* USECASE */
 
@@ -42,6 +48,10 @@ void setupLocator() {
   sl.registerLazySingleton(() => TopUpUseCase(sl()));
   sl.registerLazySingleton(() => GetPaymentMethodUseCase(sl()));
 
+  //TRANSFER USECASE
+  sl.registerLazySingleton(() => TransferUseCase(sl()));
+  sl.registerLazySingleton(() => TransferHistoryUseCase(sl()));
+
   /* REPOSITORY */
 
   //AUTH REPOSITORY
@@ -56,6 +66,10 @@ void setupLocator() {
   sl.registerLazySingleton<TopUpRespository>(
       () => TopUpRepositoryImpl(sl(), sl()));
 
+  //TRANSFER REPOSITORY
+  sl.registerLazySingleton<TransferRepository>(
+      () => TransferRepositoryImpl(sl(), sl()));
+
   /* DATA SOURCE */
 
   //AUTH DATASOURCE
@@ -67,6 +81,9 @@ void setupLocator() {
 
   //TOPUP DATASOURCE
   sl.registerLazySingleton(() => TopupRemoteService(sl()));
+
+  //TRANSFER DATASOURCE
+  sl.registerLazySingleton(() => TransferRemoteService(sl()));
 
   /* EXTERNAL */
   sl.registerLazySingleton(() => Dio());

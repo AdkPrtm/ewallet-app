@@ -3,8 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:template_clean_architecture/core/resource/resource.dart';
 import 'package:template_clean_architecture/features/auth/presentation/bloc/auth_bloc.dart';
-import 'package:template_clean_architecture/features/topup/domain/usecases/topup_usecase.dart';
 import 'package:template_clean_architecture/features/topup/presentation/bloc/topup_bloc.dart';
+import 'package:template_clean_architecture/features/transfer/presentation/bloc/transfer_bloc.dart';
 import 'package:template_clean_architecture/features/user/presentation/bloc/user_bloc.dart';
 import 'package:template_clean_architecture/injection_container.dart';
 
@@ -31,16 +31,11 @@ class MyApp extends StatelessWidget {
               create: (_) => sl<UserBloc>(),
             ),
             BlocProvider(create: (_) => sl<TopupBloc>()),
+            BlocProvider(create: (_) => sl<TransferBloc>()),
             // BlocProvider(
-            //   create: (_) => sl<TopupBloc>()
+            //   create: (_) => sl<TransferBloc>()
             //     ..add(
-            //       RequestTopupEvent(
-            //         TopupParams(
-            //           amount: 1000000,
-            //           pin: "123123",
-            //           paymentMethod: 'bca_va'
-            //         ),
-            //       ),
+            //       const RequestTransferHistoryEvent(limit: '5'),
             //     ),
             // )
           ],

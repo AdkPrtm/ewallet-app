@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:template_clean_architecture/core/resource/resource.dart';
 import 'package:template_clean_architecture/features/auth/presentation/bloc/auth_bloc.dart';
+import 'package:template_clean_architecture/features/transfer/presentation/bloc/transfer_bloc.dart';
 
 class SplashPage extends StatelessWidget {
   const SplashPage({super.key});
@@ -40,12 +41,12 @@ class SplashPage extends StatelessWidget {
         return Container();
       },
     );
-    // return BlocBuilder<TopupBloc, TopupState>(
+    // return BlocBuilder<TransferBloc, TransferState>(
     //   builder: (context, state) {
-    //     if (state is PaymentMethodLoaded) {
-    //       print(state.paymentDataTopup);
+    //     if (state is SuccessTransferHistory) {
+    //       print(state.dataTransferHistory);
     //     }
-    //     if (state is TopupFailed) {
+    //     if (state is FailedTransfer) {
     //       print(state.message);
     //     }
     //     return Container();

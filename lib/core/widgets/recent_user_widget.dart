@@ -1,29 +1,30 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:template_clean_architecture/core/resource/theme/theme.dart';
+import 'package:template_clean_architecture/features/transfer/domain/entities/entities.dart';
 import 'package:template_clean_architecture/utils/extensions/extensions.dart';
 
 class RecentUserWidget extends StatelessWidget {
   const RecentUserWidget({
     super.key,
-    required this.isVerified,
-    required this.name,
-    required this.username,
-    required this.profilePicture,
+    required this.dataTransferHistory,
+    required this.isSelected,
   });
-
-  final bool isVerified;
-  final String name;
-  final String username;
-  final String profilePicture;
+  final bool isSelected;
+  final DataTransferHistory dataTransferHistory;
 
   @override
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.all(22),
+      margin: EdgeInsets.only(bottom: 14.h),
       decoration: BoxDecoration(
         color: whiteColor,
         borderRadius: BorderRadius.circular(20),
+        border: Border.all(
+          color: isSelected ? blueColor : whiteColor,
+        ),
       ),
       child: Row(
         children: [
@@ -33,8 +34,8 @@ class RecentUserWidget extends StatelessWidget {
             decoration: BoxDecoration(
               shape: BoxShape.circle,
               image: DecorationImage(
-                image: AssetImage(
-                  profilePicture,
+                image: CachedNetworkImageProvider(
+                  dataTransferHistory.profilePicture!,
                 ),
                 fit: BoxFit.cover,
               ),
@@ -45,20 +46,20 @@ class RecentUserWidget extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                name,
+                dataTransferHistory.name!,
                 style: AppFont().blackTextStyle.copyWith(
                       fontSize: 16.sp,
                       fontWeight: AppFont().medium,
                     ),
               ),
               Text(
-                '@$username',
+                '@${dataTransferHistory.username}',
                 style: AppFont().greyTextStyle.copyWith(fontSize: 12.sp),
               ),
             ],
           ),
           const Spacer(),
-          isVerified
+          dataTransferHistory.verified == '1'
               ? Row(
                   children: [
                     Icon(

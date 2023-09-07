@@ -8,6 +8,9 @@ import 'package:template_clean_architecture/features/splash_page.dart';
 import 'package:template_clean_architecture/features/topup/domain/entities/entities.dart';
 import 'package:template_clean_architecture/features/topup/presentation/pages/amount_page.dart';
 import 'package:template_clean_architecture/features/topup/presentation/pages/topup_page.dart';
+import 'package:template_clean_architecture/features/transfer/domain/usecases/usecases.dart';
+import 'package:template_clean_architecture/features/transfer/presentation/pages/component/amount_page.dart';
+import 'package:template_clean_architecture/features/transfer/presentation/pages/transfer_page.dart';
 import 'package:template_clean_architecture/features/user/domain/domain.dart';
 import 'package:template_clean_architecture/features/user/presentation/profile/profile.dart';
 import 'package:template_clean_architecture/utils/helper/helper.dart';
@@ -43,15 +46,22 @@ class AppRoutes {
         ));
       case '/topup':
         return _materialPageRoute(const TopUpPage());
-      case '/amount':
+      case '/amount-topup':
         return _materialPageRoute(
           AmountTopupPage(
             paymentDataTopupEntity:
                 settings.arguments as PaymentDataTopupEntity,
           ),
         );
-      // case '/transfer':
-      //   return _materialPageRoute(const TransferPage());
+      case '/amount-transfer':
+        return _materialPageRoute(
+          AmountTransferPage(
+            transferParams:
+                settings.arguments as TransferParams,
+          ),
+        );
+      case '/transfer':
+        return _materialPageRoute(const TransferPage());
       case '/success-widget':
         return _materialPageRoute(SuccessPage(
           successWidgetModelHelper:
