@@ -5,6 +5,7 @@ import 'package:template_clean_architecture/core/resource/resource.dart';
 import 'package:template_clean_architecture/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:template_clean_architecture/features/tips/presentation/bloc/tips_bloc.dart';
 import 'package:template_clean_architecture/features/topup/presentation/bloc/topup_bloc.dart';
+import 'package:template_clean_architecture/features/transaction/presentation/bloc/transaction_bloc.dart';
 import 'package:template_clean_architecture/features/transfer/presentation/bloc/transfer_bloc.dart';
 import 'package:template_clean_architecture/features/user/presentation/bloc/user_bloc.dart';
 import 'package:template_clean_architecture/injection_container.dart';
@@ -28,15 +29,17 @@ class MyApp extends StatelessWidget {
             BlocProvider(
               create: (_) => sl<AuthBloc>()..add(ValidationTokenEvent()),
             ),
+            BlocProvider(create: (_) => sl<UserBloc>()),
             BlocProvider(
-              create: (_) => sl<UserBloc>(),
-            ),
+                create: (_) => sl<UserBloc>()..add(GetCurrentUserEvent())),
             BlocProvider(create: (_) => sl<TopupBloc>()),
             BlocProvider(create: (_) => sl<TransferBloc>()),
-            // BlocProvider(create: (_) => sl<TipsBloc>()),
-            BlocProvider(
-              create: (_) => sl<TipsBloc>()..add(GetTipsEvent()),
-            )
+            BlocProvider(create: (_) => sl<TipsBloc>()..add(GetTipsEvent())),
+            BlocProvider(create: (_) => sl<TransactionBloc>()),
+            // BlocProvider(
+            //   create: (_) => sl<TransactionBloc>()
+            //     ..add(const GetTransactionHistoryEvent(limit: '5')),
+            // ),
           ],
           child: MaterialApp(
             title: 'Flutter Demo',

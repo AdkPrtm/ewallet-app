@@ -1,10 +1,8 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:template_clean_architecture/core/resource/src/image_src.dart';
 import 'package:template_clean_architecture/core/resource/theme/theme.dart';
 import 'package:template_clean_architecture/features/tips/domain/entities/tips_entities.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 class TipsWidget extends StatelessWidget {
   const TipsWidget({super.key, required this.dataTipsEntity});
@@ -25,13 +23,11 @@ class TipsWidget extends StatelessWidget {
             borderRadius: const BorderRadius.vertical(
               top: Radius.circular(20),
             ),
-            child: SizedBox(
+            child: CachedNetworkImage(
               height: 110.h,
-              // width: 115.w,
-              child: CachedNetworkImage(
-                imageUrl: dataTipsEntity.thumbnail!,
-                fit: BoxFit.cover,
-              ),
+              width: double.infinity,
+              imageUrl: dataTipsEntity.thumbnail!,
+              fit: BoxFit.cover,
             ),
           ),
           Padding(

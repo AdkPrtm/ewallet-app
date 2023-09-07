@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:template_clean_architecture/core/resource/resource.dart';
 import 'package:template_clean_architecture/core/widgets/tips_widget.dart';
-import 'package:template_clean_architecture/features/tips/domain/entities/tips_entities.dart';
 import 'package:template_clean_architecture/features/tips/presentation/bloc/tips_bloc.dart';
 import 'package:url_launcher/url_launcher.dart';
 

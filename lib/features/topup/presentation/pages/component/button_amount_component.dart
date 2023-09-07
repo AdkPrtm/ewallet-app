@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:template_clean_architecture/core/resource/resource.dart';
 import 'package:template_clean_architecture/core/widgets/buttons.dart';
 import 'package:template_clean_architecture/features/topup/presentation/bloc/topup_bloc.dart';
 import 'package:template_clean_architecture/features/user/domain/domain.dart';
@@ -55,10 +56,13 @@ class ButtonAmountComponent extends StatelessWidget {
           );
         }
         if (state is TopupFailed) {
-          print(state.message);
+          showCustomSnackbar(
+            context,
+            state.message ?? "Upss, something went wrong",
+          );
         }
         if (state is TopUpLoading) {
-          return CircularProgressIndicator();
+          return const Center(child: CircularProgressIndicator());
         }
         return CustomFilledButton(
           title: 'Checkout Now',

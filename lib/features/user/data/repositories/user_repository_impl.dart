@@ -103,10 +103,8 @@ class UserRepositoryImpl extends UserRepository {
           response: httpResponse.response,
         );
       }
-      print(httpResponse.data);
       return Right(httpResponse.data.toEntity());
     } on DioException catch (e) {
-      print(e.response!.data);
       return Left(ServerFailure(e.response?.data['message'] ?? e.message));
     } on SocketException {
       return const Left(ConnectionFailure('Failed to connect to the network'));

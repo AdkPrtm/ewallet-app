@@ -32,7 +32,6 @@ class TopupBloc extends Bloc<TopupEvent, TopupState> {
   Future<void> onGetPaymentTopUpProses(
       GetPaymentMethodTopupEvent event, Emitter<TopupState> emit) async {
     emit(TopUpLoading());
-    print('masuk bloc');
     final result = await _paymentMethodUseCase.call();
     result.fold(
       (fail) => emit(TopupFailed(message: fail.message)),

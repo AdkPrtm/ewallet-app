@@ -14,6 +14,11 @@ import 'package:template_clean_architecture/features/topup/domain/repositories/r
 import 'package:template_clean_architecture/features/topup/domain/usecases/get_payment_method.dart';
 import 'package:template_clean_architecture/features/topup/domain/usecases/usecases.dart';
 import 'package:template_clean_architecture/features/topup/presentation/bloc/topup_bloc.dart';
+import 'package:template_clean_architecture/features/transaction/data/datasources/remote/remote.dart';
+import 'package:template_clean_architecture/features/transaction/data/repositories/repositories.dart';
+import 'package:template_clean_architecture/features/transaction/domain/repositories/repositories.dart';
+import 'package:template_clean_architecture/features/transaction/domain/usecases/usecases.dart';
+import 'package:template_clean_architecture/features/transaction/presentation/bloc/transaction_bloc.dart';
 import 'package:template_clean_architecture/features/transfer/data/datasources/remote/remote.dart';
 import 'package:template_clean_architecture/features/transfer/data/repositories/repositories.dart';
 import 'package:template_clean_architecture/features/transfer/domain/repositories/repositories.dart';
@@ -32,6 +37,7 @@ void setupLocator() {
   sl.registerFactory(() => TopupBloc(sl(), sl()));
   sl.registerFactory(() => TransferBloc(sl(), sl()));
   sl.registerFactory(() => TipsBloc(sl()));
+  sl.registerFactory(() => TransactionBloc(sl()));
 
   /* USECASE */
 
@@ -61,6 +67,9 @@ void setupLocator() {
   //TIPS USECASE
   sl.registerLazySingleton(() => GetTipsUseCase(sl()));
 
+  //TRANSACTION USECASE
+  sl.registerLazySingleton(() => GetTransactionHistoryUseCase(sl()));
+
   /* REPOSITORY */
 
   //AUTH REPOSITORY
@@ -83,6 +92,10 @@ void setupLocator() {
   sl.registerLazySingleton<TipsRepository>(
       () => TipsRepositoryImpl(sl(), sl()));
 
+  //TRANSACTION REPOSITORY
+  sl.registerLazySingleton<TransactionRepository>(
+      () => TransactionRespositoryImpl(sl(), sl()));
+
   /* DATA SOURCE */
 
   //AUTH DATASOURCE
@@ -100,6 +113,9 @@ void setupLocator() {
 
   //TIPS DATASOURCE
   sl.registerLazySingleton(() => TipsServiceRemote(sl()));
+
+  //TRANSACTION DATASOURCE
+  sl.registerLazySingleton(() => TransactionRemoteService(sl()));
 
   /* EXTERNAL */
   sl.registerLazySingleton(() => Dio());

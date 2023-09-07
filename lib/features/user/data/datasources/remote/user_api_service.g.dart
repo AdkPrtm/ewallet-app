@@ -92,7 +92,7 @@ class _UserRemoteService implements UserRemoteService {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    final value = SearchingByUsernameResponse.fromJson(_result.data!['data']);
+    final value = SearchingByUsernameResponse.fromJson(_result.data!);
     final httpResponse = HttpResponse(value, _result);
     return httpResponse;
   }

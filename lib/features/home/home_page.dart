@@ -10,26 +10,10 @@ import 'package:template_clean_architecture/features/home/component/custom_walle
 import 'package:template_clean_architecture/features/home/component/custome_wellcome_profile_component.dart';
 import 'package:template_clean_architecture/features/home/component/shimmer_profile_and_card_component.dart';
 import 'package:template_clean_architecture/features/user/presentation/bloc/user_bloc.dart';
+import 'package:template_clean_architecture/injection_container.dart';
 
-class HomePage extends StatefulWidget {
+class HomePage extends StatelessWidget {
   const HomePage({super.key});
-
-  @override
-  State<HomePage> createState() => _HomePageState();
-}
-
-class _HomePageState extends State<HomePage> {
-  @override
-  void initState() {
-    super.initState();
-    context.read<UserBloc>().add(GetCurrentUserEvent());
-  }
-
-  @override
-  void dispose() {
-    // TODO: implement dispose
-    super.dispose();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -39,7 +23,6 @@ class _HomePageState extends State<HomePage> {
         children: [
           BlocBuilder<UserBloc, UserState>(
             builder: (context, state) {
-              print(state);
               if (state is UserLoaded) {
                 return Column(
                   children: [
