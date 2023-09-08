@@ -32,6 +32,11 @@ class _SetKtpPageState extends State<SetKtpPage> {
   }
 
   @override
+  void dispose() {
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: ListView(
@@ -170,7 +175,11 @@ class _SetKtpPageState extends State<SetKtpPage> {
             },
             builder: (context, state) {
               if (state is AuthLoading) {
-                return CustomeTextButton(title: 'title', onTap: () {});
+                return CustomFilledButton(
+                  title: 'Continue',
+                  onTap: () {},
+                  disable: true,
+                );
               }
               return CustomeTextButton(
                 title: 'Skip for now',

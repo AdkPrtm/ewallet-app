@@ -32,10 +32,18 @@ class CustomLatestTransactionComponent extends StatelessWidget {
             borderRadius: BorderRadius.circular(20),
           ),
           child: BlocProvider(
-            create: (context) => sl<TransactionBloc>()..add(const GetTransactionHistoryEvent()),
+            create: (context) =>
+                sl<TransactionBloc>()..add(const GetTransactionHistoryEvent()),
             child: BlocBuilder<TransactionBloc, TransactionState>(
               builder: (context, state) {
                 if (state is TransactionHistoryLoaded) {
+                  if (state.dataTransactionHistoryEntity!.isEmpty) {
+                    return Text(
+                      'No data',
+                      style: AppFont().blackTextStyle,
+                      textAlign: TextAlign.center,
+                    );
+                  }
                   return Column(
                     children: state.dataTransactionHistoryEntity!.map((data) {
                       return TransactionHistoryWidget(

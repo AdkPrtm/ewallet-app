@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:template_clean_architecture/core/resource/resource.dart';
 import 'package:template_clean_architecture/features/auth/presentation/bloc/auth_bloc.dart';
+import 'package:template_clean_architecture/features/product/product.dart';
 import 'package:template_clean_architecture/features/tips/presentation/bloc/tips_bloc.dart';
 import 'package:template_clean_architecture/features/topup/presentation/bloc/topup_bloc.dart';
 import 'package:template_clean_architecture/features/transaction/presentation/bloc/transaction_bloc.dart';
@@ -36,6 +37,7 @@ class MyApp extends StatelessWidget {
             BlocProvider(create: (_) => sl<TransferBloc>()),
             BlocProvider(create: (_) => sl<TipsBloc>()..add(GetTipsEvent())),
             BlocProvider(create: (_) => sl<TransactionBloc>()),
+            BlocProvider(create: (_) => sl<ProductBloc>()),
             // BlocProvider(
             //   create: (_) => sl<TransactionBloc>()
             //     ..add(const GetTransactionHistoryEvent(limit: '5')),

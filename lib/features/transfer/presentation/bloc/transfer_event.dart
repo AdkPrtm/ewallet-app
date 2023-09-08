@@ -22,3 +22,11 @@ class RequestTransferHistoryEvent extends TransferEvent {
   @override
   List<Object> get props => [limit!];
 }
+
+class GetDataByUsername extends TransferEvent {
+  final String? username;
+
+  const GetDataByUsername({this.username});
+  @override
+  List<Object> get props => [username!];
+}

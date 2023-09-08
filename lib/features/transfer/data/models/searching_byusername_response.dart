@@ -1,5 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:template_clean_architecture/features/user/domain/entities/user_byusername_entities.dart';
+import 'package:template_clean_architecture/features/transfer/domain/entities/user_byusername_entities.dart';
 
 part 'searching_byusername_response.freezed.dart';
 part 'searching_byusername_response.g.dart';

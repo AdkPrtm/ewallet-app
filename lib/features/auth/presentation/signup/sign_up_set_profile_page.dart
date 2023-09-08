@@ -25,6 +25,11 @@ class _SetProfilePageState extends State<SetProfilePage> {
   final formKey = GlobalKey<FormState>();
 
   @override
+  void dispose() {
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: ListView(

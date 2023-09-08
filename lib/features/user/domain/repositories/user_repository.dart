@@ -6,8 +6,6 @@ abstract class UserRepository {
   Future<Either<Failure, String>> updateUser(
       UpdateProfileUserParams updateProfileUserParams);
 
-  Future<Either<Failure, ResponseSearchUsername>> getByUsername(
-      String username);
   Future<Either<Failure, UserEntity>> getCurrentUser();
 
   Future<Either<Failure, String>> changePinUser(

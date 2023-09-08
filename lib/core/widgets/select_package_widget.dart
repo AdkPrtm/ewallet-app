@@ -1,18 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:template_clean_architecture/core/resource/theme/theme.dart';
+import 'package:template_clean_architecture/core/resource/resource.dart';
+import 'package:template_clean_architecture/features/product/product.dart';
 import 'package:template_clean_architecture/utils/extensions/extensions.dart';
 
 class SelectPackageWidget extends StatelessWidget {
   const SelectPackageWidget({
     super.key,
-    required this.title,
-    required this.price,
+    required this.dataPlansListEntity,
     this.isSelected = false,
   });
 
-  final String title;
-  final String price;
+  final DataPlansListEntity dataPlansListEntity;
   final bool isSelected;
 
   @override
@@ -33,7 +32,7 @@ class SelectPackageWidget extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Text(
-            title,
+            dataPlansListEntity.name!,
             style: AppFont().blackTextStyle.copyWith(
                   fontSize: 32.sp,
                   fontWeight: AppFont().medium,
@@ -41,7 +40,7 @@ class SelectPackageWidget extends StatelessWidget {
           ),
           6.0.height,
           Text(
-            price,
+            formatCurrency(num.parse(dataPlansListEntity.price!)),
             style: AppFont().greyTextStyle.copyWith(
                   fontSize: 12.sp,
                 ),

@@ -4,6 +4,9 @@ import 'package:template_clean_architecture/features/auth/presentation/signin/si
 import 'package:template_clean_architecture/features/auth/presentation/signup/sign_up_page.dart';
 import 'package:template_clean_architecture/features/home/home_page.dart';
 import 'package:template_clean_architecture/features/pin/pin_page.dart';
+import 'package:template_clean_architecture/features/product/presentation/pages/dataplans/select_package_page.dart';
+import 'package:template_clean_architecture/features/product/presentation/pages/dataplans/select_provider_page.dart';
+import 'package:template_clean_architecture/features/product/product.dart';
 import 'package:template_clean_architecture/features/splash_page.dart';
 import 'package:template_clean_architecture/features/topup/domain/entities/entities.dart';
 import 'package:template_clean_architecture/features/topup/presentation/pages/amount_page.dart';
@@ -56,8 +59,7 @@ class AppRoutes {
       case '/amount-transfer':
         return _materialPageRoute(
           AmountTransferPage(
-            transferParams:
-                settings.arguments as TransferParams,
+            transferParams: settings.arguments as TransferParams,
           ),
         );
       case '/transfer':
@@ -67,10 +69,12 @@ class AppRoutes {
           successWidgetModelHelper:
               settings.arguments as SuccessWidgetModelHelper,
         ));
-      // case '/select-provider':
-      //   return _materialPageRoute(const SelectProviderPage());
-      // case '/select-package':
-      //   return _materialPageRoute(const SelectPackageDataPage());
+      case '/select-provider':
+        return _materialPageRoute(const SelectProviderPage());
+      case '/select-package':
+        return _materialPageRoute(SelectPackageDataPage(
+          dataOperatorCardEntity: settings.arguments as DataOperatorCardEntity,
+        ));
       default:
         return _materialPageRoute(const HomePage());
     }

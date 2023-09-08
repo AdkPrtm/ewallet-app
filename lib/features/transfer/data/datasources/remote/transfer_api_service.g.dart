@@ -73,7 +73,7 @@ class _TransferRemoteService implements TransferRemoteService {
       r'Content-Type': contentType,
     };
     _headers.removeWhere((k, v) => v == null);
-    const Map<String, dynamic>? _data = null;
+    final Map<String, dynamic>? _data = null;
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<HttpResponse<TransferHistoryResponse>>(Options(
       method: 'GET',
@@ -93,6 +93,44 @@ class _TransferRemoteService implements TransferRemoteService {
               baseUrl,
             ))));
     final value = TransferHistoryResponse.fromJson(_result.data!['data']);
+    final httpResponse = HttpResponse(value, _result);
+    return httpResponse;
+  }
+
+  @override
+  Future<HttpResponse<SearchingByUsernameResponse>> getDataUsername({
+    String? token,
+    String? contentType,
+    String? username,
+  }) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    queryParameters.removeWhere((k, v) => v == null);
+    final _headers = <String, dynamic>{
+      r'Authorization': token,
+      r'Content-Type': contentType,
+    };
+    _headers.removeWhere((k, v) => v == null);
+    final Map<String, dynamic>? _data = null;
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<HttpResponse<SearchingByUsernameResponse>>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+      contentType: contentType,
+    )
+            .compose(
+              _dio.options,
+              '/users/${username}',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    final value = SearchingByUsernameResponse.fromJson(_result.data!);
     final httpResponse = HttpResponse(value, _result);
     return httpResponse;
   }

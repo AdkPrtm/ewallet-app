@@ -1,5 +1,5 @@
-import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:template_clean_architecture/core/error/error.dart';
 import 'package:template_clean_architecture/features/auth/domain/entities/entities.dart';
 import 'package:template_clean_architecture/features/auth/domain/usecases/usecases.dart';
@@ -61,6 +61,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
 
   Future<void> onCheckDataProses(
       CheckDataExists event, Emitter<AuthState> emit) async {
+    emit(AuthLoading());
     final result = await _checkDataUseCase.call(params: event.checkDataParams);
     result.fold(
       (failure) {
@@ -77,6 +78,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   }
 
   Future<void> onLoginProses(AuthLogin event, Emitter<AuthState> emit) async {
+    emit(AuthLoading());
     final result = await _signInUseCase.call(params: event.signInParams);
     result.fold(
       (failure) {
@@ -95,8 +97,8 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
 
   Future<void> onRegisterProses(
       AuthRegister event, Emitter<AuthState> emit) async {
+    emit(AuthLoading());
     final result = await _signUpUseCase.call(params: event.signUpParams);
-
     result.fold(
       (failure) {
         if (failure is ServerFailure) {

@@ -6,13 +6,11 @@ import 'package:template_clean_architecture/core/resource/resource.dart';
 import 'package:template_clean_architecture/core/widgets/buttons.dart';
 import 'package:template_clean_architecture/core/widgets/type_number_widget.dart';
 import 'package:template_clean_architecture/features/auth/presentation/bloc/auth_bloc.dart';
-import 'package:template_clean_architecture/features/topup/presentation/bloc/topup_bloc.dart';
 import 'package:template_clean_architecture/features/topup/presentation/pages/component/amount_component.dart';
 import 'package:template_clean_architecture/features/transfer/domain/usecases/usecases.dart';
 import 'package:template_clean_architecture/features/transfer/presentation/bloc/transfer_bloc.dart';
 import 'package:template_clean_architecture/utils/extensions/extensions.dart';
 import 'package:template_clean_architecture/utils/helper/helper.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 class AmountTransferPage extends StatefulWidget {
   const AmountTransferPage({

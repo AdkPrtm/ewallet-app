@@ -54,7 +54,7 @@ class _TopupRemoteService implements TopupRemoteService {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    final value = TopUpResponse.fromJson(_result.data!['data']);
+    final value = TopUpResponse.fromJson(_result.data!);
     final httpResponse = HttpResponse(value, _result);
     return httpResponse;
   }

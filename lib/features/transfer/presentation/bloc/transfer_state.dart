@@ -21,6 +21,15 @@ class FailedTransfer extends TransferState {
   List<Object> get props => [message!];
 }
 
+
+class ListDataByUsername extends TransferState {
+  final List<UserBySearchingEntity>? listData;
+
+  const ListDataByUsername({this.listData});
+  @override
+  List<Object> get props => [listData!];
+}
+
 class SuccessTransferHistory extends TransferState {
   final List<DataTransferHistory>? dataTransferHistory;
 

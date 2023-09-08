@@ -1,4 +1,3 @@
-import 'dart:convert';
 
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:template_clean_architecture/features/transaction/domain/entities/entities.dart';

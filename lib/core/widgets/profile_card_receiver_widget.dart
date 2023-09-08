@@ -1,17 +1,16 @@
-
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:template_clean_architecture/core/resource/theme/theme.dart';
+import 'package:template_clean_architecture/features/transfer/domain/entities/entities.dart';
 
 class ProfileCardReceiverWidget extends StatelessWidget {
   const ProfileCardReceiverWidget({
     super.key,
-    required this.profileImage,
-    required this.username,
+    required this.dataTransferHistory,
   });
 
-  final String profileImage;
-  final String username;
+  final DataTransferHistory dataTransferHistory;
 
   @override
   Widget build(BuildContext context) {
@@ -26,25 +25,27 @@ class ProfileCardReceiverWidget extends StatelessWidget {
       child: Column(
         children: [
           Container(
-            height: 45.h,
+            height: 60.h,
             width: 45.h,
-            margin: EdgeInsets.only(bottom: 14.h),
+            margin: EdgeInsets.only(bottom: 8.h),
             decoration: BoxDecoration(
               shape: BoxShape.circle,
               image: DecorationImage(
-                image: AssetImage(
-                  profileImage,
+                image: CachedNetworkImageProvider(
+                  dataTransferHistory.profilePicture!,
                 ),
                 fit: BoxFit.cover,
               ),
             ),
           ),
           Text(
-            username,
+            '@${dataTransferHistory.username!}',
             style: AppFont().blackTextStyle.copyWith(
                   fontWeight: AppFont().medium,
                   fontSize: 12.sp,
+                  overflow: TextOverflow.ellipsis,
                 ),
+            maxLines: 1,
           )
         ],
       ),

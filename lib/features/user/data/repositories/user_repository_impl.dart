@@ -40,31 +40,6 @@ class UserRepositoryImpl extends UserRepository {
   }
 
   @override
-  Future<Either<Failure, ResponseSearchUsername>> getByUsername(
-      String username) async {
-    try {
-      final token = await _authLocalService.getCredentialToLocal();
-      final httpResponse = await _userRemoteService.getDataUsername(
-        token: token,
-        contentType: contentType,
-        username: username,
-      );
-      if ((httpResponse.response.statusCode ?? 0) < 200 ||
-          (httpResponse.response.statusCode ?? 0) > 201) {
-        throw DioException(
-          requestOptions: httpResponse.response.requestOptions,
-          response: httpResponse.response,
-        );
-      }
-      return Right(httpResponse.data.toEntity());
-    } on DioException catch (e) {
-      return Left(ServerFailure(e.response?.data['message'] ?? e.message));
-    } on SocketException {
-      return const Left(ConnectionFailure('Failed to connect to the network'));
-    }
-  }
-
-  @override
   Future<Either<Failure, String>> changePinUser(
       UpdatePinParams updatePinParams) async {
     try {

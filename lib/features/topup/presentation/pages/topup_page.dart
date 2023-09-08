@@ -21,6 +21,11 @@ class _TopUpPageState extends State<TopUpPage> {
   PaymentDataTopupEntity? paymentDataTopupEntity;
 
   @override
+  void dispose() {
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
@@ -74,31 +79,46 @@ class _TopUpPageState extends State<TopUpPage> {
                 ),
               ),
               12.0.height,
-              paymentDataTopupEntity == null
-                  ? CustomFilledButton(
-                      title: 'Continue',
-                      onTap: () {},
-                      changeColor: true,
-                    )
-                  : CustomFilledButton(
-                      title: 'Continue',
-                      onTap: paymentDataTopupEntity == null
-                          ? () {}
-                          : () {
-                              if (paymentDataTopupEntity != null) {
-                                Navigator.pushNamed(
-                                  context,
-                                  '/amount',
-                                  arguments: paymentDataTopupEntity,
-                                );
-                              }
-                            },
-                    ),
               30.0.height,
             ],
           ),
         ),
       ),
+      floatingActionButton: paymentDataTopupEntity == null
+          ? Padding(
+              padding: EdgeInsets.only(
+                bottom: 30.h,
+                left: 24.w,
+                right: 24.w,
+              ),
+              child: CustomFilledButton(
+                title: 'Continue',
+                onTap: () {},
+                changeColor: true,
+              ),
+            )
+          : Padding(
+              padding: EdgeInsets.only(
+                bottom: 30.h,
+                left: 24.w,
+                right: 24.w,
+              ),
+              child: CustomFilledButton(
+                title: 'Continue',
+                onTap: paymentDataTopupEntity == null
+                    ? () {}
+                    : () {
+                        if (paymentDataTopupEntity != null) {
+                          Navigator.pushNamed(
+                            context,
+                            '/amount-topup',
+                            arguments: paymentDataTopupEntity,
+                          );
+                        }
+                      },
+              ),
+            ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
     );
   }
 }

@@ -9,33 +9,6 @@ import 'package:template_clean_architecture/features/auth/presentation/bloc/auth
 
 class SignInPage extends StatelessWidget {
   const SignInPage({super.key});
-  // return BlocConsumer<AuthBloc, AuthState>(
-  //   listener: (context, state) {
-  //     if (state is AuthFailed) {
-  //       showCustomSnackbar(context, state.message);
-  //     }
-
-  //     if (state is AuthDone) {
-  //       Navigator.pushNamedAndRemoveUntil(context, '/home', (route) => false);
-  //     }
-  //   },
-  //   builder: (context, state) {
-  //     if (state is AuthLoading) {
-  //       return Stack(
-  //         children: [
-  //           _buildPage(context),
-  //           Container(
-  //             height: double.infinity,
-  //             width: double.infinity,
-  //             color: Colors.white.withOpacity(0.5),
-  //             child: const Center(child: CircularProgressIndicator()),
-  //           ),
-  //         ],
-  //       );
-  //     }
-  //     return _buildPage(context);
-  //   },
-  // );
   @override
   Widget build(BuildContext context) {
     final emailController = TextEditingController(text: '');
@@ -118,7 +91,7 @@ class SignInPage extends StatelessWidget {
                     builder: (context, state) {
                       if (state is AuthLoading) {
                         return CustomFilledButton(
-                          title: 'Update Now',
+                          title: 'Sign In',
                           disable: true,
                           onTap: () {},
                         );

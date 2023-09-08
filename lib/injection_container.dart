@@ -1,43 +1,24 @@
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
-import 'package:template_clean_architecture/features/auth/data/data.dart';
-import 'package:template_clean_architecture/features/auth/domain/domain.dart';
-import 'package:template_clean_architecture/features/auth/presentation/bloc/auth_bloc.dart';
-import 'package:template_clean_architecture/features/tips/data/datasources/remote/remote.dart';
-import 'package:template_clean_architecture/features/tips/data/repositories/repositories.dart';
-import 'package:template_clean_architecture/features/tips/domain/repositories/repositories.dart';
-import 'package:template_clean_architecture/features/tips/domain/usecases/usecase.dart';
-import 'package:template_clean_architecture/features/tips/presentation/bloc/tips_bloc.dart';
-import 'package:template_clean_architecture/features/topup/data/datasources/datasource.dart';
-import 'package:template_clean_architecture/features/topup/data/repositories/repositories.dart';
-import 'package:template_clean_architecture/features/topup/domain/repositories/repositories.dart';
-import 'package:template_clean_architecture/features/topup/domain/usecases/get_payment_method.dart';
-import 'package:template_clean_architecture/features/topup/domain/usecases/usecases.dart';
-import 'package:template_clean_architecture/features/topup/presentation/bloc/topup_bloc.dart';
-import 'package:template_clean_architecture/features/transaction/data/datasources/remote/remote.dart';
-import 'package:template_clean_architecture/features/transaction/data/repositories/repositories.dart';
-import 'package:template_clean_architecture/features/transaction/domain/repositories/repositories.dart';
-import 'package:template_clean_architecture/features/transaction/domain/usecases/usecases.dart';
-import 'package:template_clean_architecture/features/transaction/presentation/bloc/transaction_bloc.dart';
-import 'package:template_clean_architecture/features/transfer/data/datasources/remote/remote.dart';
-import 'package:template_clean_architecture/features/transfer/data/repositories/repositories.dart';
-import 'package:template_clean_architecture/features/transfer/domain/repositories/repositories.dart';
-import 'package:template_clean_architecture/features/transfer/domain/usecases/usecases.dart';
-import 'package:template_clean_architecture/features/transfer/presentation/bloc/transfer_bloc.dart';
-import 'package:template_clean_architecture/features/user/data/data.dart';
-import 'package:template_clean_architecture/features/user/domain/domain.dart';
-import 'package:template_clean_architecture/features/user/presentation/bloc/user_bloc.dart';
+import 'package:template_clean_architecture/features/auth/auth.dart';
+import 'package:template_clean_architecture/features/product/product.dart';
+import 'package:template_clean_architecture/features/tips/tips.dart';
+import 'package:template_clean_architecture/features/topup/topup.dart';
+import 'package:template_clean_architecture/features/transaction/transaction.dart';
+import 'package:template_clean_architecture/features/transfer/transfer.dart';
+import 'package:template_clean_architecture/features/user/user.dart';
 
 final sl = GetIt.instance;
 
 void setupLocator() {
   //BLOC
   sl.registerFactory(() => AuthBloc(sl(), sl(), sl(), sl(), sl(), sl()));
-  sl.registerFactory(() => UserBloc(sl(), sl(), sl(), sl()));
+  sl.registerFactory(() => UserBloc(sl(), sl(), sl()));
   sl.registerFactory(() => TopupBloc(sl(), sl()));
-  sl.registerFactory(() => TransferBloc(sl(), sl()));
+  sl.registerFactory(() => TransferBloc(sl(), sl(), sl()));
   sl.registerFactory(() => TipsBloc(sl()));
   sl.registerFactory(() => TransactionBloc(sl()));
+  sl.registerFactory(() => ProductBloc(sl(), sl()));
 
   /* USECASE */
 
@@ -52,7 +33,6 @@ void setupLocator() {
 
   //USER USECASE
   sl.registerLazySingleton(() => UpdateDataUserUsecase(sl()));
-  sl.registerLazySingleton(() => GetUserByUsernameUsecase(sl()));
   sl.registerLazySingleton(() => ChangePinUsecase(sl()));
   sl.registerLazySingleton(() => GetCurrentUserUseCase(sl()));
 
@@ -63,12 +43,17 @@ void setupLocator() {
   //TRANSFER USECASE
   sl.registerLazySingleton(() => TransferUseCase(sl()));
   sl.registerLazySingleton(() => TransferHistoryUseCase(sl()));
+  sl.registerLazySingleton(() => GetUserByUsernameUsecase(sl()));
 
   //TIPS USECASE
   sl.registerLazySingleton(() => GetTipsUseCase(sl()));
 
   //TRANSACTION USECASE
   sl.registerLazySingleton(() => GetTransactionHistoryUseCase(sl()));
+
+  //PRODUCT (DATA PLANS) USECASE
+  sl.registerLazySingleton(() => GetDataPlansUseCase(sl()));
+  sl.registerLazySingleton(() => BuyDataPlansUseCase(sl()));
 
   /* REPOSITORY */
 
@@ -96,6 +81,9 @@ void setupLocator() {
   sl.registerLazySingleton<TransactionRepository>(
       () => TransactionRespositoryImpl(sl(), sl()));
 
+  sl.registerLazySingleton<DataPlansRepository>(
+      () => DataPlansRepositoryImpl(sl(), sl()));
+
   /* DATA SOURCE */
 
   //AUTH DATASOURCE
@@ -116,6 +104,9 @@ void setupLocator() {
 
   //TRANSACTION DATASOURCE
   sl.registerLazySingleton(() => TransactionRemoteService(sl()));
+
+  //PRODUCT (DATAPLANS) DATASOURCE
+  sl.registerLazySingleton(() => DataPlansRemoteSevice(sl()));
 
   /* EXTERNAL */
   sl.registerLazySingleton(() => Dio());

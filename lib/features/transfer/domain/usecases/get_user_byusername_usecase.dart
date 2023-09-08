@@ -1,15 +1,16 @@
 import 'package:dartz/dartz.dart';
 import 'package:template_clean_architecture/core/error/error.dart';
 import 'package:template_clean_architecture/core/usecase/usecase.dart';
-import 'package:template_clean_architecture/features/user/domain/domain.dart';
+import 'package:template_clean_architecture/features/transfer/domain/entities/user_byusername_entities.dart';
+import 'package:template_clean_architecture/features/transfer/domain/repositories/repositories.dart';
 
 class GetUserByUsernameUsecase
     extends UseCase<Either<Failure, ResponseSearchUsername>, String> {
-  final UserRepository _userRepository;
+  final TransferRepository _transferRepository;
 
-  GetUserByUsernameUsecase(this._userRepository);
+  GetUserByUsernameUsecase(this._transferRepository);
 
   @override
   Future<Either<Failure, ResponseSearchUsername>> call({String? params}) =>
-      _userRepository.getByUsername(params!);
+      _transferRepository.getByUsername(params!);
 }

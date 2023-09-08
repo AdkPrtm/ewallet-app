@@ -16,13 +16,6 @@ abstract class UserRemoteService {
     @Body() Map<String, dynamic>? body,
   });
 
-  @GET('/users/{username}')
-  Future<HttpResponse<SearchingByUsernameResponse>> getDataUsername({
-    @Header("Authorization") String? token,
-    @Header("Content-Type") String? contentType,
-    @Path("username") String? username,
-  });
-
   @PUT('/wallet')
   Future<HttpResponse> changePinUser({
     @Header("Authorization") String? token,

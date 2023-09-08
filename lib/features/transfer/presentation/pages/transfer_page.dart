@@ -7,8 +7,6 @@ import 'package:template_clean_architecture/core/widgets/recent_user_widget.dart
 import 'package:template_clean_architecture/core/widgets/searching_result_widget.dart';
 import 'package:template_clean_architecture/features/transfer/domain/usecases/usecases.dart';
 import 'package:template_clean_architecture/features/transfer/presentation/bloc/transfer_bloc.dart';
-import 'package:template_clean_architecture/features/user/presentation/bloc/user_bloc.dart';
-import 'package:template_clean_architecture/injection_container.dart';
 import 'package:template_clean_architecture/utils/extensions/extensions.dart';
 
 class TransferPage extends StatefulWidget {
@@ -21,6 +19,19 @@ class TransferPage extends StatefulWidget {
 class _TransferPageState extends State<TransferPage> {
   final searchCon = TextEditingController(text: '');
   String? usernameSendTo;
+
+  @override
+  void initState() {
+    super.initState();
+    context
+        .read<TransferBloc>()
+        .add(const RequestTransferHistoryEvent(limit: '5'));
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -54,10 +65,15 @@ class _TransferPageState extends State<TransferPage> {
                   ),
                   controller: searchCon,
                   onChanged: (value) {
-                    if (value.isNotEmpty) {
+                    if (value.length >= 2) {
                       context
-                          .read<UserBloc>()
+                          .read<TransferBloc>()
                           .add(GetDataByUsername(username: value));
+                      setState(() {});
+                    } else {
+                      context
+                          .read<TransferBloc>()
+                          .add(const RequestTransferHistoryEvent(limit: '5'));
                       setState(() {});
                     }
                   },
@@ -65,7 +81,7 @@ class _TransferPageState extends State<TransferPage> {
               ],
             ),
             40.0.height,
-            searchCon.text.isEmpty ? recentUser() : searchingUser(),
+            searchCon.text.length <= 1 ? recentUser() : searchingUser(),
             80.0.height,
           ],
         ),
@@ -106,7 +122,7 @@ class _TransferPageState extends State<TransferPage> {
               ),
         ),
         14.0.height,
-        BlocBuilder<UserBloc, UserState>(
+        BlocBuilder<TransferBloc, TransferState>(
           builder: (context, state) {
             if (state is ListDataByUsername) {
               if (state.listData!.isEmpty) {
@@ -152,59 +168,56 @@ class _TransferPageState extends State<TransferPage> {
     );
   }
 
-  BlocProvider<TransferBloc> recentUser() {
-    return BlocProvider(
-      create: (_) => sl<TransferBloc>()
-        ..add(
-          const RequestTransferHistoryEvent(limit: '5'),
+  Widget recentUser() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          'Recent Users',
+          style: AppFont().blackTextStyle.copyWith(
+                fontSize: 16.sp,
+                fontWeight: AppFont().semibold,
+              ),
         ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            'Recent Users',
-            style: AppFont().blackTextStyle.copyWith(
-                  fontSize: 16.sp,
-                  fontWeight: AppFont().semibold,
-                ),
-          ),
-          14.0.height,
-          BlocBuilder<TransferBloc, TransferState>(
-            builder: (context, state) {
-              if (state is SuccessTransferHistory) {
-                return Column(
-                  children: state.dataTransferHistory!.map((data) {
-                    return GestureDetector(
-                      onTap: () {
-                        setState(() {
-                          if (usernameSendTo == data.username) {
-                            usernameSendTo = null;
-                          } else {
-                            usernameSendTo = data.username;
-                          }
-                        });
-                      },
-                      child: RecentUserWidget(
-                        dataTransferHistory: data,
-                        isSelected: data.username == usernameSendTo,
-                      ),
-                    );
-                  }).toList(),
-                );
-              }
-              return Padding(
-                padding: EdgeInsets.only(top: 20.h),
-                child: Center(
-                  child: CircularProgressIndicator(
-                    color: purpleColor,
-                    strokeWidth: 5.h,
-                  ),
-                ),
+        14.0.height,
+        BlocBuilder<TransferBloc, TransferState>(
+          builder: (context, state) {
+            if (state is SuccessTransferHistory) {
+              return Column(
+                children: state.dataTransferHistory!.map((data) {
+                  return GestureDetector(
+                    onTap: () {
+                      setState(() {
+                        if (usernameSendTo == data.username) {
+                          usernameSendTo = null;
+                        } else {
+                          usernameSendTo = data.username;
+                        }
+                      });
+                    },
+                    child: RecentUserWidget(
+                      dataTransferHistory: data,
+                      isSelected: data.username == usernameSendTo,
+                    ),
+                  );
+                }).toList(),
               );
-            },
-          )
-        ],
-      ),
+            }
+            if (state is FailedTransfer) {
+              showCustomSnackbar(context, state.message!);
+            }
+            return Padding(
+              padding: EdgeInsets.only(top: 20.h),
+              child: Center(
+                child: CircularProgressIndicator(
+                  color: purpleColor,
+                  strokeWidth: 5.h,
+                ),
+              ),
+            );
+          },
+        )
+      ],
     );
   }
 }

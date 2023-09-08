@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:retrofit/retrofit.dart';
 import 'package:template_clean_architecture/core/resource/constant/api_list.dart';
 import 'package:template_clean_architecture/features/transfer/data/models/model.dart';
+import 'package:template_clean_architecture/features/transfer/data/models/searching_byusername_response.dart';
 
 part 'transfer_api_service.g.dart';
 
@@ -21,5 +22,12 @@ abstract class TransferRemoteService {
     @Header("Authorization") String? token,
     @Header("Content-Type") String? contentType,
     @Query('limit') String? limit,
+  });
+
+  @GET('/users/{username}')
+  Future<HttpResponse<SearchingByUsernameResponse>> getDataUsername({
+    @Header("Authorization") String? token,
+    @Header("Content-Type") String? contentType,
+    @Path("username") String? username,
   });
 }

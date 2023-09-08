@@ -38,16 +38,17 @@ class SplashPage extends StatelessWidget {
           );
         }
         return Container();
-      },
+      }, 
     );
-    // return BlocBuilder<TipsBloc, TipsState>(
+    // return BlocBuilder<ProductBloc, ProductState>(
     //   builder: (context, state) {
-    //     if (state is TipsLoaded) {
-    //       print(state.dataTips);
+    //     if (state is ProductLoaded) {
+    //       print(state.dataOperator);
     //     }
-    //     if (state is TipsFailed) {
+    //     if (state is ProductFailed) {
     //       print(state.message);
     //     }
+    //     print('object');
     //     return Container();
     //   },
     // );

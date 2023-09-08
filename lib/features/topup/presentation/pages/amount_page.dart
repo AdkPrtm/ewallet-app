@@ -75,7 +75,7 @@ class _AmountTopupPageState extends State<AmountTopupPage> {
             Uri.parse(state.topUpEntity!.redirectUrl!),
           );
           await Future.delayed(const Duration(milliseconds: 100));
-          while (WidgetsBinding.instance?.lifecycleState !=
+          while (WidgetsBinding.instance.lifecycleState !=
               AppLifecycleState.resumed) {
             await Future.delayed(const Duration(milliseconds: 100));
           }
