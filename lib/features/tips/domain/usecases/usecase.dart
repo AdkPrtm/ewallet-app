@@ -1,0 +1,1 @@
+export 'get_tips_usecase.dart';

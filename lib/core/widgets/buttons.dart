@@ -9,11 +9,13 @@ class CustomFilledButton extends StatelessWidget {
     this.width = double.infinity,
     required this.onTap,
     this.disable = false,
+    this.changeColor = false,
   });
 
   final String title;
   final double width;
   final bool disable;
+  final bool changeColor;
   final VoidCallback onTap;
 
   @override
@@ -24,7 +26,7 @@ class CustomFilledButton extends StatelessWidget {
       child: TextButton(
         onPressed: onTap,
         style: TextButton.styleFrom(
-          backgroundColor: purpleColor,
+          backgroundColor: changeColor ? greyColor : purpleColor,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(56),
           ),

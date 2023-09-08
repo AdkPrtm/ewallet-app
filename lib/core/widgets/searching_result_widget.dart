@@ -1,24 +1,20 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:template_clean_architecture/core/resource/src/src.dart';
 import 'package:template_clean_architecture/core/resource/theme/theme.dart';
+import 'package:template_clean_architecture/features/transfer/domain/entities/user_byusername_entities.dart';
 import 'package:template_clean_architecture/utils/extensions/extensions.dart';
 
 class SearchingResultWidget extends StatelessWidget {
   const SearchingResultWidget({
     super.key,
-    required this.name,
-    required this.username,
-    required this.profilePicture,
-    required this.isVerified,
     this.isSelected = false,
+    required this.userBySearchingEntity,
   });
 
-  final String name;
-  final String username;
-  final String profilePicture;
-  final bool isVerified;
   final bool isSelected;
+  final UserBySearchingEntity userBySearchingEntity;
 
   @override
   Widget build(BuildContext context) {
@@ -45,14 +41,14 @@ class SearchingResultWidget extends StatelessWidget {
                   decoration: BoxDecoration(
                     shape: BoxShape.circle,
                     image: DecorationImage(
-                      image: AssetImage(
-                        profilePicture,
+                      image: CachedNetworkImageProvider(
+                        userBySearchingEntity.profilePicture!,
                       ),
                       fit: BoxFit.cover,
                     ),
                   ),
                 ),
-                isVerified
+                userBySearchingEntity.verified == '1'
                     ? Align(
                         alignment: Alignment.topRight,
                         child: Container(
@@ -75,14 +71,14 @@ class SearchingResultWidget extends StatelessWidget {
           ),
           13.0.height,
           Text(
-            name,
+            userBySearchingEntity.username!,
             style: AppFont().blackTextStyle.copyWith(
                   fontSize: 16.sp,
                   fontWeight: AppFont().medium,
                 ),
           ),
           Text(
-            '@$username',
+            '@${userBySearchingEntity.username}',
             style: AppFont().greyTextStyle.copyWith(
                   fontSize: 12.sp,
                 ),

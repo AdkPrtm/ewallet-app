@@ -1,18 +1,24 @@
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
-import 'package:template_clean_architecture/feature/auth/data/data.dart';
-import 'package:template_clean_architecture/feature/auth/domain/domain.dart';
-import 'package:template_clean_architecture/feature/auth/presentation/bloc/auth_bloc.dart';
-import 'package:template_clean_architecture/feature/user/data/data.dart';
-import 'package:template_clean_architecture/feature/user/domain/domain.dart';
-import 'package:template_clean_architecture/feature/user/presentation/bloc/user_bloc.dart';
+import 'package:template_clean_architecture/features/auth/auth.dart';
+import 'package:template_clean_architecture/features/product/product.dart';
+import 'package:template_clean_architecture/features/tips/tips.dart';
+import 'package:template_clean_architecture/features/topup/topup.dart';
+import 'package:template_clean_architecture/features/transaction/transaction.dart';
+import 'package:template_clean_architecture/features/transfer/transfer.dart';
+import 'package:template_clean_architecture/features/user/user.dart';
 
 final sl = GetIt.instance;
 
 void setupLocator() {
   //BLOC
   sl.registerFactory(() => AuthBloc(sl(), sl(), sl(), sl(), sl(), sl()));
-  sl.registerFactory(() => UserBloc(sl(), sl(), sl(), sl()));
+  sl.registerFactory(() => UserBloc(sl(), sl(), sl()));
+  sl.registerFactory(() => TopupBloc(sl(), sl()));
+  sl.registerFactory(() => TransferBloc(sl(), sl(), sl()));
+  sl.registerFactory(() => TipsBloc(sl()));
+  sl.registerFactory(() => TransactionBloc(sl()));
+  sl.registerFactory(() => ProductBloc(sl(), sl()));
 
   /* USECASE */
 
@@ -27,9 +33,27 @@ void setupLocator() {
 
   //USER USECASE
   sl.registerLazySingleton(() => UpdateDataUserUsecase(sl()));
-  sl.registerLazySingleton(() => GetUserByUsernameUsecase(sl()));
   sl.registerLazySingleton(() => ChangePinUsecase(sl()));
   sl.registerLazySingleton(() => GetCurrentUserUseCase(sl()));
+
+  //TOPUP USECASE
+  sl.registerLazySingleton(() => TopUpUseCase(sl()));
+  sl.registerLazySingleton(() => GetPaymentMethodUseCase(sl()));
+
+  //TRANSFER USECASE
+  sl.registerLazySingleton(() => TransferUseCase(sl()));
+  sl.registerLazySingleton(() => TransferHistoryUseCase(sl()));
+  sl.registerLazySingleton(() => GetUserByUsernameUsecase(sl()));
+
+  //TIPS USECASE
+  sl.registerLazySingleton(() => GetTipsUseCase(sl()));
+
+  //TRANSACTION USECASE
+  sl.registerLazySingleton(() => GetTransactionHistoryUseCase(sl()));
+
+  //PRODUCT (DATA PLANS) USECASE
+  sl.registerLazySingleton(() => GetDataPlansUseCase(sl()));
+  sl.registerLazySingleton(() => BuyDataPlansUseCase(sl()));
 
   /* REPOSITORY */
 
@@ -41,6 +65,25 @@ void setupLocator() {
   sl.registerLazySingleton<UserRepository>(
       () => UserRepositoryImpl(sl(), sl()));
 
+  //TOPUP REPOSITORY
+  sl.registerLazySingleton<TopUpRespository>(
+      () => TopUpRepositoryImpl(sl(), sl()));
+
+  //TRANSFER REPOSITORY
+  sl.registerLazySingleton<TransferRepository>(
+      () => TransferRepositoryImpl(sl(), sl()));
+
+  //TIPS REPOSITORY
+  sl.registerLazySingleton<TipsRepository>(
+      () => TipsRepositoryImpl(sl(), sl()));
+
+  //TRANSACTION REPOSITORY
+  sl.registerLazySingleton<TransactionRepository>(
+      () => TransactionRespositoryImpl(sl(), sl()));
+
+  sl.registerLazySingleton<DataPlansRepository>(
+      () => DataPlansRepositoryImpl(sl(), sl()));
+
   /* DATA SOURCE */
 
   //AUTH DATASOURCE
@@ -49,6 +92,21 @@ void setupLocator() {
 
   //USER DATASOURCE
   sl.registerLazySingleton(() => UserRemoteService(sl()));
+
+  //TOPUP DATASOURCE
+  sl.registerLazySingleton(() => TopupRemoteService(sl()));
+
+  //TRANSFER DATASOURCE
+  sl.registerLazySingleton(() => TransferRemoteService(sl()));
+
+  //TIPS DATASOURCE
+  sl.registerLazySingleton(() => TipsServiceRemote(sl()));
+
+  //TRANSACTION DATASOURCE
+  sl.registerLazySingleton(() => TransactionRemoteService(sl()));
+
+  //PRODUCT (DATAPLANS) DATASOURCE
+  sl.registerLazySingleton(() => DataPlansRemoteSevice(sl()));
 
   /* EXTERNAL */
   sl.registerLazySingleton(() => Dio());
