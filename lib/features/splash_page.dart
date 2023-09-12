@@ -40,17 +40,5 @@ class SplashPage extends StatelessWidget {
         return Container();
       }, 
     );
-    // return BlocBuilder<ProductBloc, ProductState>(
-    //   builder: (context, state) {
-    //     if (state is ProductLoaded) {
-    //       print(state.dataOperator);
-    //     }
-    //     if (state is ProductFailed) {
-    //       print(state.message);
-    //     }
-    //     print('object');
-    //     return Container();
-    //   },
-    // );
   }
 }

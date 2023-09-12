@@ -115,9 +115,9 @@ class SignUpPage extends StatelessWidget {
                         showCustomSnackbar(context, state.message);
                       }
                       if (state is CheckDataSuccess) {
-                        if (state.checkDataEntity.email == "true") {
+                        if (state.dataCheckDataEntity.email!) {
                           showCustomSnackbar(context, 'Email already used');
-                        } else if (state.checkDataEntity.username == "true") {
+                        } else if (state.dataCheckDataEntity.username!) {
                           showCustomSnackbar(context, 'Username already used');
                         } else {
                           Navigator.push(

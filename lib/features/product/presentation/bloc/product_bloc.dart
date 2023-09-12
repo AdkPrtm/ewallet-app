@@ -23,7 +23,7 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
     final result = await _getDataPlansUseCase.call(params: event.limit);
     result.fold(
       (l) => emit(ProductFailed(l.message)),
-      (data) => emit(ProductLoaded(dataOperator: data.data)),
+      (data) => emit(ProductLoaded(dataOperatorCard: data.data?.data)),
     );
   }
 

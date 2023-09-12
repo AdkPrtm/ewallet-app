@@ -1,4 +1,3 @@
-
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:template_clean_architecture/features/transaction/domain/entities/entities.dart';
 
@@ -8,6 +7,26 @@ part 'transaction_histories_response.g.dart';
 @freezed
 class TransactionHistoryResponse with _$TransactionHistoryResponse {
   const factory TransactionHistoryResponse({
+    String? status,
+    String? message,
+    ResultTransactionHistoryResponse? data,
+  }) = _TransactionHistoryResponse;
+
+  const TransactionHistoryResponse._();
+
+  factory TransactionHistoryResponse.fromJson(Map<String, dynamic> json) =>
+      _$TransactionHistoryResponseFromJson(json);
+
+  TransactionHistoryEntity toEntity() => TransactionHistoryEntity(
+    status: status,
+    message: message,
+    data: data?.toEntity(),
+  );
+}
+
+@freezed
+class ResultTransactionHistoryResponse with _$ResultTransactionHistoryResponse {
+  const factory ResultTransactionHistoryResponse({
     @JsonKey(name: 'current_page') int? currentPage,
     List<DataTransactionResponse>? data,
     @JsonKey(name: 'first_page_url') String? firstPageUrl,
@@ -21,14 +40,15 @@ class TransactionHistoryResponse with _$TransactionHistoryResponse {
     @JsonKey(name: 'prev_page_url') String? prevPageUrl,
     int? to,
     int? total,
-  }) = _TransactionHistoryResponse;
+  }) = _ResultTransactionHistoryResponse;
 
-  const TransactionHistoryResponse._();
+  const ResultTransactionHistoryResponse._();
 
-  factory TransactionHistoryResponse.fromJson(Map<String, dynamic> json) =>
-      _$TransactionHistoryResponseFromJson(json);
+  factory ResultTransactionHistoryResponse.fromJson(
+          Map<String, dynamic> json) =>
+      _$ResultTransactionHistoryResponseFromJson(json);
 
-  TransactionHistoryEntity toEntity() {
+  ResultTransactionHistoryEntity toEntity() {
     final listData = data!
         .map<DataTransactionHistoryEntity>(
             (data) => DataTransactionHistoryEntity(
@@ -54,7 +74,7 @@ class TransactionHistoryResponse with _$TransactionHistoryResponse {
                 ))
         .toList();
 
-    return TransactionHistoryEntity(
+    return ResultTransactionHistoryEntity(
       currentPage: currentPage,
       data: listData,
       firstPageUrl: firstPageUrl,

@@ -5,12 +5,12 @@ import 'package:template_clean_architecture/features/tips/domain/entities/tips_e
 import 'package:template_clean_architecture/features/tips/domain/repositories/repositories.dart';
 
 class GetTipsUseCase
-    extends UseCase<Either<Failure, TipsResponseEntity>, void> {
+    extends UseCase<Either<Failure, TipsEntity>, void> {
   final TipsRepository _tipsRepository;
 
   GetTipsUseCase(this._tipsRepository);
 
   @override
-  Future<Either<Failure, TipsResponseEntity>> call({void params}) =>
+  Future<Either<Failure, TipsEntity>> call({void params}) =>
       _tipsRepository.getTips();
 }

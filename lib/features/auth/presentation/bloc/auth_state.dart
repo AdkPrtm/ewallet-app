@@ -12,11 +12,11 @@ final class AuthInitial extends AuthState {}
 final class AuthLoading extends AuthState {}
 
 class CheckDataSuccess extends AuthState {
-  final CheckDataEntity checkDataEntity;
+  final DataCheckDataEntity dataCheckDataEntity;
 
-  const CheckDataSuccess(this.checkDataEntity);
+  const CheckDataSuccess(this.dataCheckDataEntity);
   @override
-  List<Object> get props => [checkDataEntity];
+  List<Object> get props => [dataCheckDataEntity];
 }
 
 class AuthDone extends AuthState {

@@ -14,4 +14,5 @@ abstract class AuthRepository {
   //LOCAL SERVICE
   Future<bool> setCredential(String token);
   Future<String> getCredential();
+  Future logoutCredential();
 }

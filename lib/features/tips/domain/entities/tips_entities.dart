@@ -3,8 +3,17 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 part 'tips_entities.freezed.dart';
 
 @unfreezed
-class TipsResponseEntity with _$TipsResponseEntity {
-  factory TipsResponseEntity({
+class TipsEntity with _$TipsEntity {
+  factory TipsEntity({
+    String? status,
+    String? message,
+    ResultTipsEntity? data,
+  }) = _TipsEntity;
+}
+
+@unfreezed
+class ResultTipsEntity with _$ResultTipsEntity {
+  factory ResultTipsEntity({
     int? currentPage,
     List<DataTipsEntity>? data,
     String? firstPageUrl,
@@ -18,7 +27,7 @@ class TipsResponseEntity with _$TipsResponseEntity {
     String? prevPageUrl,
     int? to,
     int? total,
-  }) = _TipsResponseEntity;
+  }) = _ResultTipsEntity;
 }
 
 @unfreezed

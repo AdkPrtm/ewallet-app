@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:template_clean_architecture/core/resource/resource.dart';
 import 'package:template_clean_architecture/core/widgets/action_profile_widget.dart';
 import 'package:template_clean_architecture/core/widgets/buttons.dart';
+import 'package:template_clean_architecture/features/auth/auth.dart';
 import 'package:template_clean_architecture/features/user/domain/entities/user_entities.dart';
 import 'package:template_clean_architecture/features/user/presentation/profile/component/profile_component.dart';
 import 'package:template_clean_architecture/utils/extensions/extensions.dart';
@@ -99,7 +101,11 @@ class ProfilePage extends StatelessWidget {
                 ActionProfileWidget(
                   svgAsset: SvgSrc.logoutSVG,
                   title: 'Logout',
-                  onTap: () {},
+                  onTap: () {
+                    context.read<AuthBloc>().add(AuthLogout());
+                    Navigator.pushNamedAndRemoveUntil(
+                        context, '/signin', (route) => false);
+                  },
                 ),
               ],
             ),

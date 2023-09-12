@@ -7,8 +7,9 @@ part 'topup_response.g.dart';
 @freezed
 class TopUpResponse with _$TopUpResponse {
   const factory TopUpResponse({
-    @JsonKey(name: 'redirect_url') String? redirectUrl,
-    String? token,
+    String? status,
+    String? message,
+    ResultTopUpResponse? data,
   }) = _TopUpResponse;
 
   const TopUpResponse._();
@@ -17,6 +18,25 @@ class TopUpResponse with _$TopUpResponse {
       _$TopUpResponseFromJson(json);
 
   TopUpEntity toEntity() => TopUpEntity(
+        status: status,
+        message: message,
+        data: data?.toEntity(),
+      );
+}
+
+@freezed
+class ResultTopUpResponse with _$ResultTopUpResponse {
+  const factory ResultTopUpResponse({
+    @JsonKey(name: 'redirect_url') String? redirectUrl,
+    String? token,
+  }) = _ResultTopUpResponse;
+
+  const ResultTopUpResponse._();
+
+  factory ResultTopUpResponse.fromJson(Map<String, dynamic> json) =>
+      _$ResultTopUpResponseFromJson(json);
+
+  ResultTopUpEntity toEntity() => ResultTopUpEntity(
         redirectUrl: redirectUrl,
         token: token,
       );

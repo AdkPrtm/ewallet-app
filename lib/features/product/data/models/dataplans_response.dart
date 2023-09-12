@@ -7,6 +7,26 @@ part 'dataplans_response.g.dart';
 @unfreezed
 class DataPlansResponse with _$DataPlansResponse {
   factory DataPlansResponse({
+    String? status,
+    String? message,
+    ResultDataPlansResponse? data,
+  }) = _DataPlansResponse;
+
+  const DataPlansResponse._();
+
+  factory DataPlansResponse.fromJson(Map<String, dynamic> json) =>
+      _$DataPlansResponseFromJson(json);
+
+  DataPlansEntity toEntity() => DataPlansEntity(
+    status: status,
+    message: message,
+    data: data?.toEntity(),
+  );
+}
+
+@unfreezed
+class ResultDataPlansResponse with _$ResultDataPlansResponse {
+  factory ResultDataPlansResponse({
     @JsonKey(name: 'current_page') int? currentPage,
     List<DataOpertorCardResponse>? data,
     @JsonKey(name: 'first_page_url') String? firstPageUrl,
@@ -20,14 +40,14 @@ class DataPlansResponse with _$DataPlansResponse {
     @JsonKey(name: 'prev_page_url') String? prevPageUrl,
     int? to,
     int? total,
-  }) = _DataPlansResponse;
+  }) = _ResultDataPlansResponse;
 
-  const DataPlansResponse._();
+  const ResultDataPlansResponse._();
 
-  factory DataPlansResponse.fromJson(Map<String, dynamic> json) =>
-      _$DataPlansResponseFromJson(json);
+  factory ResultDataPlansResponse.fromJson(Map<String, dynamic> json) =>
+      _$ResultDataPlansResponseFromJson(json);
 
-  DataPlansEntity toEntity() {
+  ResultDataPlansEntity toEntity() {
     final listData = data!
         .map<DataOperatorCardEntity>((data) => DataOperatorCardEntity(
               id: data.id,
@@ -53,7 +73,7 @@ class DataPlansResponse with _$DataPlansResponse {
             ))
         .toList();
 
-    return DataPlansEntity(
+    return ResultDataPlansEntity(
       currentPage: currentPage,
       data: listData,
       firstPageUrl: firstPageUrl,

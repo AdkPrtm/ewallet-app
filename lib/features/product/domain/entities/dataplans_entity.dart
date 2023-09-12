@@ -5,6 +5,15 @@ part 'dataplans_entity.freezed.dart';
 @unfreezed
 class DataPlansEntity with _$DataPlansEntity {
   factory DataPlansEntity({
+    String? status,
+    String? message,
+    ResultDataPlansEntity? data,
+  }) = _DataPlansEntity;
+}
+
+@unfreezed
+class ResultDataPlansEntity with _$ResultDataPlansEntity {
+  factory ResultDataPlansEntity({
     int? currentPage,
     List<DataOperatorCardEntity>? data,
     String? firstPageUrl,
@@ -18,7 +27,7 @@ class DataPlansEntity with _$DataPlansEntity {
     String? prevPageUrl,
     int? to,
     int? total,
-  }) = _DataPlansEntity;
+  }) = _ResultDataPlansEntity;
 }
 
 @unfreezed

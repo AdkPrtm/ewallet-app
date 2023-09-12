@@ -15,7 +15,7 @@ class TipsRepositoryImpl extends TipsRepository {
 
   TipsRepositoryImpl(this._tipsServiceRemote, this._authLocalService);
   @override
-  Future<Either<Failure, TipsResponseEntity>> getTips() async {
+  Future<Either<Failure, TipsEntity>> getTips() async {
     try {
       final token = await _authLocalService.getCredentialToLocal();
       final httpResponse = await _tipsServiceRemote.getTips(
@@ -31,7 +31,7 @@ class TipsRepositoryImpl extends TipsRepository {
       }
       return Right(httpResponse.data.toEntity());
     } on DioException catch (e) {
-      return Left(ServerFailure(e.response?.data['message'] ?? e.message));
+      return Left(ServerFailure(e.response!.data['message'] ?? e.message));
     } on SocketException {
       return const Left(ConnectionFailure('Failed to connect to the network'));
     }

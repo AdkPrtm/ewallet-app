@@ -24,7 +24,7 @@ abstract class UserRemoteService {
   });
 
   @GET('/users')
-  Future<HttpResponse<UserModel>> getCurrentUser({
+  Future<HttpResponse<UserModelResponse>> getCurrentUser({
     @Header("Authorization") String? token,
     @Header("Content-Type") String? contentType,
   });

@@ -175,7 +175,7 @@ class _SetKtpPageState extends State<SetKtpPage> {
             },
             builder: (context, state) {
               if (state is AuthLoading) {
-                return CustomFilledButton(
+                return CustomeTextButton(
                   title: 'Continue',
                   onTap: () {},
                   disable: true,

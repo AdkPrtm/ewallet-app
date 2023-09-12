@@ -25,7 +25,7 @@ class TopupBloc extends Bloc<TopupEvent, TopupState> {
     final result = await _topUpUseCase.call(params: event.topupParams);
     result.fold(
       (fail) => emit(TopupFailed(message: fail.message)),
-      (data) => emit(TopUpLoaded(topUpEntity: data)),
+      (data) => emit(TopUpLoaded(resultTopUpEntity: data.data)),
     );
   }
 

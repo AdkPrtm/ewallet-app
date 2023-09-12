@@ -29,7 +29,7 @@ class ImageProfileHeader extends StatelessWidget {
               ),
             ),
           ),
-          verified == '0'
+          verified == '1'
               ? Align(
                   alignment: const Alignment(0.9, -0.9),
                   child: Container(

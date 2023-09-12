@@ -12,11 +12,11 @@ class TopupInitial extends TopupState {}
 class TopUpLoading extends TopupState {}
 
 class TopUpLoaded extends TopupState {
-  final TopUpEntity? topUpEntity;
+  final ResultTopUpEntity? resultTopUpEntity;
 
-  const TopUpLoaded({this.topUpEntity});
+  const TopUpLoaded({this.resultTopUpEntity});
   @override
-  List<Object> get props => [topUpEntity!];
+  List<Object> get props => [resultTopUpEntity!];
 }
 
 class TopupFailed extends TopupState {

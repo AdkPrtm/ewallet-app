@@ -12,7 +12,7 @@ final sl = GetIt.instance;
 
 void setupLocator() {
   //BLOC
-  sl.registerFactory(() => AuthBloc(sl(), sl(), sl(), sl(), sl(), sl()));
+  sl.registerFactory(() => AuthBloc(sl(), sl(), sl(), sl(), sl(), sl(), sl()));
   sl.registerFactory(() => UserBloc(sl(), sl(), sl()));
   sl.registerFactory(() => TopupBloc(sl(), sl()));
   sl.registerFactory(() => TransferBloc(sl(), sl(), sl()));
@@ -27,6 +27,7 @@ void setupLocator() {
   sl.registerLazySingleton(() => SignUpUseCase(sl()));
   sl.registerLazySingleton(() => CheckDataUseCase(sl()));
   sl.registerLazySingleton(() => ValidationTokenUseCase(sl()));
+  sl.registerLazySingleton(() => LogoutUserUseCase(sl()));
 
   sl.registerLazySingleton(() => SetCredentialUseCase(sl()));
   sl.registerLazySingleton(() => GetCredentialUseCase(sl()));

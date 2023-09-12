@@ -40,7 +40,7 @@ class ButtonAmountComponent extends StatelessWidget {
                 if (successWidgetModelHelper!.title ==
                     'Top Up\nWallet Berhasil') {
                   await launchUrl(
-                    Uri.parse(state.topUpEntity!.redirectUrl!),
+                    Uri.parse(state.resultTopUpEntity?.redirectUrl ?? 'www.google.com'),
                   );
                 }
                 if (context.mounted) {

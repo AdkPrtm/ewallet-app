@@ -5,7 +5,6 @@ import 'package:template_clean_architecture/core/resource/resource.dart';
 import 'package:template_clean_architecture/core/widgets/buttons.dart';
 import 'package:template_clean_architecture/core/widgets/select_package_widget.dart';
 import 'package:template_clean_architecture/features/auth/auth.dart';
-import 'package:template_clean_architecture/features/product/presentation/pages/dataplans/component/buydata_component.dart';
 import 'package:template_clean_architecture/features/product/product.dart';
 import 'package:template_clean_architecture/utils/extensions/extensions.dart';
 import 'package:template_clean_architecture/utils/helper/helper.dart';

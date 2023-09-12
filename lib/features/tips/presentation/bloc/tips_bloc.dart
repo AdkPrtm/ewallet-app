@@ -18,7 +18,7 @@ class TipsBloc extends Bloc<TipsEvent, TipsState> {
     final result = await _getTipsUseCase.call();
     result.fold(
       (l) => emit(TipsFailed(message: l.message)),
-      (data) => emit(TipsLoaded(dataTips: data.data)),
+      (data) => emit(TipsLoaded(dataTips: data.data?.data)),
     );
   }
 }

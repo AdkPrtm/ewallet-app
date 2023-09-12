@@ -7,6 +7,7 @@ import 'package:template_clean_architecture/core/resource/constant/api_list.dart
 import 'package:template_clean_architecture/features/auth/data/data.dart';
 import 'package:template_clean_architecture/features/user/data/datasources/remote/remote.dart';
 import 'package:template_clean_architecture/features/user/domain/domain.dart';
+import 'package:template_clean_architecture/features/user/user.dart';
 
 class UserRepositoryImpl extends UserRepository {
   final UserRemoteService _userRemoteService;
@@ -65,7 +66,7 @@ class UserRepositoryImpl extends UserRepository {
   }
 
   @override
-  Future<Either<Failure, UserEntity>> getCurrentUser() async {
+  Future<Either<Failure, UserResponseEntity>> getCurrentUser() async {
     try {
       final token = await _authLocalService.getCredentialToLocal();
       final httpResponse = await _userRemoteService.getCurrentUser(

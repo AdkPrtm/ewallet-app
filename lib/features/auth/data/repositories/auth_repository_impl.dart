@@ -12,7 +12,10 @@ class AuthRepositoryImpl extends AuthRepository {
   final AuthRemoteService _authRemoteService;
   final AuthLocalService _authLocalService;
 
-  AuthRepositoryImpl(this._authRemoteService, this._authLocalService);
+  AuthRepositoryImpl(
+    this._authRemoteService,
+    this._authLocalService,
+  );
   @override
   Future<Either<Failure, UserEntity>> signin(SignInParams signInParams) async {
     try {
@@ -27,7 +30,7 @@ class AuthRepositoryImpl extends AuthRepository {
           response: httpResponse.response,
         );
       }
-      return Right(httpResponse.data.toEntity());
+      return Right(httpResponse.data.data!.toEntity());
     } on DioException catch (e) {
       return Left(ServerFailure(e.response?.data['message'] ?? e.message));
     } on SocketException {
@@ -72,7 +75,7 @@ class AuthRepositoryImpl extends AuthRepository {
           response: httpResponse.response,
         );
       }
-      return Right(httpResponse.data.toEntity());
+      return Right(httpResponse.data.data!.toEntity());
     } on DioException catch (e) {
       return Left(ServerFailure(e.response?.data['message'] ?? e.message));
     } on SocketException {
@@ -94,7 +97,7 @@ class AuthRepositoryImpl extends AuthRepository {
           response: httpResponse.response,
         );
       }
-      return Right(httpResponse.data.toEntity());
+      return Right(httpResponse.data.data!.toEntity());
     } on DioException catch (e) {
       return Left(ServerFailure(e.response?.data['message'] ?? e.message));
     } on SocketException {
@@ -109,4 +112,7 @@ class AuthRepositoryImpl extends AuthRepository {
   @override
   Future<String> getCredential() async =>
       await _authLocalService.getCredentialToLocal();
+
+  @override
+  Future logoutCredential() async => await _authLocalService.logoutCredential();
 }

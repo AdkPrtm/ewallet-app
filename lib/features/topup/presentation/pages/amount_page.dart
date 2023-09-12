@@ -72,7 +72,7 @@ class _AmountTopupPageState extends State<AmountTopupPage> {
       listener: (context, state) async {
         if (state is TopUpLoaded) {
           await launchUrl(
-            Uri.parse(state.topUpEntity!.redirectUrl!),
+            Uri.parse(state.resultTopUpEntity?.redirectUrl ?? 'www.google.com'),
           );
           await Future.delayed(const Duration(milliseconds: 100));
           while (WidgetsBinding.instance.lifecycleState !=

@@ -58,7 +58,7 @@ class _SelectProviderPageState extends State<SelectProviderPage> {
                   builder: (context, state) {
                     if (state is ProductLoaded) {
                       return Column(
-                        children: state.dataOperator!
+                        children: state.dataOperatorCard!
                             .map((data) => GestureDetector(
                                   onTap: () {
                                     if (dataOperatorCardEntity == data) {

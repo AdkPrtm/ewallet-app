@@ -17,19 +17,19 @@ abstract class AuthRemoteService {
   });
 
   @POST('/login')
-  Future<HttpResponse<UserModel>> loginUser({
+  Future<HttpResponse<UserModelResponse>> loginUser({
     @Body() Map<String, dynamic>? body,
     @Header("Content-Type") String? contentType,
   });
 
   @POST('/register')
-  Future<HttpResponse<UserModel>> signupUser({
+  Future<HttpResponse<UserModelResponse>> signupUser({
     @Body() Map<String, dynamic>? body,
     @Header("Content-Type") String? contentType,
   });
 
   @GET('/users')
-  Future<HttpResponse<UserModel>> validationToken({
+  Future<HttpResponse<UserModelResponse>> validationToken({
     @Header("Authorization") String? token,
     @Header("Content-Type") String? contentType,
   });

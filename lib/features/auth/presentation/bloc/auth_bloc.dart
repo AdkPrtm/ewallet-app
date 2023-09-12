@@ -1,4 +1,5 @@
 import 'package:equatable/equatable.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:template_clean_architecture/core/error/error.dart';
 import 'package:template_clean_architecture/features/auth/domain/entities/entities.dart';
@@ -16,6 +17,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
 
   final SetCredentialUseCase _setCredentialUseCase;
   final GetCredentialUseCase _getCredentialUseCase;
+  final LogoutUserUseCase _logoutUserUseCase;
 
   AuthBloc(
     this._signInUseCase,
@@ -24,6 +26,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     this._setCredentialUseCase,
     this._getCredentialUseCase,
     this._validationTokenUseCase,
+    this._logoutUserUseCase,
   ) : super(AuthInitial()) {
     on<CheckDataExists>(onCheckDataProses);
 
@@ -32,6 +35,8 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     on<AuthRegister>(onRegisterProses);
 
     on<ValidationTokenEvent>(onValidationProses);
+
+    on<AuthLogout>(onLogoutProses);
   }
 
   Future<void> onValidationProses(
@@ -73,13 +78,15 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
           emit(AuthFailed(failure.message));
         }
       },
-      (data) => emit(CheckDataSuccess(data)),
+      (data) => emit(CheckDataSuccess(data.data!)),
     );
   }
 
   Future<void> onLoginProses(AuthLogin event, Emitter<AuthState> emit) async {
     emit(AuthLoading());
-    final result = await _signInUseCase.call(params: event.signInParams);
+    String? token = await FirebaseMessaging.instance.getToken();
+    final result = await _signInUseCase.call(
+        params: event.signInParams.copyWith(tokenDevice: token));
     result.fold(
       (failure) {
         if (failure is ServerFailure) {
@@ -98,7 +105,9 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   Future<void> onRegisterProses(
       AuthRegister event, Emitter<AuthState> emit) async {
     emit(AuthLoading());
-    final result = await _signUpUseCase.call(params: event.signUpParams);
+    String? token = await FirebaseMessaging.instance.getToken();
+    final result = await _signUpUseCase.call(
+        params: event.signUpParams.copyWith(tokenDevice: token));
     result.fold(
       (failure) {
         if (failure is ServerFailure) {
@@ -112,5 +121,11 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         await _setCredentialUseCase.call(params: data.token!);
       },
     );
+  }
+
+  Future<void> onLogoutProses(AuthLogout event, Emitter<AuthState> emit) async {
+    emit(AuthLoading());
+    _logoutUserUseCase.call();
+    emit(AuthInitial());
   }
 }

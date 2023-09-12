@@ -5,6 +5,16 @@ part 'transaction_histories_entity.freezed.dart';
 @freezed
 class TransactionHistoryEntity with _$TransactionHistoryEntity {
   const factory TransactionHistoryEntity({
+    String? status,
+    String? message,
+    ResultTransactionHistoryEntity? data,
+  }) = _TransactionHistoryEntity;
+}
+
+
+@freezed
+class ResultTransactionHistoryEntity with _$ResultTransactionHistoryEntity {
+  const factory ResultTransactionHistoryEntity({
     int? currentPage,
     List<DataTransactionHistoryEntity>? data,
     String? firstPageUrl,
@@ -18,7 +28,7 @@ class TransactionHistoryEntity with _$TransactionHistoryEntity {
     String? prevPageUrl,
     int? to,
     int? total,
-  }) = _TransactionHistoryEntity;
+  }) = _ResultTransactionHistoryEntity;
 }
 
 @freezed

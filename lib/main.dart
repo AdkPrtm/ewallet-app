@@ -1,6 +1,8 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:template_clean_architecture/core/resource/method/notification.dart';
 import 'package:template_clean_architecture/core/resource/resource.dart';
 import 'package:template_clean_architecture/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:template_clean_architecture/features/product/product.dart';
@@ -9,10 +11,16 @@ import 'package:template_clean_architecture/features/topup/presentation/bloc/top
 import 'package:template_clean_architecture/features/transaction/presentation/bloc/transaction_bloc.dart';
 import 'package:template_clean_architecture/features/transfer/presentation/bloc/transfer_bloc.dart';
 import 'package:template_clean_architecture/features/user/presentation/bloc/user_bloc.dart';
+import 'package:template_clean_architecture/firebase_options.dart';
 import 'package:template_clean_architecture/injection_container.dart';
 
-void main() {
+final navigatorKey = GlobalKey<NavigatorState>();
+
+
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+  registerNotification();
   setupLocator();
   runApp(const MyApp());
 }
@@ -44,7 +52,7 @@ class MyApp extends StatelessWidget {
             // ),
           ],
           child: MaterialApp(
-            title: 'Flutter Demo',
+            title: 'Ewallet App',
             debugShowCheckedModeBanner: false,
             theme: ThemeData(
               useMaterial3: true,
@@ -59,6 +67,7 @@ class MyApp extends StatelessWidget {
               ),
             ),
             onGenerateRoute: AppRoutes.onGenerateRoutes,
+            navigatorKey: navigatorKey,
           ),
         );
       },

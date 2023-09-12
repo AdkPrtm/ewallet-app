@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "822016487431",
+    "project_id": "ewallet-app-48eea",
+    "storage_bucket": "ewallet-app-48eea.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:822016487431:android:67c7047fb704274c80faa2",
+        "android_client_info": {
+          "package_name": "com.andhikahouse.ewalletapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCWB1wUArohlypSPjh_6AmmMvzz3QNuGhA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

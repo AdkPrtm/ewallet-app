@@ -1,5 +1,3 @@
-// ignore_for_file: invalid_annotation_target
-
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:template_clean_architecture/features/transfer/domain/entities/entities.dart';
 
@@ -9,6 +7,26 @@ part 'transfer_history_response.g.dart';
 @unfreezed
 class TransferHistoryResponse with _$TransferHistoryResponse {
   factory TransferHistoryResponse({
+    String? status,
+    String? message,
+    ResultTransferHistoryResponse? data,
+  }) = _TransferHistoryResponse;
+
+  const TransferHistoryResponse._();
+
+  factory TransferHistoryResponse.fromJson(Map<String, dynamic> json) =>
+      _$TransferHistoryResponseFromJson(json);
+
+  TransferHistoryEntity toEntity() => TransferHistoryEntity(
+    status: status,
+    message: message,
+    data: data?.toEntity(),
+  );
+}
+
+@unfreezed
+class ResultTransferHistoryResponse with _$ResultTransferHistoryResponse {
+  factory ResultTransferHistoryResponse({
     @JsonKey(name: 'current_page') int? currentPage,
     List<DataTransferResponse>? data,
     @JsonKey(name: 'first_page_url') String? firstPageUrl,
@@ -22,14 +40,14 @@ class TransferHistoryResponse with _$TransferHistoryResponse {
     @JsonKey(name: 'prev_page_url') String? prevPageUrl,
     int? to,
     int? total,
-  }) = _TransferHistoryResponse;
+  }) = _ResultTransferHistoryResponse;
 
-  const TransferHistoryResponse._();
+  const ResultTransferHistoryResponse._();
 
-  factory TransferHistoryResponse.fromJson(Map<String, dynamic> json) =>
-      _$TransferHistoryResponseFromJson(json);
+  factory ResultTransferHistoryResponse.fromJson(Map<String, dynamic> json) =>
+      _$ResultTransferHistoryResponseFromJson(json);
 
-  TransferHistoryEntity toEntity() {
+  ResultTransferHistoryEntity toEntity() {
     final listData = data!
         .map<DataTransferHistory>((data) => DataTransferHistory(
             id: data.id,
@@ -45,7 +63,7 @@ class TransferHistoryResponse with _$TransferHistoryResponse {
               active: data.active,
             ))
         .toList();
-    return TransferHistoryEntity(
+    return ResultTransferHistoryEntity(
       currentPage: currentPage,
       data: listData,
       firstPageUrl: firstPageUrl,

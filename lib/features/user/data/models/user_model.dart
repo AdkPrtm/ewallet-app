@@ -5,8 +5,28 @@ part 'user_model.freezed.dart';
 part 'user_model.g.dart';
 
 @unfreezed
-class UserModel with _$UserModel {
-  factory UserModel({
+class UserModelResponse with _$UserModelResponse {
+  factory UserModelResponse({
+    String? status,
+    String? message,
+    UserResponse? data,
+  }) = _UserModelResponse;
+
+  const UserModelResponse._();
+
+  factory UserModelResponse.fromJson(Map<String, dynamic> json) =>
+      _$UserModelResponseFromJson(json);
+
+  UserResponseEntity toEntity() => UserResponseEntity(
+    status: status,
+    message: message,
+    data: data?.toEntity(),
+  );
+}
+
+@unfreezed
+class UserResponse with _$UserResponse {
+  factory UserResponse({
     String? name,
     String? email,
     String? username,
@@ -17,12 +37,12 @@ class UserModel with _$UserModel {
     @JsonKey(name: 'card_number') String? cardNumber,
     String? pin,
     String? token,
-  }) = _UserModel;
+  }) = _UserResponse;
 
-  const UserModel._();
+  const UserResponse._();
 
-  factory UserModel.fromJson(Map<String, dynamic> json) =>
-      _$UserModelFromJson(json);
+  factory UserResponse.fromJson(Map<String, dynamic> json) =>
+      _$UserResponseFromJson(json);
 
   UserEntity toEntity() => UserEntity(
         name: name,

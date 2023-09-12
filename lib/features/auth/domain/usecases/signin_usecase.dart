@@ -17,11 +17,12 @@ class SignInUseCase extends UseCase<Either<Failure, UserEntity>, SignInParams> {
       _authRepository.signin(params!);
 }
 
-@freezed
+@unfreezed
 class SignInParams with _$SignInParams {
-  const factory SignInParams({
+  factory SignInParams({
     String? email,
     String? password,
+    @JsonKey(name: 'token_device') String? tokenDevice
   }) = _SignInParams;
 
   factory SignInParams.fromJson(Map<String, dynamic> json) =>

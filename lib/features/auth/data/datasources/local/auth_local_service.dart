@@ -13,10 +13,16 @@ class AuthLocalService {
 
   Future<String> getCredentialToLocal() async {
     const storage = FlutterSecureStorage();
+
     String? token = await storage.read(key: 'token');
     if (token != null) {
       return token;
     }
     return '';
+  }
+
+  Future logoutCredential() async {
+    const storage = FlutterSecureStorage();
+    await storage.deleteAll();
   }
 }

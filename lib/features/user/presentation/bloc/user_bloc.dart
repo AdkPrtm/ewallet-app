@@ -26,10 +26,10 @@ class UserBloc extends Bloc<UserEvent, UserState> {
       GetCurrentUserEvent event, Emitter<UserState> emit) async {
     emit(UserLoading());
     final result = await _getCurrentUserUseCase.call();
-    if(isClosed) return;
+    if (isClosed) return;
     result.fold(
       (l) => emit(UserFailed(l.message)),
-      (data) => emit(UserLoaded(data)),
+      (data) => emit(UserLoaded(data.data)),
     );
   }
 
@@ -38,20 +38,18 @@ class UserBloc extends Bloc<UserEvent, UserState> {
     emit(UserLoading());
     final result = await _updateDataUserUsecase.call(
         params: event.updateProfileUserParams);
-    if(isClosed) return;
+    if (isClosed) return;
     result.fold(
       (l) => emit(UserFailed(l.message)),
       (data) => emit(UpdateProfileSuccess()),
     );
   }
 
-
-
   Future<void> onChangePinUserProses(
       ChangePinUserEvent event, Emitter<UserState> emit) async {
     emit(UserLoading());
     final result = await _changePinUsecase.call(params: event.updatePinParams);
-    if(isClosed) return;
+    if (isClosed) return;
     result.fold(
       (l) => emit(UserFailed(l.message)),
       (data) {

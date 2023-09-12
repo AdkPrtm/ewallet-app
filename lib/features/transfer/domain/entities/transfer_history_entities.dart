@@ -5,6 +5,15 @@ part 'transfer_history_entities.freezed.dart';
 @unfreezed
 class TransferHistoryEntity with _$TransferHistoryEntity {
   factory TransferHistoryEntity({
+    String? status,
+    String? message,
+    ResultTransferHistoryEntity? data,
+  }) = _TransferHistoryEntity;
+}
+
+@unfreezed
+class ResultTransferHistoryEntity with _$ResultTransferHistoryEntity {
+  factory ResultTransferHistoryEntity({
     int? currentPage,
     List<DataTransferHistory>? data,
     String? firstPageUrl,
@@ -18,7 +27,7 @@ class TransferHistoryEntity with _$TransferHistoryEntity {
     String? prevPageUrl,
     int? to,
     int? total,
-  }) = _TransferHistoryEntity;
+  }) = _ResultTransferHistoryEntity;
 }
 
 @unfreezed

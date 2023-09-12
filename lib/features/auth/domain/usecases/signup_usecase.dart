@@ -28,6 +28,7 @@ class SignUpParams with _$SignUpParams {
     String? pin,
     @JsonKey(name: 'profile_picture') String? profilePicture,
     String? ktp,
+    @JsonKey(name: 'token_device') String? tokenDevice,
   }) = _SignUpParams;
 
   factory SignUpParams.fromJson(Map<String, dynamic> json) =>

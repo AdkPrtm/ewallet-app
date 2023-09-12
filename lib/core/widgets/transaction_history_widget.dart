@@ -54,8 +54,8 @@ class TransactionHistoryWidget extends StatelessWidget {
         const Spacer(),
         Text(
           dataTransactionHistoryEntity.transactionType!.action == 'cr'
-              ? '- ${formatCurrency(num.parse(dataTransactionHistoryEntity.amount!))}'
-              : '+ ${formatCurrency(num.parse(dataTransactionHistoryEntity.amount!))}',
+              ? '+ ${formatCurrency(num.parse(dataTransactionHistoryEntity.amount!))}'
+              : '- ${formatCurrency(num.parse(dataTransactionHistoryEntity.amount!))}',
           style: AppFont().blackTextStyle.copyWith(
                 fontSize: 16.sp,
                 fontWeight: AppFont().medium,

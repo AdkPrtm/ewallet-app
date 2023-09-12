@@ -46,14 +46,14 @@ class WalletBuyDataComponent extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        '**** **** **** ${state.userEntity.cardNumber!.substring(12, 16)}',
+                        '**** **** **** ${state.userEntity?.cardNumber!.substring(12, 16) ?? '****'}',
                         style: AppFont().blackTextStyle.copyWith(
                               fontSize: 16.sp,
                               fontWeight: AppFont().medium,
                             ),
                       ),
                       Text(
-                        'Balance: ${formatCurrency(num.parse(state.userEntity.balance!))}',
+                        'Balance: ${formatCurrency(num.parse(state.userEntity?.balance! ?? '0'))}',
                         style: AppFont().greyTextStyle.copyWith(
                               fontSize: 12.sp,
                             ),

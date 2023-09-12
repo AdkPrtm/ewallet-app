@@ -20,11 +20,11 @@ class ProductFailed extends ProductState {
 }
 
 class ProductLoaded extends ProductState {
-  final List<DataOperatorCardEntity>? dataOperator;
+  final List<DataOperatorCardEntity>? dataOperatorCard;
 
-  const ProductLoaded({this.dataOperator});
+  const ProductLoaded({this.dataOperatorCard});
   @override
-  List<Object> get props => [dataOperator!];
+  List<Object> get props => [dataOperatorCard!];
 }
 
 class ProductSuccess extends ProductState {}

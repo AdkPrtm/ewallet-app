@@ -9,6 +9,26 @@ part 'tips_response.g.dart';
 @unfreezed
 class TipsResponse with _$TipsResponse {
   factory TipsResponse({
+    String? status,
+    String? message,
+    ResultTipsResponse? data,
+  }) = _TipsResponse;
+  
+  const TipsResponse._();
+
+  factory TipsResponse.fromJson(Map<String, dynamic> json) =>
+      _$TipsResponseFromJson(json);
+
+  TipsEntity toEntity() => TipsEntity(
+    status: status,
+    message: message,
+    data: data?.toEntity(),
+  );
+}
+
+@unfreezed
+class ResultTipsResponse with _$ResultTipsResponse {
+  factory ResultTipsResponse({
     @JsonKey(name: 'current_page') int? currentPage,
     List<DataTipsResponse>? data,
     @JsonKey(name: 'first_page_url') String? firstPageUrl,
@@ -22,14 +42,14 @@ class TipsResponse with _$TipsResponse {
     @JsonKey(name: 'prev_page_url') String? prevPageUrl,
     int? to,
     int? total,
-  }) = _TipsResponse;
+  }) = _ResultTipsResponse;
 
-  const TipsResponse._();
+  const ResultTipsResponse._();
 
-  factory TipsResponse.fromJson(Map<String, dynamic> json) =>
-      _$TipsResponseFromJson(json);
+  factory ResultTipsResponse.fromJson(Map<String, dynamic> json) =>
+      _$ResultTipsResponseFromJson(json);
 
-  TipsResponseEntity toEntity() {
+  ResultTipsEntity toEntity() {
     final listData = data!
         .map<DataTipsEntity>(
           (data) => DataTipsEntity(
@@ -47,7 +67,7 @@ class TipsResponse with _$TipsResponse {
               active: data.active,
             ))
         .toList();
-    return TipsResponseEntity(
+    return ResultTipsEntity(
       currentPage: currentPage,
       data: listData,
       firstPageUrl: firstPageUrl,

@@ -12,11 +12,11 @@ final class UserInitial extends UserState {}
 final class UserLoading extends UserState {}
 
 class UserLoaded extends UserState {
-  final UserEntity userEntity;
+  final UserEntity? userEntity;
 
   const UserLoaded(this.userEntity);
   @override
-  List<Object> get props => [userEntity];
+  List<Object> get props => [userEntity!];
 }
 
 class UserFailed extends UserState {

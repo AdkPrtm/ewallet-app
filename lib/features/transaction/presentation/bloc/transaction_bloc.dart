@@ -20,7 +20,7 @@ class TransactionBloc extends Bloc<TransactionEvent, TransactionState> {
     result.fold(
       (l) => emit(TransactionFailed(message: l.message)),
       (data) => emit(
-          TransactionHistoryLoaded(dataTransactionHistoryEntity: data.data)),
+          TransactionHistoryLoaded(dataTransactionHistoryEntity: data.data?.data)),
     );
   }
 }
