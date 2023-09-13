@@ -28,8 +28,9 @@ class CustomTipsComponent extends StatelessWidget {
           builder: (context, state) {
             if (state is TipsLoaded) {
               return Wrap(
-                spacing: 17.w,
-                runSpacing: 18.h,
+                alignment: WrapAlignment.spaceBetween,
+                spacing: 15.w,
+                runSpacing: 15.w,
                 children: state.dataTips!
                     .map((dataTips) => GestureDetector(
                         onTap: () {

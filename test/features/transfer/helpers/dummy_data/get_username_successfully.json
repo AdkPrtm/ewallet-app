@@ -1,0 +1,18 @@
+{
+    "status": "success",
+    "message": "",
+    "data": [
+        {
+            "id": 14,
+            "username": "yakali",
+            "verified": "1",
+            "profile_picture": "http://ewallet.test/storage/3q2zo5VY1I.jpeg"
+        },
+        {
+            "id": 14,
+            "username": "yakali",
+            "verified": "1",
+            "profile_picture": "http://ewallet.test/storage/3q2zo5VY1I.jpeg"
+        }
+    ]
+}

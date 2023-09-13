@@ -1,0 +1,5 @@
+{
+    "status": "error",
+    "message": "You cant send to yourself",
+    "data": null
+}
