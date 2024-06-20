@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:template_clean_architecture/core/resource/resource.dart';
-import 'package:template_clean_architecture/core/widgets/buttons.dart';
-import 'package:template_clean_architecture/core/widgets/forms.dart';
-import 'package:template_clean_architecture/features/auth/domain/domain.dart';
-import 'package:template_clean_architecture/features/auth/presentation/bloc/auth_bloc.dart';
+import 'package:ewallet/core/resource/resource.dart';
+import 'package:ewallet/core/widgets/buttons.dart';
+import 'package:ewallet/core/widgets/forms.dart';
+import 'package:ewallet/features/auth/domain/domain.dart';
+import 'package:ewallet/features/auth/presentation/bloc/auth/auth_bloc.dart';
 
 class SignInPage extends StatelessWidget {
   const SignInPage({super.key});

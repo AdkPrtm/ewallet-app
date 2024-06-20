@@ -1,8 +1,8 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:template_clean_architecture/core/resource/theme/theme.dart';
-import 'package:template_clean_architecture/features/tips/domain/entities/tips_entities.dart';
+import 'package:ewallet/core/resource/theme/theme.dart';
+import 'package:ewallet/features/tips/domain/entities/tips_entities.dart';
 
 class TipsWidget extends StatelessWidget {
   const TipsWidget({super.key, required this.dataTipsEntity});

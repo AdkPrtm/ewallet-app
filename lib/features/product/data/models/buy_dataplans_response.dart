@@ -7,8 +7,6 @@ part 'buy_dataplans_response.g.dart';
 class BuyDataPlansResponse with _$BuyDataPlansResponse {
   const factory BuyDataPlansResponse({
     String? status,
-    String? message,
-    String? data,
   }) = _BuyDataPlansResponse;
 
   factory BuyDataPlansResponse.fromJson(Map<String, dynamic> json) =>

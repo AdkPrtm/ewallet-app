@@ -1,7 +1,7 @@
 // ignore_for_file: invalid_annotation_target
 
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:template_clean_architecture/features/transfer/domain/entities/entities.dart';
+import 'package:ewallet/features/transfer/domain/entities/entities.dart';
 
 part 'transfer_history_response.freezed.dart';
 part 'transfer_history_response.g.dart';
@@ -9,19 +9,9 @@ part 'transfer_history_response.g.dart';
 @unfreezed
 class TransferHistoryResponse with _$TransferHistoryResponse {
   factory TransferHistoryResponse({
-    @JsonKey(name: 'current_page') int? currentPage,
     List<DataTransferResponse>? data,
-    @JsonKey(name: 'first_page_url') String? firstPageUrl,
-    int? from,
+    @JsonKey(name: 'current_page') int? currentPage,
     @JsonKey(name: 'last_page') int? lastPage,
-    @JsonKey(name: 'last_page_url') String? lastPageUrl,
-    List<LinksTransferResponse>? links,
-    @JsonKey(name: 'next_page_url') String? nextPageUrl,
-    String? path,
-    @JsonKey(name: 'per_page') int? perPage,
-    @JsonKey(name: 'prev_page_url') String? prevPageUrl,
-    int? to,
-    int? total,
   }) = _TransferHistoryResponse;
 
   const TransferHistoryResponse._();
@@ -32,33 +22,16 @@ class TransferHistoryResponse with _$TransferHistoryResponse {
   TransferHistoryEntity toEntity() {
     final listData = data!
         .map<DataTransferHistory>((data) => DataTransferHistory(
-            id: data.id,
-            name: data.name,
+            firstName: data.firstName,
+            lastName: data.lastName,
             username: data.username,
             verified: data.verified,
             profilePicture: data.profilePicture))
         .toList();
-    final listLink = links!
-        .map<LinkTransferHistory>((data) => LinkTransferHistory(
-              url: data.url,
-              label: data.label,
-              active: data.active,
-            ))
-        .toList();
     return TransferHistoryEntity(
-      currentPage: currentPage,
       data: listData,
-      firstPageUrl: firstPageUrl,
-      from: from,
+      currentPage: currentPage,
       lastPage: lastPage,
-      lastPageUrl: lastPageUrl,
-      links: listLink,
-      nextPageUrl: nextPageUrl,
-      path: path,
-      perPage: perPage,
-      prevPageUrl: prevPageUrl,
-      to: to,
-      total: total,
     );
   }
 }
@@ -66,25 +39,13 @@ class TransferHistoryResponse with _$TransferHistoryResponse {
 @unfreezed
 class DataTransferResponse with _$DataTransferResponse {
   factory DataTransferResponse({
-    int? id,
-    String? name,
+    @JsonKey(name: 'first_name') String? firstName,
+    @JsonKey(name: 'last_name') String? lastName,
     String? username,
-    String? verified,
+    bool? verified,
     @JsonKey(name: 'profile_picture') String? profilePicture,
   }) = _DataTransferResponse;
 
   factory DataTransferResponse.fromJson(Map<String, dynamic> json) =>
       _$DataTransferResponseFromJson(json);
-}
-
-@unfreezed
-class LinksTransferResponse with _$LinksTransferResponse {
-  factory LinksTransferResponse({
-    String? url,
-    String? label,
-    bool? active,
-  }) = _LinksTransferResponse;
-
-  factory LinksTransferResponse.fromJson(Map<String, dynamic> json) =>
-      _$LinksTransferResponseFromJson(json);
 }

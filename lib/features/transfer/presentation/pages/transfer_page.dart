@@ -1,13 +1,17 @@
+import 'dart:async';
+
+import 'package:ewallet/features/transfer/domain/entities/user_byusername_entities.dart';
+import 'package:ewallet/injection_container.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:template_clean_architecture/core/resource/resource.dart';
-import 'package:template_clean_architecture/core/widgets/buttons.dart';
-import 'package:template_clean_architecture/core/widgets/recent_user_widget.dart';
-import 'package:template_clean_architecture/core/widgets/searching_result_widget.dart';
-import 'package:template_clean_architecture/features/transfer/domain/usecases/usecases.dart';
-import 'package:template_clean_architecture/features/transfer/presentation/bloc/transfer_bloc.dart';
-import 'package:template_clean_architecture/utils/extensions/extensions.dart';
+import 'package:ewallet/core/resource/resource.dart';
+import 'package:ewallet/core/widgets/buttons.dart';
+import 'package:ewallet/core/widgets/recent_user_widget.dart';
+import 'package:ewallet/core/widgets/searching_result_widget.dart';
+import 'package:ewallet/features/transfer/domain/usecases/usecases.dart';
+import 'package:ewallet/features/transfer/presentation/bloc/transfer_bloc.dart';
+import 'package:ewallet/utils/extensions/extensions.dart';
 
 class TransferPage extends StatefulWidget {
   const TransferPage({super.key});
@@ -18,18 +22,52 @@ class TransferPage extends StatefulWidget {
 
 class _TransferPageState extends State<TransferPage> {
   final searchCon = TextEditingController(text: '');
+  late GetUserByUsernameUsecase _getUserByUsernameUsecase;
   String? usernameSendTo;
+  Timer? _debounce;
+  List<UserBySearchingEntity> resUserResult = [];
+  bool isLoading = false;
 
   @override
   void initState() {
     super.initState();
-    context
-        .read<TransferBloc>()
-        .add(const RequestTransferHistoryEvent(limit: '5'));
+    _getUserByUsernameUsecase = GetUserByUsernameUsecase(sl());
+  }
+
+  _onSearchChanged(String query) {
+    if (_debounce?.isActive ?? false) _debounce?.cancel();
+
+    if (query.length >= 3) {
+      _debounce = Timer(
+        const Duration(milliseconds: 1000),
+        () async {
+          setState(() {
+            isLoading = true;
+          });
+          final result = await _getUserByUsernameUsecase.call(params: query);
+          result.fold(
+            (error) => setState(() {
+              resUserResult.clear();
+              isLoading = false;
+            }),
+            (success) => setState(() {
+              resUserResult = success;
+              isLoading = false;
+            }),
+          );
+        },
+      );
+    } else {
+      setState(() {
+        resUserResult.clear();
+      });
+    }
   }
 
   @override
   void dispose() {
+    searchCon.dispose();
+    _debounce?.cancel();
     super.dispose();
   }
 
@@ -64,24 +102,18 @@ class _TransferPageState extends State<TransferPage> {
                     hintText: 'by username',
                   ),
                   controller: searchCon,
-                  onChanged: (value) {
-                    if (value.length >= 2) {
-                      context
-                          .read<TransferBloc>()
-                          .add(GetDataByUsername(username: value));
-                      setState(() {});
-                    } else {
-                      context
-                          .read<TransferBloc>()
-                          .add(const RequestTransferHistoryEvent(limit: '5'));
-                      setState(() {});
-                    }
-                  },
+                  onChanged: (value) => _onSearchChanged(value),
                 ),
               ],
             ),
             40.0.height,
-            searchCon.text.length <= 1 ? recentUser() : searchingUser(),
+            searchCon.text.length <= 2
+                ? recentUser()
+                : PopScope(
+                    onPopInvoked: (_) => _onSearchChanged(''),
+                    canPop: false,
+                    child: searchingUser(),
+                  ),
             80.0.height,
           ],
         ),
@@ -100,7 +132,9 @@ class _TransferPageState extends State<TransferPage> {
                     context,
                     '/amount-transfer',
                     arguments: TransferParams(
-                      sendToUsername: usernameSendTo,
+                      0,
+                      '',
+                      usernameSendTo,
                     ),
                   ),
           changeColor: usernameSendTo == null,
@@ -122,48 +156,83 @@ class _TransferPageState extends State<TransferPage> {
               ),
         ),
         14.0.height,
-        BlocBuilder<TransferBloc, TransferState>(
-          builder: (context, state) {
-            if (state is ListDataByUsername) {
-              if (state.listData!.isEmpty) {
-                return const Center(
-                  child: Text('username not found'),
-                );
-              } else {
-                return Wrap(
-                  spacing: 17.w,
-                  runSpacing: 17.h,
-                  children: state.listData!.map((data) {
-                    return GestureDetector(
-                      onTap: () {
-                        setState(() {
-                          if (usernameSendTo == data.username) {
-                            usernameSendTo = null;
-                          } else {
-                            usernameSendTo = data.username;
-                          }
-                        });
-                      },
-                      child: SearchingResultWidget(
-                        userBySearchingEntity: data,
-                        isSelected: data.username == usernameSendTo,
-                      ),
-                    );
-                  }).toList(),
-                );
-              }
-            }
-            return Padding(
-              padding: EdgeInsets.only(top: 20.h),
-              child: Center(
-                child: CircularProgressIndicator(
-                  color: purpleColor,
-                  strokeWidth: 5.h,
+        isLoading
+            ? Padding(
+                padding: EdgeInsets.only(top: 20.h),
+                child: Center(
+                  child: CircularProgressIndicator(
+                    color: purpleColor,
+                    strokeWidth: 5.h,
+                  ),
                 ),
-              ),
-            );
-          },
-        ),
+              )
+            : resUserResult.isEmpty
+                ? const Center(
+                    child: Text('username not found'),
+                  )
+                : Wrap(
+                    spacing: 17.w,
+                    runSpacing: 17.h,
+                    children: resUserResult.map((data) {
+                      return GestureDetector(
+                        onTap: () {
+                          setState(() {
+                            if (usernameSendTo == data.username) {
+                              usernameSendTo = null;
+                            } else {
+                              usernameSendTo = data.username;
+                            }
+                          });
+                        },
+                        child: SearchingResultWidget(
+                          userBySearchingEntity: data,
+                          isSelected: data.username == usernameSendTo,
+                        ),
+                      );
+                    }).toList(),
+                  )
+        // BlocBuilder<TransferBloc, TransferState>(
+        //   builder: (context, state) {
+        //     if (state is ResultTransactionState) {
+        //       if (state.listUser == null) {
+        //         return const Center(
+        //           child: Text('username not found'),
+        //         );
+        //       } else {
+        //         return Wrap(
+        //           spacing: 17.w,
+        //           runSpacing: 17.h,
+        //           children: state.listUser!.map((data) {
+        //             return GestureDetector(
+        //               onTap: () {
+        //                 setState(() {
+        //                   if (usernameSendTo == data.username) {
+        //                     usernameSendTo = null;
+        //                   } else {
+        //                     usernameSendTo = data.username;
+        //                   }
+        //                 });
+        //               },
+        //               child: SearchingResultWidget(
+        //                 userBySearchingEntity: data,
+        //                 isSelected: data.username == usernameSendTo,
+        //               ),
+        //             );
+        //           }).toList(),
+        //         );
+        //       }
+        //     }
+        //     return Padding(
+        //       padding: EdgeInsets.only(top: 20.h),
+        //       child: Center(
+        //         child: CircularProgressIndicator(
+        //           color: purpleColor,
+        //           strokeWidth: 5.h,
+        //         ),
+        //       ),
+        //     );
+        //   },
+        // ),
       ],
     );
   }
@@ -202,9 +271,6 @@ class _TransferPageState extends State<TransferPage> {
                   );
                 }).toList(),
               );
-            }
-            if (state is FailedTransfer) {
-              showCustomSnackbar(context, state.message!);
             }
             return Padding(
               padding: EdgeInsets.only(top: 20.h),

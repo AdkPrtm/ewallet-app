@@ -1,7 +1,7 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:template_clean_architecture/features/onboarding/component/bottom_container_component.dart';
+import 'package:ewallet/features/onboarding/component/bottom_container_component.dart';
 
 class OnboardingPage extends StatefulWidget {
   const OnboardingPage({super.key});

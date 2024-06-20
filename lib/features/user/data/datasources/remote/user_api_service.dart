@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:retrofit/retrofit.dart';
-import 'package:template_clean_architecture/core/resource/constant/api_list.dart';
-import 'package:template_clean_architecture/features/user/data/data.dart';
+import 'package:ewallet/core/resource/constant/api_list.dart';
+import 'package:ewallet/features/user/data/data.dart';
 
 part 'user_api_service.g.dart';
 
@@ -13,17 +13,17 @@ abstract class UserRemoteService {
   Future<HttpResponse> updateProfileUser({
     @Header("Authorization") String? token,
     @Header("Content-Type") String? contentType,
-    @Body() Map<String, dynamic>? body,
+    @Body() required Map<String, dynamic> body,
   });
 
   @PUT('/wallet')
   Future<HttpResponse> changePinUser({
     @Header("Authorization") String? token,
     @Header("Content-Type") String? contentType,
-    @Body() Map<String, dynamic>? body,
+    @Body() required Map<String, dynamic> body,
   });
 
-  @GET('/users')
+  @GET('/user')
   Future<HttpResponse<UserModel>> getCurrentUser({
     @Header("Authorization") String? token,
     @Header("Content-Type") String? contentType,

@@ -1,9 +1,11 @@
+import 'package:ewallet/core/widgets/shimmer/shimmer_tips_component.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:template_clean_architecture/core/resource/resource.dart';
-import 'package:template_clean_architecture/core/widgets/tips_widget.dart';
-import 'package:template_clean_architecture/features/tips/presentation/bloc/tips_bloc.dart';
+import 'package:ewallet/core/resource/resource.dart';
+import 'package:ewallet/core/widgets/tips_widget.dart';
+import 'package:ewallet/features/tips/presentation/bloc/tips_bloc.dart';
+import 'package:shimmer/shimmer.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class CustomTipsComponent extends StatelessWidget {
@@ -42,10 +44,15 @@ class CustomTipsComponent extends StatelessWidget {
                     .toList(),
               );
             }
-            return Center(
-              child: CircularProgressIndicator(
-                color: purpleColor,
-                strokeWidth: 5.h,
+            List<dynamic> dummy = ['1', '2', '3', '4'];
+            return Shimmer.fromColors(
+              baseColor: Colors.grey.shade300,
+              highlightColor: Colors.grey.shade100,
+              child: Wrap(
+                spacing: 17.w,
+                runSpacing: 18.h,
+                children:
+                    dummy.map((_) => const ShimmerTipsComponent()).toList(),
               ),
             );
           },

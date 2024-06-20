@@ -13,7 +13,7 @@ class _TipsServiceRemote implements TipsServiceRemote {
     this._dio, {
     this.baseUrl,
   }) {
-    baseUrl ??= 'https://andhikawidiarto.my.id/api';
+    baseUrl ??= 'https://ewallet.andhikawidiarto.my.id/api';
   }
 
   final Dio _dio;
@@ -22,18 +22,19 @@ class _TipsServiceRemote implements TipsServiceRemote {
 
   @override
   Future<HttpResponse<TipsResponse>> getTips({
-    String? token,
     String? contentType,
+    required int limit,
+    required int page,
   }) async {
-    const _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{};
-    queryParameters.removeWhere((k, v) => v == null);
-    final _headers = <String, dynamic>{
-      r'Authorization': token,
-      r'Content-Type': contentType,
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{
+      r'limit': limit,
+      r'page': page,
     };
+    queryParameters.removeWhere((k, v) => v == null);
+    final _headers = <String, dynamic>{r'Content-Type': contentType};
     _headers.removeWhere((k, v) => v == null);
-    final Map<String, dynamic>? _data = null;
+    const Map<String, dynamic>? _data = null;
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<HttpResponse<TipsResponse>>(Options(
       method: 'GET',
@@ -52,7 +53,7 @@ class _TipsServiceRemote implements TipsServiceRemote {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    final value = TipsResponse.fromJson(_result.data!['data']);
+    final value = TipsResponse.fromJson(_result.data!);
     final httpResponse = HttpResponse(value, _result);
     return httpResponse;
   }

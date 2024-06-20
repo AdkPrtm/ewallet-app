@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:template_clean_architecture/core/resource/theme/theme.dart';
+import 'package:ewallet/core/resource/theme/theme.dart';
 
 class TypeNumberWidget extends StatelessWidget {
   const TypeNumberWidget({super.key, required this.title, required this.onTap});

@@ -1,11 +1,13 @@
+import 'package:ewallet/features/auth/auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:template_clean_architecture/core/resource/resource.dart';
-import 'package:template_clean_architecture/core/widgets/action_profile_widget.dart';
-import 'package:template_clean_architecture/core/widgets/buttons.dart';
-import 'package:template_clean_architecture/features/user/domain/entities/user_entities.dart';
-import 'package:template_clean_architecture/features/user/presentation/profile/component/profile_component.dart';
-import 'package:template_clean_architecture/utils/extensions/extensions.dart';
+import 'package:ewallet/core/resource/resource.dart';
+import 'package:ewallet/core/widgets/action_profile_widget.dart';
+import 'package:ewallet/core/widgets/buttons.dart';
+import 'package:ewallet/features/user/domain/entities/user_entities.dart';
+import 'package:ewallet/features/user/presentation/profile/component/profile_component.dart';
+import 'package:ewallet/utils/extensions/extensions.dart';
 
 class ProfilePage extends StatelessWidget {
   const ProfilePage({super.key, required this.userEntity});
@@ -20,7 +22,7 @@ class ProfilePage extends StatelessWidget {
           'My Profile',
         ),
       ),
-      body: Column(
+      body: ListView(
         children: [
           Container(
             margin: EdgeInsets.symmetric(
@@ -40,7 +42,7 @@ class ProfilePage extends StatelessWidget {
                 ),
                 16.0.height,
                 Text(
-                  userEntity.name!,
+                  '${userEntity.firstName!} ${userEntity.lastName!}',
                   style: AppFont().blackTextStyle.copyWith(
                         fontSize: 18.sp,
                         fontWeight: AppFont().medium,
@@ -51,19 +53,12 @@ class ProfilePage extends StatelessWidget {
                   svgAsset: SvgSrc.profileSVG,
                   title: 'Edit Profile',
                   onTap: () async {
-                    if (await Navigator.pushNamed(
-                          context,
-                          '/pin',
-                          arguments: userEntity,
-                        ) ==
-                        true) {
-                      if (context.mounted) {
-                        Navigator.pushNamed(
-                          context,
-                          '/profile-edit',
-                          arguments: userEntity,
-                        );
-                      }
+                    if (context.mounted) {
+                      Navigator.pushNamed(
+                        context,
+                        '/profile-edit',
+                        arguments: userEntity,
+                      );
                     }
                   },
                 ),
@@ -76,6 +71,20 @@ class ProfilePage extends StatelessWidget {
                     '/profile-pin',
                     arguments: userEntity,
                   ),
+                ),
+                30.0.height,
+                ActionProfileWidget(
+                  svgAsset: SvgSrc.verifiedIcon,
+                  title: 'Verified Account',
+                  isVerifiedList: true,
+                  verified: userEntity.verified ?? false,
+                  onTap: userEntity.verified!
+                      ? () {}
+                      : () => Navigator.pushNamed(
+                            context,
+                            '/verification',
+                            arguments: userEntity,
+                          ),
                 ),
                 30.0.height,
                 ActionProfileWidget(
@@ -99,16 +108,55 @@ class ProfilePage extends StatelessWidget {
                 ActionProfileWidget(
                   svgAsset: SvgSrc.logoutSVG,
                   title: 'Logout',
-                  onTap: () {},
+                  onTap: () {
+                    showDialog(
+                      context: context,
+                      builder: (context) => AlertDialog(
+                        title: const Text('Logout?'),
+                        titleTextStyle: AppFont().blackTextStyle.copyWith(
+                            fontSize: 18.sp, fontWeight: AppFont().medium),
+                        content:
+                            const Text('Are you sure you want to log out?'),
+                        contentTextStyle:
+                            AppFont().blackTextStyle.copyWith(fontSize: 16.sp),
+                        actions: [
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Expanded(
+                                child: CustomeTextButton(
+                                  title: 'Yes',
+                                  onTap: () {
+                                    context.read<AuthBloc>().add(AuthLogout());
+                                    Navigator.pushNamedAndRemoveUntil(
+                                        context, '/signin', (route) => false);
+                                  },
+                                ),
+                              ),
+                              Expanded(
+                                child: CustomFilledButton(
+                                  title: 'Cancel',
+                                  onTap: () {
+                                    Navigator.pop(context);
+                                  },
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                    );
+                  },
                 ),
               ],
             ),
           ),
-          87.0.height,
+          30.0.height,
           CustomeTextButton(
             title: 'Report a Problem',
             onTap: () {},
           ),
+          30.0.height,
         ],
       ),
     );

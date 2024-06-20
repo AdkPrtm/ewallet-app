@@ -1,19 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:template_clean_architecture/core/resource/resource.dart';
-import 'package:template_clean_architecture/core/widgets/buttons.dart';
-import 'package:template_clean_architecture/core/widgets/forms.dart';
-import 'package:template_clean_architecture/features/auth/domain/domain.dart';
-import 'package:template_clean_architecture/features/auth/presentation/bloc/auth_bloc.dart';
-import 'package:template_clean_architecture/features/auth/presentation/signup/sign_up_set_profile_page.dart';
+import 'package:ewallet/core/resource/resource.dart';
+import 'package:ewallet/core/widgets/buttons.dart';
+import 'package:ewallet/core/widgets/forms.dart';
+import 'package:ewallet/features/auth/domain/domain.dart';
+import 'package:ewallet/features/auth/presentation/bloc/auth/auth_bloc.dart';
+import 'package:ewallet/features/auth/presentation/signup/sign_up_set_profile_page.dart';
 
 class SignUpPage extends StatelessWidget {
   const SignUpPage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final nameController = TextEditingController(text: '');
+    final firstNameController = TextEditingController(text: '');
+    final lastNameController = TextEditingController(text: '');
     final usernameController = TextEditingController(text: '');
     final emailController = TextEditingController(text: '');
     final passwordController = TextEditingController(text: '');
@@ -53,11 +54,22 @@ class SignUpPage extends StatelessWidget {
               child: Column(
                 children: [
                   CustomFormField(
-                    title: 'Full Name',
-                    textEditingController: nameController,
+                    title: 'First Name',
+                    textEditingController: firstNameController,
                     validator: (value) {
                       if (value!.isEmpty) {
-                        return 'Full Name Required';
+                        return 'First Name Required';
+                      }
+                      return null;
+                    },
+                  ),
+                  SizedBox(height: 16.h),
+                  CustomFormField(
+                    title: 'Last Name',
+                    textEditingController: lastNameController,
+                    validator: (value) {
+                      if (value!.isEmpty) {
+                        return 'Last Name Required';
                       }
                       return null;
                     },
@@ -115,9 +127,9 @@ class SignUpPage extends StatelessWidget {
                         showCustomSnackbar(context, state.message);
                       }
                       if (state is CheckDataSuccess) {
-                        if (state.checkDataEntity.email == "true") {
+                        if (state.checkDataEntity.email) {
                           showCustomSnackbar(context, 'Email already used');
-                        } else if (state.checkDataEntity.username == "true") {
+                        } else if (state.checkDataEntity.username) {
                           showCustomSnackbar(context, 'Username already used');
                         } else {
                           Navigator.push(
@@ -125,7 +137,8 @@ class SignUpPage extends StatelessWidget {
                             MaterialPageRoute(
                               builder: (context) => SetProfilePage(
                                 data: SignUpParams(
-                                  name: nameController.text,
+                                  firstName: firstNameController.text,
+                                  lastName: lastNameController.text,
                                   username: usernameController.text,
                                   email: emailController.text,
                                   password: passwordController.text,
@@ -167,10 +180,12 @@ class SignUpPage extends StatelessWidget {
           ),
           SizedBox(height: 50.h),
           CustomeTextButton(
-              title: 'Sign In',
-              onTap: () {
-                Navigator.pushNamed(context, '/signin');
-              }),
+            title: 'Sign In',
+            onTap: () {
+              Navigator.pushNamed(context, '/signin');
+            },
+          ),
+          SizedBox(height: 50.h),
         ],
       ),
     );

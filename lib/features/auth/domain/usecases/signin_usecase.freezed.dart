@@ -12,7 +12,7 @@ part of 'signin_usecase.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 SignInParams _$SignInParamsFromJson(Map<String, dynamic> json) {
   return _SignInParams.fromJson(json);
@@ -20,8 +20,10 @@ SignInParams _$SignInParamsFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$SignInParams {
-  String? get email => throw _privateConstructorUsedError;
-  String? get password => throw _privateConstructorUsedError;
+  String get email => throw _privateConstructorUsedError;
+  String get password => throw _privateConstructorUsedError;
+  @JsonKey(name: "token_device")
+  String? get tokenFCM => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -35,7 +37,10 @@ abstract class $SignInParamsCopyWith<$Res> {
           SignInParams value, $Res Function(SignInParams) then) =
       _$SignInParamsCopyWithImpl<$Res, SignInParams>;
   @useResult
-  $Res call({String? email, String? password});
+  $Res call(
+      {String email,
+      String password,
+      @JsonKey(name: "token_device") String? tokenFCM});
 }
 
 /// @nodoc
@@ -51,55 +56,68 @@ class _$SignInParamsCopyWithImpl<$Res, $Val extends SignInParams>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? email = freezed,
-    Object? password = freezed,
+    Object? email = null,
+    Object? password = null,
+    Object? tokenFCM = freezed,
   }) {
     return _then(_value.copyWith(
-      email: freezed == email
+      email: null == email
           ? _value.email
           : email // ignore: cast_nullable_to_non_nullable
-              as String?,
-      password: freezed == password
+              as String,
+      password: null == password
           ? _value.password
           : password // ignore: cast_nullable_to_non_nullable
+              as String,
+      tokenFCM: freezed == tokenFCM
+          ? _value.tokenFCM
+          : tokenFCM // ignore: cast_nullable_to_non_nullable
               as String?,
     ) as $Val);
   }
 }
 
 /// @nodoc
-abstract class _$$_SignInParamsCopyWith<$Res>
+abstract class _$$SignInParamsImplCopyWith<$Res>
     implements $SignInParamsCopyWith<$Res> {
-  factory _$$_SignInParamsCopyWith(
-          _$_SignInParams value, $Res Function(_$_SignInParams) then) =
-      __$$_SignInParamsCopyWithImpl<$Res>;
+  factory _$$SignInParamsImplCopyWith(
+          _$SignInParamsImpl value, $Res Function(_$SignInParamsImpl) then) =
+      __$$SignInParamsImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String? email, String? password});
+  $Res call(
+      {String email,
+      String password,
+      @JsonKey(name: "token_device") String? tokenFCM});
 }
 
 /// @nodoc
-class __$$_SignInParamsCopyWithImpl<$Res>
-    extends _$SignInParamsCopyWithImpl<$Res, _$_SignInParams>
-    implements _$$_SignInParamsCopyWith<$Res> {
-  __$$_SignInParamsCopyWithImpl(
-      _$_SignInParams _value, $Res Function(_$_SignInParams) _then)
+class __$$SignInParamsImplCopyWithImpl<$Res>
+    extends _$SignInParamsCopyWithImpl<$Res, _$SignInParamsImpl>
+    implements _$$SignInParamsImplCopyWith<$Res> {
+  __$$SignInParamsImplCopyWithImpl(
+      _$SignInParamsImpl _value, $Res Function(_$SignInParamsImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? email = freezed,
-    Object? password = freezed,
+    Object? email = null,
+    Object? password = null,
+    Object? tokenFCM = freezed,
   }) {
-    return _then(_$_SignInParams(
-      email: freezed == email
+    return _then(_$SignInParamsImpl(
+      email: null == email
           ? _value.email
           : email // ignore: cast_nullable_to_non_nullable
-              as String?,
-      password: freezed == password
+              as String,
+      password: null == password
           ? _value.password
           : password // ignore: cast_nullable_to_non_nullable
+              as String,
+      tokenFCM: freezed == tokenFCM
+          ? _value.tokenFCM
+          : tokenFCM // ignore: cast_nullable_to_non_nullable
               as String?,
     ));
   }
@@ -107,63 +125,77 @@ class __$$_SignInParamsCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_SignInParams implements _SignInParams {
-  const _$_SignInParams({this.email, this.password});
+class _$SignInParamsImpl implements _SignInParams {
+  const _$SignInParamsImpl(
+      {required this.email,
+      required this.password,
+      @JsonKey(name: "token_device") this.tokenFCM});
 
-  factory _$_SignInParams.fromJson(Map<String, dynamic> json) =>
-      _$$_SignInParamsFromJson(json);
+  factory _$SignInParamsImpl.fromJson(Map<String, dynamic> json) =>
+      _$$SignInParamsImplFromJson(json);
 
   @override
-  final String? email;
+  final String email;
   @override
-  final String? password;
+  final String password;
+  @override
+  @JsonKey(name: "token_device")
+  final String? tokenFCM;
 
   @override
   String toString() {
-    return 'SignInParams(email: $email, password: $password)';
+    return 'SignInParams(email: $email, password: $password, tokenFCM: $tokenFCM)';
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_SignInParams &&
+            other is _$SignInParamsImpl &&
             (identical(other.email, email) || other.email == email) &&
             (identical(other.password, password) ||
-                other.password == password));
+                other.password == password) &&
+            (identical(other.tokenFCM, tokenFCM) ||
+                other.tokenFCM == tokenFCM));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, email, password);
+  int get hashCode => Object.hash(runtimeType, email, password, tokenFCM);
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_SignInParamsCopyWith<_$_SignInParams> get copyWith =>
-      __$$_SignInParamsCopyWithImpl<_$_SignInParams>(this, _$identity);
+  _$$SignInParamsImplCopyWith<_$SignInParamsImpl> get copyWith =>
+      __$$SignInParamsImplCopyWithImpl<_$SignInParamsImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_SignInParamsToJson(
+    return _$$SignInParamsImplToJson(
       this,
     );
   }
 }
 
 abstract class _SignInParams implements SignInParams {
-  const factory _SignInParams({final String? email, final String? password}) =
-      _$_SignInParams;
+  const factory _SignInParams(
+          {required final String email,
+          required final String password,
+          @JsonKey(name: "token_device") final String? tokenFCM}) =
+      _$SignInParamsImpl;
 
   factory _SignInParams.fromJson(Map<String, dynamic> json) =
-      _$_SignInParams.fromJson;
+      _$SignInParamsImpl.fromJson;
 
   @override
-  String? get email;
+  String get email;
   @override
-  String? get password;
+  String get password;
+  @override
+  @JsonKey(name: "token_device")
+  String? get tokenFCM;
   @override
   @JsonKey(ignore: true)
-  _$$_SignInParamsCopyWith<_$_SignInParams> get copyWith =>
+  _$$SignInParamsImplCopyWith<_$SignInParamsImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

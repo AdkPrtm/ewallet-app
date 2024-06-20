@@ -1,21 +1,26 @@
 import 'package:dio/dio.dart';
+import 'package:ewallet/features/auth/domain/usecases/remove_credential_usecase.dart';
+import 'package:ewallet/features/auth/domain/usecases/request_otp_usecase.dart';
+import 'package:ewallet/features/auth/domain/usecases/verify_otp_usecase.dart';
+import 'package:ewallet/features/auth/presentation/bloc/request_otp/request_otp_bloc.dart';
 import 'package:get_it/get_it.dart';
-import 'package:template_clean_architecture/features/auth/auth.dart';
-import 'package:template_clean_architecture/features/product/product.dart';
-import 'package:template_clean_architecture/features/tips/tips.dart';
-import 'package:template_clean_architecture/features/topup/topup.dart';
-import 'package:template_clean_architecture/features/transaction/transaction.dart';
-import 'package:template_clean_architecture/features/transfer/transfer.dart';
-import 'package:template_clean_architecture/features/user/user.dart';
+import 'package:ewallet/features/auth/auth.dart';
+import 'package:ewallet/features/product/product.dart';
+import 'package:ewallet/features/tips/tips.dart';
+import 'package:ewallet/features/topup/topup.dart';
+import 'package:ewallet/features/transaction/transaction.dart';
+import 'package:ewallet/features/transfer/transfer.dart';
+import 'package:ewallet/features/user/user.dart';
 
 final sl = GetIt.instance;
 
 void setupLocator() {
   //BLOC
-  sl.registerFactory(() => AuthBloc(sl(), sl(), sl(), sl(), sl(), sl()));
+  sl.registerFactory(() => AuthBloc(sl(), sl(), sl(), sl(), sl(), sl(), sl()));
+  sl.registerFactory(() => RequestOtpBloc(sl(), sl(), sl()));
   sl.registerFactory(() => UserBloc(sl(), sl(), sl()));
   sl.registerFactory(() => TopupBloc(sl(), sl()));
-  sl.registerFactory(() => TransferBloc(sl(), sl(), sl()));
+  sl.registerFactory(() => TransferBloc(sl(), sl()));
   sl.registerFactory(() => TipsBloc(sl()));
   sl.registerFactory(() => TransactionBloc(sl()));
   sl.registerFactory(() => ProductBloc(sl(), sl()));
@@ -27,9 +32,12 @@ void setupLocator() {
   sl.registerLazySingleton(() => SignUpUseCase(sl()));
   sl.registerLazySingleton(() => CheckDataUseCase(sl()));
   sl.registerLazySingleton(() => ValidationTokenUseCase(sl()));
+  sl.registerLazySingleton(() => RequestOtpUsecase(sl()));
+  sl.registerLazySingleton(() => VerifyOtpUsecase(sl()));
 
   sl.registerLazySingleton(() => SetCredentialUseCase(sl()));
   sl.registerLazySingleton(() => GetCredentialUseCase(sl()));
+  sl.registerLazySingleton(() => RemoveCredentialUsecase(sl()));
 
   //USER USECASE
   sl.registerLazySingleton(() => UpdateDataUserUsecase(sl()));
@@ -74,8 +82,7 @@ void setupLocator() {
       () => TransferRepositoryImpl(sl(), sl()));
 
   //TIPS REPOSITORY
-  sl.registerLazySingleton<TipsRepository>(
-      () => TipsRepositoryImpl(sl(), sl()));
+  sl.registerLazySingleton<TipsRepository>(() => TipsRepositoryImpl(sl()));
 
   //TRANSACTION REPOSITORY
   sl.registerLazySingleton<TransactionRepository>(

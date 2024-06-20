@@ -6,29 +6,28 @@ part of 'user_model.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_UserModel _$$_UserModelFromJson(Map<String, dynamic> json) => _$_UserModel(
-      name: json['name'] as String?,
-      email: json['email'] as String?,
+_$UserModelImpl _$$UserModelImplFromJson(Map<String, dynamic> json) =>
+    _$UserModelImpl(
+      firstName: json['first_name'] as String?,
+      lastName: json['last_name'] as String?,
       username: json['username'] as String?,
-      verified: json['verified'] as String?,
+      email: json['email'] as String?,
       profilePicture: json['profile_picture'] as String?,
-      ktp: json['ktp'] as String?,
-      balance: json['balance'] as String?,
+      verified: json['verified'] as bool?,
+      balance: (json['balance'] as num?)?.toInt(),
       cardNumber: json['card_number'] as String?,
-      pin: json['pin'] as String?,
       token: json['token'] as String?,
     );
 
-Map<String, dynamic> _$$_UserModelToJson(_$_UserModel instance) =>
+Map<String, dynamic> _$$UserModelImplToJson(_$UserModelImpl instance) =>
     <String, dynamic>{
-      'name': instance.name,
-      'email': instance.email,
+      'first_name': instance.firstName,
+      'last_name': instance.lastName,
       'username': instance.username,
-      'verified': instance.verified,
+      'email': instance.email,
       'profile_picture': instance.profilePicture,
-      'ktp': instance.ktp,
+      'verified': instance.verified,
       'balance': instance.balance,
       'card_number': instance.cardNumber,
-      'pin': instance.pin,
       'token': instance.token,
     };

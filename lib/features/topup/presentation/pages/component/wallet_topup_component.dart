@@ -1,9 +1,9 @@
+import 'package:ewallet/features/user/presentation/bloc/user_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:template_clean_architecture/core/resource/resource.dart';
-import 'package:template_clean_architecture/features/auth/presentation/bloc/auth_bloc.dart';
-import 'package:template_clean_architecture/utils/extensions/extensions.dart';
+import 'package:ewallet/core/resource/resource.dart';
+import 'package:ewallet/utils/extensions/extensions.dart';
 
 class WalletTopupComponent extends StatelessWidget {
   const WalletTopupComponent({
@@ -39,21 +39,21 @@ class WalletTopupComponent extends StatelessWidget {
               ),
             ),
             16.0.width,
-            BlocBuilder<AuthBloc, AuthState>(
+            BlocBuilder<UserBloc, UserState>(
               builder: (context, state) {
-                if (state is AuthDone) {
+                if (state is UserLoaded) {
                   return Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        '**** **** **** ${state.userEntity.cardNumber!.substring(12,16)}',
+                        '**** **** **** ${state.userEntity.cardNumber!.substring(12, 16)}',
                         style: AppFont().blackTextStyle.copyWith(
                               fontSize: 16.sp,
                               fontWeight: AppFont().medium,
                             ),
                       ),
                       Text(
-                        state.userEntity.name!,
+                        '${state.userEntity.firstName} ${state.userEntity.lastName}',
                         style: AppFont().greyTextStyle.copyWith(
                               fontSize: 12.sp,
                             ),

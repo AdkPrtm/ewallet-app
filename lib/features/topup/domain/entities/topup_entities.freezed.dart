@@ -12,12 +12,16 @@ part of 'topup_entities.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$TopUpEntity {
+  @JsonKey(name: 'link_payment')
   String? get redirectUrl => throw _privateConstructorUsedError;
-  String? get token => throw _privateConstructorUsedError;
+  @JsonKey(name: 'reference_id')
+  String? get invoiceId => throw _privateConstructorUsedError;
+  @JsonKey(name: 'charge_amount')
+  int? get amount => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $TopUpEntityCopyWith<TopUpEntity> get copyWith =>
@@ -30,7 +34,10 @@ abstract class $TopUpEntityCopyWith<$Res> {
           TopUpEntity value, $Res Function(TopUpEntity) then) =
       _$TopUpEntityCopyWithImpl<$Res, TopUpEntity>;
   @useResult
-  $Res call({String? redirectUrl, String? token});
+  $Res call(
+      {@JsonKey(name: 'link_payment') String? redirectUrl,
+      @JsonKey(name: 'reference_id') String? invoiceId,
+      @JsonKey(name: 'charge_amount') int? amount});
 }
 
 /// @nodoc
@@ -47,104 +54,134 @@ class _$TopUpEntityCopyWithImpl<$Res, $Val extends TopUpEntity>
   @override
   $Res call({
     Object? redirectUrl = freezed,
-    Object? token = freezed,
+    Object? invoiceId = freezed,
+    Object? amount = freezed,
   }) {
     return _then(_value.copyWith(
       redirectUrl: freezed == redirectUrl
           ? _value.redirectUrl
           : redirectUrl // ignore: cast_nullable_to_non_nullable
               as String?,
-      token: freezed == token
-          ? _value.token
-          : token // ignore: cast_nullable_to_non_nullable
+      invoiceId: freezed == invoiceId
+          ? _value.invoiceId
+          : invoiceId // ignore: cast_nullable_to_non_nullable
               as String?,
+      amount: freezed == amount
+          ? _value.amount
+          : amount // ignore: cast_nullable_to_non_nullable
+              as int?,
     ) as $Val);
   }
 }
 
 /// @nodoc
-abstract class _$$_TopUpEntityCopyWith<$Res>
+abstract class _$$TopUpEntityImplCopyWith<$Res>
     implements $TopUpEntityCopyWith<$Res> {
-  factory _$$_TopUpEntityCopyWith(
-          _$_TopUpEntity value, $Res Function(_$_TopUpEntity) then) =
-      __$$_TopUpEntityCopyWithImpl<$Res>;
+  factory _$$TopUpEntityImplCopyWith(
+          _$TopUpEntityImpl value, $Res Function(_$TopUpEntityImpl) then) =
+      __$$TopUpEntityImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String? redirectUrl, String? token});
+  $Res call(
+      {@JsonKey(name: 'link_payment') String? redirectUrl,
+      @JsonKey(name: 'reference_id') String? invoiceId,
+      @JsonKey(name: 'charge_amount') int? amount});
 }
 
 /// @nodoc
-class __$$_TopUpEntityCopyWithImpl<$Res>
-    extends _$TopUpEntityCopyWithImpl<$Res, _$_TopUpEntity>
-    implements _$$_TopUpEntityCopyWith<$Res> {
-  __$$_TopUpEntityCopyWithImpl(
-      _$_TopUpEntity _value, $Res Function(_$_TopUpEntity) _then)
+class __$$TopUpEntityImplCopyWithImpl<$Res>
+    extends _$TopUpEntityCopyWithImpl<$Res, _$TopUpEntityImpl>
+    implements _$$TopUpEntityImplCopyWith<$Res> {
+  __$$TopUpEntityImplCopyWithImpl(
+      _$TopUpEntityImpl _value, $Res Function(_$TopUpEntityImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? redirectUrl = freezed,
-    Object? token = freezed,
+    Object? invoiceId = freezed,
+    Object? amount = freezed,
   }) {
-    return _then(_$_TopUpEntity(
+    return _then(_$TopUpEntityImpl(
       redirectUrl: freezed == redirectUrl
           ? _value.redirectUrl
           : redirectUrl // ignore: cast_nullable_to_non_nullable
               as String?,
-      token: freezed == token
-          ? _value.token
-          : token // ignore: cast_nullable_to_non_nullable
+      invoiceId: freezed == invoiceId
+          ? _value.invoiceId
+          : invoiceId // ignore: cast_nullable_to_non_nullable
               as String?,
+      amount: freezed == amount
+          ? _value.amount
+          : amount // ignore: cast_nullable_to_non_nullable
+              as int?,
     ));
   }
 }
 
 /// @nodoc
 
-class _$_TopUpEntity implements _TopUpEntity {
-  const _$_TopUpEntity({this.redirectUrl, this.token});
+class _$TopUpEntityImpl implements _TopUpEntity {
+  const _$TopUpEntityImpl(
+      {@JsonKey(name: 'link_payment') this.redirectUrl,
+      @JsonKey(name: 'reference_id') this.invoiceId,
+      @JsonKey(name: 'charge_amount') this.amount});
 
   @override
+  @JsonKey(name: 'link_payment')
   final String? redirectUrl;
   @override
-  final String? token;
+  @JsonKey(name: 'reference_id')
+  final String? invoiceId;
+  @override
+  @JsonKey(name: 'charge_amount')
+  final int? amount;
 
   @override
   String toString() {
-    return 'TopUpEntity(redirectUrl: $redirectUrl, token: $token)';
+    return 'TopUpEntity(redirectUrl: $redirectUrl, invoiceId: $invoiceId, amount: $amount)';
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_TopUpEntity &&
+            other is _$TopUpEntityImpl &&
             (identical(other.redirectUrl, redirectUrl) ||
                 other.redirectUrl == redirectUrl) &&
-            (identical(other.token, token) || other.token == token));
+            (identical(other.invoiceId, invoiceId) ||
+                other.invoiceId == invoiceId) &&
+            (identical(other.amount, amount) || other.amount == amount));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, redirectUrl, token);
+  int get hashCode => Object.hash(runtimeType, redirectUrl, invoiceId, amount);
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_TopUpEntityCopyWith<_$_TopUpEntity> get copyWith =>
-      __$$_TopUpEntityCopyWithImpl<_$_TopUpEntity>(this, _$identity);
+  _$$TopUpEntityImplCopyWith<_$TopUpEntityImpl> get copyWith =>
+      __$$TopUpEntityImplCopyWithImpl<_$TopUpEntityImpl>(this, _$identity);
 }
 
 abstract class _TopUpEntity implements TopUpEntity {
-  const factory _TopUpEntity({final String? redirectUrl, final String? token}) =
-      _$_TopUpEntity;
+  const factory _TopUpEntity(
+      {@JsonKey(name: 'link_payment') final String? redirectUrl,
+      @JsonKey(name: 'reference_id') final String? invoiceId,
+      @JsonKey(name: 'charge_amount') final int? amount}) = _$TopUpEntityImpl;
 
   @override
+  @JsonKey(name: 'link_payment')
   String? get redirectUrl;
   @override
-  String? get token;
+  @JsonKey(name: 'reference_id')
+  String? get invoiceId;
+  @override
+  @JsonKey(name: 'charge_amount')
+  int? get amount;
   @override
   @JsonKey(ignore: true)
-  _$$_TopUpEntityCopyWith<_$_TopUpEntity> get copyWith =>
+  _$$TopUpEntityImplCopyWith<_$TopUpEntityImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

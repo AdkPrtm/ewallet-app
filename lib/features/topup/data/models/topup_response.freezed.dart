@@ -12,7 +12,7 @@ part of 'topup_response.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 TopUpResponse _$TopUpResponseFromJson(Map<String, dynamic> json) {
   return _TopUpResponse.fromJson(json);
@@ -20,9 +20,12 @@ TopUpResponse _$TopUpResponseFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$TopUpResponse {
-  @JsonKey(name: 'redirect_url')
+  @JsonKey(name: 'link_payment')
   String? get redirectUrl => throw _privateConstructorUsedError;
-  String? get token => throw _privateConstructorUsedError;
+  @JsonKey(name: 'reference_id')
+  String? get invoiceId => throw _privateConstructorUsedError;
+  @JsonKey(name: 'charge_amount')
+  int? get amount => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -37,7 +40,9 @@ abstract class $TopUpResponseCopyWith<$Res> {
       _$TopUpResponseCopyWithImpl<$Res, TopUpResponse>;
   @useResult
   $Res call(
-      {@JsonKey(name: 'redirect_url') String? redirectUrl, String? token});
+      {@JsonKey(name: 'link_payment') String? redirectUrl,
+      @JsonKey(name: 'reference_id') String? invoiceId,
+      @JsonKey(name: 'charge_amount') int? amount});
 }
 
 /// @nodoc
@@ -54,104 +59,124 @@ class _$TopUpResponseCopyWithImpl<$Res, $Val extends TopUpResponse>
   @override
   $Res call({
     Object? redirectUrl = freezed,
-    Object? token = freezed,
+    Object? invoiceId = freezed,
+    Object? amount = freezed,
   }) {
     return _then(_value.copyWith(
       redirectUrl: freezed == redirectUrl
           ? _value.redirectUrl
           : redirectUrl // ignore: cast_nullable_to_non_nullable
               as String?,
-      token: freezed == token
-          ? _value.token
-          : token // ignore: cast_nullable_to_non_nullable
+      invoiceId: freezed == invoiceId
+          ? _value.invoiceId
+          : invoiceId // ignore: cast_nullable_to_non_nullable
               as String?,
+      amount: freezed == amount
+          ? _value.amount
+          : amount // ignore: cast_nullable_to_non_nullable
+              as int?,
     ) as $Val);
   }
 }
 
 /// @nodoc
-abstract class _$$_TopUpResponseCopyWith<$Res>
+abstract class _$$TopUpResponseImplCopyWith<$Res>
     implements $TopUpResponseCopyWith<$Res> {
-  factory _$$_TopUpResponseCopyWith(
-          _$_TopUpResponse value, $Res Function(_$_TopUpResponse) then) =
-      __$$_TopUpResponseCopyWithImpl<$Res>;
+  factory _$$TopUpResponseImplCopyWith(
+          _$TopUpResponseImpl value, $Res Function(_$TopUpResponseImpl) then) =
+      __$$TopUpResponseImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
-      {@JsonKey(name: 'redirect_url') String? redirectUrl, String? token});
+      {@JsonKey(name: 'link_payment') String? redirectUrl,
+      @JsonKey(name: 'reference_id') String? invoiceId,
+      @JsonKey(name: 'charge_amount') int? amount});
 }
 
 /// @nodoc
-class __$$_TopUpResponseCopyWithImpl<$Res>
-    extends _$TopUpResponseCopyWithImpl<$Res, _$_TopUpResponse>
-    implements _$$_TopUpResponseCopyWith<$Res> {
-  __$$_TopUpResponseCopyWithImpl(
-      _$_TopUpResponse _value, $Res Function(_$_TopUpResponse) _then)
+class __$$TopUpResponseImplCopyWithImpl<$Res>
+    extends _$TopUpResponseCopyWithImpl<$Res, _$TopUpResponseImpl>
+    implements _$$TopUpResponseImplCopyWith<$Res> {
+  __$$TopUpResponseImplCopyWithImpl(
+      _$TopUpResponseImpl _value, $Res Function(_$TopUpResponseImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? redirectUrl = freezed,
-    Object? token = freezed,
+    Object? invoiceId = freezed,
+    Object? amount = freezed,
   }) {
-    return _then(_$_TopUpResponse(
+    return _then(_$TopUpResponseImpl(
       redirectUrl: freezed == redirectUrl
           ? _value.redirectUrl
           : redirectUrl // ignore: cast_nullable_to_non_nullable
               as String?,
-      token: freezed == token
-          ? _value.token
-          : token // ignore: cast_nullable_to_non_nullable
+      invoiceId: freezed == invoiceId
+          ? _value.invoiceId
+          : invoiceId // ignore: cast_nullable_to_non_nullable
               as String?,
+      amount: freezed == amount
+          ? _value.amount
+          : amount // ignore: cast_nullable_to_non_nullable
+              as int?,
     ));
   }
 }
 
 /// @nodoc
 @JsonSerializable()
-class _$_TopUpResponse extends _TopUpResponse {
-  const _$_TopUpResponse(
-      {@JsonKey(name: 'redirect_url') this.redirectUrl, this.token})
+class _$TopUpResponseImpl extends _TopUpResponse {
+  const _$TopUpResponseImpl(
+      {@JsonKey(name: 'link_payment') this.redirectUrl,
+      @JsonKey(name: 'reference_id') this.invoiceId,
+      @JsonKey(name: 'charge_amount') this.amount})
       : super._();
 
-  factory _$_TopUpResponse.fromJson(Map<String, dynamic> json) =>
-      _$$_TopUpResponseFromJson(json);
+  factory _$TopUpResponseImpl.fromJson(Map<String, dynamic> json) =>
+      _$$TopUpResponseImplFromJson(json);
 
   @override
-  @JsonKey(name: 'redirect_url')
+  @JsonKey(name: 'link_payment')
   final String? redirectUrl;
   @override
-  final String? token;
+  @JsonKey(name: 'reference_id')
+  final String? invoiceId;
+  @override
+  @JsonKey(name: 'charge_amount')
+  final int? amount;
 
   @override
   String toString() {
-    return 'TopUpResponse(redirectUrl: $redirectUrl, token: $token)';
+    return 'TopUpResponse(redirectUrl: $redirectUrl, invoiceId: $invoiceId, amount: $amount)';
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_TopUpResponse &&
+            other is _$TopUpResponseImpl &&
             (identical(other.redirectUrl, redirectUrl) ||
                 other.redirectUrl == redirectUrl) &&
-            (identical(other.token, token) || other.token == token));
+            (identical(other.invoiceId, invoiceId) ||
+                other.invoiceId == invoiceId) &&
+            (identical(other.amount, amount) || other.amount == amount));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, redirectUrl, token);
+  int get hashCode => Object.hash(runtimeType, redirectUrl, invoiceId, amount);
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_TopUpResponseCopyWith<_$_TopUpResponse> get copyWith =>
-      __$$_TopUpResponseCopyWithImpl<_$_TopUpResponse>(this, _$identity);
+  _$$TopUpResponseImplCopyWith<_$TopUpResponseImpl> get copyWith =>
+      __$$TopUpResponseImplCopyWithImpl<_$TopUpResponseImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_TopUpResponseToJson(
+    return _$$TopUpResponseImplToJson(
       this,
     );
   }
@@ -159,20 +184,25 @@ class _$_TopUpResponse extends _TopUpResponse {
 
 abstract class _TopUpResponse extends TopUpResponse {
   const factory _TopUpResponse(
-      {@JsonKey(name: 'redirect_url') final String? redirectUrl,
-      final String? token}) = _$_TopUpResponse;
+      {@JsonKey(name: 'link_payment') final String? redirectUrl,
+      @JsonKey(name: 'reference_id') final String? invoiceId,
+      @JsonKey(name: 'charge_amount') final int? amount}) = _$TopUpResponseImpl;
   const _TopUpResponse._() : super._();
 
   factory _TopUpResponse.fromJson(Map<String, dynamic> json) =
-      _$_TopUpResponse.fromJson;
+      _$TopUpResponseImpl.fromJson;
 
   @override
-  @JsonKey(name: 'redirect_url')
+  @JsonKey(name: 'link_payment')
   String? get redirectUrl;
   @override
-  String? get token;
+  @JsonKey(name: 'reference_id')
+  String? get invoiceId;
+  @override
+  @JsonKey(name: 'charge_amount')
+  int? get amount;
   @override
   @JsonKey(ignore: true)
-  _$$_TopUpResponseCopyWith<_$_TopUpResponse> get copyWith =>
+  _$$TopUpResponseImplCopyWith<_$TopUpResponseImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

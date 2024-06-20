@@ -8,17 +8,17 @@ abstract class ProductEvent extends Equatable {
 }
 
 class GetDataPlansEvent extends ProductEvent {
-  final String? limit;
+  final GetDataPlansQuery query;
 
-  const GetDataPlansEvent({this.limit = '10'});
+  const GetDataPlansEvent({required this.query});
   @override
-  List<Object> get props => [limit!];
+  List<Object> get props => [query];
 }
 
 class BuyDataPlansEvent extends ProductEvent {
   final BuyDataPlansParams? buyDataPlansParams;
 
   const BuyDataPlansEvent({this.buyDataPlansParams});
-    @override
+  @override
   List<Object> get props => [buyDataPlansParams!];
 }

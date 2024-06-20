@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:template_clean_architecture/core/resource/resource.dart';
-import 'package:template_clean_architecture/features/user/user.dart';
-import 'package:template_clean_architecture/utils/extensions/extensions.dart';
+import 'package:ewallet/core/resource/resource.dart';
+import 'package:ewallet/features/user/user.dart';
+import 'package:ewallet/utils/extensions/extensions.dart';
 
 class WalletBuyDataComponent extends StatelessWidget {
   const WalletBuyDataComponent({
@@ -53,7 +53,7 @@ class WalletBuyDataComponent extends StatelessWidget {
                             ),
                       ),
                       Text(
-                        'Balance: ${formatCurrency(num.parse(state.userEntity.balance!))}',
+                        'Balance: ${formatCurrency(state.userEntity.balance!)}',
                         style: AppFont().greyTextStyle.copyWith(
                               fontSize: 12.sp,
                             ),

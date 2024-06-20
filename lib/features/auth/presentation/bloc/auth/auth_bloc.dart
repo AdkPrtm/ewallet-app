@@ -1,9 +1,11 @@
 import 'package:equatable/equatable.dart';
+import 'package:ewallet/core/service/notification_service.dart';
+import 'package:ewallet/features/auth/domain/usecases/remove_credential_usecase.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:template_clean_architecture/core/error/error.dart';
-import 'package:template_clean_architecture/features/auth/domain/entities/entities.dart';
-import 'package:template_clean_architecture/features/auth/domain/usecases/usecases.dart';
-import 'package:template_clean_architecture/features/user/domain/domain.dart';
+import 'package:ewallet/core/error/error.dart';
+import 'package:ewallet/features/auth/domain/entities/entities.dart';
+import 'package:ewallet/features/auth/domain/usecases/usecases.dart';
+import 'package:ewallet/features/user/domain/domain.dart';
 
 part 'auth_event.dart';
 part 'auth_state.dart';
@@ -16,6 +18,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
 
   final SetCredentialUseCase _setCredentialUseCase;
   final GetCredentialUseCase _getCredentialUseCase;
+  final RemoveCredentialUsecase _removeCredentialUsecase;
 
   AuthBloc(
     this._signInUseCase,
@@ -24,6 +27,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     this._setCredentialUseCase,
     this._getCredentialUseCase,
     this._validationTokenUseCase,
+    this._removeCredentialUsecase
   ) : super(AuthInitial()) {
     on<CheckDataExists>(onCheckDataProses);
 
@@ -32,6 +36,8 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     on<AuthRegister>(onRegisterProses);
 
     on<ValidationTokenEvent>(onValidationProses);
+
+    on<AuthLogout>(onLogoutProses);
   }
 
   Future<void> onValidationProses(
@@ -43,17 +49,20 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     }
     final result = await _validationTokenUseCase.call(params: token);
     await result.fold(
-      (l) async => emit(AuthFailed(l.message)),
-      (data) async {
-        if (data.email == null) {
-          final result2 =
-              await _validationTokenUseCase.call(params: data.token);
-          await _setCredentialUseCase.call(params: data.token);
+      (l) async {
+        if (l.message.contains('token: ')) {
+          List<String> parts = l.message.split(' ');
+          String token = parts[1];
+          final result2 = await _validationTokenUseCase.call(params: token);
+          await _setCredentialUseCase.call(params: token);
           await result2.fold(
             (l) async => null,
-            (r) async => emit(AuthDone(data)),
+            (r) async => emit(AuthDone(r)),
           );
         }
+        emit(AuthFailed(l.message));
+      },
+      (data) async {
         return emit(AuthDone(data));
       },
     );
@@ -79,7 +88,9 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
 
   Future<void> onLoginProses(AuthLogin event, Emitter<AuthState> emit) async {
     emit(AuthLoading());
-    final result = await _signInUseCase.call(params: event.signInParams);
+    var tokenFcm = await PushNotifications.getDeviceToken();
+    final result = await _signInUseCase.call(
+        params: event.signInParams.copyWith(tokenFCM: tokenFcm));
     result.fold(
       (failure) {
         if (failure is ServerFailure) {
@@ -98,7 +109,9 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   Future<void> onRegisterProses(
       AuthRegister event, Emitter<AuthState> emit) async {
     emit(AuthLoading());
-    final result = await _signUpUseCase.call(params: event.signUpParams);
+    var tokenFcm = await PushNotifications.getDeviceToken();
+    final result = await _signUpUseCase.call(
+        params: event.signUpParams.copyWith(tokenFCM: tokenFcm));
     result.fold(
       (failure) {
         if (failure is ServerFailure) {
@@ -112,5 +125,10 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         await _setCredentialUseCase.call(params: data.token!);
       },
     );
+  }
+
+  Future<void> onLogoutProses(AuthLogout event, Emitter<AuthState> emit) async{
+    final result = await _removeCredentialUsecase.call();
+    if(result) emit(AuthInitial());
   }
 }

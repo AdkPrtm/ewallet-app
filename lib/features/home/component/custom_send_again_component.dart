@@ -1,10 +1,11 @@
+import 'package:ewallet/core/widgets/shimmer/shimmer_send_again_component.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:template_clean_architecture/core/resource/resource.dart';
-import 'package:template_clean_architecture/core/widgets/profile_card_receiver_widget.dart';
-import 'package:template_clean_architecture/features/transfer/presentation/bloc/transfer_bloc.dart';
-import 'package:template_clean_architecture/injection_container.dart';
+import 'package:ewallet/core/resource/resource.dart';
+import 'package:ewallet/core/widgets/profile_card_receiver_widget.dart';
+import 'package:ewallet/features/transfer/presentation/bloc/transfer_bloc.dart';
+import 'package:shimmer/shimmer.dart';
 
 class CustomSendAgainComponent extends StatelessWidget {
   const CustomSendAgainComponent({
@@ -26,35 +27,34 @@ class CustomSendAgainComponent extends StatelessWidget {
         SizedBox(height: 14.h),
         SingleChildScrollView(
           scrollDirection: Axis.horizontal,
-          child: BlocProvider(
-            create: (context) => sl<TransferBloc>()
-              ..add(const RequestTransferHistoryEvent(limit: '5')),
-            child: BlocBuilder<TransferBloc, TransferState>(
-              builder: (context, state) {
-                if (state is SuccessTransferHistory) {
-                  if (state.dataTransferHistory!.isEmpty) {
-                    return Text(
-                      'No data',
-                      style: AppFont().blackTextStyle,
-                      textAlign: TextAlign.center,
-                    );
-                  } else {
-                    return Row(
-                      children: state.dataTransferHistory!
-                          .map((data) => ProfileCardReceiverWidget(
-                              dataTransferHistory: data))
-                          .toList(),
-                    );
-                  }
+          child: BlocBuilder<TransferBloc, TransferState>(
+            builder: (context, state) {
+              if (state is SuccessTransferHistory) {
+                if (state.dataTransferHistory!.isEmpty) {
+                  return Text(
+                    'No data',
+                    style: AppFont().blackTextStyle,
+                    textAlign: TextAlign.center,
+                  );
+                } else {
+                  return Row(
+                    children: state.dataTransferHistory!
+                        .map((data) => ProfileCardReceiverWidget(
+                            dataTransferHistory: data))
+                        .toList(),
+                  );
                 }
-                return Center(
-                  child: CircularProgressIndicator(
-                    color: purpleColor,
-                    strokeWidth: 5.h,
-                  ),
-                );
-              },
-            ),
+              }
+              List<dynamic> dummy = ['1', '2', '3', '4', '5'];
+              return Shimmer.fromColors(
+                baseColor: Colors.grey.shade300,
+                highlightColor: Colors.grey.shade100,
+                child: Row(
+                  children:
+                      dummy.map((_) => const ShimmerSendAgain()).toList(),
+                ),
+              );
+            },
           ),
         )
       ],

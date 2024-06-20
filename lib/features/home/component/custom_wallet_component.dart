@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:template_clean_architecture/core/resource/resource.dart';
+import 'package:ewallet/core/resource/resource.dart';
 
 class CustomWalletComponent extends StatelessWidget {
   const CustomWalletComponent({
@@ -12,13 +12,12 @@ class CustomWalletComponent extends StatelessWidget {
 
   final String nama;
   final String card;
-  final String balance;
+  final int balance;
 
   @override
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-      height: 220.h,
       padding: EdgeInsets.all(30.h),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(28),
@@ -41,7 +40,7 @@ class CustomWalletComponent extends StatelessWidget {
           Text(
             '**** **** **** ${card.substring(12, 16)}',
             style: AppFont().whiteTextStyle.copyWith(
-                  fontSize: 18.sp,
+                  fontSize: 14.sp,
                   fontWeight: AppFont().medium,
                   letterSpacing: 5.9.w,
                 ),
@@ -49,9 +48,9 @@ class CustomWalletComponent extends StatelessWidget {
           SizedBox(height: 18.h),
           Text('Balance', style: AppFont().whiteTextStyle),
           Text(
-            formatCurrency(num.parse(balance)),
+            formatCurrency(balance),
             style: AppFont().whiteTextStyle.copyWith(
-                  fontSize: 24.sp,
+                  fontSize: 22.sp,
                   fontWeight: AppFont().semibold,
                 ),
           ),

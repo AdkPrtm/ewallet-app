@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:template_clean_architecture/core/resource/resource.dart';
-import 'package:template_clean_architecture/core/widgets/buttons.dart';
-import 'package:template_clean_architecture/core/widgets/select_widget_widget.dart';
-import 'package:template_clean_architecture/features/product/presentation/pages/dataplans/component/buydata_component.dart';
-import 'package:template_clean_architecture/features/product/product.dart';
-import 'package:template_clean_architecture/utils/extensions/extensions.dart';
+import 'package:ewallet/core/resource/resource.dart';
+import 'package:ewallet/core/widgets/buttons.dart';
+import 'package:ewallet/core/widgets/select_widget_widget.dart';
+import 'package:ewallet/features/product/presentation/pages/dataplans/component/buydata_component.dart';
+import 'package:ewallet/features/product/product.dart';
+import 'package:ewallet/utils/extensions/extensions.dart';
 
 class SelectProviderPage extends StatefulWidget {
   const SelectProviderPage({super.key});
@@ -20,7 +20,9 @@ class _SelectProviderPageState extends State<SelectProviderPage> {
   @override
   void initState() {
     super.initState();
-    context.read<ProductBloc>().add(const GetDataPlansEvent());
+    context
+        .read<ProductBloc>()
+        .add(GetDataPlansEvent(query: GetDataPlansQuery(page: 1, limit: 10)));
   }
 
   @override
@@ -57,8 +59,9 @@ class _SelectProviderPageState extends State<SelectProviderPage> {
                 BlocBuilder<ProductBloc, ProductState>(
                   builder: (context, state) {
                     if (state is ProductLoaded) {
+                      List<DataOperatorCardEntity>? dataFilter = state.dataOperator?.where((data) => data.status == 'ACTIVE').toList();
                       return Column(
-                        children: state.dataOperator!
+                        children: dataFilter!
                             .map((data) => GestureDetector(
                                   onTap: () {
                                     if (dataOperatorCardEntity == data) {

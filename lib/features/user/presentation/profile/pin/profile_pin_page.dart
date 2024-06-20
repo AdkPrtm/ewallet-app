@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:template_clean_architecture/core/resource/resource.dart';
-import 'package:template_clean_architecture/core/widgets/buttons.dart';
-import 'package:template_clean_architecture/core/widgets/forms.dart';
-import 'package:template_clean_architecture/features/user/domain/domain.dart';
-import 'package:template_clean_architecture/features/user/presentation/bloc/user_bloc.dart';
-import 'package:template_clean_architecture/utils/extensions/extensions.dart';
-import 'package:template_clean_architecture/utils/helper/helper.dart';
+import 'package:ewallet/core/resource/resource.dart';
+import 'package:ewallet/core/widgets/buttons.dart';
+import 'package:ewallet/core/widgets/forms.dart';
+import 'package:ewallet/features/user/domain/domain.dart';
+import 'package:ewallet/features/user/presentation/bloc/user_bloc.dart';
+import 'package:ewallet/utils/extensions/extensions.dart';
+import 'package:ewallet/utils/helper/helper.dart';
 
 class ProfilePinPage extends StatelessWidget {
   const ProfilePinPage({super.key});
@@ -114,8 +114,8 @@ class ProfilePinPage extends StatelessWidget {
                           context.read<UserBloc>().add(
                                 ChangePinUserEvent(
                                   updatePinParams: UpdatePinParams(
-                                    oldPin: int.parse(conOldPin.text),
-                                    newPin: int.parse(conNewPin.text),
+                                    conOldPin.text,
+                                    conNewPin.text,
                                   ),
                                 ),
                               );

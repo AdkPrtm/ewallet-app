@@ -2,16 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
-import 'package:template_clean_architecture/core/resource/resource.dart';
-import 'package:template_clean_architecture/core/widgets/buttons.dart';
-import 'package:template_clean_architecture/core/widgets/type_number_widget.dart';
-import 'package:template_clean_architecture/features/auth/presentation/bloc/auth_bloc.dart';
-import 'package:template_clean_architecture/features/topup/domain/entities/entities.dart';
-import 'package:template_clean_architecture/features/topup/domain/usecases/topup_usecase.dart';
-import 'package:template_clean_architecture/features/topup/presentation/bloc/topup_bloc.dart';
-import 'package:template_clean_architecture/features/topup/presentation/pages/component/amount_component.dart';
-import 'package:template_clean_architecture/utils/extensions/extensions.dart';
-import 'package:template_clean_architecture/utils/helper/helper.dart';
+import 'package:ewallet/core/resource/resource.dart';
+import 'package:ewallet/core/widgets/buttons.dart';
+import 'package:ewallet/core/widgets/type_number_widget.dart';
+import 'package:ewallet/features/topup/domain/entities/entities.dart';
+import 'package:ewallet/features/topup/domain/usecases/topup_usecase.dart';
+import 'package:ewallet/features/topup/presentation/bloc/topup_bloc.dart';
+import 'package:ewallet/features/topup/presentation/pages/component/amount_component.dart';
+import 'package:ewallet/utils/extensions/extensions.dart';
+import 'package:ewallet/utils/helper/helper.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class AmountTopupPage extends StatefulWidget {
@@ -221,25 +220,20 @@ class _AmountTopupPageState extends State<AmountTopupPage> {
                   CustomFilledButton(
                     title: 'Checkout Now',
                     onTap: () async {
-                      final authState = context.read<AuthBloc>().state;
-                      if (authState is AuthDone) {
-                        if (await Navigator.pushNamed(context, '/pin',
-                                arguments: authState.userEntity) ==
-                            true) {
-                          if (context.mounted) {
-                            context.read<TopupBloc>().add(
-                                  RequestTopupEvent(
-                                    TopupParams(
-                                      amount: int.parse(amountController.text
-                                          .replaceAll('.', '')),
-                                      pin: authState.userEntity.pin,
-                                      paymentMethod:
-                                          widget.paymentDataTopupEntity.code,
-                                    ),
-                                  ),
-                                );
-                          }
-                        }
+                      final pin = await Navigator.pushNamed(context, '/pin');
+                      if (context.mounted) {
+                        context.read<TopupBloc>().add(
+                              RequestTopupEvent(
+                                TopupParams(
+                                  amount: int.parse(amountController.text
+                                      .replaceAll('.', '')),
+                                  pin: pin.toString(),
+                                  paymentMethod:
+                                      widget.paymentDataTopupEntity.code!,
+                                  transactionType: 'topup',
+                                ),
+                              ),
+                            );
                       }
                     },
                   ),

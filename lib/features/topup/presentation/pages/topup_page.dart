@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:template_clean_architecture/core/resource/resource.dart';
-import 'package:template_clean_architecture/core/widgets/buttons.dart';
-import 'package:template_clean_architecture/core/widgets/select_option_widget.dart';
-import 'package:template_clean_architecture/features/topup/domain/entities/entities.dart';
-import 'package:template_clean_architecture/features/topup/presentation/bloc/topup_bloc.dart';
-import 'package:template_clean_architecture/features/topup/presentation/pages/component/topup_component.dart';
-import 'package:template_clean_architecture/injection_container.dart';
-import 'package:template_clean_architecture/utils/extensions/extensions.dart';
+import 'package:ewallet/core/resource/resource.dart';
+import 'package:ewallet/core/widgets/buttons.dart';
+import 'package:ewallet/core/widgets/select_option_widget.dart';
+import 'package:ewallet/features/topup/domain/entities/entities.dart';
+import 'package:ewallet/features/topup/presentation/bloc/topup_bloc.dart';
+import 'package:ewallet/features/topup/presentation/pages/component/topup_component.dart';
+import 'package:ewallet/injection_container.dart';
+import 'package:ewallet/utils/extensions/extensions.dart';
 
 class TopUpPage extends StatefulWidget {
   const TopUpPage({super.key});
@@ -55,8 +55,12 @@ class _TopUpPageState extends State<TopUpPage> {
                 child: BlocBuilder<TopupBloc, TopupState>(
                   builder: (context, state) {
                     if (state is PaymentMethodLoaded) {
+                      List<PaymentDataTopupEntity> activePayments = state
+                          .paymentDataTopup
+                          .where((res) => res.status == 'ACTIVE')
+                          .toList();
                       return Column(
-                        children: state.paymentDataTopup.map((paymentmethod) {
+                        children: activePayments.map((paymentmethod) {
                           return GestureDetector(
                             onTap: () {
                               setState(() {
@@ -78,8 +82,7 @@ class _TopUpPageState extends State<TopUpPage> {
                   },
                 ),
               ),
-              12.0.height,
-              30.0.height,
+              80.0.height,
             ],
           ),
         ),

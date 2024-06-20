@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:retrofit/retrofit.dart';
-import 'package:template_clean_architecture/core/resource/constant/api_list.dart';
-import 'package:template_clean_architecture/features/transaction/data/models/models.dart';
+import 'package:ewallet/core/resource/constant/api_list.dart';
+import 'package:ewallet/features/transaction/data/models/models.dart';
 
 part 'transaction_api_service.g.dart';
 
@@ -9,10 +9,11 @@ part 'transaction_api_service.g.dart';
 abstract class TransactionRemoteService {
   factory TransactionRemoteService(Dio dio) = _TransactionRemoteService;
 
-  @GET('/transactions')
+  @GET('/transaction')
   Future<HttpResponse<TransactionHistoryResponse>> getTransactionHistory({
     @Header("Authorization") String? token,
     @Header("Content-Type") String? contentType,
-    @Query('limit') String? limit,
+    @Query('limit') required int limit,
+    @Query('page') required int page,
   });
 }

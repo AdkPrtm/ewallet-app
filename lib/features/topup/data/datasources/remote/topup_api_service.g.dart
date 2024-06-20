@@ -13,7 +13,7 @@ class _TopupRemoteService implements TopupRemoteService {
     this._dio, {
     this.baseUrl,
   }) {
-    baseUrl ??= 'https://andhikawidiarto.my.id/api';
+    baseUrl ??= 'https://ewallet.andhikawidiarto.my.id/api';
   }
 
   final Dio _dio;
@@ -24,9 +24,9 @@ class _TopupRemoteService implements TopupRemoteService {
   Future<HttpResponse<TopUpResponse>> topup({
     String? token,
     String? contentType,
-    Map<String, dynamic>? body,
+    required Map<String, dynamic> body,
   }) async {
-    const _extra = <String, dynamic>{};
+    final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{
@@ -35,7 +35,7 @@ class _TopupRemoteService implements TopupRemoteService {
     };
     _headers.removeWhere((k, v) => v == null);
     final _data = <String, dynamic>{};
-    _data.addAll(body!);
+    _data.addAll(body);
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<HttpResponse<TopUpResponse>>(Options(
       method: 'POST',
@@ -60,11 +60,11 @@ class _TopupRemoteService implements TopupRemoteService {
   }
 
   @override
-  Future<HttpResponse<PaymentMethodTopupResponse>> getPaymentMethod({
+  Future<HttpResponse<List<PaymentMethodTopupResponse>>> getPaymentMethod({
     String? token,
     String? contentType,
   }) async {
-    const _extra = <String, dynamic>{};
+    final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{
@@ -72,9 +72,9 @@ class _TopupRemoteService implements TopupRemoteService {
       r'Content-Type': contentType,
     };
     _headers.removeWhere((k, v) => v == null);
-    final Map<String, dynamic>? _data = null;
-    final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<HttpResponse<PaymentMethodTopupResponse>>(Options(
+    const Map<String, dynamic>? _data = null;
+    final _result = await _dio.fetch<List<dynamic>>(
+        _setStreamType<HttpResponse<List<PaymentMethodTopupResponse>>>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
@@ -82,7 +82,7 @@ class _TopupRemoteService implements TopupRemoteService {
     )
             .compose(
               _dio.options,
-              '/paymentmethod',
+              '/topup',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -91,7 +91,10 @@ class _TopupRemoteService implements TopupRemoteService {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    final value = PaymentMethodTopupResponse.fromJson(_result.data!);
+    var value = _result.data!
+        .map((dynamic i) =>
+            PaymentMethodTopupResponse.fromJson(i as Map<String, dynamic>))
+        .toList();
     final httpResponse = HttpResponse(value, _result);
     return httpResponse;
   }

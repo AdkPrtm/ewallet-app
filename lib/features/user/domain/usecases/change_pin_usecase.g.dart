@@ -8,8 +8,8 @@ part of 'change_pin_usecase.dart';
 
 UpdatePinParams _$UpdatePinParamsFromJson(Map<String, dynamic> json) =>
     UpdatePinParams(
-      oldPin: json['previous_pin'] as int?,
-      newPin: json['new_pin'] as int?,
+      json['previous_pin'] as String,
+      json['new_pin'] as String,
     );
 
 Map<String, dynamic> _$UpdatePinParamsToJson(UpdatePinParams instance) =>

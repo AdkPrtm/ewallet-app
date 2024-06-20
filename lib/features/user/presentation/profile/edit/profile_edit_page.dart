@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:template_clean_architecture/core/resource/resource.dart';
-import 'package:template_clean_architecture/core/widgets/buttons.dart';
-import 'package:template_clean_architecture/core/widgets/forms.dart';
-import 'package:template_clean_architecture/features/user/domain/domain.dart';
-import 'package:template_clean_architecture/features/user/presentation/bloc/user_bloc.dart';
-import 'package:template_clean_architecture/utils/extensions/extensions.dart';
-import 'package:template_clean_architecture/utils/helper/model_success_helper.dart';
+import 'package:ewallet/core/resource/resource.dart';
+import 'package:ewallet/core/widgets/buttons.dart';
+import 'package:ewallet/core/widgets/forms.dart';
+import 'package:ewallet/features/user/domain/domain.dart';
+import 'package:ewallet/features/user/presentation/bloc/user_bloc.dart';
+import 'package:ewallet/utils/extensions/extensions.dart';
+import 'package:ewallet/utils/helper/model_success_helper.dart';
 
 class ProfileEditPage extends StatelessWidget {
   const ProfileEditPage({super.key, required this.userEntity});
@@ -44,7 +44,7 @@ class ProfileEditPage extends StatelessWidget {
                     if (value!.isEmpty) {
                       return 'Full Name Required';
                     }
-                      return null;
+                    return null;
                   },
                 ),
                 16.0.height,
@@ -55,7 +55,7 @@ class ProfileEditPage extends StatelessWidget {
                     if (value!.isEmpty) {
                       return 'Full Name Required';
                     }
-                      return null;
+                    return null;
                   },
                 ),
                 16.0.height,
@@ -66,7 +66,7 @@ class ProfileEditPage extends StatelessWidget {
                     if (!emailValidator(value!)) {
                       return 'Invalid Email';
                     }
-                      return null;
+                    return null;
                   },
                 ),
                 16.0.height,
@@ -116,10 +116,10 @@ class ProfileEditPage extends StatelessWidget {
                                   userEntity: userEntity,
                                   updateProfileUserParams:
                                       UpdateProfileUserParams(
-                                    username: conUsername.text,
-                                    name: conName.text,
-                                    email: conEmail.text,
-                                    password: conPassword.text,
+                                    conUsername.text,
+                                    conName.text,
+                                    conEmail.text,
+                                    conPassword.text,
                                   ),
                                 ),
                               );

@@ -2,9 +2,8 @@ part of 'transfer_bloc.dart';
 
 abstract class TransferState extends Equatable {
   const TransferState();
-
   @override
-  List<Object> get props => [];
+  List<Object?> get props => [];
 }
 
 class TransferInitial extends TransferState {}
@@ -18,16 +17,7 @@ class FailedTransfer extends TransferState {
 
   const FailedTransfer({this.message});
   @override
-  List<Object> get props => [message!];
-}
-
-
-class ListDataByUsername extends TransferState {
-  final List<UserBySearchingEntity>? listData;
-
-  const ListDataByUsername({this.listData});
-  @override
-  List<Object> get props => [listData!];
+  List<Object?> get props => [message];
 }
 
 class SuccessTransferHistory extends TransferState {

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:template_clean_architecture/core/resource/theme/theme.dart';
+import 'package:ewallet/core/resource/theme/theme.dart';
 
 class CustomFilledButton extends StatelessWidget {
   const CustomFilledButton({

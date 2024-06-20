@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:template_clean_architecture/core/resource/resource.dart';
-import 'package:template_clean_architecture/utils/extensions/extensions.dart';
-
+import 'package:ewallet/core/resource/resource.dart';
+import 'package:ewallet/utils/extensions/extensions.dart';
 
 class ShimmerProfileAndCardComponent extends StatelessWidget {
   const ShimmerProfileAndCardComponent({

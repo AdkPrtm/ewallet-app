@@ -2,11 +2,11 @@ import 'dart:io';
 
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
-import 'package:template_clean_architecture/core/error/failure.dart';
-import 'package:template_clean_architecture/core/resource/constant/api_list.dart';
-import 'package:template_clean_architecture/features/auth/data/data.dart';
-import 'package:template_clean_architecture/features/user/data/datasources/remote/remote.dart';
-import 'package:template_clean_architecture/features/user/domain/domain.dart';
+import 'package:ewallet/core/error/failure.dart';
+import 'package:ewallet/core/resource/constant/api_list.dart';
+import 'package:ewallet/features/auth/data/data.dart';
+import 'package:ewallet/features/user/data/datasources/remote/remote.dart';
+import 'package:ewallet/features/user/domain/domain.dart';
 
 class UserRepositoryImpl extends UserRepository {
   final UserRemoteService _userRemoteService;

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:template_clean_architecture/core/resource/resource.dart';
+import 'package:ewallet/core/resource/resource.dart';
 
 class CustomFormField extends StatelessWidget {
   const CustomFormField({

@@ -1,8 +1,9 @@
 import 'package:dio/dio.dart';
+import 'package:ewallet/features/auth/data/models/verify_otp_response.dart';
 import 'package:retrofit/retrofit.dart';
-import 'package:template_clean_architecture/core/resource/constant/api_list.dart';
-import 'package:template_clean_architecture/features/auth/data/models/models.dart';
-import 'package:template_clean_architecture/features/user/data/data.dart';
+import 'package:ewallet/core/resource/constant/api_list.dart';
+import 'package:ewallet/features/auth/data/models/models.dart';
+import 'package:ewallet/features/user/data/data.dart';
 
 part 'auth_api_service.g.dart';
 
@@ -10,25 +11,38 @@ part 'auth_api_service.g.dart';
 abstract class AuthRemoteService {
   factory AuthRemoteService(Dio dio) = _AuthRemoteService;
 
-  @POST('/isdataexists')
+  @POST('/auth/isdataexists')
   Future<HttpResponse<CheckDataResponse>> checkData({
-    @Body() Map<String, dynamic>? body,
+    @Body() required Map<String, dynamic> body,
     @Header("Content-Type") String? contentType,
   });
 
-  @POST('/login')
+  @POST('/auth/login')
   Future<HttpResponse<UserModel>> loginUser({
-    @Body() Map<String, dynamic>? body,
+    @Body() required Map<String, dynamic> body,
     @Header("Content-Type") String? contentType,
   });
 
-  @POST('/register')
+  @POST('/auth/register')
   Future<HttpResponse<UserModel>> signupUser({
-    @Body() Map<String, dynamic>? body,
+    @Body() required Map<String, dynamic> body,
     @Header("Content-Type") String? contentType,
   });
 
-  @GET('/users')
+  @POST('/auth/requestotp')
+  Future<HttpResponse<RequestOTPResponse>> requestOTP({
+    @Header("Authorization") String? token,
+    @Header("Content-Type") String? contentType,
+  });
+
+  @POST('/auth/verificationotp')
+  Future<HttpResponse<VerifyOTPResponse>> verifyOTP({
+    @Header("Authorization") String? token,
+    @Header("Content-Type") String? contentType,
+    @Body() required Map<String, dynamic> body,
+  });
+
+  @GET('/user')
   Future<HttpResponse<UserModel>> validationToken({
     @Header("Authorization") String? token,
     @Header("Content-Type") String? contentType,

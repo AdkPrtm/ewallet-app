@@ -12,7 +12,7 @@ part of 'update_data_user_usecase.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 UpdateProfileUserParams _$UpdateProfileUserParamsFromJson(
     Map<String, dynamic> json) {
@@ -21,14 +21,14 @@ UpdateProfileUserParams _$UpdateProfileUserParamsFromJson(
 
 /// @nodoc
 mixin _$UpdateProfileUserParams {
-  String? get username => throw _privateConstructorUsedError;
-  set username(String? value) => throw _privateConstructorUsedError;
-  String? get name => throw _privateConstructorUsedError;
-  set name(String? value) => throw _privateConstructorUsedError;
-  String? get email => throw _privateConstructorUsedError;
-  set email(String? value) => throw _privateConstructorUsedError;
-  String? get password => throw _privateConstructorUsedError;
-  set password(String? value) => throw _privateConstructorUsedError;
+  String get username => throw _privateConstructorUsedError;
+  set username(String value) => throw _privateConstructorUsedError;
+  String get name => throw _privateConstructorUsedError;
+  set name(String value) => throw _privateConstructorUsedError;
+  String get email => throw _privateConstructorUsedError;
+  set email(String value) => throw _privateConstructorUsedError;
+  String get password => throw _privateConstructorUsedError;
+  set password(String value) => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -42,7 +42,7 @@ abstract class $UpdateProfileUserParamsCopyWith<$Res> {
           $Res Function(UpdateProfileUserParams) then) =
       _$UpdateProfileUserParamsCopyWithImpl<$Res, UpdateProfileUserParams>;
   @useResult
-  $Res call({String? username, String? name, String? email, String? password});
+  $Res call({String username, String name, String email, String password});
 }
 
 /// @nodoc
@@ -59,98 +59,100 @@ class _$UpdateProfileUserParamsCopyWithImpl<$Res,
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? username = freezed,
-    Object? name = freezed,
-    Object? email = freezed,
-    Object? password = freezed,
+    Object? username = null,
+    Object? name = null,
+    Object? email = null,
+    Object? password = null,
   }) {
     return _then(_value.copyWith(
-      username: freezed == username
+      username: null == username
           ? _value.username
           : username // ignore: cast_nullable_to_non_nullable
-              as String?,
-      name: freezed == name
+              as String,
+      name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
-              as String?,
-      email: freezed == email
+              as String,
+      email: null == email
           ? _value.email
           : email // ignore: cast_nullable_to_non_nullable
-              as String?,
-      password: freezed == password
+              as String,
+      password: null == password
           ? _value.password
           : password // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as String,
     ) as $Val);
   }
 }
 
 /// @nodoc
-abstract class _$$_UpdateProfileUserParamsCopyWith<$Res>
+abstract class _$$UpdateProfileUserParamsImplCopyWith<$Res>
     implements $UpdateProfileUserParamsCopyWith<$Res> {
-  factory _$$_UpdateProfileUserParamsCopyWith(_$_UpdateProfileUserParams value,
-          $Res Function(_$_UpdateProfileUserParams) then) =
-      __$$_UpdateProfileUserParamsCopyWithImpl<$Res>;
+  factory _$$UpdateProfileUserParamsImplCopyWith(
+          _$UpdateProfileUserParamsImpl value,
+          $Res Function(_$UpdateProfileUserParamsImpl) then) =
+      __$$UpdateProfileUserParamsImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String? username, String? name, String? email, String? password});
+  $Res call({String username, String name, String email, String password});
 }
 
 /// @nodoc
-class __$$_UpdateProfileUserParamsCopyWithImpl<$Res>
+class __$$UpdateProfileUserParamsImplCopyWithImpl<$Res>
     extends _$UpdateProfileUserParamsCopyWithImpl<$Res,
-        _$_UpdateProfileUserParams>
-    implements _$$_UpdateProfileUserParamsCopyWith<$Res> {
-  __$$_UpdateProfileUserParamsCopyWithImpl(_$_UpdateProfileUserParams _value,
-      $Res Function(_$_UpdateProfileUserParams) _then)
+        _$UpdateProfileUserParamsImpl>
+    implements _$$UpdateProfileUserParamsImplCopyWith<$Res> {
+  __$$UpdateProfileUserParamsImplCopyWithImpl(
+      _$UpdateProfileUserParamsImpl _value,
+      $Res Function(_$UpdateProfileUserParamsImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? username = freezed,
-    Object? name = freezed,
-    Object? email = freezed,
-    Object? password = freezed,
+    Object? username = null,
+    Object? name = null,
+    Object? email = null,
+    Object? password = null,
   }) {
-    return _then(_$_UpdateProfileUserParams(
-      username: freezed == username
+    return _then(_$UpdateProfileUserParamsImpl(
+      null == username
           ? _value.username
           : username // ignore: cast_nullable_to_non_nullable
-              as String?,
-      name: freezed == name
+              as String,
+      null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
-              as String?,
-      email: freezed == email
+              as String,
+      null == email
           ? _value.email
           : email // ignore: cast_nullable_to_non_nullable
-              as String?,
-      password: freezed == password
+              as String,
+      null == password
           ? _value.password
           : password // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as String,
     ));
   }
 }
 
 /// @nodoc
 @JsonSerializable()
-class _$_UpdateProfileUserParams implements _UpdateProfileUserParams {
-  _$_UpdateProfileUserParams(
-      {this.username, this.name, this.email, this.password});
+class _$UpdateProfileUserParamsImpl implements _UpdateProfileUserParams {
+  _$UpdateProfileUserParamsImpl(
+      this.username, this.name, this.email, this.password);
 
-  factory _$_UpdateProfileUserParams.fromJson(Map<String, dynamic> json) =>
-      _$$_UpdateProfileUserParamsFromJson(json);
+  factory _$UpdateProfileUserParamsImpl.fromJson(Map<String, dynamic> json) =>
+      _$$UpdateProfileUserParamsImplFromJson(json);
 
   @override
-  String? username;
+  String username;
   @override
-  String? name;
+  String name;
   @override
-  String? email;
+  String email;
   @override
-  String? password;
+  String password;
 
   @override
   String toString() {
@@ -160,14 +162,13 @@ class _$_UpdateProfileUserParams implements _UpdateProfileUserParams {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_UpdateProfileUserParamsCopyWith<_$_UpdateProfileUserParams>
-      get copyWith =>
-          __$$_UpdateProfileUserParamsCopyWithImpl<_$_UpdateProfileUserParams>(
-              this, _$identity);
+  _$$UpdateProfileUserParamsImplCopyWith<_$UpdateProfileUserParamsImpl>
+      get copyWith => __$$UpdateProfileUserParamsImplCopyWithImpl<
+          _$UpdateProfileUserParamsImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_UpdateProfileUserParamsToJson(
+    return _$$UpdateProfileUserParamsImplToJson(
       this,
     );
   }
@@ -175,28 +176,26 @@ class _$_UpdateProfileUserParams implements _UpdateProfileUserParams {
 
 abstract class _UpdateProfileUserParams implements UpdateProfileUserParams {
   factory _UpdateProfileUserParams(
-      {String? username,
-      String? name,
-      String? email,
-      String? password}) = _$_UpdateProfileUserParams;
+          String username, String name, String email, String password) =
+      _$UpdateProfileUserParamsImpl;
 
   factory _UpdateProfileUserParams.fromJson(Map<String, dynamic> json) =
-      _$_UpdateProfileUserParams.fromJson;
+      _$UpdateProfileUserParamsImpl.fromJson;
 
   @override
-  String? get username;
-  set username(String? value);
+  String get username;
+  set username(String value);
   @override
-  String? get name;
-  set name(String? value);
+  String get name;
+  set name(String value);
   @override
-  String? get email;
-  set email(String? value);
+  String get email;
+  set email(String value);
   @override
-  String? get password;
-  set password(String? value);
+  String get password;
+  set password(String value);
   @override
   @JsonKey(ignore: true)
-  _$$_UpdateProfileUserParamsCopyWith<_$_UpdateProfileUserParams>
+  _$$UpdateProfileUserParamsImplCopyWith<_$UpdateProfileUserParamsImpl>
       get copyWith => throw _privateConstructorUsedError;
 }

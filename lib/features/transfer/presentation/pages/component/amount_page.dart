@@ -2,15 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
-import 'package:template_clean_architecture/core/resource/resource.dart';
-import 'package:template_clean_architecture/core/widgets/buttons.dart';
-import 'package:template_clean_architecture/core/widgets/type_number_widget.dart';
-import 'package:template_clean_architecture/features/auth/presentation/bloc/auth_bloc.dart';
-import 'package:template_clean_architecture/features/topup/presentation/pages/component/amount_component.dart';
-import 'package:template_clean_architecture/features/transfer/domain/usecases/usecases.dart';
-import 'package:template_clean_architecture/features/transfer/presentation/bloc/transfer_bloc.dart';
-import 'package:template_clean_architecture/utils/extensions/extensions.dart';
-import 'package:template_clean_architecture/utils/helper/helper.dart';
+import 'package:ewallet/core/resource/resource.dart';
+import 'package:ewallet/core/widgets/buttons.dart';
+import 'package:ewallet/core/widgets/type_number_widget.dart';
+import 'package:ewallet/features/topup/presentation/pages/component/amount_component.dart';
+import 'package:ewallet/features/transfer/domain/usecases/usecases.dart';
+import 'package:ewallet/features/transfer/presentation/bloc/transfer_bloc.dart';
+import 'package:ewallet/utils/extensions/extensions.dart';
+import 'package:ewallet/utils/helper/helper.dart';
 
 class AmountTransferPage extends StatefulWidget {
   const AmountTransferPage({
@@ -211,33 +210,22 @@ class _AmountTransferPageState extends State<AmountTransferPage> {
                   CustomFilledButton(
                     title: 'Checkout Now',
                     onTap: () async {
-                      final authState = context.read<AuthBloc>().state;
-                      int amount =
-                          int.parse(amountController.text.replaceAll('.', ''));
-                      if (amount <= 999) {
-                        showCustomSnackbar(context, 'minimum transfer 1000');
-                      } else {
-                        if (authState is AuthDone) {
-                          if (await Navigator.pushNamed(context, '/pin',
-                                  arguments: authState.userEntity) ==
-                              true) {
-                            if (context.mounted) {
-                              context.read<TransferBloc>().add(
-                                    RequestTransferEvent(
-                                      transferParams:
-                                          widget.transferParams.copyWith(
-                                        sendToUsername: widget
-                                            .transferParams.sendToUsername,
-                                        pin: authState.userEntity.pin,
-                                        amount: int.parse(
-                                          amountController.text
-                                              .replaceAll('.', ''),
-                                        ),
-                                      ),
+                      final pin = await Navigator.pushNamed(context, '/pin');
+                      if (pin != null) {
+                        if (context.mounted) {
+                          context.read<TransferBloc>().add(
+                                RequestTransferEvent(
+                                  transferParams:
+                                      widget.transferParams.copyWith(
+                                    sendToUsername:
+                                        widget.transferParams.sendToUsername,
+                                    pin: pin.toString(),
+                                    amount: int.parse(
+                                      amountController.text.replaceAll('.', ''),
                                     ),
-                                  );
-                            }
-                          }
+                                  ),
+                                ),
+                              );
                         }
                       }
                     },

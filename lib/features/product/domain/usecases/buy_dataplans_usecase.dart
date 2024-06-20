@@ -1,8 +1,8 @@
 import 'package:dartz/dartz.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:template_clean_architecture/core/error/error.dart';
-import 'package:template_clean_architecture/core/usecase/usecase.dart';
-import 'package:template_clean_architecture/features/product/product.dart';
+import 'package:ewallet/core/error/error.dart';
+import 'package:ewallet/core/usecase/usecase.dart';
+import 'package:ewallet/features/product/product.dart';
 
 part 'buy_dataplans_usecase.g.dart';
 
@@ -20,15 +20,15 @@ class BuyDataPlansUseCase
 @JsonSerializable()
 class BuyDataPlansParams {
   @JsonKey(name: 'data_plan_id')
-  int? idPlans;
-  @JsonKey(name: 'phone_number')
-  String? phoneNumber;
-  String? pin;
+  String idPlans;
+  @JsonKey(name: 'number_phone')
+  String phoneNumber;
+  String pin;
 
   BuyDataPlansParams({
-    this.idPlans,
-    this.phoneNumber,
-    this.pin,
+    required this.idPlans,
+    required this.phoneNumber,
+    required this.pin,
   });
 
   Map<String, dynamic> toJson() => _$BuyDataPlansParamsToJson(this);

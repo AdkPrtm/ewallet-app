@@ -12,7 +12,7 @@ part of 'dataplans_response.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 DataPlansResponse _$DataPlansResponseFromJson(Map<String, dynamic> json) {
   return _DataPlansResponse.fromJson(json);
@@ -20,48 +20,17 @@ DataPlansResponse _$DataPlansResponseFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$DataPlansResponse {
+  List<DataOpertorCardResponse>? get data => throw _privateConstructorUsedError;
+  set data(List<DataOpertorCardResponse>? value) =>
+      throw _privateConstructorUsedError;
   @JsonKey(name: 'current_page')
   int? get currentPage => throw _privateConstructorUsedError;
   @JsonKey(name: 'current_page')
   set currentPage(int? value) => throw _privateConstructorUsedError;
-  List<DataOpertorCardResponse>? get data => throw _privateConstructorUsedError;
-  set data(List<DataOpertorCardResponse>? value) =>
-      throw _privateConstructorUsedError;
-  @JsonKey(name: 'first_page_url')
-  String? get firstPageUrl => throw _privateConstructorUsedError;
-  @JsonKey(name: 'first_page_url')
-  set firstPageUrl(String? value) => throw _privateConstructorUsedError;
-  int? get from => throw _privateConstructorUsedError;
-  set from(int? value) => throw _privateConstructorUsedError;
   @JsonKey(name: 'last_page')
   int? get lastPage => throw _privateConstructorUsedError;
   @JsonKey(name: 'last_page')
   set lastPage(int? value) => throw _privateConstructorUsedError;
-  @JsonKey(name: 'last_page_url')
-  String? get lastPageUrl => throw _privateConstructorUsedError;
-  @JsonKey(name: 'last_page_url')
-  set lastPageUrl(String? value) => throw _privateConstructorUsedError;
-  List<LinkDataPlansResponse>? get links => throw _privateConstructorUsedError;
-  set links(List<LinkDataPlansResponse>? value) =>
-      throw _privateConstructorUsedError;
-  @JsonKey(name: 'next_page_url')
-  String? get nextPageUrl => throw _privateConstructorUsedError;
-  @JsonKey(name: 'next_page_url')
-  set nextPageUrl(String? value) => throw _privateConstructorUsedError;
-  String? get path => throw _privateConstructorUsedError;
-  set path(String? value) => throw _privateConstructorUsedError;
-  @JsonKey(name: 'per_page')
-  int? get perPage => throw _privateConstructorUsedError;
-  @JsonKey(name: 'per_page')
-  set perPage(int? value) => throw _privateConstructorUsedError;
-  @JsonKey(name: 'prev_page_url')
-  String? get prevPageUrl => throw _privateConstructorUsedError;
-  @JsonKey(name: 'prev_page_url')
-  set prevPageUrl(String? value) => throw _privateConstructorUsedError;
-  int? get to => throw _privateConstructorUsedError;
-  set to(int? value) => throw _privateConstructorUsedError;
-  int? get total => throw _privateConstructorUsedError;
-  set total(int? value) => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -76,19 +45,9 @@ abstract class $DataPlansResponseCopyWith<$Res> {
       _$DataPlansResponseCopyWithImpl<$Res, DataPlansResponse>;
   @useResult
   $Res call(
-      {@JsonKey(name: 'current_page') int? currentPage,
-      List<DataOpertorCardResponse>? data,
-      @JsonKey(name: 'first_page_url') String? firstPageUrl,
-      int? from,
-      @JsonKey(name: 'last_page') int? lastPage,
-      @JsonKey(name: 'last_page_url') String? lastPageUrl,
-      List<LinkDataPlansResponse>? links,
-      @JsonKey(name: 'next_page_url') String? nextPageUrl,
-      String? path,
-      @JsonKey(name: 'per_page') int? perPage,
-      @JsonKey(name: 'prev_page_url') String? prevPageUrl,
-      int? to,
-      int? total});
+      {List<DataOpertorCardResponse>? data,
+      @JsonKey(name: 'current_page') int? currentPage,
+      @JsonKey(name: 'last_page') int? lastPage});
 }
 
 /// @nodoc
@@ -104,178 +63,68 @@ class _$DataPlansResponseCopyWithImpl<$Res, $Val extends DataPlansResponse>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? currentPage = freezed,
     Object? data = freezed,
-    Object? firstPageUrl = freezed,
-    Object? from = freezed,
+    Object? currentPage = freezed,
     Object? lastPage = freezed,
-    Object? lastPageUrl = freezed,
-    Object? links = freezed,
-    Object? nextPageUrl = freezed,
-    Object? path = freezed,
-    Object? perPage = freezed,
-    Object? prevPageUrl = freezed,
-    Object? to = freezed,
-    Object? total = freezed,
   }) {
     return _then(_value.copyWith(
-      currentPage: freezed == currentPage
-          ? _value.currentPage
-          : currentPage // ignore: cast_nullable_to_non_nullable
-              as int?,
       data: freezed == data
           ? _value.data
           : data // ignore: cast_nullable_to_non_nullable
               as List<DataOpertorCardResponse>?,
-      firstPageUrl: freezed == firstPageUrl
-          ? _value.firstPageUrl
-          : firstPageUrl // ignore: cast_nullable_to_non_nullable
-              as String?,
-      from: freezed == from
-          ? _value.from
-          : from // ignore: cast_nullable_to_non_nullable
+      currentPage: freezed == currentPage
+          ? _value.currentPage
+          : currentPage // ignore: cast_nullable_to_non_nullable
               as int?,
       lastPage: freezed == lastPage
           ? _value.lastPage
           : lastPage // ignore: cast_nullable_to_non_nullable
-              as int?,
-      lastPageUrl: freezed == lastPageUrl
-          ? _value.lastPageUrl
-          : lastPageUrl // ignore: cast_nullable_to_non_nullable
-              as String?,
-      links: freezed == links
-          ? _value.links
-          : links // ignore: cast_nullable_to_non_nullable
-              as List<LinkDataPlansResponse>?,
-      nextPageUrl: freezed == nextPageUrl
-          ? _value.nextPageUrl
-          : nextPageUrl // ignore: cast_nullable_to_non_nullable
-              as String?,
-      path: freezed == path
-          ? _value.path
-          : path // ignore: cast_nullable_to_non_nullable
-              as String?,
-      perPage: freezed == perPage
-          ? _value.perPage
-          : perPage // ignore: cast_nullable_to_non_nullable
-              as int?,
-      prevPageUrl: freezed == prevPageUrl
-          ? _value.prevPageUrl
-          : prevPageUrl // ignore: cast_nullable_to_non_nullable
-              as String?,
-      to: freezed == to
-          ? _value.to
-          : to // ignore: cast_nullable_to_non_nullable
-              as int?,
-      total: freezed == total
-          ? _value.total
-          : total // ignore: cast_nullable_to_non_nullable
               as int?,
     ) as $Val);
   }
 }
 
 /// @nodoc
-abstract class _$$_DataPlansResponseCopyWith<$Res>
+abstract class _$$DataPlansResponseImplCopyWith<$Res>
     implements $DataPlansResponseCopyWith<$Res> {
-  factory _$$_DataPlansResponseCopyWith(_$_DataPlansResponse value,
-          $Res Function(_$_DataPlansResponse) then) =
-      __$$_DataPlansResponseCopyWithImpl<$Res>;
+  factory _$$DataPlansResponseImplCopyWith(_$DataPlansResponseImpl value,
+          $Res Function(_$DataPlansResponseImpl) then) =
+      __$$DataPlansResponseImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
-      {@JsonKey(name: 'current_page') int? currentPage,
-      List<DataOpertorCardResponse>? data,
-      @JsonKey(name: 'first_page_url') String? firstPageUrl,
-      int? from,
-      @JsonKey(name: 'last_page') int? lastPage,
-      @JsonKey(name: 'last_page_url') String? lastPageUrl,
-      List<LinkDataPlansResponse>? links,
-      @JsonKey(name: 'next_page_url') String? nextPageUrl,
-      String? path,
-      @JsonKey(name: 'per_page') int? perPage,
-      @JsonKey(name: 'prev_page_url') String? prevPageUrl,
-      int? to,
-      int? total});
+      {List<DataOpertorCardResponse>? data,
+      @JsonKey(name: 'current_page') int? currentPage,
+      @JsonKey(name: 'last_page') int? lastPage});
 }
 
 /// @nodoc
-class __$$_DataPlansResponseCopyWithImpl<$Res>
-    extends _$DataPlansResponseCopyWithImpl<$Res, _$_DataPlansResponse>
-    implements _$$_DataPlansResponseCopyWith<$Res> {
-  __$$_DataPlansResponseCopyWithImpl(
-      _$_DataPlansResponse _value, $Res Function(_$_DataPlansResponse) _then)
+class __$$DataPlansResponseImplCopyWithImpl<$Res>
+    extends _$DataPlansResponseCopyWithImpl<$Res, _$DataPlansResponseImpl>
+    implements _$$DataPlansResponseImplCopyWith<$Res> {
+  __$$DataPlansResponseImplCopyWithImpl(_$DataPlansResponseImpl _value,
+      $Res Function(_$DataPlansResponseImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? currentPage = freezed,
     Object? data = freezed,
-    Object? firstPageUrl = freezed,
-    Object? from = freezed,
+    Object? currentPage = freezed,
     Object? lastPage = freezed,
-    Object? lastPageUrl = freezed,
-    Object? links = freezed,
-    Object? nextPageUrl = freezed,
-    Object? path = freezed,
-    Object? perPage = freezed,
-    Object? prevPageUrl = freezed,
-    Object? to = freezed,
-    Object? total = freezed,
   }) {
-    return _then(_$_DataPlansResponse(
-      currentPage: freezed == currentPage
-          ? _value.currentPage
-          : currentPage // ignore: cast_nullable_to_non_nullable
-              as int?,
+    return _then(_$DataPlansResponseImpl(
       data: freezed == data
           ? _value.data
           : data // ignore: cast_nullable_to_non_nullable
               as List<DataOpertorCardResponse>?,
-      firstPageUrl: freezed == firstPageUrl
-          ? _value.firstPageUrl
-          : firstPageUrl // ignore: cast_nullable_to_non_nullable
-              as String?,
-      from: freezed == from
-          ? _value.from
-          : from // ignore: cast_nullable_to_non_nullable
+      currentPage: freezed == currentPage
+          ? _value.currentPage
+          : currentPage // ignore: cast_nullable_to_non_nullable
               as int?,
       lastPage: freezed == lastPage
           ? _value.lastPage
           : lastPage // ignore: cast_nullable_to_non_nullable
-              as int?,
-      lastPageUrl: freezed == lastPageUrl
-          ? _value.lastPageUrl
-          : lastPageUrl // ignore: cast_nullable_to_non_nullable
-              as String?,
-      links: freezed == links
-          ? _value.links
-          : links // ignore: cast_nullable_to_non_nullable
-              as List<LinkDataPlansResponse>?,
-      nextPageUrl: freezed == nextPageUrl
-          ? _value.nextPageUrl
-          : nextPageUrl // ignore: cast_nullable_to_non_nullable
-              as String?,
-      path: freezed == path
-          ? _value.path
-          : path // ignore: cast_nullable_to_non_nullable
-              as String?,
-      perPage: freezed == perPage
-          ? _value.perPage
-          : perPage // ignore: cast_nullable_to_non_nullable
-              as int?,
-      prevPageUrl: freezed == prevPageUrl
-          ? _value.prevPageUrl
-          : prevPageUrl // ignore: cast_nullable_to_non_nullable
-              as String?,
-      to: freezed == to
-          ? _value.to
-          : to // ignore: cast_nullable_to_non_nullable
-              as int?,
-      total: freezed == total
-          ? _value.total
-          : total // ignore: cast_nullable_to_non_nullable
               as int?,
     ));
   }
@@ -283,75 +132,40 @@ class __$$_DataPlansResponseCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_DataPlansResponse extends _DataPlansResponse {
-  _$_DataPlansResponse(
-      {@JsonKey(name: 'current_page') this.currentPage,
-      this.data,
-      @JsonKey(name: 'first_page_url') this.firstPageUrl,
-      this.from,
-      @JsonKey(name: 'last_page') this.lastPage,
-      @JsonKey(name: 'last_page_url') this.lastPageUrl,
-      this.links,
-      @JsonKey(name: 'next_page_url') this.nextPageUrl,
-      this.path,
-      @JsonKey(name: 'per_page') this.perPage,
-      @JsonKey(name: 'prev_page_url') this.prevPageUrl,
-      this.to,
-      this.total})
+class _$DataPlansResponseImpl extends _DataPlansResponse {
+  _$DataPlansResponseImpl(
+      {this.data,
+      @JsonKey(name: 'current_page') this.currentPage,
+      @JsonKey(name: 'last_page') this.lastPage})
       : super._();
 
-  factory _$_DataPlansResponse.fromJson(Map<String, dynamic> json) =>
-      _$$_DataPlansResponseFromJson(json);
+  factory _$DataPlansResponseImpl.fromJson(Map<String, dynamic> json) =>
+      _$$DataPlansResponseImplFromJson(json);
 
+  @override
+  List<DataOpertorCardResponse>? data;
   @override
   @JsonKey(name: 'current_page')
   int? currentPage;
   @override
-  List<DataOpertorCardResponse>? data;
-  @override
-  @JsonKey(name: 'first_page_url')
-  String? firstPageUrl;
-  @override
-  int? from;
-  @override
   @JsonKey(name: 'last_page')
   int? lastPage;
-  @override
-  @JsonKey(name: 'last_page_url')
-  String? lastPageUrl;
-  @override
-  List<LinkDataPlansResponse>? links;
-  @override
-  @JsonKey(name: 'next_page_url')
-  String? nextPageUrl;
-  @override
-  String? path;
-  @override
-  @JsonKey(name: 'per_page')
-  int? perPage;
-  @override
-  @JsonKey(name: 'prev_page_url')
-  String? prevPageUrl;
-  @override
-  int? to;
-  @override
-  int? total;
 
   @override
   String toString() {
-    return 'DataPlansResponse(currentPage: $currentPage, data: $data, firstPageUrl: $firstPageUrl, from: $from, lastPage: $lastPage, lastPageUrl: $lastPageUrl, links: $links, nextPageUrl: $nextPageUrl, path: $path, perPage: $perPage, prevPageUrl: $prevPageUrl, to: $to, total: $total)';
+    return 'DataPlansResponse(data: $data, currentPage: $currentPage, lastPage: $lastPage)';
   }
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_DataPlansResponseCopyWith<_$_DataPlansResponse> get copyWith =>
-      __$$_DataPlansResponseCopyWithImpl<_$_DataPlansResponse>(
+  _$$DataPlansResponseImplCopyWith<_$DataPlansResponseImpl> get copyWith =>
+      __$$DataPlansResponseImplCopyWithImpl<_$DataPlansResponseImpl>(
           this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_DataPlansResponseToJson(
+    return _$$DataPlansResponseImplToJson(
       this,
     );
   }
@@ -359,80 +173,30 @@ class _$_DataPlansResponse extends _DataPlansResponse {
 
 abstract class _DataPlansResponse extends DataPlansResponse {
   factory _DataPlansResponse(
-      {@JsonKey(name: 'current_page') int? currentPage,
-      List<DataOpertorCardResponse>? data,
-      @JsonKey(name: 'first_page_url') String? firstPageUrl,
-      int? from,
-      @JsonKey(name: 'last_page') int? lastPage,
-      @JsonKey(name: 'last_page_url') String? lastPageUrl,
-      List<LinkDataPlansResponse>? links,
-      @JsonKey(name: 'next_page_url') String? nextPageUrl,
-      String? path,
-      @JsonKey(name: 'per_page') int? perPage,
-      @JsonKey(name: 'prev_page_url') String? prevPageUrl,
-      int? to,
-      int? total}) = _$_DataPlansResponse;
+      {List<DataOpertorCardResponse>? data,
+      @JsonKey(name: 'current_page') int? currentPage,
+      @JsonKey(name: 'last_page') int? lastPage}) = _$DataPlansResponseImpl;
   _DataPlansResponse._() : super._();
 
   factory _DataPlansResponse.fromJson(Map<String, dynamic> json) =
-      _$_DataPlansResponse.fromJson;
+      _$DataPlansResponseImpl.fromJson;
 
+  @override
+  List<DataOpertorCardResponse>? get data;
+  set data(List<DataOpertorCardResponse>? value);
   @override
   @JsonKey(name: 'current_page')
   int? get currentPage;
   @JsonKey(name: 'current_page')
   set currentPage(int? value);
   @override
-  List<DataOpertorCardResponse>? get data;
-  set data(List<DataOpertorCardResponse>? value);
-  @override
-  @JsonKey(name: 'first_page_url')
-  String? get firstPageUrl;
-  @JsonKey(name: 'first_page_url')
-  set firstPageUrl(String? value);
-  @override
-  int? get from;
-  set from(int? value);
-  @override
   @JsonKey(name: 'last_page')
   int? get lastPage;
   @JsonKey(name: 'last_page')
   set lastPage(int? value);
   @override
-  @JsonKey(name: 'last_page_url')
-  String? get lastPageUrl;
-  @JsonKey(name: 'last_page_url')
-  set lastPageUrl(String? value);
-  @override
-  List<LinkDataPlansResponse>? get links;
-  set links(List<LinkDataPlansResponse>? value);
-  @override
-  @JsonKey(name: 'next_page_url')
-  String? get nextPageUrl;
-  @JsonKey(name: 'next_page_url')
-  set nextPageUrl(String? value);
-  @override
-  String? get path;
-  set path(String? value);
-  @override
-  @JsonKey(name: 'per_page')
-  int? get perPage;
-  @JsonKey(name: 'per_page')
-  set perPage(int? value);
-  @override
-  @JsonKey(name: 'prev_page_url')
-  String? get prevPageUrl;
-  @JsonKey(name: 'prev_page_url')
-  set prevPageUrl(String? value);
-  @override
-  int? get to;
-  set to(int? value);
-  @override
-  int? get total;
-  set total(int? value);
-  @override
   @JsonKey(ignore: true)
-  _$$_DataPlansResponseCopyWith<_$_DataPlansResponse> get copyWith =>
+  _$$DataPlansResponseImplCopyWith<_$DataPlansResponseImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -443,8 +207,8 @@ DataOpertorCardResponse _$DataOpertorCardResponseFromJson(
 
 /// @nodoc
 mixin _$DataOpertorCardResponse {
-  int? get id => throw _privateConstructorUsedError;
-  set id(int? value) => throw _privateConstructorUsedError;
+  String? get id => throw _privateConstructorUsedError;
+  set id(String? value) => throw _privateConstructorUsedError;
   String? get name => throw _privateConstructorUsedError;
   set name(String? value) => throw _privateConstructorUsedError;
   String? get status => throw _privateConstructorUsedError;
@@ -471,7 +235,7 @@ abstract class $DataOpertorCardResponseCopyWith<$Res> {
       _$DataOpertorCardResponseCopyWithImpl<$Res, DataOpertorCardResponse>;
   @useResult
   $Res call(
-      {int? id,
+      {String? id,
       String? name,
       String? status,
       String? thumbnail,
@@ -502,7 +266,7 @@ class _$DataOpertorCardResponseCopyWithImpl<$Res,
       id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as String?,
       name: freezed == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -524,15 +288,16 @@ class _$DataOpertorCardResponseCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_DataOpertorCardResponseCopyWith<$Res>
+abstract class _$$DataOpertorCardResponseImplCopyWith<$Res>
     implements $DataOpertorCardResponseCopyWith<$Res> {
-  factory _$$_DataOpertorCardResponseCopyWith(_$_DataOpertorCardResponse value,
-          $Res Function(_$_DataOpertorCardResponse) then) =
-      __$$_DataOpertorCardResponseCopyWithImpl<$Res>;
+  factory _$$DataOpertorCardResponseImplCopyWith(
+          _$DataOpertorCardResponseImpl value,
+          $Res Function(_$DataOpertorCardResponseImpl) then) =
+      __$$DataOpertorCardResponseImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
-      {int? id,
+      {String? id,
       String? name,
       String? status,
       String? thumbnail,
@@ -540,12 +305,13 @@ abstract class _$$_DataOpertorCardResponseCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_DataOpertorCardResponseCopyWithImpl<$Res>
+class __$$DataOpertorCardResponseImplCopyWithImpl<$Res>
     extends _$DataOpertorCardResponseCopyWithImpl<$Res,
-        _$_DataOpertorCardResponse>
-    implements _$$_DataOpertorCardResponseCopyWith<$Res> {
-  __$$_DataOpertorCardResponseCopyWithImpl(_$_DataOpertorCardResponse _value,
-      $Res Function(_$_DataOpertorCardResponse) _then)
+        _$DataOpertorCardResponseImpl>
+    implements _$$DataOpertorCardResponseImplCopyWith<$Res> {
+  __$$DataOpertorCardResponseImplCopyWithImpl(
+      _$DataOpertorCardResponseImpl _value,
+      $Res Function(_$DataOpertorCardResponseImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -557,11 +323,11 @@ class __$$_DataOpertorCardResponseCopyWithImpl<$Res>
     Object? thumbnail = freezed,
     Object? dataPlans = freezed,
   }) {
-    return _then(_$_DataOpertorCardResponse(
+    return _then(_$DataOpertorCardResponseImpl(
       id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as String?,
       name: freezed == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -584,8 +350,8 @@ class __$$_DataOpertorCardResponseCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_DataOpertorCardResponse extends _DataOpertorCardResponse {
-  _$_DataOpertorCardResponse(
+class _$DataOpertorCardResponseImpl extends _DataOpertorCardResponse {
+  _$DataOpertorCardResponseImpl(
       {this.id,
       this.name,
       this.status,
@@ -593,11 +359,11 @@ class _$_DataOpertorCardResponse extends _DataOpertorCardResponse {
       @JsonKey(name: 'data_plans') this.dataPlans})
       : super._();
 
-  factory _$_DataOpertorCardResponse.fromJson(Map<String, dynamic> json) =>
-      _$$_DataOpertorCardResponseFromJson(json);
+  factory _$DataOpertorCardResponseImpl.fromJson(Map<String, dynamic> json) =>
+      _$$DataOpertorCardResponseImplFromJson(json);
 
   @override
-  int? id;
+  String? id;
   @override
   String? name;
   @override
@@ -616,14 +382,13 @@ class _$_DataOpertorCardResponse extends _DataOpertorCardResponse {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_DataOpertorCardResponseCopyWith<_$_DataOpertorCardResponse>
-      get copyWith =>
-          __$$_DataOpertorCardResponseCopyWithImpl<_$_DataOpertorCardResponse>(
-              this, _$identity);
+  _$$DataOpertorCardResponseImplCopyWith<_$DataOpertorCardResponseImpl>
+      get copyWith => __$$DataOpertorCardResponseImplCopyWithImpl<
+          _$DataOpertorCardResponseImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_DataOpertorCardResponseToJson(
+    return _$$DataOpertorCardResponseImplToJson(
       this,
     );
   }
@@ -631,20 +396,20 @@ class _$_DataOpertorCardResponse extends _DataOpertorCardResponse {
 
 abstract class _DataOpertorCardResponse extends DataOpertorCardResponse {
   factory _DataOpertorCardResponse(
-      {int? id,
+      {String? id,
       String? name,
       String? status,
       String? thumbnail,
       @JsonKey(name: 'data_plans')
-      List<DataPlansListResponse>? dataPlans}) = _$_DataOpertorCardResponse;
+      List<DataPlansListResponse>? dataPlans}) = _$DataOpertorCardResponseImpl;
   _DataOpertorCardResponse._() : super._();
 
   factory _DataOpertorCardResponse.fromJson(Map<String, dynamic> json) =
-      _$_DataOpertorCardResponse.fromJson;
+      _$DataOpertorCardResponseImpl.fromJson;
 
   @override
-  int? get id;
-  set id(int? value);
+  String? get id;
+  set id(String? value);
   @override
   String? get name;
   set name(String? value);
@@ -661,7 +426,7 @@ abstract class _DataOpertorCardResponse extends DataOpertorCardResponse {
   set dataPlans(List<DataPlansListResponse>? value);
   @override
   @JsonKey(ignore: true)
-  _$$_DataOpertorCardResponseCopyWith<_$_DataOpertorCardResponse>
+  _$$DataOpertorCardResponseImplCopyWith<_$DataOpertorCardResponseImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
 
@@ -672,12 +437,12 @@ DataPlansListResponse _$DataPlansListResponseFromJson(
 
 /// @nodoc
 mixin _$DataPlansListResponse {
-  int? get id => throw _privateConstructorUsedError;
-  set id(int? value) => throw _privateConstructorUsedError;
+  String? get id => throw _privateConstructorUsedError;
+  set id(String? value) => throw _privateConstructorUsedError;
   String? get name => throw _privateConstructorUsedError;
   set name(String? value) => throw _privateConstructorUsedError;
-  String? get price => throw _privateConstructorUsedError;
-  set price(String? value) => throw _privateConstructorUsedError;
+  int? get price => throw _privateConstructorUsedError;
+  set price(int? value) => throw _privateConstructorUsedError;
   @JsonKey(name: 'operator_card_id')
   String? get operatorCardId => throw _privateConstructorUsedError;
   @JsonKey(name: 'operator_card_id')
@@ -696,9 +461,9 @@ abstract class $DataPlansListResponseCopyWith<$Res> {
       _$DataPlansListResponseCopyWithImpl<$Res, DataPlansListResponse>;
   @useResult
   $Res call(
-      {int? id,
+      {String? id,
       String? name,
-      String? price,
+      int? price,
       @JsonKey(name: 'operator_card_id') String? operatorCardId});
 }
 
@@ -725,7 +490,7 @@ class _$DataPlansListResponseCopyWithImpl<$Res,
       id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as String?,
       name: freezed == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -733,7 +498,7 @@ class _$DataPlansListResponseCopyWithImpl<$Res,
       price: freezed == price
           ? _value.price
           : price // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as int?,
       operatorCardId: freezed == operatorCardId
           ? _value.operatorCardId
           : operatorCardId // ignore: cast_nullable_to_non_nullable
@@ -743,26 +508,28 @@ class _$DataPlansListResponseCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_DataPlansListResponseCopyWith<$Res>
+abstract class _$$DataPlansListResponseImplCopyWith<$Res>
     implements $DataPlansListResponseCopyWith<$Res> {
-  factory _$$_DataPlansListResponseCopyWith(_$_DataPlansListResponse value,
-          $Res Function(_$_DataPlansListResponse) then) =
-      __$$_DataPlansListResponseCopyWithImpl<$Res>;
+  factory _$$DataPlansListResponseImplCopyWith(
+          _$DataPlansListResponseImpl value,
+          $Res Function(_$DataPlansListResponseImpl) then) =
+      __$$DataPlansListResponseImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
-      {int? id,
+      {String? id,
       String? name,
-      String? price,
+      int? price,
       @JsonKey(name: 'operator_card_id') String? operatorCardId});
 }
 
 /// @nodoc
-class __$$_DataPlansListResponseCopyWithImpl<$Res>
-    extends _$DataPlansListResponseCopyWithImpl<$Res, _$_DataPlansListResponse>
-    implements _$$_DataPlansListResponseCopyWith<$Res> {
-  __$$_DataPlansListResponseCopyWithImpl(_$_DataPlansListResponse _value,
-      $Res Function(_$_DataPlansListResponse) _then)
+class __$$DataPlansListResponseImplCopyWithImpl<$Res>
+    extends _$DataPlansListResponseCopyWithImpl<$Res,
+        _$DataPlansListResponseImpl>
+    implements _$$DataPlansListResponseImplCopyWith<$Res> {
+  __$$DataPlansListResponseImplCopyWithImpl(_$DataPlansListResponseImpl _value,
+      $Res Function(_$DataPlansListResponseImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -773,11 +540,11 @@ class __$$_DataPlansListResponseCopyWithImpl<$Res>
     Object? price = freezed,
     Object? operatorCardId = freezed,
   }) {
-    return _then(_$_DataPlansListResponse(
+    return _then(_$DataPlansListResponseImpl(
       id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as String?,
       name: freezed == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -785,7 +552,7 @@ class __$$_DataPlansListResponseCopyWithImpl<$Res>
       price: freezed == price
           ? _value.price
           : price // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as int?,
       operatorCardId: freezed == operatorCardId
           ? _value.operatorCardId
           : operatorCardId // ignore: cast_nullable_to_non_nullable
@@ -796,22 +563,22 @@ class __$$_DataPlansListResponseCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_DataPlansListResponse implements _DataPlansListResponse {
-  _$_DataPlansListResponse(
+class _$DataPlansListResponseImpl implements _DataPlansListResponse {
+  _$DataPlansListResponseImpl(
       {this.id,
       this.name,
       this.price,
       @JsonKey(name: 'operator_card_id') this.operatorCardId});
 
-  factory _$_DataPlansListResponse.fromJson(Map<String, dynamic> json) =>
-      _$$_DataPlansListResponseFromJson(json);
+  factory _$DataPlansListResponseImpl.fromJson(Map<String, dynamic> json) =>
+      _$$DataPlansListResponseImplFromJson(json);
 
   @override
-  int? id;
+  String? id;
   @override
   String? name;
   @override
-  String? price;
+  int? price;
   @override
   @JsonKey(name: 'operator_card_id')
   String? operatorCardId;
@@ -824,13 +591,13 @@ class _$_DataPlansListResponse implements _DataPlansListResponse {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_DataPlansListResponseCopyWith<_$_DataPlansListResponse> get copyWith =>
-      __$$_DataPlansListResponseCopyWithImpl<_$_DataPlansListResponse>(
-          this, _$identity);
+  _$$DataPlansListResponseImplCopyWith<_$DataPlansListResponseImpl>
+      get copyWith => __$$DataPlansListResponseImplCopyWithImpl<
+          _$DataPlansListResponseImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_DataPlansListResponseToJson(
+    return _$$DataPlansListResponseImplToJson(
       this,
     );
   }
@@ -838,24 +605,24 @@ class _$_DataPlansListResponse implements _DataPlansListResponse {
 
 abstract class _DataPlansListResponse implements DataPlansListResponse {
   factory _DataPlansListResponse(
-          {int? id,
+          {String? id,
           String? name,
-          String? price,
+          int? price,
           @JsonKey(name: 'operator_card_id') String? operatorCardId}) =
-      _$_DataPlansListResponse;
+      _$DataPlansListResponseImpl;
 
   factory _DataPlansListResponse.fromJson(Map<String, dynamic> json) =
-      _$_DataPlansListResponse.fromJson;
+      _$DataPlansListResponseImpl.fromJson;
 
   @override
-  int? get id;
-  set id(int? value);
+  String? get id;
+  set id(String? value);
   @override
   String? get name;
   set name(String? value);
   @override
-  String? get price;
-  set price(String? value);
+  int? get price;
+  set price(int? value);
   @override
   @JsonKey(name: 'operator_card_id')
   String? get operatorCardId;
@@ -863,170 +630,6 @@ abstract class _DataPlansListResponse implements DataPlansListResponse {
   set operatorCardId(String? value);
   @override
   @JsonKey(ignore: true)
-  _$$_DataPlansListResponseCopyWith<_$_DataPlansListResponse> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-LinkDataPlansResponse _$LinkDataPlansResponseFromJson(
-    Map<String, dynamic> json) {
-  return _LinkDataPlansResponse.fromJson(json);
-}
-
-/// @nodoc
-mixin _$LinkDataPlansResponse {
-  String? get url => throw _privateConstructorUsedError;
-  set url(String? value) => throw _privateConstructorUsedError;
-  String? get label => throw _privateConstructorUsedError;
-  set label(String? value) => throw _privateConstructorUsedError;
-  bool? get active => throw _privateConstructorUsedError;
-  set active(bool? value) => throw _privateConstructorUsedError;
-
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
-  $LinkDataPlansResponseCopyWith<LinkDataPlansResponse> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class $LinkDataPlansResponseCopyWith<$Res> {
-  factory $LinkDataPlansResponseCopyWith(LinkDataPlansResponse value,
-          $Res Function(LinkDataPlansResponse) then) =
-      _$LinkDataPlansResponseCopyWithImpl<$Res, LinkDataPlansResponse>;
-  @useResult
-  $Res call({String? url, String? label, bool? active});
-}
-
-/// @nodoc
-class _$LinkDataPlansResponseCopyWithImpl<$Res,
-        $Val extends LinkDataPlansResponse>
-    implements $LinkDataPlansResponseCopyWith<$Res> {
-  _$LinkDataPlansResponseCopyWithImpl(this._value, this._then);
-
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? url = freezed,
-    Object? label = freezed,
-    Object? active = freezed,
-  }) {
-    return _then(_value.copyWith(
-      url: freezed == url
-          ? _value.url
-          : url // ignore: cast_nullable_to_non_nullable
-              as String?,
-      label: freezed == label
-          ? _value.label
-          : label // ignore: cast_nullable_to_non_nullable
-              as String?,
-      active: freezed == active
-          ? _value.active
-          : active // ignore: cast_nullable_to_non_nullable
-              as bool?,
-    ) as $Val);
-  }
-}
-
-/// @nodoc
-abstract class _$$_LinkDataPlansResponseCopyWith<$Res>
-    implements $LinkDataPlansResponseCopyWith<$Res> {
-  factory _$$_LinkDataPlansResponseCopyWith(_$_LinkDataPlansResponse value,
-          $Res Function(_$_LinkDataPlansResponse) then) =
-      __$$_LinkDataPlansResponseCopyWithImpl<$Res>;
-  @override
-  @useResult
-  $Res call({String? url, String? label, bool? active});
-}
-
-/// @nodoc
-class __$$_LinkDataPlansResponseCopyWithImpl<$Res>
-    extends _$LinkDataPlansResponseCopyWithImpl<$Res, _$_LinkDataPlansResponse>
-    implements _$$_LinkDataPlansResponseCopyWith<$Res> {
-  __$$_LinkDataPlansResponseCopyWithImpl(_$_LinkDataPlansResponse _value,
-      $Res Function(_$_LinkDataPlansResponse) _then)
-      : super(_value, _then);
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? url = freezed,
-    Object? label = freezed,
-    Object? active = freezed,
-  }) {
-    return _then(_$_LinkDataPlansResponse(
-      url: freezed == url
-          ? _value.url
-          : url // ignore: cast_nullable_to_non_nullable
-              as String?,
-      label: freezed == label
-          ? _value.label
-          : label // ignore: cast_nullable_to_non_nullable
-              as String?,
-      active: freezed == active
-          ? _value.active
-          : active // ignore: cast_nullable_to_non_nullable
-              as bool?,
-    ));
-  }
-}
-
-/// @nodoc
-@JsonSerializable()
-class _$_LinkDataPlansResponse implements _LinkDataPlansResponse {
-  _$_LinkDataPlansResponse({this.url, this.label, this.active});
-
-  factory _$_LinkDataPlansResponse.fromJson(Map<String, dynamic> json) =>
-      _$$_LinkDataPlansResponseFromJson(json);
-
-  @override
-  String? url;
-  @override
-  String? label;
-  @override
-  bool? active;
-
-  @override
-  String toString() {
-    return 'LinkDataPlansResponse(url: $url, label: $label, active: $active)';
-  }
-
-  @JsonKey(ignore: true)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$_LinkDataPlansResponseCopyWith<_$_LinkDataPlansResponse> get copyWith =>
-      __$$_LinkDataPlansResponseCopyWithImpl<_$_LinkDataPlansResponse>(
-          this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$_LinkDataPlansResponseToJson(
-      this,
-    );
-  }
-}
-
-abstract class _LinkDataPlansResponse implements LinkDataPlansResponse {
-  factory _LinkDataPlansResponse({String? url, String? label, bool? active}) =
-      _$_LinkDataPlansResponse;
-
-  factory _LinkDataPlansResponse.fromJson(Map<String, dynamic> json) =
-      _$_LinkDataPlansResponse.fromJson;
-
-  @override
-  String? get url;
-  set url(String? value);
-  @override
-  String? get label;
-  set label(String? value);
-  @override
-  bool? get active;
-  set active(bool? value);
-  @override
-  @JsonKey(ignore: true)
-  _$$_LinkDataPlansResponseCopyWith<_$_LinkDataPlansResponse> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$DataPlansListResponseImplCopyWith<_$DataPlansListResponseImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }

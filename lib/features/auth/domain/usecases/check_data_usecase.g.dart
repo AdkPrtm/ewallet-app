@@ -8,12 +8,12 @@ part of 'check_data_usecase.dart';
 
 CheckDataParams _$CheckDataParamsFromJson(Map<String, dynamic> json) =>
     CheckDataParams(
-      email: json['is_email_exists'] as String?,
-      username: json['is_username_exists'] as String?,
+      email: json['email'] as String?,
+      username: json['username'] as String?,
     );
 
 Map<String, dynamic> _$CheckDataParamsToJson(CheckDataParams instance) =>
     <String, dynamic>{
-      'is_email_exists': instance.email,
-      'is_username_exists': instance.username,
+      'email': instance.email,
+      'username': instance.username,
     };

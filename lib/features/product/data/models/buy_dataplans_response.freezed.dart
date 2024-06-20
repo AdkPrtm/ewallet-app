@@ -12,7 +12,7 @@ part of 'buy_dataplans_response.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 BuyDataPlansResponse _$BuyDataPlansResponseFromJson(Map<String, dynamic> json) {
   return _BuyDataPlansResponse.fromJson(json);
@@ -21,8 +21,6 @@ BuyDataPlansResponse _$BuyDataPlansResponseFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$BuyDataPlansResponse {
   String? get status => throw _privateConstructorUsedError;
-  String? get message => throw _privateConstructorUsedError;
-  String? get data => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -36,7 +34,7 @@ abstract class $BuyDataPlansResponseCopyWith<$Res> {
           $Res Function(BuyDataPlansResponse) then) =
       _$BuyDataPlansResponseCopyWithImpl<$Res, BuyDataPlansResponse>;
   @useResult
-  $Res call({String? status, String? message, String? data});
+  $Res call({String? status});
 }
 
 /// @nodoc
@@ -54,64 +52,44 @@ class _$BuyDataPlansResponseCopyWithImpl<$Res,
   @override
   $Res call({
     Object? status = freezed,
-    Object? message = freezed,
-    Object? data = freezed,
   }) {
     return _then(_value.copyWith(
       status: freezed == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
               as String?,
-      message: freezed == message
-          ? _value.message
-          : message // ignore: cast_nullable_to_non_nullable
-              as String?,
-      data: freezed == data
-          ? _value.data
-          : data // ignore: cast_nullable_to_non_nullable
-              as String?,
     ) as $Val);
   }
 }
 
 /// @nodoc
-abstract class _$$_BuyDataPlansResponseCopyWith<$Res>
+abstract class _$$BuyDataPlansResponseImplCopyWith<$Res>
     implements $BuyDataPlansResponseCopyWith<$Res> {
-  factory _$$_BuyDataPlansResponseCopyWith(_$_BuyDataPlansResponse value,
-          $Res Function(_$_BuyDataPlansResponse) then) =
-      __$$_BuyDataPlansResponseCopyWithImpl<$Res>;
+  factory _$$BuyDataPlansResponseImplCopyWith(_$BuyDataPlansResponseImpl value,
+          $Res Function(_$BuyDataPlansResponseImpl) then) =
+      __$$BuyDataPlansResponseImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String? status, String? message, String? data});
+  $Res call({String? status});
 }
 
 /// @nodoc
-class __$$_BuyDataPlansResponseCopyWithImpl<$Res>
-    extends _$BuyDataPlansResponseCopyWithImpl<$Res, _$_BuyDataPlansResponse>
-    implements _$$_BuyDataPlansResponseCopyWith<$Res> {
-  __$$_BuyDataPlansResponseCopyWithImpl(_$_BuyDataPlansResponse _value,
-      $Res Function(_$_BuyDataPlansResponse) _then)
+class __$$BuyDataPlansResponseImplCopyWithImpl<$Res>
+    extends _$BuyDataPlansResponseCopyWithImpl<$Res, _$BuyDataPlansResponseImpl>
+    implements _$$BuyDataPlansResponseImplCopyWith<$Res> {
+  __$$BuyDataPlansResponseImplCopyWithImpl(_$BuyDataPlansResponseImpl _value,
+      $Res Function(_$BuyDataPlansResponseImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? status = freezed,
-    Object? message = freezed,
-    Object? data = freezed,
   }) {
-    return _then(_$_BuyDataPlansResponse(
+    return _then(_$BuyDataPlansResponseImpl(
       status: freezed == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
-              as String?,
-      message: freezed == message
-          ? _value.message
-          : message // ignore: cast_nullable_to_non_nullable
-              as String?,
-      data: freezed == data
-          ? _value.data
-          : data // ignore: cast_nullable_to_non_nullable
               as String?,
     ));
   }
@@ -119,70 +97,59 @@ class __$$_BuyDataPlansResponseCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_BuyDataPlansResponse implements _BuyDataPlansResponse {
-  const _$_BuyDataPlansResponse({this.status, this.message, this.data});
+class _$BuyDataPlansResponseImpl implements _BuyDataPlansResponse {
+  const _$BuyDataPlansResponseImpl({this.status});
 
-  factory _$_BuyDataPlansResponse.fromJson(Map<String, dynamic> json) =>
-      _$$_BuyDataPlansResponseFromJson(json);
+  factory _$BuyDataPlansResponseImpl.fromJson(Map<String, dynamic> json) =>
+      _$$BuyDataPlansResponseImplFromJson(json);
 
   @override
   final String? status;
-  @override
-  final String? message;
-  @override
-  final String? data;
 
   @override
   String toString() {
-    return 'BuyDataPlansResponse(status: $status, message: $message, data: $data)';
+    return 'BuyDataPlansResponse(status: $status)';
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_BuyDataPlansResponse &&
-            (identical(other.status, status) || other.status == status) &&
-            (identical(other.message, message) || other.message == message) &&
-            (identical(other.data, data) || other.data == data));
+            other is _$BuyDataPlansResponseImpl &&
+            (identical(other.status, status) || other.status == status));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, status, message, data);
+  int get hashCode => Object.hash(runtimeType, status);
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_BuyDataPlansResponseCopyWith<_$_BuyDataPlansResponse> get copyWith =>
-      __$$_BuyDataPlansResponseCopyWithImpl<_$_BuyDataPlansResponse>(
-          this, _$identity);
+  _$$BuyDataPlansResponseImplCopyWith<_$BuyDataPlansResponseImpl>
+      get copyWith =>
+          __$$BuyDataPlansResponseImplCopyWithImpl<_$BuyDataPlansResponseImpl>(
+              this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_BuyDataPlansResponseToJson(
+    return _$$BuyDataPlansResponseImplToJson(
       this,
     );
   }
 }
 
 abstract class _BuyDataPlansResponse implements BuyDataPlansResponse {
-  const factory _BuyDataPlansResponse(
-      {final String? status,
-      final String? message,
-      final String? data}) = _$_BuyDataPlansResponse;
+  const factory _BuyDataPlansResponse({final String? status}) =
+      _$BuyDataPlansResponseImpl;
 
   factory _BuyDataPlansResponse.fromJson(Map<String, dynamic> json) =
-      _$_BuyDataPlansResponse.fromJson;
+      _$BuyDataPlansResponseImpl.fromJson;
 
   @override
   String? get status;
   @override
-  String? get message;
-  @override
-  String? get data;
-  @override
   @JsonKey(ignore: true)
-  _$$_BuyDataPlansResponseCopyWith<_$_BuyDataPlansResponse> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$BuyDataPlansResponseImplCopyWith<_$BuyDataPlansResponseImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }

@@ -10,6 +10,7 @@ class SvgSrc {
   static const String statisticSVG = 'assets/svg/statistic.svg';
   static const String walletSVG = 'assets/svg/wallet.svg';
   static const String mypinSVG = 'assets/svg/mypin.svg';
+  static const String verifiedIcon = 'assets/svg/verified.svg';
 
   //TRANSACTION
   static const String trxCashbackIcon =

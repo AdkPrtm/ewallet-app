@@ -1,14 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:template_clean_architecture/core/resource/resource.dart';
-import 'package:template_clean_architecture/core/widgets/type_number_widget.dart';
-import 'package:template_clean_architecture/features/user/domain/domain.dart';
-import 'package:template_clean_architecture/utils/extensions/extensions.dart';
+import 'package:ewallet/core/resource/resource.dart';
+import 'package:ewallet/core/widgets/type_number_widget.dart';
+import 'package:ewallet/utils/extensions/extensions.dart';
 
 class PinPage extends StatefulWidget {
-  const PinPage({super.key, required this.userEntity});
-
-  final UserEntity userEntity;
+  const PinPage({super.key});
 
   @override
   State<PinPage> createState() => _PinPageState();
@@ -25,13 +22,7 @@ class _PinPageState extends State<PinPage> {
     }
 
     if (pinController.text.length == 6) {
-      if (pinController.text == widget.userEntity.pin) {
-        Navigator.pop(context, true);
-      } else {
-        pinController.text = '';
-        showCustomSnackbar(
-            context, 'Pin yang anda masukan salah, silahkan coba lagi');
-      }
+      Navigator.pop(context, pinController.text);
     }
   }
 

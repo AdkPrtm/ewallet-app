@@ -2,24 +2,23 @@ import 'dart:io';
 
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
-import 'package:template_clean_architecture/core/error/failure.dart';
-import 'package:template_clean_architecture/core/resource/constant/api_list.dart';
-import 'package:template_clean_architecture/features/auth/data/data.dart';
-import 'package:template_clean_architecture/features/tips/data/datasources/remote/remote.dart';
-import 'package:template_clean_architecture/features/tips/domain/entities/tips_entities.dart';
-import 'package:template_clean_architecture/features/tips/domain/repositories/repositories.dart';
+import 'package:ewallet/core/error/failure.dart';
+import 'package:ewallet/core/resource/constant/api_list.dart';
+import 'package:ewallet/features/tips/data/datasources/remote/remote.dart';
+import 'package:ewallet/features/tips/domain/domain.dart';
+import 'package:ewallet/features/tips/domain/entities/tips_entities.dart';
 
 class TipsRepositoryImpl extends TipsRepository {
   final TipsServiceRemote _tipsServiceRemote;
-  final AuthLocalService _authLocalService;
 
-  TipsRepositoryImpl(this._tipsServiceRemote, this._authLocalService);
+  TipsRepositoryImpl(this._tipsServiceRemote);
   @override
-  Future<Either<Failure, TipsResponseEntity>> getTips() async {
+  Future<Either<Failure, TipsResponseEntity>> getTips(
+      GetTipsQuery query) async {
     try {
-      final token = await _authLocalService.getCredentialToLocal();
       final httpResponse = await _tipsServiceRemote.getTips(
-        token: token,
+        limit: query.limit ?? 6,
+        page: query.page ?? 1,
         contentType: contentType,
       );
       if ((httpResponse.response.statusCode ?? 0) < 200 ||

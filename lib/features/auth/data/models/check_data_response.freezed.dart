@@ -12,7 +12,7 @@ part of 'check_data_response.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 CheckDataResponse _$CheckDataResponseFromJson(Map<String, dynamic> json) {
   return _CheckDataResponse.fromJson(json);
@@ -21,9 +21,9 @@ CheckDataResponse _$CheckDataResponseFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$CheckDataResponse {
   @JsonKey(name: 'is_email_exists')
-  String? get email => throw _privateConstructorUsedError;
+  bool get email => throw _privateConstructorUsedError;
   @JsonKey(name: 'is_username_exists')
-  String? get username => throw _privateConstructorUsedError;
+  bool get username => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -38,8 +38,8 @@ abstract class $CheckDataResponseCopyWith<$Res> {
       _$CheckDataResponseCopyWithImpl<$Res, CheckDataResponse>;
   @useResult
   $Res call(
-      {@JsonKey(name: 'is_email_exists') String? email,
-      @JsonKey(name: 'is_username_exists') String? username});
+      {@JsonKey(name: 'is_email_exists') bool email,
+      @JsonKey(name: 'is_username_exists') bool username});
 }
 
 /// @nodoc
@@ -55,79 +55,78 @@ class _$CheckDataResponseCopyWithImpl<$Res, $Val extends CheckDataResponse>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? email = freezed,
-    Object? username = freezed,
+    Object? email = null,
+    Object? username = null,
   }) {
     return _then(_value.copyWith(
-      email: freezed == email
+      email: null == email
           ? _value.email
           : email // ignore: cast_nullable_to_non_nullable
-              as String?,
-      username: freezed == username
+              as bool,
+      username: null == username
           ? _value.username
           : username // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as bool,
     ) as $Val);
   }
 }
 
 /// @nodoc
-abstract class _$$_CheckDataResponseCopyWith<$Res>
+abstract class _$$CheckDataResponseImplCopyWith<$Res>
     implements $CheckDataResponseCopyWith<$Res> {
-  factory _$$_CheckDataResponseCopyWith(_$_CheckDataResponse value,
-          $Res Function(_$_CheckDataResponse) then) =
-      __$$_CheckDataResponseCopyWithImpl<$Res>;
+  factory _$$CheckDataResponseImplCopyWith(_$CheckDataResponseImpl value,
+          $Res Function(_$CheckDataResponseImpl) then) =
+      __$$CheckDataResponseImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
-      {@JsonKey(name: 'is_email_exists') String? email,
-      @JsonKey(name: 'is_username_exists') String? username});
+      {@JsonKey(name: 'is_email_exists') bool email,
+      @JsonKey(name: 'is_username_exists') bool username});
 }
 
 /// @nodoc
-class __$$_CheckDataResponseCopyWithImpl<$Res>
-    extends _$CheckDataResponseCopyWithImpl<$Res, _$_CheckDataResponse>
-    implements _$$_CheckDataResponseCopyWith<$Res> {
-  __$$_CheckDataResponseCopyWithImpl(
-      _$_CheckDataResponse _value, $Res Function(_$_CheckDataResponse) _then)
+class __$$CheckDataResponseImplCopyWithImpl<$Res>
+    extends _$CheckDataResponseCopyWithImpl<$Res, _$CheckDataResponseImpl>
+    implements _$$CheckDataResponseImplCopyWith<$Res> {
+  __$$CheckDataResponseImplCopyWithImpl(_$CheckDataResponseImpl _value,
+      $Res Function(_$CheckDataResponseImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? email = freezed,
-    Object? username = freezed,
+    Object? email = null,
+    Object? username = null,
   }) {
-    return _then(_$_CheckDataResponse(
-      email: freezed == email
+    return _then(_$CheckDataResponseImpl(
+      null == email
           ? _value.email
           : email // ignore: cast_nullable_to_non_nullable
-              as String?,
-      username: freezed == username
+              as bool,
+      null == username
           ? _value.username
           : username // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as bool,
     ));
   }
 }
 
 /// @nodoc
 @JsonSerializable()
-class _$_CheckDataResponse extends _CheckDataResponse {
-  const _$_CheckDataResponse(
-      {@JsonKey(name: 'is_email_exists') this.email,
-      @JsonKey(name: 'is_username_exists') this.username})
+class _$CheckDataResponseImpl extends _CheckDataResponse {
+  const _$CheckDataResponseImpl(@JsonKey(name: 'is_email_exists') this.email,
+      @JsonKey(name: 'is_username_exists') this.username)
       : super._();
 
-  factory _$_CheckDataResponse.fromJson(Map<String, dynamic> json) =>
-      _$$_CheckDataResponseFromJson(json);
+  factory _$CheckDataResponseImpl.fromJson(Map<String, dynamic> json) =>
+      _$$CheckDataResponseImplFromJson(json);
 
   @override
   @JsonKey(name: 'is_email_exists')
-  final String? email;
+  final bool email;
   @override
   @JsonKey(name: 'is_username_exists')
-  final String? username;
+  final bool username;
 
   @override
   String toString() {
@@ -135,10 +134,10 @@ class _$_CheckDataResponse extends _CheckDataResponse {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_CheckDataResponse &&
+            other is _$CheckDataResponseImpl &&
             (identical(other.email, email) || other.email == email) &&
             (identical(other.username, username) ||
                 other.username == username));
@@ -151,13 +150,13 @@ class _$_CheckDataResponse extends _CheckDataResponse {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_CheckDataResponseCopyWith<_$_CheckDataResponse> get copyWith =>
-      __$$_CheckDataResponseCopyWithImpl<_$_CheckDataResponse>(
+  _$$CheckDataResponseImplCopyWith<_$CheckDataResponseImpl> get copyWith =>
+      __$$CheckDataResponseImplCopyWithImpl<_$CheckDataResponseImpl>(
           this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_CheckDataResponseToJson(
+    return _$$CheckDataResponseImplToJson(
       this,
     );
   }
@@ -165,22 +164,22 @@ class _$_CheckDataResponse extends _CheckDataResponse {
 
 abstract class _CheckDataResponse extends CheckDataResponse {
   const factory _CheckDataResponse(
-          {@JsonKey(name: 'is_email_exists') final String? email,
-          @JsonKey(name: 'is_username_exists') final String? username}) =
-      _$_CheckDataResponse;
+          @JsonKey(name: 'is_email_exists') final bool email,
+          @JsonKey(name: 'is_username_exists') final bool username) =
+      _$CheckDataResponseImpl;
   const _CheckDataResponse._() : super._();
 
   factory _CheckDataResponse.fromJson(Map<String, dynamic> json) =
-      _$_CheckDataResponse.fromJson;
+      _$CheckDataResponseImpl.fromJson;
 
   @override
   @JsonKey(name: 'is_email_exists')
-  String? get email;
+  bool get email;
   @override
   @JsonKey(name: 'is_username_exists')
-  String? get username;
+  bool get username;
   @override
   @JsonKey(ignore: true)
-  _$$_CheckDataResponseCopyWith<_$_CheckDataResponse> get copyWith =>
+  _$$CheckDataResponseImplCopyWith<_$CheckDataResponseImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

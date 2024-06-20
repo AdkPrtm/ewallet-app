@@ -12,7 +12,7 @@ part of 'transfer_usecase.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 TransferParams _$TransferParamsFromJson(Map<String, dynamic> json) {
   return _TransferParams.fromJson(json);
@@ -20,10 +20,10 @@ TransferParams _$TransferParamsFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$TransferParams {
-  int? get amount => throw _privateConstructorUsedError;
-  set amount(int? value) => throw _privateConstructorUsedError;
-  String? get pin => throw _privateConstructorUsedError;
-  set pin(String? value) => throw _privateConstructorUsedError;
+  int get amount => throw _privateConstructorUsedError;
+  set amount(int value) => throw _privateConstructorUsedError;
+  String get pin => throw _privateConstructorUsedError;
+  set pin(String value) => throw _privateConstructorUsedError;
   @JsonKey(name: 'send_to')
   String? get sendToUsername => throw _privateConstructorUsedError;
   @JsonKey(name: 'send_to')
@@ -42,8 +42,8 @@ abstract class $TransferParamsCopyWith<$Res> {
       _$TransferParamsCopyWithImpl<$Res, TransferParams>;
   @useResult
   $Res call(
-      {int? amount,
-      String? pin,
+      {int amount,
+      String pin,
       @JsonKey(name: 'send_to') String? sendToUsername});
 }
 
@@ -60,19 +60,19 @@ class _$TransferParamsCopyWithImpl<$Res, $Val extends TransferParams>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? amount = freezed,
-    Object? pin = freezed,
+    Object? amount = null,
+    Object? pin = null,
     Object? sendToUsername = freezed,
   }) {
     return _then(_value.copyWith(
-      amount: freezed == amount
+      amount: null == amount
           ? _value.amount
           : amount // ignore: cast_nullable_to_non_nullable
-              as int?,
-      pin: freezed == pin
+              as int,
+      pin: null == pin
           ? _value.pin
           : pin // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as String,
       sendToUsername: freezed == sendToUsername
           ? _value.sendToUsername
           : sendToUsername // ignore: cast_nullable_to_non_nullable
@@ -82,44 +82,44 @@ class _$TransferParamsCopyWithImpl<$Res, $Val extends TransferParams>
 }
 
 /// @nodoc
-abstract class _$$_TransferParamsCopyWith<$Res>
+abstract class _$$TransferParamsImplCopyWith<$Res>
     implements $TransferParamsCopyWith<$Res> {
-  factory _$$_TransferParamsCopyWith(
-          _$_TransferParams value, $Res Function(_$_TransferParams) then) =
-      __$$_TransferParamsCopyWithImpl<$Res>;
+  factory _$$TransferParamsImplCopyWith(_$TransferParamsImpl value,
+          $Res Function(_$TransferParamsImpl) then) =
+      __$$TransferParamsImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
-      {int? amount,
-      String? pin,
+      {int amount,
+      String pin,
       @JsonKey(name: 'send_to') String? sendToUsername});
 }
 
 /// @nodoc
-class __$$_TransferParamsCopyWithImpl<$Res>
-    extends _$TransferParamsCopyWithImpl<$Res, _$_TransferParams>
-    implements _$$_TransferParamsCopyWith<$Res> {
-  __$$_TransferParamsCopyWithImpl(
-      _$_TransferParams _value, $Res Function(_$_TransferParams) _then)
+class __$$TransferParamsImplCopyWithImpl<$Res>
+    extends _$TransferParamsCopyWithImpl<$Res, _$TransferParamsImpl>
+    implements _$$TransferParamsImplCopyWith<$Res> {
+  __$$TransferParamsImplCopyWithImpl(
+      _$TransferParamsImpl _value, $Res Function(_$TransferParamsImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? amount = freezed,
-    Object? pin = freezed,
+    Object? amount = null,
+    Object? pin = null,
     Object? sendToUsername = freezed,
   }) {
-    return _then(_$_TransferParams(
-      amount: freezed == amount
+    return _then(_$TransferParamsImpl(
+      null == amount
           ? _value.amount
           : amount // ignore: cast_nullable_to_non_nullable
-              as int?,
-      pin: freezed == pin
+              as int,
+      null == pin
           ? _value.pin
           : pin // ignore: cast_nullable_to_non_nullable
-              as String?,
-      sendToUsername: freezed == sendToUsername
+              as String,
+      freezed == sendToUsername
           ? _value.sendToUsername
           : sendToUsername // ignore: cast_nullable_to_non_nullable
               as String?,
@@ -129,17 +129,17 @@ class __$$_TransferParamsCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_TransferParams implements _TransferParams {
-  _$_TransferParams(
-      {this.amount, this.pin, @JsonKey(name: 'send_to') this.sendToUsername});
+class _$TransferParamsImpl implements _TransferParams {
+  _$TransferParamsImpl(
+      this.amount, this.pin, @JsonKey(name: 'send_to') this.sendToUsername);
 
-  factory _$_TransferParams.fromJson(Map<String, dynamic> json) =>
-      _$$_TransferParamsFromJson(json);
+  factory _$TransferParamsImpl.fromJson(Map<String, dynamic> json) =>
+      _$$TransferParamsImplFromJson(json);
 
   @override
-  int? amount;
+  int amount;
   @override
-  String? pin;
+  String pin;
   @override
   @JsonKey(name: 'send_to')
   String? sendToUsername;
@@ -152,32 +152,31 @@ class _$_TransferParams implements _TransferParams {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_TransferParamsCopyWith<_$_TransferParams> get copyWith =>
-      __$$_TransferParamsCopyWithImpl<_$_TransferParams>(this, _$identity);
+  _$$TransferParamsImplCopyWith<_$TransferParamsImpl> get copyWith =>
+      __$$TransferParamsImplCopyWithImpl<_$TransferParamsImpl>(
+          this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_TransferParamsToJson(
+    return _$$TransferParamsImplToJson(
       this,
     );
   }
 }
 
 abstract class _TransferParams implements TransferParams {
-  factory _TransferParams(
-      {int? amount,
-      String? pin,
-      @JsonKey(name: 'send_to') String? sendToUsername}) = _$_TransferParams;
+  factory _TransferParams(int amount, String pin,
+      @JsonKey(name: 'send_to') String? sendToUsername) = _$TransferParamsImpl;
 
   factory _TransferParams.fromJson(Map<String, dynamic> json) =
-      _$_TransferParams.fromJson;
+      _$TransferParamsImpl.fromJson;
 
   @override
-  int? get amount;
-  set amount(int? value);
+  int get amount;
+  set amount(int value);
   @override
-  String? get pin;
-  set pin(String? value);
+  String get pin;
+  set pin(String value);
   @override
   @JsonKey(name: 'send_to')
   String? get sendToUsername;
@@ -185,6 +184,6 @@ abstract class _TransferParams implements TransferParams {
   set sendToUsername(String? value);
   @override
   @JsonKey(ignore: true)
-  _$$_TransferParamsCopyWith<_$_TransferParams> get copyWith =>
+  _$$TransferParamsImplCopyWith<_$TransferParamsImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

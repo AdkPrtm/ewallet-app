@@ -13,7 +13,7 @@ class _UserRemoteService implements UserRemoteService {
     this._dio, {
     this.baseUrl,
   }) {
-    baseUrl ??= 'https://andhikawidiarto.my.id/api';
+    baseUrl ??= 'https://ewallet.andhikawidiarto.my.id/api';
   }
 
   final Dio _dio;
@@ -24,9 +24,9 @@ class _UserRemoteService implements UserRemoteService {
   Future<HttpResponse<dynamic>> updateProfileUser({
     String? token,
     String? contentType,
-    Map<String, dynamic>? body,
+    required Map<String, dynamic> body,
   }) async {
-    const _extra = <String, dynamic>{};
+    final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{
@@ -35,7 +35,7 @@ class _UserRemoteService implements UserRemoteService {
     };
     _headers.removeWhere((k, v) => v == null);
     final _data = <String, dynamic>{};
-    _data.addAll(body!);
+    _data.addAll(body);
     final _result =
         await _dio.fetch(_setStreamType<HttpResponse<dynamic>>(Options(
       method: 'PUT',
@@ -63,9 +63,9 @@ class _UserRemoteService implements UserRemoteService {
   Future<HttpResponse<dynamic>> changePinUser({
     String? token,
     String? contentType,
-    Map<String, dynamic>? body,
+    required Map<String, dynamic> body,
   }) async {
-    const _extra = <String, dynamic>{};
+    final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{
@@ -74,7 +74,7 @@ class _UserRemoteService implements UserRemoteService {
     };
     _headers.removeWhere((k, v) => v == null);
     final _data = <String, dynamic>{};
-    _data.addAll(body!);
+    _data.addAll(body);
     final _result =
         await _dio.fetch(_setStreamType<HttpResponse<dynamic>>(Options(
       method: 'PUT',
@@ -103,7 +103,7 @@ class _UserRemoteService implements UserRemoteService {
     String? token,
     String? contentType,
   }) async {
-    const _extra = <String, dynamic>{};
+    final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{
@@ -111,7 +111,7 @@ class _UserRemoteService implements UserRemoteService {
       r'Content-Type': contentType,
     };
     _headers.removeWhere((k, v) => v == null);
-    final Map<String, dynamic>? _data = null;
+    const Map<String, dynamic>? _data = null;
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<HttpResponse<UserModel>>(Options(
       method: 'GET',
@@ -121,7 +121,7 @@ class _UserRemoteService implements UserRemoteService {
     )
             .compose(
               _dio.options,
-              '/users',
+              '/user',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -130,7 +130,7 @@ class _UserRemoteService implements UserRemoteService {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    final value = UserModel.fromJson(_result.data!['data']);
+    final value = UserModel.fromJson(_result.data!);
     final httpResponse = HttpResponse(value, _result);
     return httpResponse;
   }

@@ -6,18 +6,14 @@ part of 'buy_dataplans_response.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_BuyDataPlansResponse _$$_BuyDataPlansResponseFromJson(
+_$BuyDataPlansResponseImpl _$$BuyDataPlansResponseImplFromJson(
         Map<String, dynamic> json) =>
-    _$_BuyDataPlansResponse(
+    _$BuyDataPlansResponseImpl(
       status: json['status'] as String?,
-      message: json['message'] as String?,
-      data: json['data'] as String?,
     );
 
-Map<String, dynamic> _$$_BuyDataPlansResponseToJson(
-        _$_BuyDataPlansResponse instance) =>
+Map<String, dynamic> _$$BuyDataPlansResponseImplToJson(
+        _$BuyDataPlansResponseImpl instance) =>
     <String, dynamic>{
       'status': instance.status,
-      'message': instance.message,
-      'data': instance.data,
     };

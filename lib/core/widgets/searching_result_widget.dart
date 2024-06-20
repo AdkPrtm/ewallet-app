@@ -1,10 +1,10 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:template_clean_architecture/core/resource/src/src.dart';
-import 'package:template_clean_architecture/core/resource/theme/theme.dart';
-import 'package:template_clean_architecture/features/transfer/domain/entities/user_byusername_entities.dart';
-import 'package:template_clean_architecture/utils/extensions/extensions.dart';
+import 'package:ewallet/core/resource/src/src.dart';
+import 'package:ewallet/core/resource/theme/theme.dart';
+import 'package:ewallet/features/transfer/domain/entities/user_byusername_entities.dart';
+import 'package:ewallet/utils/extensions/extensions.dart';
 
 class SearchingResultWidget extends StatelessWidget {
   const SearchingResultWidget({
@@ -48,7 +48,7 @@ class SearchingResultWidget extends StatelessWidget {
                     ),
                   ),
                 ),
-                userBySearchingEntity.verified == '1'
+                userBySearchingEntity.verified!
                     ? Align(
                         alignment: Alignment.topRight,
                         child: Container(

@@ -1,22 +1,23 @@
+import 'package:ewallet/features/user/presentation/profile/verification/verification_page.dart';
 import 'package:flutter/material.dart';
-import 'package:template_clean_architecture/core/widgets/success_widget.dart';
-import 'package:template_clean_architecture/features/auth/presentation/signin/sign_in_page.dart';
-import 'package:template_clean_architecture/features/auth/presentation/signup/sign_up_page.dart';
-import 'package:template_clean_architecture/features/home/home_page.dart';
-import 'package:template_clean_architecture/features/pin/pin_page.dart';
-import 'package:template_clean_architecture/features/product/presentation/pages/dataplans/select_package_page.dart';
-import 'package:template_clean_architecture/features/product/presentation/pages/dataplans/select_provider_page.dart';
-import 'package:template_clean_architecture/features/product/product.dart';
-import 'package:template_clean_architecture/features/splash_page.dart';
-import 'package:template_clean_architecture/features/topup/domain/entities/entities.dart';
-import 'package:template_clean_architecture/features/topup/presentation/pages/amount_page.dart';
-import 'package:template_clean_architecture/features/topup/presentation/pages/topup_page.dart';
-import 'package:template_clean_architecture/features/transfer/domain/usecases/usecases.dart';
-import 'package:template_clean_architecture/features/transfer/presentation/pages/component/amount_page.dart';
-import 'package:template_clean_architecture/features/transfer/presentation/pages/transfer_page.dart';
-import 'package:template_clean_architecture/features/user/domain/domain.dart';
-import 'package:template_clean_architecture/features/user/presentation/profile/profile.dart';
-import 'package:template_clean_architecture/utils/helper/helper.dart';
+import 'package:ewallet/core/widgets/success_widget.dart';
+import 'package:ewallet/features/auth/presentation/signin/sign_in_page.dart';
+import 'package:ewallet/features/auth/presentation/signup/sign_up_page.dart';
+import 'package:ewallet/features/home/home_page.dart';
+import 'package:ewallet/features/pin/pin_page.dart';
+import 'package:ewallet/features/product/presentation/pages/dataplans/select_package_page.dart';
+import 'package:ewallet/features/product/presentation/pages/dataplans/select_provider_page.dart';
+import 'package:ewallet/features/product/product.dart';
+import 'package:ewallet/features/splash_page.dart';
+import 'package:ewallet/features/topup/domain/entities/entities.dart';
+import 'package:ewallet/features/topup/presentation/pages/amount_page.dart';
+import 'package:ewallet/features/topup/presentation/pages/topup_page.dart';
+import 'package:ewallet/features/transfer/domain/usecases/usecases.dart';
+import 'package:ewallet/features/transfer/presentation/pages/component/amount_page.dart';
+import 'package:ewallet/features/transfer/presentation/pages/transfer_page.dart';
+import 'package:ewallet/features/user/domain/domain.dart';
+import 'package:ewallet/features/user/presentation/profile/profile.dart';
+import 'package:ewallet/utils/helper/helper.dart';
 
 class AppRoutes {
   static Route onGenerateRoutes(RouteSettings settings) {
@@ -43,10 +44,13 @@ class AppRoutes {
         ));
       case '/profile-pin':
         return _materialPageRoute(const ProfilePinPage());
-      case '/pin':
-        return _materialPageRoute(PinPage(
+
+      case '/verification':
+        return _materialPageRoute(VerificationPage(
           userEntity: settings.arguments as UserEntity,
         ));
+      case '/pin':
+        return _materialPageRoute(const PinPage());
       case '/topup':
         return _materialPageRoute(const TopUpPage());
       case '/amount-topup':

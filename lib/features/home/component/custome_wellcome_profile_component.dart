@@ -1,7 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:template_clean_architecture/core/resource/resource.dart';
+import 'package:ewallet/core/resource/resource.dart';
 
 class CustomWellcomeProfileComponent extends StatelessWidget {
   const CustomWellcomeProfileComponent({
@@ -13,7 +13,7 @@ class CustomWellcomeProfileComponent extends StatelessWidget {
 
   final String name;
   final String urlPicture;
-  final String verified;
+  final bool verified;
 
   @override
   Widget build(BuildContext context) {
@@ -50,9 +50,8 @@ class CustomWellcomeProfileComponent extends StatelessWidget {
                   ),
                 ),
               ),
-              verified == "0"
-                  ? const SizedBox()
-                  : Align(
+              verified
+                  ? Align(
                       alignment: Alignment.topRight,
                       child: Container(
                         height: 14.h,
@@ -68,6 +67,7 @@ class CustomWellcomeProfileComponent extends StatelessWidget {
                         ),
                       ),
                     )
+                  : const SizedBox()
             ],
           ),
         )

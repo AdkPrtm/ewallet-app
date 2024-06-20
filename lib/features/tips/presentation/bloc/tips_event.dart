@@ -7,4 +7,10 @@ abstract class TipsEvent extends Equatable {
   List<Object> get props => [];
 }
 
-class GetTipsEvent extends TipsEvent {}
+class GetTipsEvent extends TipsEvent {
+  final GetTipsQuery? query;
+
+  const GetTipsEvent({this.query});
+  @override
+  List<Object> get props => [query!];
+}

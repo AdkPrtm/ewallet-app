@@ -1,17 +1,17 @@
 // ignore_for_file: invalid_annotation_target
 
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:template_clean_architecture/features/auth/domain/entities/entities.dart';
+import 'package:ewallet/features/auth/domain/entities/entities.dart';
 
 part 'check_data_response.freezed.dart';
 part 'check_data_response.g.dart';
 
 @freezed
 class CheckDataResponse with _$CheckDataResponse {
-  const factory CheckDataResponse({
-    @JsonKey(name: 'is_email_exists') String? email,
-    @JsonKey(name: 'is_username_exists') String? username,
-  }) = _CheckDataResponse;
+  const factory CheckDataResponse(
+    @JsonKey(name: 'is_email_exists') bool email,
+    @JsonKey(name: 'is_username_exists') bool username,
+  ) = _CheckDataResponse;
 
   const CheckDataResponse._();
 
@@ -19,7 +19,7 @@ class CheckDataResponse with _$CheckDataResponse {
       _$CheckDataResponseFromJson(json);
 
   CheckDataEntity toEntity() => CheckDataEntity(
-        email: email,
-        username: username,
+        email,
+        username,
       );
 }

@@ -6,17 +6,17 @@ part of 'update_data_user_usecase.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_UpdateProfileUserParams _$$_UpdateProfileUserParamsFromJson(
+_$UpdateProfileUserParamsImpl _$$UpdateProfileUserParamsImplFromJson(
         Map<String, dynamic> json) =>
-    _$_UpdateProfileUserParams(
-      username: json['username'] as String?,
-      name: json['name'] as String?,
-      email: json['email'] as String?,
-      password: json['password'] as String?,
+    _$UpdateProfileUserParamsImpl(
+      json['username'] as String,
+      json['name'] as String,
+      json['email'] as String,
+      json['password'] as String,
     );
 
-Map<String, dynamic> _$$_UpdateProfileUserParamsToJson(
-        _$_UpdateProfileUserParams instance) =>
+Map<String, dynamic> _$$UpdateProfileUserParamsImplToJson(
+        _$UpdateProfileUserParamsImpl instance) =>
     <String, dynamic>{
       'username': instance.username,
       'name': instance.name,

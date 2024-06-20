@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:retrofit/retrofit.dart';
-import 'package:template_clean_architecture/core/resource/constant/api_list.dart';
-import 'package:template_clean_architecture/features/product/data/models/model.dart';
+import 'package:ewallet/core/resource/constant/api_list.dart';
+import 'package:ewallet/features/product/data/models/model.dart';
 
 part 'dataplans_api_service.g.dart';
 
@@ -9,17 +9,18 @@ part 'dataplans_api_service.g.dart';
 abstract class DataPlansRemoteSevice {
   factory DataPlansRemoteSevice(Dio dio) = _DataPlansRemoteSevice;
 
-  @GET('/operatorlist')
+  @GET('/mobile')
   Future<HttpResponse<DataPlansResponse>> getDataPlan({
     @Header("Authorization") String? token,
     @Header("Content-Type") String? contentType,
-    @Query('limit') String? limit,
+    @Query('limit') required int limit,
+    @Query('page') required int page,
   });
 
-  @POST('/dataplans')
+  @POST('/mobile')
   Future<HttpResponse<BuyDataPlansResponse>> buyDataPlans({
     @Header("Authorization") String? token,
     @Header("Content-Type") String? contentType,
-    @Body() Map<String, dynamic>? body,
+    @Body() required Map<String, dynamic> body,
   });
 }

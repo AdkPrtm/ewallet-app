@@ -1,14 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:template_clean_architecture/core/resource/resource.dart';
-import 'package:template_clean_architecture/core/widgets/buttons.dart';
-import 'package:template_clean_architecture/core/widgets/select_package_widget.dart';
-import 'package:template_clean_architecture/features/auth/auth.dart';
-import 'package:template_clean_architecture/features/product/presentation/pages/dataplans/component/buydata_component.dart';
-import 'package:template_clean_architecture/features/product/product.dart';
-import 'package:template_clean_architecture/utils/extensions/extensions.dart';
-import 'package:template_clean_architecture/utils/helper/helper.dart';
+import 'package:ewallet/core/resource/resource.dart';
+import 'package:ewallet/core/widgets/buttons.dart';
+import 'package:ewallet/core/widgets/select_package_widget.dart';
+import 'package:ewallet/features/product/product.dart';
+import 'package:ewallet/utils/extensions/extensions.dart';
+import 'package:ewallet/utils/helper/helper.dart';
 
 class SelectPackageDataPage extends StatefulWidget {
   const SelectPackageDataPage(
@@ -138,7 +136,7 @@ class _SelectPackageDataPageState extends State<SelectPackageDataPage> {
                       }
 
                       if (state is ProductFailed) {
-                        showCustomSnackbar(context, state.message!);
+                        showCustomSnackbar(context, state.message ?? '');
                       }
                     },
                     builder: (context, state) {
@@ -153,23 +151,20 @@ class _SelectPackageDataPageState extends State<SelectPackageDataPage> {
                         title: 'Continue',
                         onTap: () async {
                           if (formKey.currentState!.validate()) {
-                            final authstate = context.read<AuthBloc>().state;
-                            if (authstate is AuthDone) {
-                              if (await Navigator.pushNamed(context, '/pin',
-                                      arguments: authstate.userEntity) ==
-                                  true) {
-                                if (context.mounted) {
-                                  context.read<ProductBloc>().add(
-                                        BuyDataPlansEvent(
-                                          buyDataPlansParams:
-                                              BuyDataPlansParams(
-                                            idPlans: dataPlansListEntity!.id,
-                                            phoneNumber: phoneNumber.text,
-                                            pin: authstate.userEntity.pin,
-                                          ),
+                            final pin =
+                                await Navigator.pushNamed(context, '/pin');
+                            if (pin != null) {
+                              if (context.mounted) {
+                                context.read<ProductBloc>().add(
+                                      BuyDataPlansEvent(
+                                        buyDataPlansParams: BuyDataPlansParams(
+                                          idPlans:
+                                              dataPlansListEntity?.id ?? '',
+                                          phoneNumber: phoneNumber.text,
+                                          pin: pin.toString(),
                                         ),
-                                      );
-                                }
+                                      ),
+                                    );
                               }
                             }
                           }

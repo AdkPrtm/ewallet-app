@@ -1,5 +1,5 @@
-import 'package:template_clean_architecture/core/usecase/usecase.dart';
-import 'package:template_clean_architecture/features/auth/domain/domain.dart';
+import 'package:ewallet/core/usecase/usecase.dart';
+import 'package:ewallet/features/auth/domain/domain.dart';
 
 class SetCredentialUseCase extends UseCase<bool, String> {
   final AuthRepository _authRepository;

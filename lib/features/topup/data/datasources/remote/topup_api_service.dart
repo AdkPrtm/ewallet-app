@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:retrofit/retrofit.dart';
-import 'package:template_clean_architecture/core/resource/constant/api_list.dart';
-import 'package:template_clean_architecture/features/topup/data/models/models.dart';
+import 'package:ewallet/core/resource/constant/api_list.dart';
+import 'package:ewallet/features/topup/data/models/models.dart';
 
 part 'topup_api_service.g.dart';
 
@@ -13,11 +13,11 @@ abstract class TopupRemoteService {
   Future<HttpResponse<TopUpResponse>> topup({
     @Header("Authorization") String? token,
     @Header("Content-Type") String? contentType,
-    @Body() Map<String, dynamic>? body,
+    @Body() required Map<String, dynamic> body,
   });
 
-  @GET('/paymentmethod')
-  Future<HttpResponse<PaymentMethodTopupResponse>> getPaymentMethod({
+  @GET('/topup')
+  Future<HttpResponse<List<PaymentMethodTopupResponse>>> getPaymentMethod({
     @Header("Authorization") String? token,
     @Header("Content-Type") String? contentType,
   });

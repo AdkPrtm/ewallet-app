@@ -5,15 +5,14 @@ part 'user_entities.freezed.dart';
 @unfreezed
 class UserEntity with _$UserEntity {
   factory UserEntity({
-    String? name,
-    String? email,
+    String? firstName,
+    String? lastName,
     String? username,
-    String? verified,
+    String? email,
     String? profilePicture,
-    String? ktp,
-    String? balance,
+    bool? verified,
+    int? balance,
     String? cardNumber,
-    String? pin,
     String? token,
   }) = _UserEntity;
 }

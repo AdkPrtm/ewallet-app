@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:template_clean_architecture/core/resource/theme/theme.dart';
-import 'package:template_clean_architecture/core/widgets/buttons.dart';
-import 'package:template_clean_architecture/utils/helper/helper.dart';
+import 'package:ewallet/core/resource/theme/theme.dart';
+import 'package:ewallet/core/widgets/buttons.dart';
+import 'package:ewallet/utils/helper/helper.dart';
 
 class SuccessPage extends StatelessWidget {
   const SuccessPage({super.key, required this.successWidgetModelHelper});

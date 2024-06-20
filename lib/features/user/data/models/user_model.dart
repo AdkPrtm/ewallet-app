@@ -1,5 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:template_clean_architecture/features/user/domain/domain.dart';
+import 'package:ewallet/features/user/domain/domain.dart';
 
 part 'user_model.freezed.dart';
 part 'user_model.g.dart';
@@ -7,15 +7,14 @@ part 'user_model.g.dart';
 @unfreezed
 class UserModel with _$UserModel {
   factory UserModel({
-    String? name,
-    String? email,
+    @JsonKey(name: 'first_name') String? firstName,
+    @JsonKey(name: 'last_name') String? lastName,
     String? username,
-    String? verified,
+    String? email,
     @JsonKey(name: 'profile_picture') String? profilePicture,
-    String? ktp,
-    String? balance,
+    bool? verified,
+    int? balance,
     @JsonKey(name: 'card_number') String? cardNumber,
-    String? pin,
     String? token,
   }) = _UserModel;
 
@@ -25,15 +24,14 @@ class UserModel with _$UserModel {
       _$UserModelFromJson(json);
 
   UserEntity toEntity() => UserEntity(
-        name: name,
+        firstName: firstName,
+        lastName: lastName,
         email: email,
         username: username,
         verified: verified,
         profilePicture: profilePicture,
-        ktp: ktp,
         balance: balance,
         cardNumber: cardNumber,
-        pin: pin,
         token: token,
       );
 }

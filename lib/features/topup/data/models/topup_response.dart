@@ -1,5 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:template_clean_architecture/features/topup/domain/entities/entities.dart';
+import 'package:ewallet/features/topup/domain/entities/entities.dart';
 
 part 'topup_response.freezed.dart';
 part 'topup_response.g.dart';
@@ -7,8 +7,9 @@ part 'topup_response.g.dart';
 @freezed
 class TopUpResponse with _$TopUpResponse {
   const factory TopUpResponse({
-    @JsonKey(name: 'redirect_url') String? redirectUrl,
-    String? token,
+    @JsonKey(name: 'link_payment') String? redirectUrl,
+    @JsonKey(name: 'reference_id') String? invoiceId,
+    @JsonKey(name: 'charge_amount') int? amount,
   }) = _TopUpResponse;
 
   const TopUpResponse._();
@@ -18,6 +19,7 @@ class TopUpResponse with _$TopUpResponse {
 
   TopUpEntity toEntity() => TopUpEntity(
         redirectUrl: redirectUrl,
-        token: token,
+        invoiceId: invoiceId,
+        amount: amount,
       );
 }

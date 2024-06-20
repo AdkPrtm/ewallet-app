@@ -1,9 +1,8 @@
-
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:template_clean_architecture/core/resource/resource.dart';
-import 'package:template_clean_architecture/core/widgets/buttons.dart';
+import 'package:ewallet/core/resource/resource.dart';
+import 'package:ewallet/core/widgets/buttons.dart';
 
 class BottomContainerComponent extends StatelessWidget {
   const BottomContainerComponent({
@@ -76,9 +75,7 @@ class BottomContainerComponent extends StatelessWidget {
                       margin: EdgeInsets.only(right: 10.h),
                       decoration: BoxDecoration(
                         shape: BoxShape.circle,
-                        color: currentIndex == 0
-                            ? blueColor
-                            : lightBackground,
+                        color: currentIndex == 0 ? blueColor : lightBackground,
                       ),
                     ),
                     Container(
@@ -87,9 +84,7 @@ class BottomContainerComponent extends StatelessWidget {
                       margin: EdgeInsets.only(right: 10.h),
                       decoration: BoxDecoration(
                         shape: BoxShape.circle,
-                        color: currentIndex == 1
-                            ? blueColor
-                            : lightBackground,
+                        color: currentIndex == 1 ? blueColor : lightBackground,
                       ),
                     ),
                     Container(
@@ -98,9 +93,7 @@ class BottomContainerComponent extends StatelessWidget {
                       margin: EdgeInsets.only(right: 10.h),
                       decoration: BoxDecoration(
                         shape: BoxShape.circle,
-                        color: currentIndex == 2
-                            ? blueColor
-                            : lightBackground,
+                        color: currentIndex == 2 ? blueColor : lightBackground,
                       ),
                     ),
                     const Spacer(),

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:template_clean_architecture/core/resource/resource.dart';
-import 'package:template_clean_architecture/core/widgets/buttons.dart';
-import 'package:template_clean_architecture/features/topup/presentation/bloc/topup_bloc.dart';
-import 'package:template_clean_architecture/features/user/domain/domain.dart';
-import 'package:template_clean_architecture/utils/helper/helper.dart';
+import 'package:ewallet/core/resource/resource.dart';
+import 'package:ewallet/core/widgets/buttons.dart';
+import 'package:ewallet/features/topup/presentation/bloc/topup_bloc.dart';
+import 'package:ewallet/features/user/domain/domain.dart';
+import 'package:ewallet/utils/helper/helper.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class ButtonAmountComponent extends StatelessWidget {

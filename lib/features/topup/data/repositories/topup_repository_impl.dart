@@ -2,11 +2,11 @@ import 'dart:io';
 
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
-import 'package:template_clean_architecture/core/error/failure.dart';
-import 'package:template_clean_architecture/core/resource/constant/api_list.dart';
-import 'package:template_clean_architecture/features/auth/data/datasources/datasources.dart';
-import 'package:template_clean_architecture/features/topup/data/datasources/datasource.dart';
-import 'package:template_clean_architecture/features/topup/domain/domain.dart';
+import 'package:ewallet/core/error/failure.dart';
+import 'package:ewallet/core/resource/constant/api_list.dart';
+import 'package:ewallet/features/auth/data/datasources/datasources.dart';
+import 'package:ewallet/features/topup/data/datasources/datasource.dart';
+import 'package:ewallet/features/topup/domain/domain.dart';
 
 class TopUpRepositoryImpl extends TopUpRespository {
   final TopupRemoteService _topupRemoteService;
@@ -23,7 +23,6 @@ class TopUpRepositoryImpl extends TopUpRespository {
         contentType: contentType,
         body: topupParams.toJson(),
       );
-
       if ((httpResponse.response.statusCode ?? 0) < 200 ||
           (httpResponse.response.statusCode ?? 0) > 201) {
         throw DioException(
@@ -40,7 +39,7 @@ class TopUpRepositoryImpl extends TopUpRespository {
   }
 
   @override
-  Future<Either<Failure, ResponsePaymentTopupEntity>>
+  Future<Either<Failure, List<PaymentDataTopupEntity>>>
       getPaymentMethodEntity() async {
     try {
       final token = await _authLocalService.getCredentialToLocal();
@@ -55,7 +54,17 @@ class TopUpRepositoryImpl extends TopUpRespository {
           response: httpResponse.response,
         );
       }
-      return Right(httpResponse.data.toEntity());
+      List<PaymentDataTopupEntity> data = httpResponse.data
+          .map(
+            (data) => PaymentDataTopupEntity(
+                name: data.name,
+                code: data.code,
+                thumbnail: data.thumbnail,
+                status: data.status),
+          )
+          .toList();
+
+      return Right(data);
     } on DioException catch (e) {
       return Left(ServerFailure(e.response?.data['message'] ?? e.message));
     } on SocketException {

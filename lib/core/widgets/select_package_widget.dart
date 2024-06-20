@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:template_clean_architecture/core/resource/resource.dart';
-import 'package:template_clean_architecture/features/product/product.dart';
-import 'package:template_clean_architecture/utils/extensions/extensions.dart';
+import 'package:ewallet/core/resource/resource.dart';
+import 'package:ewallet/features/product/product.dart';
+import 'package:ewallet/utils/extensions/extensions.dart';
 
 class SelectPackageWidget extends StatelessWidget {
   const SelectPackageWidget({
@@ -32,15 +32,16 @@ class SelectPackageWidget extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Text(
-            dataPlansListEntity.name!,
+            dataPlansListEntity.name ?? '',
             style: AppFont().blackTextStyle.copyWith(
-                  fontSize: 32.sp,
-                  fontWeight: AppFont().medium,
+                  fontSize: 28.sp,
+                  fontWeight: AppFont().semibold,
                 ),
+            textAlign: TextAlign.center,
           ),
           6.0.height,
           Text(
-            formatCurrency(num.parse(dataPlansListEntity.price!)),
+            formatCurrency(dataPlansListEntity.price ?? 0),
             style: AppFont().greyTextStyle.copyWith(
                   fontSize: 12.sp,
                 ),

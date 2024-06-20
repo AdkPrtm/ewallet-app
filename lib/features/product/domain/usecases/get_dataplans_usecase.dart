@@ -1,16 +1,22 @@
 import 'package:dartz/dartz.dart';
-import 'package:template_clean_architecture/core/error/error.dart';
-import 'package:template_clean_architecture/core/usecase/usecase.dart';
-import 'package:template_clean_architecture/features/product/domain/entities/entities.dart';
-import 'package:template_clean_architecture/features/product/domain/repositories/repositories.dart';
+import 'package:ewallet/core/error/error.dart';
+import 'package:ewallet/core/usecase/usecase.dart';
+import 'package:ewallet/features/product/domain/entities/entities.dart';
+import 'package:ewallet/features/product/domain/repositories/repositories.dart';
 
 class GetDataPlansUseCase
-    extends UseCase<Either<Failure, DataPlansEntity>, String> {
+    extends UseCase<Either<Failure, DataPlansEntity>, GetDataPlansQuery> {
   final DataPlansRepository dataPlansRepository;
 
   GetDataPlansUseCase(this.dataPlansRepository);
-  
+
   @override
-  Future<Either<Failure, DataPlansEntity>> call({String? params}) =>
+  Future<Either<Failure, DataPlansEntity>> call({GetDataPlansQuery? params}) =>
       dataPlansRepository.getDataPlans(params!);
+}
+class GetDataPlansQuery {
+  int page;
+  int limit;
+
+  GetDataPlansQuery({this.page = 1, this.limit = 10});
 }

@@ -2,13 +2,16 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:template_clean_architecture/core/resource/resource.dart';
-import 'package:template_clean_architecture/core/widgets/buttons.dart';
-import 'package:template_clean_architecture/core/widgets/forms.dart';
-import 'package:template_clean_architecture/features/auth/domain/domain.dart';
-import 'package:template_clean_architecture/features/auth/presentation/signup/sign_up_set_ktp_page.dart';
+import 'package:ewallet/core/resource/resource.dart';
+import 'package:ewallet/core/widgets/buttons.dart';
+import 'package:ewallet/core/widgets/forms.dart';
+import 'package:ewallet/features/auth/domain/domain.dart';
+
+import '../../../../utils/helper/model_success_helper.dart';
+import '../bloc/auth/auth_bloc.dart';
 
 class SetProfilePage extends StatefulWidget {
   const SetProfilePage({super.key, required this.data});
@@ -97,7 +100,7 @@ class _SetProfilePageState extends State<SetProfilePage> {
                   ),
                   SizedBox(height: 16.h),
                   Text(
-                    widget.data.name!,
+                    '${widget.data.firstName} ${widget.data.lastName}',
                     style: AppFont().blackTextStyle.copyWith(
                           fontSize: 18.sp,
                           fontWeight: AppFont().medium,
@@ -121,26 +124,50 @@ class _SetProfilePageState extends State<SetProfilePage> {
                     },
                   ),
                   SizedBox(height: 30.h),
-                  CustomFilledButton(
-                    title: 'Continue',
-                    onTap: () {
-                      if (formKey.currentState!.validate()) {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => SetKtpPage(
-                              data: widget.data.copyWith(
-                                pin: pinController.text,
-                                profilePicture: selectedImage == null
-                                    ? null
-                                    : 'data:image/png;base64,${base64Encode(File(selectedImage!.path).readAsBytesSync())}',
-                              ),
+                  BlocConsumer<AuthBloc, AuthState>(
+                    listener: (context, state) {
+                      if (state is AuthFailed) {
+                        showCustomSnackbar(context, state.message);
+                      }
+                      if (state is AuthDone) {
+                        Navigator.pushNamedAndRemoveUntil(
+                            context,
+                            '/success-widget',
+                            arguments: SuccessWidgetModelHelper(
+                              navigator: '/home',
+                              title: 'Akun Berhasil\nTerdaftar',
+                              subtitle:
+                                  'Grow your finance start\ntogether with us',
+                              textButton: 'Get Started',
                             ),
-                          ),
-                        );
+                            (route) => false);
                       }
                     },
-                  ),
+                    builder: (context, state) {
+                      if (state is AuthLoading) {
+                        return CustomFilledButton(
+                          title: 'Continue',
+                          onTap: () {},
+                          disable: true,
+                        );
+                      }
+                      return CustomFilledButton(
+                        title: 'Register',
+                        onTap: () {
+                          if (formKey.currentState!.validate()) {
+                            context.read<AuthBloc>().add(
+                                  AuthRegister(widget.data.copyWith(
+                                    pin: pinController.text,
+                                    profilePicture: selectedImage == null
+                                        ? ''
+                                        : 'data:image/png;base64,${base64Encode(File(selectedImage!.path).readAsBytesSync())}',
+                                  )),
+                                );
+                          }
+                        },
+                      );
+                    },
+                  )
                 ],
               ),
             ),

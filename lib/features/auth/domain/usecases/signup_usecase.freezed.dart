@@ -12,7 +12,7 @@ part of 'signup_usecase.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 SignUpParams _$SignUpParamsFromJson(Map<String, dynamic> json) {
   return _SignUpParams.fromJson(json);
@@ -20,8 +20,14 @@ SignUpParams _$SignUpParamsFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$SignUpParams {
-  String? get name => throw _privateConstructorUsedError;
-  set name(String? value) => throw _privateConstructorUsedError;
+  @JsonKey(name: 'first_name')
+  String? get firstName => throw _privateConstructorUsedError;
+  @JsonKey(name: 'first_name')
+  set firstName(String? value) => throw _privateConstructorUsedError;
+  @JsonKey(name: 'last_name')
+  String? get lastName => throw _privateConstructorUsedError;
+  @JsonKey(name: 'last_name')
+  set lastName(String? value) => throw _privateConstructorUsedError;
   String? get username => throw _privateConstructorUsedError;
   set username(String? value) => throw _privateConstructorUsedError;
   String? get email => throw _privateConstructorUsedError;
@@ -34,8 +40,10 @@ mixin _$SignUpParams {
   String? get profilePicture => throw _privateConstructorUsedError;
   @JsonKey(name: 'profile_picture')
   set profilePicture(String? value) => throw _privateConstructorUsedError;
-  String? get ktp => throw _privateConstructorUsedError;
-  set ktp(String? value) => throw _privateConstructorUsedError;
+  @JsonKey(name: 'token_device')
+  String? get tokenFCM => throw _privateConstructorUsedError;
+  @JsonKey(name: 'token_device')
+  set tokenFCM(String? value) => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -50,13 +58,14 @@ abstract class $SignUpParamsCopyWith<$Res> {
       _$SignUpParamsCopyWithImpl<$Res, SignUpParams>;
   @useResult
   $Res call(
-      {String? name,
+      {@JsonKey(name: 'first_name') String? firstName,
+      @JsonKey(name: 'last_name') String? lastName,
       String? username,
       String? email,
       String? password,
       String? pin,
       @JsonKey(name: 'profile_picture') String? profilePicture,
-      String? ktp});
+      @JsonKey(name: 'token_device') String? tokenFCM});
 }
 
 /// @nodoc
@@ -72,18 +81,23 @@ class _$SignUpParamsCopyWithImpl<$Res, $Val extends SignUpParams>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? name = freezed,
+    Object? firstName = freezed,
+    Object? lastName = freezed,
     Object? username = freezed,
     Object? email = freezed,
     Object? password = freezed,
     Object? pin = freezed,
     Object? profilePicture = freezed,
-    Object? ktp = freezed,
+    Object? tokenFCM = freezed,
   }) {
     return _then(_value.copyWith(
-      name: freezed == name
-          ? _value.name
-          : name // ignore: cast_nullable_to_non_nullable
+      firstName: freezed == firstName
+          ? _value.firstName
+          : firstName // ignore: cast_nullable_to_non_nullable
+              as String?,
+      lastName: freezed == lastName
+          ? _value.lastName
+          : lastName // ignore: cast_nullable_to_non_nullable
               as String?,
       username: freezed == username
           ? _value.username
@@ -105,55 +119,61 @@ class _$SignUpParamsCopyWithImpl<$Res, $Val extends SignUpParams>
           ? _value.profilePicture
           : profilePicture // ignore: cast_nullable_to_non_nullable
               as String?,
-      ktp: freezed == ktp
-          ? _value.ktp
-          : ktp // ignore: cast_nullable_to_non_nullable
+      tokenFCM: freezed == tokenFCM
+          ? _value.tokenFCM
+          : tokenFCM // ignore: cast_nullable_to_non_nullable
               as String?,
     ) as $Val);
   }
 }
 
 /// @nodoc
-abstract class _$$_SignUpParamsCopyWith<$Res>
+abstract class _$$SignUpParamsImplCopyWith<$Res>
     implements $SignUpParamsCopyWith<$Res> {
-  factory _$$_SignUpParamsCopyWith(
-          _$_SignUpParams value, $Res Function(_$_SignUpParams) then) =
-      __$$_SignUpParamsCopyWithImpl<$Res>;
+  factory _$$SignUpParamsImplCopyWith(
+          _$SignUpParamsImpl value, $Res Function(_$SignUpParamsImpl) then) =
+      __$$SignUpParamsImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
-      {String? name,
+      {@JsonKey(name: 'first_name') String? firstName,
+      @JsonKey(name: 'last_name') String? lastName,
       String? username,
       String? email,
       String? password,
       String? pin,
       @JsonKey(name: 'profile_picture') String? profilePicture,
-      String? ktp});
+      @JsonKey(name: 'token_device') String? tokenFCM});
 }
 
 /// @nodoc
-class __$$_SignUpParamsCopyWithImpl<$Res>
-    extends _$SignUpParamsCopyWithImpl<$Res, _$_SignUpParams>
-    implements _$$_SignUpParamsCopyWith<$Res> {
-  __$$_SignUpParamsCopyWithImpl(
-      _$_SignUpParams _value, $Res Function(_$_SignUpParams) _then)
+class __$$SignUpParamsImplCopyWithImpl<$Res>
+    extends _$SignUpParamsCopyWithImpl<$Res, _$SignUpParamsImpl>
+    implements _$$SignUpParamsImplCopyWith<$Res> {
+  __$$SignUpParamsImplCopyWithImpl(
+      _$SignUpParamsImpl _value, $Res Function(_$SignUpParamsImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? name = freezed,
+    Object? firstName = freezed,
+    Object? lastName = freezed,
     Object? username = freezed,
     Object? email = freezed,
     Object? password = freezed,
     Object? pin = freezed,
     Object? profilePicture = freezed,
-    Object? ktp = freezed,
+    Object? tokenFCM = freezed,
   }) {
-    return _then(_$_SignUpParams(
-      name: freezed == name
-          ? _value.name
-          : name // ignore: cast_nullable_to_non_nullable
+    return _then(_$SignUpParamsImpl(
+      firstName: freezed == firstName
+          ? _value.firstName
+          : firstName // ignore: cast_nullable_to_non_nullable
+              as String?,
+      lastName: freezed == lastName
+          ? _value.lastName
+          : lastName // ignore: cast_nullable_to_non_nullable
               as String?,
       username: freezed == username
           ? _value.username
@@ -175,9 +195,9 @@ class __$$_SignUpParamsCopyWithImpl<$Res>
           ? _value.profilePicture
           : profilePicture // ignore: cast_nullable_to_non_nullable
               as String?,
-      ktp: freezed == ktp
-          ? _value.ktp
-          : ktp // ignore: cast_nullable_to_non_nullable
+      tokenFCM: freezed == tokenFCM
+          ? _value.tokenFCM
+          : tokenFCM // ignore: cast_nullable_to_non_nullable
               as String?,
     ));
   }
@@ -185,21 +205,26 @@ class __$$_SignUpParamsCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_SignUpParams implements _SignUpParams {
-  _$_SignUpParams(
-      {this.name,
+class _$SignUpParamsImpl implements _SignUpParams {
+  _$SignUpParamsImpl(
+      {@JsonKey(name: 'first_name') this.firstName,
+      @JsonKey(name: 'last_name') this.lastName,
       this.username,
       this.email,
       this.password,
       this.pin,
       @JsonKey(name: 'profile_picture') this.profilePicture,
-      this.ktp});
+      @JsonKey(name: 'token_device') this.tokenFCM});
 
-  factory _$_SignUpParams.fromJson(Map<String, dynamic> json) =>
-      _$$_SignUpParamsFromJson(json);
+  factory _$SignUpParamsImpl.fromJson(Map<String, dynamic> json) =>
+      _$$SignUpParamsImplFromJson(json);
 
   @override
-  String? name;
+  @JsonKey(name: 'first_name')
+  String? firstName;
+  @override
+  @JsonKey(name: 'last_name')
+  String? lastName;
   @override
   String? username;
   @override
@@ -212,22 +237,23 @@ class _$_SignUpParams implements _SignUpParams {
   @JsonKey(name: 'profile_picture')
   String? profilePicture;
   @override
-  String? ktp;
+  @JsonKey(name: 'token_device')
+  String? tokenFCM;
 
   @override
   String toString() {
-    return 'SignUpParams(name: $name, username: $username, email: $email, password: $password, pin: $pin, profilePicture: $profilePicture, ktp: $ktp)';
+    return 'SignUpParams(firstName: $firstName, lastName: $lastName, username: $username, email: $email, password: $password, pin: $pin, profilePicture: $profilePicture, tokenFCM: $tokenFCM)';
   }
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_SignUpParamsCopyWith<_$_SignUpParams> get copyWith =>
-      __$$_SignUpParamsCopyWithImpl<_$_SignUpParams>(this, _$identity);
+  _$$SignUpParamsImplCopyWith<_$SignUpParamsImpl> get copyWith =>
+      __$$SignUpParamsImplCopyWithImpl<_$SignUpParamsImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_SignUpParamsToJson(
+    return _$$SignUpParamsImplToJson(
       this,
     );
   }
@@ -235,20 +261,28 @@ class _$_SignUpParams implements _SignUpParams {
 
 abstract class _SignUpParams implements SignUpParams {
   factory _SignUpParams(
-      {String? name,
+      {@JsonKey(name: 'first_name') String? firstName,
+      @JsonKey(name: 'last_name') String? lastName,
       String? username,
       String? email,
       String? password,
       String? pin,
       @JsonKey(name: 'profile_picture') String? profilePicture,
-      String? ktp}) = _$_SignUpParams;
+      @JsonKey(name: 'token_device') String? tokenFCM}) = _$SignUpParamsImpl;
 
   factory _SignUpParams.fromJson(Map<String, dynamic> json) =
-      _$_SignUpParams.fromJson;
+      _$SignUpParamsImpl.fromJson;
 
   @override
-  String? get name;
-  set name(String? value);
+  @JsonKey(name: 'first_name')
+  String? get firstName;
+  @JsonKey(name: 'first_name')
+  set firstName(String? value);
+  @override
+  @JsonKey(name: 'last_name')
+  String? get lastName;
+  @JsonKey(name: 'last_name')
+  set lastName(String? value);
   @override
   String? get username;
   set username(String? value);
@@ -267,10 +301,12 @@ abstract class _SignUpParams implements SignUpParams {
   @JsonKey(name: 'profile_picture')
   set profilePicture(String? value);
   @override
-  String? get ktp;
-  set ktp(String? value);
+  @JsonKey(name: 'token_device')
+  String? get tokenFCM;
+  @JsonKey(name: 'token_device')
+  set tokenFCM(String? value);
   @override
   @JsonKey(ignore: true)
-  _$$_SignUpParamsCopyWith<_$_SignUpParams> get copyWith =>
+  _$$SignUpParamsImplCopyWith<_$SignUpParamsImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

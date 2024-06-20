@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:template_clean_architecture/core/resource/resource.dart';
-import 'package:template_clean_architecture/core/widgets/transaction_history_widget.dart';
-import 'package:template_clean_architecture/features/transaction/presentation/bloc/transaction_bloc.dart';
-import 'package:template_clean_architecture/injection_container.dart';
+import 'package:ewallet/core/resource/resource.dart';
+import 'package:ewallet/core/widgets/transaction_history_widget.dart';
+import 'package:ewallet/features/transaction/presentation/bloc/transaction_bloc.dart';
+import 'package:shimmer/shimmer.dart';
+
+import '../../../core/widgets/shimmer/shimmer_latest_transacrion_component.dart';
 
 class CustomLatestTransactionComponent extends StatelessWidget {
   const CustomLatestTransactionComponent({
@@ -31,37 +33,34 @@ class CustomLatestTransactionComponent extends StatelessWidget {
             color: whiteColor,
             borderRadius: BorderRadius.circular(20),
           ),
-          child: BlocProvider(
-            create: (context) =>
-                sl<TransactionBloc>()..add(const GetTransactionHistoryEvent()),
-            child: BlocBuilder<TransactionBloc, TransactionState>(
-              builder: (context, state) {
-                if (state is TransactionHistoryLoaded) {
-                  if (state.dataTransactionHistoryEntity!.isEmpty) {
-                    return Text(
-                      'No data',
-                      style: AppFont().blackTextStyle,
-                      textAlign: TextAlign.center,
-                    );
-                  }
-                  return Column(
-                    children: state.dataTransactionHistoryEntity!.map((data) {
-                      return TransactionHistoryWidget(
-                        dataTransactionHistoryEntity: data,
-                      );
-                    }).toList(),
+          child: BlocBuilder<TransactionBloc, TransactionState>(
+            builder: (context, state) {
+              if (state is TransactionHistoryLoaded) {
+                if (state.dataTransactionHistoryEntity!.isEmpty) {
+                  return Text(
+                    'No data',
+                    style: AppFont().blackTextStyle,
+                    textAlign: TextAlign.center,
                   );
                 }
-                return Padding(
-                  padding: const EdgeInsets.all(20),
-                  child: Center(
-                      child: CircularProgressIndicator(
-                    color: purpleColor,
-                    strokeWidth: 5.h,
-                  )),
+                return Column(
+                  children: state.dataTransactionHistoryEntity!.map((data) {
+                    return TransactionHistoryWidget(
+                      dataTransactionHistoryEntity: data,
+                    );
+                  }).toList(),
                 );
-              },
-            ),
+              }
+              List<dynamic> dummy = ['1', '2', '3', '4', '5'];
+              return Shimmer.fromColors(
+                baseColor: Colors.grey.shade300,
+                highlightColor: Colors.grey.shade100,
+                child: Column(
+                  children:
+                      dummy.map((_) => const ShimmerLatestTrx()).toList(),
+                ),
+              );
+            },
           ),
         )
       ],

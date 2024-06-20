@@ -15,12 +15,21 @@ class RequestTransferEvent extends TransferEvent {
   List<Object> get props => [transferParams!];
 }
 
-class RequestTransferHistoryEvent extends TransferEvent {
-  final String? limit;
+// class RequestDataTransactionEvent extends TransferEvent {
+//   final GetTransferHistoryQuery? trfHistory;
+//   final String? username;
 
-  const RequestTransferHistoryEvent({this.limit});
+//   const RequestDataTransactionEvent({this.trfHistory, this.username});
+//   @override
+//   List<Object> get props => [trfHistory!, username!];
+// }
+
+class RequestTransferHistoryEvent extends TransferEvent {
+  final GetTransferHistoryQuery? query;
+
+  const RequestTransferHistoryEvent({this.query});
   @override
-  List<Object> get props => [limit!];
+  List<Object> get props => [query!];
 }
 
 class GetDataByUsername extends TransferEvent {

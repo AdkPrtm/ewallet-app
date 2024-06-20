@@ -1,8 +1,7 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:template_clean_architecture/features/topup/domain/entities/entities.dart';
-import 'package:template_clean_architecture/features/topup/domain/usecases/get_payment_method.dart';
-import 'package:template_clean_architecture/features/topup/domain/usecases/usecases.dart';
+import 'package:ewallet/features/topup/domain/entities/entities.dart';
+import 'package:ewallet/features/topup/domain/usecases/usecases.dart';
 
 part 'topup_event.dart';
 part 'topup_state.dart';
@@ -35,7 +34,7 @@ class TopupBloc extends Bloc<TopupEvent, TopupState> {
     final result = await _paymentMethodUseCase.call();
     result.fold(
       (fail) => emit(TopupFailed(message: fail.message)),
-      (data) => emit(PaymentMethodLoaded(paymentDataTopup: data.data!)),
+      (data) => emit(PaymentMethodLoaded(paymentDataTopup: data)),
     );
   }
 }

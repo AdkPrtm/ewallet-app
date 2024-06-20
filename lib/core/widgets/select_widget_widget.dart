@@ -1,8 +1,8 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:template_clean_architecture/core/resource/theme/theme.dart';
-import 'package:template_clean_architecture/features/product/domain/domain.dart';
+import 'package:ewallet/core/resource/theme/theme.dart';
+import 'package:ewallet/features/product/domain/domain.dart';
 
 class SelectProviderWidget extends StatelessWidget {
   const SelectProviderWidget({
@@ -33,7 +33,7 @@ class SelectProviderWidget extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           CachedNetworkImage(
-            imageUrl: dataOperatorCardEntity.thumbnail!,
+            imageUrl: dataOperatorCardEntity.thumbnail ?? '',
             height: 30,
             width: 96,
           ),
@@ -41,7 +41,7 @@ class SelectProviderWidget extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.end,
             children: [
               Text(
-                dataOperatorCardEntity.name!,
+                dataOperatorCardEntity.name ?? '',
                 style: AppFont().blackTextStyle.copyWith(
                       fontSize: 16.sp,
                       fontWeight: AppFont().semibold,
@@ -49,7 +49,7 @@ class SelectProviderWidget extends StatelessWidget {
                 textAlign: TextAlign.right,
               ),
               Text(
-                dataOperatorCardEntity.status!,
+                dataOperatorCardEntity.status ?? '',
                 style: AppFont().greyTextStyle.copyWith(fontSize: 12.sp),
                 textAlign: TextAlign.right,
               ),

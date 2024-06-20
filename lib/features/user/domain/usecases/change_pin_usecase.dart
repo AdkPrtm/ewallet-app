@@ -1,8 +1,8 @@
 import 'package:dartz/dartz.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:template_clean_architecture/core/error/error.dart';
-import 'package:template_clean_architecture/core/usecase/usecase.dart';
-import 'package:template_clean_architecture/features/user/domain/domain.dart';
+import 'package:ewallet/core/error/error.dart';
+import 'package:ewallet/core/usecase/usecase.dart';
+import 'package:ewallet/features/user/domain/domain.dart';
 
 part 'change_pin_usecase.g.dart';
 
@@ -20,11 +20,11 @@ class ChangePinUsecase
 @JsonSerializable()
 class UpdatePinParams {
   @JsonKey(name: 'previous_pin')
-  int? oldPin;
+  String oldPin;
   @JsonKey(name: 'new_pin')
-  int? newPin;
+  String newPin;
 
-  UpdatePinParams({this.oldPin, this.newPin});
+  UpdatePinParams(this.oldPin, this.newPin);
 
   Map<String, dynamic> toJson() => _$UpdatePinParamsToJson(this);
 }

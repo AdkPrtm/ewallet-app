@@ -1,8 +1,8 @@
 import 'package:dartz/dartz.dart';
 import 'package:json_annotation/json_annotation.dart';
-import 'package:template_clean_architecture/core/error/failure.dart';
-import 'package:template_clean_architecture/core/usecase/usecase.dart';
-import 'package:template_clean_architecture/features/auth/domain/domain.dart';
+import 'package:ewallet/core/error/failure.dart';
+import 'package:ewallet/core/usecase/usecase.dart';
+import 'package:ewallet/features/auth/domain/domain.dart';
 
 part 'check_data_usecase.g.dart';
 
@@ -19,9 +19,7 @@ class CheckDataUseCase
 
 @JsonSerializable()
 class CheckDataParams {
-  @JsonKey(name: 'is_email_exists')
   String? email;
-  @JsonKey(name: 'is_username_exists')
   String? username;
 
   CheckDataParams({this.email, this.username});

@@ -13,7 +13,7 @@ class _DataPlansRemoteSevice implements DataPlansRemoteSevice {
     this._dio, {
     this.baseUrl,
   }) {
-    baseUrl ??= 'https://andhikawidiarto.my.id/api';
+    baseUrl ??= 'https://ewallet.andhikawidiarto.my.id/api';
   }
 
   final Dio _dio;
@@ -24,17 +24,21 @@ class _DataPlansRemoteSevice implements DataPlansRemoteSevice {
   Future<HttpResponse<DataPlansResponse>> getDataPlan({
     String? token,
     String? contentType,
-    String? limit,
+    required int limit,
+    required int page,
   }) async {
-    const _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{r'limit': limit};
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{
+      r'limit': limit,
+      r'page': page,
+    };
     queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{
       r'Authorization': token,
       r'Content-Type': contentType,
     };
     _headers.removeWhere((k, v) => v == null);
-    final Map<String, dynamic>? _data = null;
+    const Map<String, dynamic>? _data = null;
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<HttpResponse<DataPlansResponse>>(Options(
       method: 'GET',
@@ -44,7 +48,7 @@ class _DataPlansRemoteSevice implements DataPlansRemoteSevice {
     )
             .compose(
               _dio.options,
-              '/operatorlist',
+              '/mobile',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -53,7 +57,7 @@ class _DataPlansRemoteSevice implements DataPlansRemoteSevice {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    final value = DataPlansResponse.fromJson(_result.data!['data']);
+    final value = DataPlansResponse.fromJson(_result.data!);
     final httpResponse = HttpResponse(value, _result);
     return httpResponse;
   }
@@ -62,9 +66,9 @@ class _DataPlansRemoteSevice implements DataPlansRemoteSevice {
   Future<HttpResponse<BuyDataPlansResponse>> buyDataPlans({
     String? token,
     String? contentType,
-    Map<String, dynamic>? body,
+    required Map<String, dynamic> body,
   }) async {
-    const _extra = <String, dynamic>{};
+    final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{
@@ -73,7 +77,7 @@ class _DataPlansRemoteSevice implements DataPlansRemoteSevice {
     };
     _headers.removeWhere((k, v) => v == null);
     final _data = <String, dynamic>{};
-    _data.addAll(body!);
+    _data.addAll(body);
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<HttpResponse<BuyDataPlansResponse>>(Options(
       method: 'POST',
@@ -83,7 +87,7 @@ class _DataPlansRemoteSevice implements DataPlansRemoteSevice {
     )
             .compose(
               _dio.options,
-              '/dataplans',
+              '/mobile',
               queryParameters: queryParameters,
               data: _data,
             )

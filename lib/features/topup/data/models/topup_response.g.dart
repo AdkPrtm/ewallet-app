@@ -6,14 +6,16 @@ part of 'topup_response.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_TopUpResponse _$$_TopUpResponseFromJson(Map<String, dynamic> json) =>
-    _$_TopUpResponse(
-      redirectUrl: json['redirect_url'] as String?,
-      token: json['token'] as String?,
+_$TopUpResponseImpl _$$TopUpResponseImplFromJson(Map<String, dynamic> json) =>
+    _$TopUpResponseImpl(
+      redirectUrl: json['link_payment'] as String?,
+      invoiceId: json['reference_id'] as String?,
+      amount: (json['charge_amount'] as num?)?.toInt(),
     );
 
-Map<String, dynamic> _$$_TopUpResponseToJson(_$_TopUpResponse instance) =>
+Map<String, dynamic> _$$TopUpResponseImplToJson(_$TopUpResponseImpl instance) =>
     <String, dynamic>{
-      'redirect_url': instance.redirectUrl,
-      'token': instance.token,
+      'link_payment': instance.redirectUrl,
+      'reference_id': instance.invoiceId,
+      'charge_amount': instance.amount,
     };

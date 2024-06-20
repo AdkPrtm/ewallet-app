@@ -1,8 +1,8 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:template_clean_architecture/core/resource/resource.dart';
-import 'package:template_clean_architecture/features/transaction/domain/entities/entities.dart';
+import 'package:ewallet/core/resource/resource.dart';
+import 'package:ewallet/features/transaction/domain/entities/entities.dart';
 
 class TransactionHistoryWidget extends StatelessWidget {
   const TransactionHistoryWidget({
@@ -25,8 +25,7 @@ class TransactionHistoryWidget extends StatelessWidget {
           ),
           child: Center(
             child: CachedNetworkImage(
-              imageUrl:
-                  dataTransactionHistoryEntity.transactionType!.thumbnail!,
+              imageUrl: dataTransactionHistoryEntity.transactionThumbnail ?? '',
             ),
           ),
         ),
@@ -35,14 +34,15 @@ class TransactionHistoryWidget extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              dataTransactionHistoryEntity.transactionType!.name!,
+              dataTransactionHistoryEntity.transactionName ?? '',
               style: AppFont().blackTextStyle.copyWith(
                     fontSize: 16.sp,
                     fontWeight: AppFont().medium,
                   ),
             ),
             Text(
-              dateToMonthDate(DateTime.parse(dataTransactionHistoryEntity.createdAt!)),
+              dateToMonthDate(
+                  dataTransactionHistoryEntity.createdAt ?? DateTime.now()),
               style: AppFont().greyTextStyle.copyWith(
                     fontSize: 12.sp,
                     overflow: TextOverflow.fade,
@@ -53,9 +53,9 @@ class TransactionHistoryWidget extends StatelessWidget {
         ),
         const Spacer(),
         Text(
-          dataTransactionHistoryEntity.transactionType!.action == 'cr'
-              ? '- ${formatCurrency(num.parse(dataTransactionHistoryEntity.amount!))}'
-              : '+ ${formatCurrency(num.parse(dataTransactionHistoryEntity.amount!))}',
+          dataTransactionHistoryEntity.transactionAction == 'CR'
+              ? '+ ${formatCurrency(dataTransactionHistoryEntity.amount ?? 0)}'
+              : '- ${formatCurrency(dataTransactionHistoryEntity.amount ?? 0)}',
           style: AppFont().blackTextStyle.copyWith(
                 fontSize: 16.sp,
                 fontWeight: AppFont().medium,

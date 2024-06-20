@@ -6,14 +6,16 @@ part of 'signin_usecase.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_SignInParams _$$_SignInParamsFromJson(Map<String, dynamic> json) =>
-    _$_SignInParams(
-      email: json['email'] as String?,
-      password: json['password'] as String?,
+_$SignInParamsImpl _$$SignInParamsImplFromJson(Map<String, dynamic> json) =>
+    _$SignInParamsImpl(
+      email: json['email'] as String,
+      password: json['password'] as String,
+      tokenFCM: json['token_device'] as String?,
     );
 
-Map<String, dynamic> _$$_SignInParamsToJson(_$_SignInParams instance) =>
+Map<String, dynamic> _$$SignInParamsImplToJson(_$SignInParamsImpl instance) =>
     <String, dynamic>{
       'email': instance.email,
       'password': instance.password,
+      'token_device': instance.tokenFCM,
     };

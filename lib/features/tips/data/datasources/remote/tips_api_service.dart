@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:retrofit/retrofit.dart';
-import 'package:template_clean_architecture/core/resource/constant/api_list.dart';
-import 'package:template_clean_architecture/features/tips/data/models/models.dart';
+import 'package:ewallet/core/resource/constant/api_list.dart';
+import 'package:ewallet/features/tips/data/models/models.dart';
 
 part 'tips_api_service.g.dart';
 
@@ -11,7 +11,8 @@ abstract class TipsServiceRemote {
 
   @GET('/tips')
   Future<HttpResponse<TipsResponse>> getTips({
-    @Header("Authorization") String? token,
     @Header("Content-Type") String? contentType,
+    @Query("limit") required int limit,
+    @Query("page") required int page,
   });
 }

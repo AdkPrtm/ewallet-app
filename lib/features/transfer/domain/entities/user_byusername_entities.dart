@@ -5,17 +5,11 @@ part 'user_byusername_entities.freezed.dart';
 @freezed
 class UserBySearchingEntity with _$UserBySearchingEntity {
   const factory UserBySearchingEntity({
+    String? id,
+    String? firstName,
+    String? lastName,
     String? username,
-    String? verified,
+    bool? verified,
     String? profilePicture,
   }) = _UserBySearchingEntity;
-}
-
-@freezed
-class ResponseSearchUsername with _$ResponseSearchUsername {
-  const factory ResponseSearchUsername({
-    String? status,
-    String? message,
-    List<UserBySearchingEntity>? data,
-  }) = _ResponseSearchUsername;
 }

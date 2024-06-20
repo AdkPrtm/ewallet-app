@@ -1,9 +1,9 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:template_clean_architecture/core/resource/theme/theme.dart';
-import 'package:template_clean_architecture/features/transfer/domain/entities/entities.dart';
-import 'package:template_clean_architecture/utils/extensions/extensions.dart';
+import 'package:ewallet/core/resource/theme/theme.dart';
+import 'package:ewallet/features/transfer/domain/entities/entities.dart';
+import 'package:ewallet/utils/extensions/extensions.dart';
 
 class RecentUserWidget extends StatelessWidget {
   const RecentUserWidget({
@@ -46,7 +46,7 @@ class RecentUserWidget extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                dataTransferHistory.name!,
+                '${dataTransferHistory.firstName} ${dataTransferHistory.lastName}',
                 style: AppFont().blackTextStyle.copyWith(
                       fontSize: 16.sp,
                       fontWeight: AppFont().medium,
@@ -59,7 +59,7 @@ class RecentUserWidget extends StatelessWidget {
             ],
           ),
           const Spacer(),
-          dataTransferHistory.verified == '1'
+          dataTransferHistory.verified == true
               ? Row(
                   children: [
                     Icon(

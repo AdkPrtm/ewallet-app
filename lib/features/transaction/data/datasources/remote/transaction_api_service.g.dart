@@ -13,7 +13,7 @@ class _TransactionRemoteService implements TransactionRemoteService {
     this._dio, {
     this.baseUrl,
   }) {
-    baseUrl ??= 'https://andhikawidiarto.my.id/api';
+    baseUrl ??= 'https://ewallet.andhikawidiarto.my.id/api';
   }
 
   final Dio _dio;
@@ -24,17 +24,21 @@ class _TransactionRemoteService implements TransactionRemoteService {
   Future<HttpResponse<TransactionHistoryResponse>> getTransactionHistory({
     String? token,
     String? contentType,
-    String? limit,
+    required int limit,
+    required int page,
   }) async {
-    const _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{r'limit': limit};
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{
+      r'limit': limit,
+      r'page': page,
+    };
     queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{
       r'Authorization': token,
       r'Content-Type': contentType,
     };
     _headers.removeWhere((k, v) => v == null);
-    final Map<String, dynamic>? _data = null;
+    const Map<String, dynamic>? _data = null;
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<HttpResponse<TransactionHistoryResponse>>(Options(
       method: 'GET',
@@ -44,7 +48,7 @@ class _TransactionRemoteService implements TransactionRemoteService {
     )
             .compose(
               _dio.options,
-              '/transactions',
+              '/transaction',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -53,7 +57,7 @@ class _TransactionRemoteService implements TransactionRemoteService {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    final value = TransactionHistoryResponse.fromJson(_result.data!['data']);
+    final value = TransactionHistoryResponse.fromJson(_result.data!);
     final httpResponse = HttpResponse(value, _result);
     return httpResponse;
   }

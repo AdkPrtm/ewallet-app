@@ -6,14 +6,15 @@ part of 'check_data_response.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_CheckDataResponse _$$_CheckDataResponseFromJson(Map<String, dynamic> json) =>
-    _$_CheckDataResponse(
-      email: json['is_email_exists'].toString(),
-      username: json['is_username_exists'].toString(),
+_$CheckDataResponseImpl _$$CheckDataResponseImplFromJson(
+        Map<String, dynamic> json) =>
+    _$CheckDataResponseImpl(
+      json['is_email_exists'] as bool,
+      json['is_username_exists'] as bool,
     );
 
-Map<String, dynamic> _$$_CheckDataResponseToJson(
-        _$_CheckDataResponse instance) =>
+Map<String, dynamic> _$$CheckDataResponseImplToJson(
+        _$CheckDataResponseImpl instance) =>
     <String, dynamic>{
       'is_email_exists': instance.email,
       'is_username_exists': instance.username,

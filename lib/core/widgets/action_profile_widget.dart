@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:template_clean_architecture/core/resource/resource.dart';
-import 'package:template_clean_architecture/utils/extensions/extensions.dart';
+import 'package:ewallet/core/resource/resource.dart';
+import 'package:ewallet/utils/extensions/extensions.dart';
 
 class ActionProfileWidget extends StatelessWidget {
   const ActionProfileWidget({
@@ -10,10 +10,14 @@ class ActionProfileWidget extends StatelessWidget {
     required this.svgAsset,
     required this.title,
     required this.onTap,
+    this.verified = false,
+    this.isVerifiedList = false,
   });
 
   final String svgAsset;
   final String title;
+  final bool verified;
+  final bool isVerifiedList;
   final VoidCallback onTap;
 
   @override
@@ -27,12 +31,19 @@ class ActionProfileWidget extends StatelessWidget {
             width: 24.h,
           ),
           18.0.width,
-          Text(
-            title,
-            style: AppFont().blackTextStyle.copyWith(
-                  fontWeight: AppFont().medium,
-                ),
-          )
+          Expanded(
+            child: Text(
+              title,
+              style: AppFont().blackTextStyle.copyWith(
+                    fontWeight: AppFont().medium,
+                  ),
+            ),
+          ),
+          isVerifiedList
+              ? verified
+                  ? const Icon(Icons.verified_outlined)
+                  : const Icon(Icons.cancel_outlined)
+              : const SizedBox()
         ],
       ),
     );

@@ -1,7 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:template_clean_architecture/core/resource/src/src.dart';
+import 'package:ewallet/core/resource/src/src.dart';
 
 class ImageProfileHeader extends StatelessWidget {
   const ImageProfileHeader({
@@ -11,7 +11,7 @@ class ImageProfileHeader extends StatelessWidget {
   });
 
   final String url;
-  final String verified;
+  final bool verified;
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +29,7 @@ class ImageProfileHeader extends StatelessWidget {
               ),
             ),
           ),
-          verified == '0'
+          verified
               ? Align(
                   alignment: const Alignment(0.9, -0.9),
                   child: Container(
